@@ -1,0 +1,201 @@
+---
+title: "Central Limit Theorem"
+subtitle: "Understanding the Intuition Behind the CLT"
+---
+
+## Introduction
+
+The Central Limit Theorem (CLT) is one of the most important concepts in statistics. It states that when we take repeated random samples from any population (regardless of the shape of the original distribution), the sampling distribution of the sample mean will approach a normal distribution as the sample size increases.
+
+Let's demonstrate this step by step!
+
+## Step 1: Create and Visualize the Original Distribution
+
+First, let's create a non-normal distribution to start with. We'll use a skewed distribution to make the effect more dramatic.
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+
+# Check and install required packages
+required_packages <- c("ggplot2", "dplyr")
+
+# Function to install packages if not already installed
+install_if_missing <- function(packages) {
+  for(pkg in packages) {
+    if(!require(pkg, character.only = TRUE, quietly = TRUE)) {
+      install.packages(pkg, dependencies = TRUE)
+      library(pkg, character.only = TRUE)
+    } else {
+      library(pkg, character.only = TRUE)
+    }
+  }
+}
+
+# Install and load packages
+install_if_missing(required_packages)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Create a skewed distribution (exponential distribution)
+n_population <- 10000
+original_distribution <- rexp(n_population, rate = 0.5)
+
+# Create a data frame for plotting
+df_original <- data.frame(values = original_distribution)
+
+# Plot the original distribution
+ggplot(df_original, aes(x = values)) +
+  geom_histogram(bins = 50, fill = "steelblue", alpha = 0.7, color = "black") +
+  geom_density(aes(y = after_stat(count) * max(after_stat(count)) / max(after_stat(density))), 
+               color = "red", linewidth = 1) +
+  labs(title = "Original Distribution (Exponential)",
+       subtitle = paste("Mean =", round(mean(original_distribution), 2), 
+                       ", SD =", round(sd(original_distribution), 2)),
+       x = "Values", y = "Frequency") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+```
+
+## Step 2: Take Random Samples and Calculate Sample Means
+
+Now let's take multiple random samples from this distribution and calculate the mean of each sample.
+
+```{r}
+#| echo: true
+
+# Parameters for sampling
+n_samples <- 1000  # Number of samples to take
+sample_size <- 30  # Size of each sample
+
+# Take samples and calculate means
+sample_means <- numeric(n_samples)
+
+for(i in 1:n_samples) {
+  sample_data <- sample(original_distribution, size = sample_size, replace = TRUE)
+  sample_means[i] <- mean(sample_data)
+}
+
+# Create data frame for sample means
+df_sample_means <- data.frame(sample_mean = sample_means)
+
+# Calculate theoretical parameters
+theoretical_mean <- mean(original_distribution)
+theoretical_se <- sd(original_distribution) / sqrt(sample_size)
+
+cat("Original distribution mean:", round(theoretical_mean, 3), "\n")
+cat("Original distribution SD:", round(sd(original_distribution), 3), "\n")
+cat("Sample means mean:", round(mean(sample_means), 3), "\n")
+cat("Sample means SD:", round(sd(sample_means), 3), "\n")
+cat("Theoretical SE:", round(theoretical_se, 3), "\n")
+```
+
+## Step 3: Visualize the Sampling Distribution
+
+Now let's plot the distribution of sample means and compare it to a normal distribution.
+
+```{r}
+#| echo: true
+
+# Create the sampling distribution plot
+ggplot(df_sample_means, aes(x = sample_mean)) +
+  geom_histogram(bins = 30, fill = "lightgreen", alpha = 0.7, color = "black") +
+  geom_density(aes(y = after_stat(count) * max(after_stat(count)) / max(after_stat(density))), 
+               color = "blue", linewidth = 1) +
+  # Add theoretical normal curve
+  stat_function(fun = function(x) {
+    dnorm(x, mean = theoretical_mean, sd = theoretical_se) * 
+      max(hist(sample_means, breaks = 30, plot = FALSE)$counts) / 
+      max(dnorm(seq(min(sample_means), max(sample_means), length.out = 100), 
+                mean = theoretical_mean, sd = theoretical_se))
+  }, color = "red", linewidth = 1, linetype = "dashed") +
+  labs(title = "Sampling Distribution of Sample Means",
+       subtitle = paste("n =", sample_size, "samples,", n_samples, "repetitions"),
+       x = "Sample Mean", y = "Frequency") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5)) +
+  annotate("text", x = max(sample_means) * 0.8, y = max(hist(sample_means, breaks = 30, plot = FALSE)$counts) * 0.8,
+           label = paste("Theoretical Normal\nMean =", round(theoretical_mean, 2), "\nSE =", round(theoretical_se, 2)),
+           color = "red", size = 3)
+```
+
+## Step 4: Compare Different Sample Sizes
+
+Let's see how the sampling distribution changes with different sample sizes.
+
+```{r}
+#| echo: true
+
+# Function to generate sampling distribution for different sample sizes
+generate_sampling_dist <- function(sample_size, n_samples = 1000) {
+  sample_means <- numeric(n_samples)
+  for(i in 1:n_samples) {
+    sample_data <- sample(original_distribution, size = sample_size, replace = TRUE)
+    sample_means[i] <- mean(sample_data)
+  }
+  return(data.frame(sample_mean = sample_means, sample_size = sample_size))
+}
+
+# Generate sampling distributions for different sample sizes
+sample_sizes <- c(5, 15, 30, 50)
+sampling_dists <- lapply(sample_sizes, function(n) generate_sampling_dist(n, 1000))
+all_sampling_dists <- do.call(rbind, sampling_dists)
+
+# Plot all sampling distributions
+ggplot(all_sampling_dists, aes(x = sample_mean)) +
+  geom_histogram(bins = 25, fill = "lightblue", alpha = 0.7, color = "black") +
+  facet_wrap(~sample_size, scales = "free_x", labeller = label_both) +
+  labs(title = "Sampling Distribution for Different Sample Sizes",
+       subtitle = "Notice how the distribution becomes more normal and narrower as sample size increases",
+       x = "Sample Mean", y = "Frequency") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+```
+
+## Step 5: Q-Q Plot to Check Normality
+
+Let's use a Q-Q plot to see how well our sampling distribution follows a normal distribution.
+
+```{r}
+#| echo: true
+
+# Create Q-Q plot for the sampling distribution with n=30
+qq_data <- data.frame(sample_means = sample_means)
+
+ggplot(qq_data, aes(sample = sample_means)) +
+  stat_qq() +
+  stat_qq_line(color = "red", linewidth = 1) +
+  labs(title = "Q-Q Plot: Sample Means vs Normal Distribution",
+       subtitle = paste("Sample size =", sample_size),
+       x = "Theoretical Quantiles", y = "Sample Quantiles") +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        plot.subtitle = element_text(hjust = 0.5))
+```
+
+## Key Insights
+
+1. **Original Distribution**: We started with a highly skewed exponential distribution
+2. **Sampling Distribution**: Even with a moderate sample size (n=30), the distribution of sample means is much more normal
+3. **Sample Size Effect**: As sample size increases, the sampling distribution becomes:
+   - More normal in shape
+   - Narrower (smaller standard error)
+   - More concentrated around the true population mean
+4. **Central Limit Theorem**: This demonstrates that regardless of the original distribution's shape, the sampling distribution of the mean approaches normality
+
+## Mathematical Foundation
+
+The Central Limit Theorem states that if $X_1, X_2, ..., X_n$ are independent and identically distributed random variables with mean $\mu$ and standard deviation $\sigma$, then:
+
+$$\frac{\bar{X} - \mu}{\sigma/\sqrt{n}} \xrightarrow{d} N(0,1)$$
+
+Where $\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i$ is the sample mean.
+
+This means that for large enough sample sizes, the sampling distribution of the sample mean will be approximately normal with:
+- Mean = $\mu$ (population mean)
+- Standard Error = $\frac{\sigma}{\sqrt{n}}$ (population standard deviation divided by square root of sample size) 

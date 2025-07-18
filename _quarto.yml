@@ -1,0 +1,21 @@
+project:
+  type: website
+
+website:
+  title: "Statistics Concepts"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: concepts/central-limit-theorem.qmd
+        text: Central Limit Theorem
+      - about.qmd
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+editor: visual
+
