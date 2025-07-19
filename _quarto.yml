@@ -9,6 +9,8 @@ website:
         text: Home
       - href: concepts/central-limit-theorem.qmd
         text: Central Limit Theorem
+      - href: concepts/degrees-of-freedom.qmd
+        text: Degrees of Freedom
       - about.qmd
 
 format:
