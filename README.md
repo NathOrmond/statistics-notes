@@ -1,10 +1,10 @@
-# Statistics Concepts
+# Statistics Notes
 
-An interactive website demonstrating fundamental statistical concepts through hands-on R code examples and visualizations.
+A repository for notes and investigations into statistical concepts, accompanied by hands-on R code examples and visualizations.
 
 ## Overview
 
-This project uses [Quarto](https://quarto.org/) to create an educational website that teaches statistical concepts through interactive demonstrations. Each concept page contains executable R code that automatically installs required packages and generates visualizations to help understand the underlying principles.
+This project serves as a personal repository for notes and investigations into various statistical concepts. It leverages [Quarto](https://quarto.org/) to create an interactive website where each topic is explored through hands-on R code examples and visualizations. The goal is to provide a clear and reproducible way to understand statistical principles as I investigate them.
 
 ## Features
 
@@ -17,6 +17,7 @@ This project uses [Quarto](https://quarto.org/) to create an educational website
 ## Current Topics
 
 - **Central Limit Theorem**: Understanding how sampling distributions approach normality
+- **Chatbot Effects on Postpartum Mental Health**: An analysis and discussion of a paper on chatbot therapy.
 - *More topics coming soon...*
 
 ## Project Structure
@@ -31,7 +32,14 @@ stats-concepts/
 │
 ├── concepts/                      # Statistical concept pages
 │   ├── central-limit-theorem.qmd  # CLT demonstration
+│   ├── degrees-of-freedom.qmd     # Degrees of Freedom demonstration
 │   └── template.qmd               # Template for new concepts
+│
+├── misc/                          # Miscellaneous files and analyses
+│   └── papers/
+│       ├── index.qmd              # Index for paper analyses
+│       └── chatbot-mental-health/
+│           └── chatbot-postpartum-mental-health.qmd # Analysis of chatbot effects on postpartum mental health
 │
 ├── data/                          # Data files
 ├── datasets/                      # Additional datasets
@@ -129,66 +137,69 @@ quarto render
 
 If successful, you should see output indicating that the files were rendered to the `_site/` directory.
 
-## How to Serve the Website
+## How to Serve the Website (For Developers)
 
-### Option 1: Local Development Server (Recommended)
+This section outlines how to build and serve the website locally for development and testing.
 
-For development and testing:
+### Local Development Server (Recommended)
+
+For active development, use Quarto's built-in preview server. This provides live reloading as you make changes.
 
 ```bash
 # Start a local development server
 quarto preview
 
-# Or with specific port
+# Or with a specific port
 quarto preview --port 4242
 ```
 
-This will:
-- Start a local web server (usually at `http://localhost:4848`)
-- Automatically reload when you make changes
-- Show live preview of your edits
+This command will:
+- Start a local web server (typically at `http://localhost:4848`).
+- Automatically reload the browser when you save changes to `.qmd` files.
+- Display a live preview of your edits.
 
-### Option 2: Build and Serve Static Files
+### Building Static Files
 
-For production deployment:
+To generate the static HTML files for deployment or local serving without live reloading:
 
 ```bash
-# Build the website
+# Build the entire website
 quarto render
-
-# The built files will be in the _site/ directory
-# You can serve these files with any web server
 ```
 
-### Option 3: Using Python's Built-in Server
+The generated static files will be located in the `_site/` directory. You can then serve these files using any web server (e.g., Python's `http.server`, Node.js `http-server`, or a simple static file server).
 
-If you have Python installed:
+### Serving Built Files (Examples)
+
+#### Using Python's Built-in Server
+
+If you have Python installed, you can quickly serve the built site:
 
 ```bash
-# Build the site first
+# First, build the site
 quarto render
 
-# Serve the built files
+# Then, navigate to the output directory and serve
 cd _site
 python -m http.server 8000
-# Then visit http://localhost:8000
+# Access in your browser at http://localhost:8000
 ```
 
-### Option 4: Using Node.js http-server
+#### Using Node.js http-server
 
-If you have Node.js installed:
+For Node.js users, `http-server` is a convenient option:
 
 ```bash
-# Install http-server globally
+# Install http-server globally (if you haven't already)
 npm install -g http-server
 
 # Build the site
 quarto render
 
-# Serve the built files
+# Navigate to the output directory and serve
 cd _site
 http-server -p 8080
-# Then visit http://localhost:8080
+# Access in your browser at http://localhost:8080
 ```
 
 ## Development Workflow
@@ -337,15 +348,34 @@ jobs:
 
 ## Contributing
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test locally with `quarto preview`
-5. Submit a pull request
+Contributions are welcome! If you'd like to add new concepts, improve existing ones, or fix issues, please follow these steps:
+
+1.  **Fork the repository**: Start by forking this repository to your GitHub account.
+2.  **Clone your fork**: Clone your forked repository to your local machine.
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/stats-notes.git
+    cd stats-notes
+    ```
+3.  **Create a new branch**: Create a new branch for your feature or bug fix.
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+4.  **Make your changes**: Implement your changes, add new `.qmd` files for concepts, or update existing ones.
+5.  **Test locally**: Ensure your changes work as expected by building and previewing the site locally.
+    ```bash
+    quarto preview
+    ```
+6.  **Commit your changes**: Commit your changes with a clear and concise commit message.
+7.  **Push to your fork**: Push your new branch to your forked repository on GitHub.
+8.  **Open a Pull Request**: Create a pull request from your fork to the `main` branch of this repository. Describe your changes in detail.
 
 ## License
 
-[Add your license information here]
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## References
+
+References for all papers and discussions are provided inline within the respective Quarto documents.
 
 ## Acknowledgments
 
