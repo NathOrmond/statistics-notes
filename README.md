@@ -9,7 +9,7 @@ This project serves as a personal repository for notes and investigations into v
 ## Features
 
 - **Interactive Demonstrations**: Run R code directly in the browser
-- **Automatic Package Management**: Required packages are installed automatically
+- **Reproducible Package Management**: Uses `renv` for project-specific R package management, ensuring consistent environments.
 - **Visual Learning**: Rich plots and visualizations for each concept
 - **Mathematical Foundation**: Formal mathematical notation and explanations
 - **Responsive Design**: Works on desktop and mobile devices
@@ -110,21 +110,29 @@ cd stats-concepts
 
 ### 2. Install R Dependencies
 
-The project uses `renv` for R package management. All required packages will be automatically installed when you first run the code.
+This project uses `renv` for reproducible R package management.
 
-```bash
-# Start R and restore the environment
-R
-```
+**First-time setup or new dependencies:**
 
-In R:
-```r
-# Restore the R environment (this will install all required packages)
-renv::restore()
+1.  **Run the setup script:**
+    Open your RStudio project (`stats-concepts.Rproj`) and run the following command in the R console:
+    ```r
+    source("setup_project_packages.R")
+    ```
+    This script will install all necessary packages into your project's `renv` library and update `renv.lock`.
 
-# Exit R
-q()
-```
+2.  **For new users or when `renv.lock` changes:**
+    If you are a new user cloning the repository, or if the `renv.lock` file has been updated (e.g., by another developer adding new packages), you can restore the project's environment by running:
+    ```r
+    renv::restore()
+    ```
+    This will install all packages specified in `renv.lock` into your project's private library.
+
+3.  **For developers adding new packages:**
+    If you add new R packages to the project, remember to run `renv::snapshot()` in the R console after installation. This will update `renv.lock` to include the new dependencies, ensuring reproducibility for others.
+    ```r
+    renv::snapshot()
+    ```
 
 ### 3. Verify Setup
 
@@ -235,7 +243,6 @@ http-server -p 8080
 - Use `#| echo: true` to show code
 - Use `#| warning: false` to suppress warnings
 - Use `#| message: false` to suppress messages
-- Always include the package installation code at the top
 - Set `set.seed()` for reproducible results
 
 ### Example Code Block
@@ -244,27 +251,6 @@ http-server -p 8080
 #| echo: true
 #| warning: false
 #| message: false
-
-# Check and install required packages
-required_packages <- c("ggplot2", "dplyr")
-
-# Function to install packages if not already installed
-install_if_missing <- function(packages) {
-  for(pkg in packages) {
-    if(!require(pkg, character.only = TRUE, quietly = TRUE)) {
-      install.packages(pkg, dependencies = TRUE)
-      library(pkg, character.only = TRUE)
-    } else {
-      library(pkg, character.only = TRUE)
-    }
-  }
-}
-
-# Install and load packages
-install_if_missing(required_packages)
-
-# Set seed for reproducibility
-set.seed(123)
 
 # Your demonstration code here
 ```
@@ -324,8 +310,9 @@ jobs:
 ### Common Issues
 
 **"Package not found" errors:**
-- Make sure you're using the `install_if_missing()` function
-- Check that you have internet access for package downloads
+- Ensure you have run `source("setup_project_packages.R")` or `renv::restore()` to install all project dependencies.
+- Check that you have internet access for package downloads.
+- Verify that the package is listed in `renv.lock`. If not, you may need to install it and run `renv::snapshot()`.
 
 **Rendering fails:**
 - Verify R and Quarto are properly installed

@@ -10,17 +10,14 @@ execute:
 ```{r}
 # Installation and Setup
 required_packages <- c("ggplot2", "dplyr", "gridExtra", "moments", "nortest")
-install_if_missing <- function(packages) {
-  for(pkg in packages) {
-    if(!require(pkg, character.only = TRUE, quietly = TRUE)) {
-      install.packages(pkg, dependencies = TRUE)
-      library(pkg, character.only = TRUE)
-    } else {
-      library(pkg, character.only = TRUE)
-    }
-  }
-}
-install_if_missing(required_packages)
+
+# Load required packages
+library(ggplot2)
+library(dplyr)
+library(gridExtra)
+library(moments)
+library(nortest)
+
 set.seed(123)
 ```
 

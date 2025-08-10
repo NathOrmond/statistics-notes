@@ -9,17 +9,15 @@ execute:
 ```{r}
 # Installation and Setup
 required_packages <- c("ggplot2", "dplyr", "tidyr", "gridExtra", "moments", "nortest")
-install_if_missing <- function(packages) {
-  for(pkg in packages) {
-    if(!require(pkg, character.only = TRUE, quietly = TRUE)) {
-      install.packages(pkg, dependencies = TRUE)
-      library(pkg, character.only = TRUE)
-    } else {
-      library(pkg, character.only = TRUE)
-    }
-  }
-}
-install_if_missing(required_packages)
+
+# Load required packages
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(gridExtra)
+library(moments)
+library(nortest)
+
 set.seed(123)
 
 # Helper function to add color sample spots to captions
@@ -57,9 +55,7 @@ add_color_samples <- function(caption, colors) {
 
 > Use of a chatbot was acceptable to women in the early [postpartum period](https://www.sciencedirect.com/topics/nursing-and-health-professions/puerperium "Learn more about postpartum period from ScienceDirect's AI-generated Topic Pages"). The sample did not screen positive for depression at baseline and thus the potential of the chatbot to reduce depressive symptoms in this population was limited. This study was conducted in a general obstetric population. Future studies of longer duration in high-risk postpartum populations who screen positive for depression are needed to further understand the utility and efficacy of such digital therapeutics for that population.
 
-## Data
-
-\| Variable \| Chatbot group % (n) (n=68) \| Usual care group % (n) (n=84) \| P value \| \|---\|---\|---\|---\| \| \*\*Age in y\*\* \| \| \| .02 \| \| 18-24 \| 0 (0) \| 7.1% (6) \| \| \| 25-34 \| 63.2% (43) \| 47.6% (40) \| \| \| 35-44 \| 32.4% (22) \| 44.0% (37) \| \| \| \>45 \| 4.4% (3) \| 1.2% (1) \| \| \| \*\*Race-Ethnicity\*\* \| \| \| .14 \| \| White \| 48.5% (32) \| 38.1% (32) \| \| \| Asian/Pacific Islander \| 39.7% (27) \| 38.1% (32) \| \| \| Black/African American \| 1.6% (1) \| 1.2% (1) \| \| \| Hispanic/Latinx \| 6% (4) \| 4.8% (4) \| \| \| Other \| 5.9% (4) \| 19.0% (15) \| \| \| \*\*Marital status\*\* \| \| \| .046 \| \| Married \| 94.1% (64) \| 83.3% (70) \| \| \| Not married \| 5.9% (4) \| 16.7% (14) \| \| \| \*\*Employment status\*\* \| \| \| \| \| Employed part or full-time \| 80.9% (55) \| 78.6% (66) \| .14 \| \| Unemployed (including homemaker, student, retired) \| 19.1% (13) \| 21.4% (18) \| .84 \| \| \*\*Psychiatric history\*\* \| \| \| \| \| Pre-existing mental health condition \| 16.2% (11) \| 9.5% (8) \| .23 \| \| Psychiatric medication use \| 5.9% (4) \| 1.2% (1) \| .87 \| \| Previous use of psychotherapy \| 38.2% (26) \| 36.9% (31) \| .87 \| \| Current use of psychotherapy \| 30.8% (21) \| 19.4% (17) \| .37 \| \| \*\*Opinions regarding psychiatric care at enrollment\*\* \| \| \| \| \| Current use of a smartphone app to support mental health \| 4.4% (3) \| 10.7% (9) \| .55 \| \| Comfortable with use of mobile app to support mental health \| 82.4% (56) \| 77.4% (65) \| .74 \| \| Satisfied with medical services in pregnancy specifically regarding anxiety and depression \| 47.1% (32) \| 50.0% (42) \| .89 \| \| Anxiety and depression are an important part of a person's general health \| 88.2% (60) \| 78.6% (66) \| .13 \| \| Anxiety and depression are important to monitor during pregnancy and postpartum \| 97.1% (66) \| 88.1% (74) \| .07 \| \| Childbearing -women face stigma if they seek depression or anxiety services \| 58.5% (40) \| 59.5% (50) \| .97 \|
+ \| .97 \|
 
 ------------------------------------------------------------------------
 

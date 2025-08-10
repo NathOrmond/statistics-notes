@@ -25,20 +25,14 @@ Description of the first step.
 # Check and install required packages
 required_packages <- c("ggplot2", "dplyr")
 
-# Function to install packages if not already installed
-install_if_missing <- function(packages) {
-  for(pkg in packages) {
-    if(!require(pkg, character.only = TRUE, quietly = TRUE)) {
-      install.packages(pkg, dependencies = TRUE)
-      library(pkg, character.only = TRUE)
-    } else {
-      library(pkg, character.only = TRUE)
-    }
-  }
-}
+# Load required packages
+library(ggplot2)
+library(dplyr)
+
+
 
 # Install and load packages
-install_if_missing(required_packages)
+
 
 # Set seed for reproducibility
 set.seed(123)

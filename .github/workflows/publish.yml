@@ -25,6 +25,9 @@ jobs:
       - name: Install R Packages
         uses: r-lib/actions/setup-renv@v2
 
+      - name: Restore renv environment
+        run: R -e "renv::restore()"
+
       - name: Render Website
         run: |
           quarto render
