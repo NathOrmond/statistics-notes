@@ -17,6 +17,9 @@ Understanding how sampling distributions approach normality regardless of the or
 - Explore the effect of sample size on sampling distributions
 - Understand the mathematical foundation of the CLT
 
+### [Analysis and Discussion of Papers](misc/papers/index.html)
+This section provides analysis and discussion of various papers.
+
 ### Coming Soon...
 
 - **Confidence Intervals**: Understanding uncertainty in parameter estimation

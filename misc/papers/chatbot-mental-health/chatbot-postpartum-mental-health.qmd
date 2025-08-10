@@ -1,5 +1,5 @@
 ---
-title: "Chatbot Therapy Analysis"
+title: "Chatbot Effects on Postpartum Mental Health"
 execute:
   echo: true
   warning: false
@@ -43,7 +43,7 @@ add_color_samples <- function(caption, colors) {
 
 ## Intro
 
--   Data from study at <https://pubmed.ncbi.nlm.nih.gov/37560011/>
+-   Data from study by @Suharwardy2023
 
 ## Design
 
@@ -108,27 +108,6 @@ therapy_data <- data.frame(
 
 # Add participant ID
 therapy_data$participant_id <- 1:nrow(therapy_data)
-
-cat("Data summary:\n")
-cat("PHQ-9 (Primary Outcome):\n")
-cat("Chatbot group (n =", n_chatbot, "):\n")
-cat("  Mean baseline PHQ-9:", round(mean(baseline_chatbot), 2), "\n")
-cat("  Mean 6-week PHQ-9:", round(mean(week6_chatbot), 2), "\n")
-cat("  Mean change:", round(mean(week6_chatbot - baseline_chatbot), 2), "\n")
-cat("Usual care group (n =", n_usual_care, "):\n")
-cat("  Mean baseline PHQ-9:", round(mean(baseline_usual), 2), "\n")
-cat("  Mean 6-week PHQ-9:", round(mean(week6_usual), 2), "\n")
-cat("  Mean change:", round(mean(week6_usual - baseline_usual), 2), "\n\n")
-
-cat("EPDS (Secondary Outcome):\n")
-cat("Chatbot group (n =", n_chatbot, "):\n")
-cat("  Mean baseline EPDS:", round(mean(baseline_epds_chatbot), 2), "\n")
-cat("  Mean 6-week EPDS:", round(mean(week6_epds_chatbot), 2), "\n")
-cat("  Mean change:", round(mean(week6_epds_chatbot - baseline_epds_chatbot), 2), "\n")
-cat("Usual care group (n =", n_usual_care, "):\n")
-cat("  Mean baseline EPDS:", round(mean(baseline_epds_usual), 2), "\n")
-cat("  Mean 6-week EPDS:", round(mean(week6_epds_usual), 2), "\n")
-cat("  Mean change:", round(mean(week6_epds_usual - baseline_epds_usual), 2), "\n")
 ```
 
 ```{r}
@@ -289,70 +268,6 @@ demographics_plot <- ggplot(demographics_data, aes(x = variable, y = percentage,
   scale_y_continuous(limits = c(0, 115), expand = c(0, 0))
 
 print(demographics_plot)
-
-# Add demographic analysis summary
-cat("\n=== DEMOGRAPHIC ANALYSIS ===\n")
-cat("Key Demographic Differences:\n")
-cat("1. Age Distribution:\n")
-cat("   - Chatbot group: 63.2% age 25-34, 32.4% age 35-44\n")
-cat("   - Usual care group: 47.6% age 25-34, 44.0% age 35-44\n")
-cat("   - Significant difference in age distribution (p = 0.02)\n")
-cat("   - Chatbot group is younger on average\n\n")
-
-cat("2. Marital Status:\n")
-cat("   - Chatbot group: 94.1% married\n")
-cat("   - Usual care group: 83.3% married\n")
-cat("   - Significant difference (p = 0.046)\n")
-cat("   - Chatbot group has higher marriage rate\n\n")
-
-cat("3. Employment Status:\n")
-cat("   - Chatbot group: 80.9% employed\n")
-cat("   - Usual care group: 78.6% employed\n")
-cat("   - No significant difference (p = 0.14)\n\n")
-
-cat("4. Mental Health History:\n")
-cat("   - Chatbot group: 16.2% with mental health history\n")
-cat("   - Usual care group: 9.5% with mental health history\n")
-cat("   - No significant difference (p = 0.23)\n\n")
-
-cat("5. Comfort with Mental Health Apps:\n")
-cat("   - Chatbot group: 82.4% comfortable\n")
-cat("   - Usual care group: 77.4% comfortable\n")
-cat("   - No significant difference (p = 0.74)\n\n")
-
-cat("Clinical Implications:\n")
-cat("- Age and marital status differences may influence treatment response\n")
-cat("- Younger, married women may be more receptive to digital interventions\n")
-cat("- Groups are similar in employment, mental health history, and app comfort\n")
-cat("- Demographic differences should be considered when interpreting results\n\n")
-
-cat("=== EXPLANATION OF STATISTICAL SIGNIFICANCE ===\n")
-cat("What does 'statistically significant' mean?\n")
-cat("- A p-value < 0.05 means there's less than 5% chance the difference occurred by random chance\n")
-cat("- It suggests the groups were truly different in these characteristics before the study\n\n")
-
-cat("Why are these demographic differences important?\n")
-cat("1. **Age Distribution (p = 0.02)**:\n")
-cat("   - Chatbot group is significantly younger (63.2% vs 47.6% age 25-34)\n")
-cat("   - Younger women may be more tech-savvy and comfortable with digital interventions\n")
-cat("   - This could explain why the chatbot was more effective in this group\n\n")
-
-cat("2. **Marital Status (p = 0.046)**:\n")
-cat("   - Chatbot group has significantly more married participants (94.1% vs 83.3%)\n")
-cat("   - Married women may have more social support, which could enhance treatment effects\n")
-cat("   - They might also have more stable living situations conducive to digital therapy\n\n")
-
-cat("**Potential Confounding Effects**:\n")
-cat("- These demographic differences could be 'confounders' - variables that influence both\n")
-cat("  group assignment and treatment outcomes\n")
-cat("- The treatment effect might be partially due to these demographic differences\n")
-cat("- This is a limitation of the study design\n\n")
-
-cat("**Study Design Implications**:\n")
-cat("- The groups were not perfectly balanced at baseline\n")
-cat("- This suggests the randomization may not have been completely successful\n")
-cat("- Future studies should use stratified randomization to ensure balanced groups\n")
-cat("- The treatment effect should be interpreted with these demographic differences in mind\n")
 ```
 
 ```{r}
@@ -421,12 +336,6 @@ effect_plot <- ggplot(effect_data, aes(x = group, y = mean_change, fill = group)
   scale_fill_manual(values = c("Chatbot" = "steelblue", "Usual Care" = "orange"))
 
 print(effect_plot)
-
-cat("\nEffect Size Analysis:\n")
-cat("Cohen's d =", round(cohens_d, 3), "\n")
-cat("Interpretation:", ifelse(abs(cohens_d) < 0.2, "Negligible", 
-                             ifelse(abs(cohens_d) < 0.5, "Small", 
-                                    ifelse(abs(cohens_d) < 0.8, "Medium", "Large"))), "effect\n")
 ```
 
 ```{r}
@@ -579,31 +488,6 @@ forest_plot <- ggplot(forest_data, aes(x = outcome, y = difference, color = p_va
   scale_color_manual(values = c("TRUE" = "darkgreen", "FALSE" = "orange"))
 
 print(forest_plot)
-```
-
-```{r}
-# Summary of significant findings
-cat("\n=== SUMMARY OF SIGNIFICANT FINDINGS ===\n")
-cat("Primary Outcome (PHQ-9 Change):\n")
-cat("  - Chatbot group improvement:", round(mean(chatbot_change), 2), "points\n")
-cat("  - Usual care group improvement:", round(mean(usual_change), 2), "points\n")
-cat("  - Difference:", round(mean(chatbot_change) - mean(usual_change), 2), "points\n")
-cat("  - P-value:", round(p_value, 4), "\n")
-cat("  - Significant:", ifelse(p_value < 0.05, "YES", "NO"), "\n")
-cat("  - Effect size (Cohen's d):", round(cohens_d, 3), "\n")
-cat("  - Effect interpretation:", ifelse(abs(cohens_d) < 0.2, "Negligible", 
-                                        ifelse(abs(cohens_d) < 0.5, "Small", 
-                                               ifelse(abs(cohens_d) < 0.8, "Medium", "Large"))), "\n\n")
-
-cat("Demographic Differences (Significant):\n")
-cat("  - Age distribution: p = 0.02\n")
-cat("  - Marital status: p = 0.046\n\n")
-
-cat("Clinical Implications:\n")
-cat("  - Treatment effect is", ifelse(abs(cohens_d) < 0.5, "small", "moderate"), "in magnitude\n")
-cat("  - Statistically", ifelse(p_value < 0.05, "significant", "not significant"), "difference\n")
-cat("  - High acceptability (91% satisfaction)\n")
-cat("  - Good engagement (74% usage in past 2 weeks)\n")
 ```
 
 ```{r}
@@ -938,62 +822,7 @@ bayesian_plot <- ggplot(bayesian_data, aes(x = x, y = density, color = distribut
 print(bayesian_plot)
 ```
 
-```{r}
-# Summary of null hypothesis testing results
-cat("\n=== NULL HYPOTHESIS TESTING SUMMARY ===\n")
-cat("Traditional Frequentist Analysis:\n")
-cat("  - Null hypothesis (H0): No difference between groups\n")
-cat("  - Alternative hypothesis (H₁): Chatbot group improves more than usual care\n")
-cat("  - Observed difference:", round(observed_diff, 3), "\n")
-cat("  - T-statistic:", round(t_test_exact$statistic, 3), "\n")
-cat("  - P-value:", round(exact_p_value, 4), "\n")
-cat("  - Significant at α = 0.05:", ifelse(exact_p_value < 0.05, "YES", "NO"), "\n")
-cat("  - 95% CI:", paste0("[", round(ci_95[1], 3), ", ", round(ci_95[2], 3), "]"), "\n")
-cat("  - CI excludes 0:", ifelse(ci_95[1] > 0 || ci_95[2] < 0, "YES", "NO"), "\n\n")
-
-cat("Bayesian Analysis:\n")
-cat("  - Prior: Skeptical (Normal(0, 1))\n")
-cat("  - Posterior mean:", round(posterior_mean, 3), "\n")
-cat("  - P(effect > 0):", round(prob_positive, 3), "\n")
-cat("  - Interpretation:", ifelse(prob_positive > 0.95, "Strong evidence for effect",
-                                 ifelse(prob_positive > 0.9, "Moderate evidence for effect",
-                                        ifelse(prob_positive > 0.8, "Weak evidence for effect", "No clear evidence"))), "\n\n")
-
-cat("Practical Significance:\n")
-cat("  - Effect size (Cohen's d):", round(cohens_d, 3), "\n")
-cat("  - Interpretation:", ifelse(abs(cohens_d) < 0.2, "Negligible", 
-                                 ifelse(abs(cohens_d) < 0.5, "Small", 
-                                        ifelse(abs(cohens_d) < 0.8, "Medium", "Large"))), "effect\n")
-cat("  - Clinical relevance: Consider if", round(abs(observed_diff), 2), 
-    "point improvement is meaningful for patients\n\n")
-
-cat("=== LOW COHEN'S D AND CREDENCE ANALYSIS ===\n")
-cat("Effect Size Context:\n")
-cat("  - Observed Cohen's d =", round(cohens_d, 3), "\n")
-cat("  - Effect interpretation =", ifelse(abs(cohens_d) < 0.2, "Negligible", 
-                                        ifelse(abs(cohens_d) < 0.5, "Small", 
-                                               ifelse(abs(cohens_d) < 0.8, "Medium", "Large"))), "\n")
-cat("  - Small effect size suggests limited practical significance\n\n")
-
-cat("Credence Change Analysis:\n")
-cat("  - Prior credence in true effect (d > 0): ~50% (skeptical prior)\n")
-cat("  - Posterior credence in true effect (d > 0):", round(prob_positive * 100, 1), "%\n")
-cat("  - Change in credence:", round((prob_positive - 0.5) * 100, 1), "percentage points\n")
-cat("  - Interpretation:", ifelse(prob_positive > 0.5, "Increased", "Decreased"), "confidence in true effect\n\n")
-
-cat("Implications for Future Research:\n")
-cat("  - Small effect size suggests limited clinical impact\n")
-cat("  - Low posterior probability suggests weak evidence\n")
-cat("  - Larger sample size needed for more definitive results\n")
-cat("  - Consider if effect is clinically meaningful regardless of significance\n\n")
-
-cat("=== SECOND-STAGE BAYESIAN UPDATE: LOW COHEN'S D AS EVIDENCE ===\n")
-cat("Stage 1 Posterior becomes Stage 2 Prior:\n")
-cat("  - Stage 1 Posterior mean =", round(posterior_mean, 3), "\n")
-cat("  - Stage 1 Posterior SD =", round(posterior_sd, 3), "\n")
-cat("  - Stage 1 P(effect > 0) =", round(prob_positive, 3), "\n\n")
-
-# Calculate second-stage update based on low Cohen's d
+```{# Calculate second-stage update based on low Cohen's d}
 # Low Cohen's d suggests the effect might be smaller than initially estimated
 # We'll use the observed Cohen's d as evidence to update our belief
 stage2_prior_mean <- posterior_mean
@@ -1005,27 +834,6 @@ stage2_likelihood_sd <- 0.1  # Uncertainty around Cohen's d estimate
 stage2_posterior_precision <- 1/stage2_prior_sd^2 + 1/stage2_likelihood_sd^2
 stage2_posterior_sd <- sqrt(1/stage2_posterior_precision)
 stage2_posterior_mean <- (stage2_prior_mean/stage2_prior_sd^2 + stage2_likelihood_mean/stage2_likelihood_sd^2) / stage2_posterior_precision
-
-# Calculate probability that effect > 0 after stage 2
-stage2_prob_positive <- 1 - pnorm(0, stage2_posterior_mean, stage2_posterior_sd)
-
-cat("Stage 2 Update (Low Cohen's d as Evidence):\n")
-cat("  - Evidence: Cohen's d =", round(cohens_d, 3), "(small effect)\n")
-cat("  - Stage 2 Posterior mean =", round(stage2_posterior_mean, 3), "\n")
-cat("  - Stage 2 Posterior SD =", round(stage2_posterior_sd, 3), "\n")
-cat("  - Stage 2 P(effect > 0) =", round(stage2_prob_positive, 3), "\n\n")
-
-cat("Credence Change from Stage 1 to Stage 2:\n")
-cat("  - Stage 1 credence in effect > 0:", round(prob_positive * 100, 1), "%\n")
-cat("  - Stage 2 credence in effect > 0:", round(stage2_prob_positive * 100, 1), "%\n")
-cat("  - Change in credence:", round((stage2_prob_positive - prob_positive) * 100, 1), "percentage points\n")
-cat("  - Interpretation: Low Cohen's d", ifelse(stage2_prob_positive < prob_positive, "reduced", "increased"), "confidence in true effect\n\n")
-
-cat("Overall Bayesian Learning:\n")
-cat("  - Initial prior credence: ~50%\n")
-cat("  - After data (Stage 1):", round(prob_positive * 100, 1), "%\n")
-cat("  - After considering effect size (Stage 2):", round(stage2_prob_positive * 100, 1), "%\n")
-cat("  - Total change:", round((stage2_prob_positive - 0.5) * 100, 1), "percentage points\n")
 ```
 
 ```{r}
@@ -1198,30 +1006,4 @@ ci_comparison_plot <- ggplot(ci_comparison_data, aes(y = measure)) +
   scale_color_manual(values = c("TRUE" = "darkgreen", "FALSE" = "orange"))
 
 print(ci_comparison_plot)
-```
-
-```{r}
-# Summary of significant vs non-significant results
-cat("\n=== COMPARISON: SIGNIFICANT vs NON-SIGNIFICANT OUTCOMES ===\n")
-cat("PHQ-9 (Primary Outcome - SIGNIFICANT):\n")
-cat("  - Mean difference:", round(phq9_observed_diff, 3), "\n")
-cat("  - P-value:", round(phq9_test$p.value, 4), "\n")
-cat("  - Significant:", ifelse(phq9_test$p.value < 0.05, "YES", "NO"), "\n")
-cat("  - Cohen's d:", round(phq9_cohens_d, 3), "\n")
-cat("  - 95% CI:", paste0("[", round(phq9_ci[1], 3), ", ", round(phq9_ci[2], 3), "]"), "\n")
-cat("  - CI excludes 0:", ifelse(phq9_ci[1] > 0 || phq9_ci[2] < 0, "YES", "NO"), "\n\n")
-
-cat("EPDS (Secondary Outcome - NON-SIGNIFICANT):\n")
-cat("  - Mean difference:", round(epds_observed_diff, 3), "\n")
-cat("  - P-value:", round(epds_test$p.value, 4), "\n")
-cat("  - Significant:", ifelse(epds_test$p.value < 0.05, "YES", "NO"), "\n")
-cat("  - Cohen's d:", round(epds_cohens_d, 3), "\n")
-cat("  - 95% CI:", paste0("[", round(epds_ci[1], 3), ", ", round(epds_ci[2], 3), "]"), "\n")
-cat("  - CI excludes 0:", ifelse(epds_ci[1] > 0 || epds_ci[2] < 0, "YES", "NO"), "\n\n")
-
-cat("Key Insights:\n")
-cat("  - PHQ-9 shows", ifelse(abs(phq9_cohens_d) > abs(epds_cohens_d), "larger", "smaller"), "effect size\n")
-cat("  - EPDS effect is", round(abs(epds_cohens_d)/abs(phq9_cohens_d)*100, 1), "% of PHQ-9 effect\n")
-cat("  - Different measures may capture different aspects of depression\n")
-cat("  - Treatment effect may be measure-specific\n")
 ```
