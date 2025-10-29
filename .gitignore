@@ -3,13 +3,7 @@
 .Rhistory
 .RData
 .Ruserdata
-
-# renv - exclude library but keep config files
-renv/library/
-renv/staging/
-renv/local/
-renv/python/
-renv/cache/
+renv/
 
 # Quarto specific files
 /.quarto/

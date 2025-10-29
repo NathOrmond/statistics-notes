@@ -49,22 +49,47 @@ act --dryrun
 
 ## For This Project
 
-### Testing the Build Pipeline
+### Limitations of act for This Workflow
 
-Since your workflow publishes to GitHub Pages (which requires GitHub authentication), you'll want to test just the build steps. You can use `act` with the `--job` flag to run specific jobs, or modify the command to skip the publish step.
+⚠️ **Important**: Your workflow uses actions that require the GitHub CLI (`gh`) tool, which isn't available in act's Docker containers. This means:
+- ✅ Workflow syntax validation works
+- ✅ Action repository cloning works
+- ❌ Quarto setup step will fail (requires `gh` CLI)
+- ❌ Full R/renv testing may be limited
 
-**Option 1: Run only the build job (without publish)**
+**For comprehensive testing**, push to a branch and check the GitHub Actions logs.
+
+### Testing Options
+
+**Option 1: Manual Build Testing (Recommended)**
+
+Test the build commands manually, which is actually more reliable than act:
 
 ```bash
-act push --job build-deploy -s GITHUB_TOKEN=dummy_token
+# 1. Ensure renv is set up
+Rscript -e "renv::restore()"
+
+# 2. Generate navigation
+Rscript scripts/generate_nav.R
+
+# 3. Render the site
+quarto render
+
+# 4. Verify output
+ls -la _site/
+```
+
+**Option 2: Use act for Syntax Validation**
+
+```bash
+# This will validate workflow syntax and show where it would fail
+act push --job build-deploy -s GITHUB_TOKEN=dummy_token --container-architecture linux/amd64
 ```
 
 This will:
-- ✅ Set up Quarto
-- ✅ Set up R and install packages
-- ✅ Generate navigation
-- ✅ Render the website
-- ⚠️ Attempt to publish (will fail without real token, but you can see the build succeeded)
+- ✅ Validate workflow YAML syntax
+- ✅ Test action repository access
+- ❌ Fail at Quarto setup (known limitation - needs `gh` CLI)
 
 **Option 2: Comment out the publish step temporarily**
 
