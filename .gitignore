@@ -9,6 +9,7 @@ renv/
 /.quarto/
 _site/
 _site.yml
+_quarto_nav.yml
 
 # OS specific files
 .DS_Store
@@ -21,3 +22,5 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+**/*.quarto_ipynb

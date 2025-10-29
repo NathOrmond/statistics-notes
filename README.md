@@ -1,6 +1,6 @@
 # Statistics Notes
 
-A repository for notes and investigations into statistical concepts, accompanied by hands-on R code examples and visualizations.
+A repository for notes and investigations into statistical concepts, accompanied by hands-on R code examples and visualisations.
 
 ## Overview
 
@@ -30,22 +30,27 @@ stats-concepts/
 ├── styles.css                     # Custom CSS styling
 ├── README.md                      # This file
 │
-├── concepts/                      # Statistical concept pages
-│   ├── central-limit-theorem.qmd  # CLT demonstration
-│   ├── degrees-of-freedom.qmd     # Degrees of Freedom demonstration
-│   └── template.qmd               # Template for new concepts
+├── src/                           # Source Quarto documents
+│   ├── teaching-stats/            # Educational content
+│   │   └── core-concepts/         # Core statistical concepts
+│   │       ├── central-limit-theorem.qmd
+│   │       ├── degrees-of-freedom.qmd
+│   │       └── template.qmd
+│   └── blog/                      # Blog-style articles and reviews
+│       ├── paper-reviews/         # Paper review articles
+│       │   ├── index.qmd
+│       │   └── chatbot-mental-health/
+│       │       └── chatbot-postpartum-mental-health.qmd
+│       └── essays/                # Opinion pieces and essays
 │
-├── misc/                          # Miscellaneous files and analyses
-│   └── papers/
-│       ├── index.qmd              # Index for paper analyses
-│       └── chatbot-mental-health/
-│           └── chatbot-postpartum-mental-health.qmd # Analysis of chatbot effects on postpartum mental health
-│
-├── data/                          # Data files
-├── datasets/                      # Additional datasets
-├── images/                        # Generated plots and images
-│   ├── clt-demo/
-│   └── plots/
+├── data/                          # Data files (for external datasets, if needed)
+├── resources/                     # Resources and generated content
+│   └── images/                    # Generated plots and images
+│       ├── clt-demo/
+│       └── plots/
+├── scripts/                       # Helper scripts
+│   ├── generate_nav.R           # Auto-generate navigation from directory structure
+│   └── serve.sh                  # Render and serve the site locally
 │
 ├── renv/                          # R environment management
 ├── renv.lock                      # R package lock file
@@ -102,7 +107,7 @@ quarto --version
 
 ```bash
 # If using git
-git clone <repository-url>
+git clone git@github.com:nathormond/statistics-notes.git
 cd stats-concepts
 
 # Or download and extract the ZIP file
@@ -177,11 +182,31 @@ quarto render
 
 The generated static files will be located in the `_site/` directory. You can then serve these files using any web server (e.g., Python's `http.server`, Node.js `http-server`, or a simple static file server).
 
-### Serving Built Files (Examples)
+### Serving Built Files
 
-#### Using Python's Built-in Server
+#### Quick Serve Script (Recommended)
 
-If you have Python installed, you can quickly serve the built site:
+Use the convenience script to render and serve in one command:
+
+```bash
+# Render and serve on default port 8080
+./scripts/serve.sh
+
+# Or specify a custom port
+./scripts/serve.sh 3000
+```
+
+This script will:
+- Render the Quarto site
+- Automatically detect and use an available web server (Python, Node.js, etc.)
+- Start a local server and display the URL
+- Handle cleanup gracefully when you stop it (Ctrl+C)
+
+#### Manual Serving
+
+If you prefer to build and serve manually:
+
+**Using Python's Built-in Server:**
 
 ```bash
 # First, build the site
@@ -189,24 +214,19 @@ quarto render
 
 # Then, navigate to the output directory and serve
 cd _site
-python -m http.server 8000
-# Access in your browser at http://localhost:8000
+python3 -m http.server 8080
+# Access in your browser at http://localhost:8080
 ```
 
-#### Using Node.js http-server
-
-For Node.js users, `http-server` is a convenient option:
+**Using Node.js http-server:**
 
 ```bash
-# Install http-server globally (if you haven't already)
-npm install -g http-server
-
 # Build the site
 quarto render
 
 # Navigate to the output directory and serve
 cd _site
-http-server -p 8080
+npx --yes http-server -p 8080
 # Access in your browser at http://localhost:8080
 ```
 
@@ -216,7 +236,7 @@ http-server -p 8080
 
 1. **Copy the template**:
    ```bash
-   cp concepts/template.qmd concepts/your-concept-name.qmd
+   cp src/teaching-stats/core-concepts/template.qmd src/teaching-stats/core-concepts/your-concept-name.qmd
    ```
 
 2. **Edit the new file**:
@@ -224,14 +244,17 @@ http-server -p 8080
    - Replace placeholder content with your demonstration
    - Add your R code in the code blocks
 
-3. **Update navigation**:
-   Edit `_quarto.yml` to add your new page to the navbar:
-   ```yaml
-   navbar:
-     left:
-       - href: concepts/your-concept-name.qmd
-         text: Your Concept Name
+3. **Update navigation automatically**:
+   Run the navigation generator script to automatically update `_quarto.yml`:
+   ```r
+   source("scripts/generate_nav.R")
    ```
+   Or from the command line:
+   ```bash
+   Rscript scripts/generate_nav.R
+   ```
+   
+   This script scans your `src/` directory, reads YAML headers from `.qmd` files to get titles, and automatically updates the navigation structure in `_quarto.yml`. No more manual editing of navigation links!
 
 4. **Test your changes**:
    ```bash

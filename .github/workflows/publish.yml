@@ -28,6 +28,11 @@ jobs:
       - name: Restore renv environment
         run: R -e "renv::restore()"
 
+      - name: Generate navigation
+        run: |
+          Rscript scripts/generate_nav.R
+        shell: bash
+
       - name: Render Website
         run: |
           quarto render

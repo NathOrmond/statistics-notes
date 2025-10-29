@@ -1,0 +1,11 @@
+---
+title: "Core Statistical Concepts"
+---
+
+This section covers fundamental statistical concepts through interactive demonstrations and explanations.
+
+## Frequentist Statistics
+
+- [Central Limit Theorem](./central-limit-theorem.qmd) - Understanding how sampling distributions approach normality
+- [Degrees of Freedom](./degrees-of-freedom.qmd) - Exploring the concept of degrees of freedom in statistical analysis
+

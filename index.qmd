@@ -1,45 +1,49 @@
 ---
-title: "Statistics Concepts"
-subtitle: "Interactive Demonstrations of Key Statistical Principles"
+title: "Nathan's Stats Stuff"
+subtitle: "My writing relating to Statistics"
 ---
 
-## Welcome to Statistics Concepts
+## Welcome
 
-This website provides interactive demonstrations and explanations of fundamental statistical concepts. Each page contains hands-on examples with R code that you can run and modify to deepen your understanding.
+This website brings together my work exploring statistical concepts through **interactive demonstrations** and **data analysis**. Whether you're learning statistics or interested in critical analysis of research papers, you'll find hands-on examples with R code that you can run, modify, and learn from.
 
-## Available Topics
+---
 
-### [Central Limit Theorem](concepts/central-limit-theorem.html)
-Understanding how sampling distributions approach normality regardless of the original distribution's shape.
+## Teaching Statistics
 
-**Key Learning Objectives:**
-- Visualize the transformation from skewed to normal distributions
-- Explore the effect of sample size on sampling distributions
-- Understand the mathematical foundation of the CLT
+Learn fundamental statistical concepts through interactive demonstrations with live R code examples.
 
-### [Analysis and Discussion of Papers](misc/papers/index.html)
-This section provides analysis and discussion of various papers.
+**Featured Content:**
+- [**Core Statistical Concepts**](src/teaching-stats/core-concepts/index.html) - Interactive tutorials covering essential topics like:
+  - [Central Limit Theorem](src/teaching-stats/core-concepts/central-limit-theorem.html) - Understanding how sampling distributions approach normality
+  - [Degrees of Freedom](src/teaching-stats/core-concepts/degrees-of-freedom.html) - Exploring this fundamental statistical concept
 
-### Coming Soon...
+[Browse All Teaching Content →](src/teaching-stats/core-concepts/index.html)
 
-- **Confidence Intervals**: Understanding uncertainty in parameter estimation
-- **Hypothesis Testing**: The logic of statistical significance
-- **Regression Analysis**: Modeling relationships between variables
-- **Probability Distributions**: Common distributions and their properties
+---
 
-## How to Use This Site
+## Blog & Analysis
 
-1. **Read the Introduction**: Each concept page starts with an overview
-2. **Run the Code**: Execute the R code blocks to see the demonstrations
-3. **Experiment**: Modify parameters to see how they affect the results
-4. **Understand the Math**: Review the mathematical foundations provided
+Critical analysis and discussion of statistical papers and research.
 
-## Technical Requirements
+[**Paper Reviews**](src/blog/paper-reviews/index.html) - In-depth analysis of research papers, exploring:
+- Study design and methodology
+- Statistical analysis approaches
+- Interpretation of results
+- Personal commentary and insights
 
-- R (version 4.0 or higher)
-- Required packages will be automatically installed when you run the code
-- A modern web browser to view the rendered HTML
+---
+
+## About This Project
+
+This site is built with [Quarto](https://quarto.org/) and uses R for all statistical demonstrations. All code is reproducible and available for you to experiment with. The goal is to make statistical concepts more accessible through hands-on learning.
+
+---
 
 ## Getting Started
 
-Click on any topic above to begin exploring statistical concepts through interactive demonstrations!
+1. Explore the [Teaching Statistics](src/teaching-stats/core-concepts/index.html) section to learn core concepts
+2. Check out [Paper Reviews](src/blog/paper-reviews/index.html) for critical analysis
+3. Run and modify the R code examples to experiment with the concepts
+
+**Technical Requirements:** R (version 4.0+) and a modern web browser. Required R packages will be automatically installed when you run the code blocks.

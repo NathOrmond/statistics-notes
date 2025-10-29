@@ -2,14 +2,43 @@
 title: "About"
 ---
 
+## About This Site
+
+This website brings together my exploration of statistical concepts through interactive demonstrations, data analysis, and critical examination of research. The goal is to make statistics accessible through hands-on learning with reproducible R code.
+
+---
+
 ## About the Author
 
-This site is maintained by **Nathan Ormond**, a Senior Software Engineer at Highway Data Systems.
+**Nathan Ormond** is a Senior Software Engineer with a diverse academic and professional background.
 
-Nathan holds an MSc in Philosophy and is currently pursuing an MS in Statistics part-time. His diverse academic background and professional experience drive his passion for exploring and explaining complex statistical concepts.
+### Background
 
-You can find more about Nathan's projects and work at [https://linktr.ee/digitalgnosis](https://linktr.ee/digitalgnosis).
+Nathan began his career through a **degree apprenticeship**, combining practical experience with formal education. He holds:
+- **MSc in Philosophy**
+- Currently pursuing an **MS in Statistics** part-time while working
 
-```{r}
-1 + 1
-```
+### Professional Work
+
+Nathan is the founder of **Eukrasis Ltd**, where he provides consulting services in:
+- Software Engineering
+- Statistics
+
+His  background—spanning software engineering, philosophy, and statistics—drives his passion for exploring and explaining complex concepts.
+
+### Connect
+
+You can find more about Nathan and links to his work at [linktr.ee/digitalgnosis](https://linktr.ee/digitalgnosis).
+
+---
+
+## About the Project
+
+This site is built using:
+
+- **[Quarto](https://quarto.org/)** - Scientific and technical publishing system
+- **R** - Statistical computing and graphics
+- **ggplot2** - Data visualisation
+- Other open-source R packages for statistical analysis
+
+All code examples are reproducible and available for you to experiment with. The site is open source and welcomes contributions and feedback.
