@@ -25,20 +25,28 @@ jobs:
       - name: Install R Packages
         uses: r-lib/actions/setup-renv@v2
 
+      - name: Restore renv packages
+        run: |
+          Rscript -e "source('renv/activate.R'); renv::restore()"
+        shell: bash
+
       - name: Verify packages installed
         run: |
-          Rscript -e "if (!requireNamespace('ggplot2', quietly = TRUE)) { stop('ggplot2 not available') } else { message('✓ Packages available') }"
+          Rscript -e "source('renv/activate.R'); if (!requireNamespace('ggplot2', quietly = TRUE)) { stop('ggplot2 not available') } else { message('✓ Packages available') }"
         shell: bash
 
       - name: Generate navigation
         run: |
-          Rscript scripts/generate_nav.R
+          Rscript -e "source('renv/activate.R'); source('scripts/generate_nav.R')"
         shell: bash
 
       - name: Render Website
         run: |
+          export RENV_PROJECT="${{ github.workspace }}"
           quarto render
         shell: bash
+        env:
+          RENV_PROJECT: ${{ github.workspace }}
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
