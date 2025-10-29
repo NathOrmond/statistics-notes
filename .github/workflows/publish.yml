@@ -25,8 +25,10 @@ jobs:
       - name: Install R Packages
         uses: r-lib/actions/setup-renv@v2
 
-      - name: Restore renv environment
-        run: R -e "renv::restore()"
+      - name: Verify packages installed
+        run: |
+          Rscript -e "if (!requireNamespace('ggplot2', quietly = TRUE)) { stop('ggplot2 not available') } else { message('✓ Packages available') }"
+        shell: bash
 
       - name: Generate navigation
         run: |
