@@ -33,12 +33,19 @@ jobs:
           Rscript scripts/generate_nav.R
         shell: bash
 
-      - name: Render Website
+      - name: Get renv library path
+        id: renv-lib
         run: |
-          quarto render
+          R_LIB_PATH=$(Rscript -e "source('renv/activate.R'); cat(.libPaths()[1])")
+          echo "lib_path=$R_LIB_PATH" >> $GITHUB_OUTPUT
+
+      - name: Render Website
+        run: quarto render
         shell: bash
         env:
+          R_LIBS: ${{ steps.renv-lib.outputs.lib_path }}
           R_LIBS_USER: ""
+          R_PROFILE: ${{ github.workspace }}/.Rprofile
           RENV_PROJECT: ${{ github.workspace }}
 
       - name: Publish to GitHub Pages
