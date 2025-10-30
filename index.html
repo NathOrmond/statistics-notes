@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistics Concepts – Statistics Notes</title>
+<title>Nathan’s Stats Stuff – Nathans Stats Stuff</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,14 +32,15 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4df3b0c4fafa0f66eafcead0ee6cff11.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -79,8 +80,10 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">Statistics Notes</span>
+    <span class="navbar-title">Nathans Stats Stuff</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -94,32 +97,24 @@ ul.task-list li input[type="checkbox"] {
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-concepts" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Concepts</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching-stats" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Teaching Stats</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-concepts">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching-stats">    
         <li>
-    <a class="dropdown-item" href="./concepts/central-limit-theorem.html">
- <span class="dropdown-text">Central Limit Theorem</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./concepts/degrees-of-freedom.html">
- <span class="dropdown-text">Degrees of Freedom</span></a>
+    <a class="dropdown-item" href="./src/teaching-stats/core-concepts/index.html">
+ <span class="dropdown-text">Core Concepts</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-analysis-and-discussion-of-papers" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Analysis and Discussion of Papers</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-blog" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Blog</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-analysis-and-discussion-of-papers">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-blog">    
         <li>
-    <a class="dropdown-item" href="./misc/papers/index.html">
- <span class="dropdown-text">Overview</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./misc/papers/chatbot-mental-health/chatbot-postpartum-mental-health.html">
- <span class="dropdown-text">Chatbot Effects on Postpartum Mental Health</span></a>
+    <a class="dropdown-item" href="./src/blog/paper-reviews/index.html">
+ <span class="dropdown-text">Paper Reviews</span></a>
   </li>  
     </ul>
   </li>
@@ -143,15 +138,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#welcome-to-statistics-concepts" id="toc-welcome-to-statistics-concepts" class="nav-link active" data-scroll-target="#welcome-to-statistics-concepts">Welcome to Statistics Concepts</a></li>
-  <li><a href="#available-topics" id="toc-available-topics" class="nav-link" data-scroll-target="#available-topics">Available Topics</a>
-  <ul class="collapse">
-  <li><a href="#central-limit-theorem" id="toc-central-limit-theorem" class="nav-link" data-scroll-target="#central-limit-theorem">Central Limit Theorem</a></li>
-  <li><a href="#analysis-and-discussion-of-papers" id="toc-analysis-and-discussion-of-papers" class="nav-link" data-scroll-target="#analysis-and-discussion-of-papers">Analysis and Discussion of Papers</a></li>
-  <li><a href="#coming-soon" id="toc-coming-soon" class="nav-link" data-scroll-target="#coming-soon">Coming Soon…</a></li>
-  </ul></li>
-  <li><a href="#how-to-use-this-site" id="toc-how-to-use-this-site" class="nav-link" data-scroll-target="#how-to-use-this-site">How to Use This Site</a></li>
-  <li><a href="#technical-requirements" id="toc-technical-requirements" class="nav-link" data-scroll-target="#technical-requirements">Technical Requirements</a></li>
+  <li><a href="#welcome" id="toc-welcome" class="nav-link active" data-scroll-target="#welcome">Welcome</a></li>
+  <li><a href="#teaching-statistics" id="toc-teaching-statistics" class="nav-link" data-scroll-target="#teaching-statistics">Teaching Statistics</a></li>
+  <li><a href="#blog-analysis" id="toc-blog-analysis" class="nav-link" data-scroll-target="#blog-analysis">Blog &amp; Analysis</a></li>
+  <li><a href="#about-this-project" id="toc-about-this-project" class="nav-link" data-scroll-target="#about-this-project">About This Project</a></li>
   <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started">Getting Started</a></li>
   </ul>
 </nav>
@@ -161,8 +151,8 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistics Concepts</h1>
-<p class="subtitle lead">Interactive Demonstrations of Key Statistical Principles</p>
+<h1 class="title">Nathan’s Stats Stuff</h1>
+<p class="subtitle lead">My writing relating to Statistics</p>
 </div>
 
 
@@ -179,51 +169,37 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="welcome-to-statistics-concepts" class="level2">
-<h2 class="anchored" data-anchor-id="welcome-to-statistics-concepts">Welcome to Statistics Concepts</h2>
-<p>This website provides interactive demonstrations and explanations of fundamental statistical concepts. Each page contains hands-on examples with R code that you can run and modify to deepen your understanding.</p>
+<section id="welcome" class="level2">
+<h2 class="anchored" data-anchor-id="welcome">Welcome</h2>
+<p>This website brings together my work exploring statistical concepts through <strong>interactive demonstrations</strong> and <strong>data analysis</strong>. Whether you’re learning statistics or interested in critical analysis of research papers, you’ll find hands-on examples with R code that you can run, modify, and learn from.</p>
+<hr>
 </section>
-<section id="available-topics" class="level2">
-<h2 class="anchored" data-anchor-id="available-topics">Available Topics</h2>
-<section id="central-limit-theorem" class="level3">
-<h3 class="anchored" data-anchor-id="central-limit-theorem"><a href="concepts/central-limit-theorem.html">Central Limit Theorem</a></h3>
-<p>Understanding how sampling distributions approach normality regardless of the original distribution’s shape.</p>
-<p><strong>Key Learning Objectives:</strong> - Visualize the transformation from skewed to normal distributions - Explore the effect of sample size on sampling distributions - Understand the mathematical foundation of the CLT</p>
+<section id="teaching-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="teaching-statistics">Teaching Statistics</h2>
+<p>Learn fundamental statistical concepts through interactive demonstrations with live R code examples.</p>
+<p><strong>Featured Content:</strong> - <a href="src/teaching-stats/core-concepts/index.html"><strong>Core Statistical Concepts</strong></a> - Interactive tutorials covering essential topics like: - <a href="src/teaching-stats/core-concepts/central-limit-theorem.html">Central Limit Theorem</a> - Understanding how sampling distributions approach normality - <a href="src/teaching-stats/core-concepts/degrees-of-freedom.html">Degrees of Freedom</a> - Exploring this fundamental statistical concept</p>
+<p><a href="src/teaching-stats/core-concepts/index.html">Browse All Teaching Content →</a></p>
+<hr>
 </section>
-<section id="analysis-and-discussion-of-papers" class="level3">
-<h3 class="anchored" data-anchor-id="analysis-and-discussion-of-papers"><a href="misc/papers/index.html">Analysis and Discussion of Papers</a></h3>
-<p>This section provides analysis and discussion of various papers.</p>
+<section id="blog-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="blog-analysis">Blog &amp; Analysis</h2>
+<p>Critical analysis and discussion of statistical papers and research.</p>
+<p><a href="src/blog/paper-reviews/index.html"><strong>Paper Reviews</strong></a> - In-depth analysis of research papers, exploring: - Study design and methodology - Statistical analysis approaches - Interpretation of results - Personal commentary and insights</p>
+<hr>
 </section>
-<section id="coming-soon" class="level3">
-<h3 class="anchored" data-anchor-id="coming-soon">Coming Soon…</h3>
-<ul>
-<li><strong>Confidence Intervals</strong>: Understanding uncertainty in parameter estimation</li>
-<li><strong>Hypothesis Testing</strong>: The logic of statistical significance</li>
-<li><strong>Regression Analysis</strong>: Modeling relationships between variables</li>
-<li><strong>Probability Distributions</strong>: Common distributions and their properties</li>
-</ul>
-</section>
-</section>
-<section id="how-to-use-this-site" class="level2">
-<h2 class="anchored" data-anchor-id="how-to-use-this-site">How to Use This Site</h2>
-<ol type="1">
-<li><strong>Read the Introduction</strong>: Each concept page starts with an overview</li>
-<li><strong>Run the Code</strong>: Execute the R code blocks to see the demonstrations</li>
-<li><strong>Experiment</strong>: Modify parameters to see how they affect the results</li>
-<li><strong>Understand the Math</strong>: Review the mathematical foundations provided</li>
-</ol>
-</section>
-<section id="technical-requirements" class="level2">
-<h2 class="anchored" data-anchor-id="technical-requirements">Technical Requirements</h2>
-<ul>
-<li>R (version 4.0 or higher)</li>
-<li>Required packages will be automatically installed when you run the code</li>
-<li>A modern web browser to view the rendered HTML</li>
-</ul>
+<section id="about-this-project" class="level2">
+<h2 class="anchored" data-anchor-id="about-this-project">About This Project</h2>
+<p>This site is built with <a href="https://quarto.org/">Quarto</a> and uses R for all statistical demonstrations. All code is reproducible and available for you to experiment with. The goal is to make statistical concepts more accessible through hands-on learning.</p>
+<hr>
 </section>
 <section id="getting-started" class="level2">
 <h2 class="anchored" data-anchor-id="getting-started">Getting Started</h2>
-<p>Click on any topic above to begin exploring statistical concepts through interactive demonstrations!</p>
+<ol type="1">
+<li>Explore the <a href="src/teaching-stats/core-concepts/index.html">Teaching Statistics</a> section to learn core concepts</li>
+<li>Check out <a href="src/blog/paper-reviews/index.html">Paper Reviews</a> for critical analysis</li>
+<li>Run and modify the R code examples to experiment with the concepts</li>
+</ol>
+<p><strong>Technical Requirements:</strong> R (version 4.0+) and a modern web browser. Required R packages will be automatically installed when you run the code blocks.</p>
 
 
 </section>
@@ -280,13 +256,14 @@ ul.task-list li input[type="checkbox"] {
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

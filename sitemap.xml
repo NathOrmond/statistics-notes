@@ -1,31 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://NathOrmond.github.io/stats-concepts/concepts/template.html</loc>
-    <lastmod>2025-08-10T17:24:31.521Z</lastmod>
+    <loc>https://NathOrmond.github.io/stats-concepts/src/teaching-stats/core-concepts/central-limit-theorem.html</loc>
+    <lastmod>2025-10-30T17:45:42.695Z</lastmod>
   </url>
   <url>
-    <loc>https://NathOrmond.github.io/stats-concepts/concepts/central-limit-theorem.html</loc>
-    <lastmod>2025-08-10T17:24:31.521Z</lastmod>
+    <loc>https://NathOrmond.github.io/stats-concepts/src/teaching-stats/core-concepts/template.html</loc>
+    <lastmod>2025-10-30T17:45:42.695Z</lastmod>
   </url>
   <url>
-    <loc>https://NathOrmond.github.io/stats-concepts/misc/papers/index.html</loc>
-    <lastmod>2025-08-10T17:24:31.522Z</lastmod>
+    <loc>https://NathOrmond.github.io/stats-concepts/src/blog/paper-reviews/chatbot-mental-health/chatbot-postpartum-mental-health.html</loc>
+    <lastmod>2025-10-30T17:45:42.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NathOrmond.github.io/stats-concepts/docs/routing-system.html</loc>
+    <lastmod>2025-10-30T17:45:42.688Z</lastmod>
   </url>
   <url>
     <loc>https://NathOrmond.github.io/stats-concepts/about.html</loc>
-    <lastmod>2025-08-10T17:24:31.521Z</lastmod>
+    <lastmod>2025-10-30T17:45:42.687Z</lastmod>
   </url>
   <url>
     <loc>https://NathOrmond.github.io/stats-concepts/index.html</loc>
-    <lastmod>2025-08-10T17:24:31.521Z</lastmod>
+    <lastmod>2025-10-30T17:45:42.688Z</lastmod>
   </url>
   <url>
-    <loc>https://NathOrmond.github.io/stats-concepts/misc/papers/chatbot-mental-health/chatbot-postpartum-mental-health.html</loc>
-    <lastmod>2025-08-10T17:24:31.522Z</lastmod>
+    <loc>https://NathOrmond.github.io/stats-concepts/docs/testing-ci-locally.html</loc>
+    <lastmod>2025-10-30T17:45:42.688Z</lastmod>
   </url>
   <url>
-    <loc>https://NathOrmond.github.io/stats-concepts/concepts/degrees-of-freedom.html</loc>
-    <lastmod>2025-08-10T17:24:31.521Z</lastmod>
+    <loc>https://NathOrmond.github.io/stats-concepts/src/blog/paper-reviews/index.html</loc>
+    <lastmod>2025-10-30T17:45:42.694Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NathOrmond.github.io/stats-concepts/src/teaching-stats/core-concepts/index.html</loc>
+    <lastmod>2025-10-30T17:45:42.695Z</lastmod>
+  </url>
+  <url>
+    <loc>https://NathOrmond.github.io/stats-concepts/src/teaching-stats/core-concepts/degrees-of-freedom.html</loc>
+    <lastmod>2025-10-30T17:45:42.695Z</lastmod>
   </url>
 </urlset>
