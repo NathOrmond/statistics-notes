@@ -15,36 +15,29 @@ Check if Docker is running:
 docker ps
 ```
 
-## Basic Usage
+## Quick Start
 
-### Run All Workflows
+### Unified script
+
+Use the unified test runner for both manual local builds and CI simulation with `act`.
+
+Manual build test (recommended for reliability):
 
 ```bash
-# From the project root
-act
+./scripts/test.sh
 ```
 
-This will:
-- Detect workflows in `.github/workflows/`
-- Show you which workflows match
-- Ask which ones to run
-
-### Run Specific Event
+CI test with `act`:
 
 ```bash
-# Run workflows triggered by push events
-act push
+# Basic
+./scripts/test.sh --ci
 
-# Run workflows triggered by pull requests
-act pull_request
-```
+# On Apple Silicon
+./scripts/test.sh --ci --amd64
 
-### Dry Run (Preview Only)
-
-See what would happen without actually executing:
-
-```bash
-act --dryrun
+# Provide explicit token (otherwise uses gh auth token if available)
+./scripts/test.sh --ci --token YOUR_GITHUB_TOKEN
 ```
 
 ## For This Project
@@ -59,37 +52,10 @@ act --dryrun
 
 **For comprehensive testing**, push to a branch and check the GitHub Actions logs.
 
-### Testing Options
+### Details
 
-**Option 1: Manual Build Testing (Recommended)**
-
-Test the build commands manually, which is actually more reliable than act:
-
-```bash
-# 1. Ensure renv is set up
-Rscript -e "renv::restore()"
-
-# 2. Generate navigation
-Rscript scripts/generate_nav.R
-
-# 3. Render the site
-quarto render
-
-# 4. Verify output
-ls -la _site/
-```
-
-**Option 2: Use act for Syntax Validation**
-
-```bash
-# This will validate workflow syntax and show where it would fail
-act push --job build-deploy -s GITHUB_TOKEN=dummy_token --container-architecture linux/amd64
-```
-
-This will:
-- ✅ Validate workflow YAML syntax
-- ✅ Test action repository access
-- ❌ Fail at Quarto setup (known limitation - needs `gh` CLI)
+- Manual mode runs the same steps as CI: `renv::restore()`, `scripts/generate_nav.R`, `quarto render`, and verifies `_site/`.
+- CI mode runs your GitHub Actions workflow with `act` and an artifact server; it’s best for workflow syntax/flow validation, but may fail at Quarto setup due to missing `gh` CLI in containers.
 
 **Option 2: Comment out the publish step temporarily**
 

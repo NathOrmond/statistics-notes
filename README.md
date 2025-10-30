@@ -278,6 +278,40 @@ npx --yes http-server -p 8080
 # Your demonstration code here
 ```
 
+## Local Testing and CI Simulation
+
+### Unified test runner
+
+Use the unified script to test builds locally or simulate CI with `act`.
+
+Manual build test (recommended):
+
+```bash
+./scripts/test.sh
+```
+
+This will:
+- Restore `renv` packages
+- Generate navigation
+- Render the site with Quarto
+- Verify `_site/index.html`
+
+CI test using `act` (syntax/flow validation):
+
+```bash
+# Basic
+./scripts/test.sh --ci
+
+# Apple Silicon (force amd64 containers)
+./scripts/test.sh --ci --amd64
+
+# Explicit token (otherwise uses gh auth token if available)
+./scripts/test.sh --ci --token YOUR_GITHUB_TOKEN
+```
+
+Notes:
+- `act` can’t fully replicate GitHub Actions; Quarto setup may fail due to missing `gh` CLI in containers. Use the manual build test for reliable local validation.
+
 ## Deployment
 
 ### GitHub Pages
