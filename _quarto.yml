@@ -18,6 +18,8 @@ website:
         text: Paper Reviews
     - href: about.qmd
       text: About
+execute:
+  freeze: auto
 format:
   html:
     theme: cosmo
