@@ -37,6 +37,9 @@ jobs:
         run: |
           quarto render
         shell: bash
+        env:
+          R_LIBS_USER: ""
+          RENV_PROJECT: ${{ github.workspace }}
 
       - name: Publish to GitHub Pages
         uses: quarto-dev/quarto-actions/publish@v2
