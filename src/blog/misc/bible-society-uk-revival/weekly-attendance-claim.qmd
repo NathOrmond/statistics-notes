@@ -57,15 +57,9 @@ n_2024 <- survey_meta$sample_size_weighted[2]
 
 ## Point Estimates
 
-```{r}
-#| label: point-estimates
-
-cat("Weekly Attendance Estimates:\n")
-cat("============================\n\n")
-cat(sprintf("2018: %.1f%% (n = %s)\n", weekly_2018 * 100, format(n_2018, big.mark = ",")))
-cat(sprintf("2024: %.1f%% (n = %s)\n", weekly_2024 * 100, format(n_2024, big.mark = ",")))
-cat(sprintf("Change: %+.1f percentage points\n\n", (weekly_2024 - weekly_2018) * 100))
-```
+- **2018**: `r sprintf("%.1f", weekly_2018 * 100)`% (n = `r format(n_2018, big.mark = ",")`)
+- **2024**: `r sprintf("%.1f", weekly_2024 * 100)`% (n = `r format(n_2024, big.mark = ",")`)
+- **Change**: `r sprintf("%+.1f", (weekly_2024 - weekly_2018) * 100)` percentage points
 
 ## Confidence Intervals (with Design Effect)
 
@@ -93,19 +87,14 @@ calc_ci <- function(p, n, deff = 1.5, conf_level = 0.95) {
 
 ci_2018 <- calc_ci(weekly_2018, n_2018)
 ci_2024 <- calc_ci(weekly_2024, n_2024)
-
-# Display results
-cat("95% Confidence Intervals (with design effect = 1.5):\n")
-cat("=====================================================\n\n")
-cat(sprintf("2018: %.1f%% [%.1f%%, %.1f%%]\n", 
-            ci_2018$estimate * 100,
-            ci_2018$ci_lower * 100,
-            ci_2018$ci_upper * 100))
-cat(sprintf("2024: %.1f%% [%.1f%%, %.1f%%]\n\n", 
-            ci_2024$estimate * 100,
-            ci_2024$ci_lower * 100,
-            ci_2024$ci_upper * 100))
 ```
+
+### 95% Confidence Intervals (with design effect = 1.5)
+
+The confidence intervals account for design effects in panel surveys:
+
+- **2018**: `r sprintf("%.1f", ci_2018$estimate * 100)`% [`r sprintf("%.1f", ci_2018$ci_lower * 100)`%, `r sprintf("%.1f", ci_2018$ci_upper * 100)`%]
+- **2024**: `r sprintf("%.1f", ci_2024$estimate * 100)`% [`r sprintf("%.1f", ci_2024$ci_lower * 100)`%, `r sprintf("%.1f", ci_2024$ci_upper * 100)`%]
 
 ## Hypothesis Test
 
@@ -150,21 +139,18 @@ prop_test <- function(p1, n1, p2, n2, deff = 1.5) {
 }
 
 test_result <- prop_test(weekly_2018, n_2018, weekly_2024, n_2024)
-
-cat("Hypothesis Test Results:\n")
-cat("=========================\n\n")
-cat(sprintf("Difference: %+.2f percentage points\n", test_result$difference * 100))
-cat(sprintf("95%% CI for difference: [%+.2f, %+.2f] percentage points\n", 
-            test_result$ci_lower * 100, test_result$ci_upper * 100))
-cat(sprintf("Z-statistic: %.3f\n", test_result$z_statistic))
-cat(sprintf("P-value: %.4f\n\n", test_result$p_value))
-
-if (test_result$significant) {
-  cat("Result: Statistically significant (p < 0.05)\n")
-} else {
-  cat("Result: Not statistically significant (p ≥ 0.05)\n")
-}
 ```
+
+### Hypothesis Test Results
+
+The hypothesis test examines whether the observed change is statistically significant:
+
+- **Difference**: `r sprintf("%+.2f", test_result$difference * 100)` percentage points
+- **95% CI for difference**: [`r sprintf("%+.2f", test_result$ci_lower * 100)`, `r sprintf("%+.2f", test_result$ci_upper * 100)`] percentage points
+- **Z-statistic**: `r sprintf("%.3f", test_result$z_statistic)`
+- **P-value**: `r sprintf("%.4f", test_result$p_value)`
+
+**Result**: `r if (test_result$significant) {"Statistically significant (p < 0.05)"} else {"Not statistically significant (p ≥ 0.05)"}`
 
 ## Effect Size
 
@@ -187,16 +173,19 @@ interpret_h <- function(h) {
   if (abs_h < 0.8) return("Medium")
   return("Large")
 }
-
-cat("Effect Size (Cohen's h):\n")
-cat("========================\n\n")
-cat(sprintf("h = %.3f (%s effect)\n\n", h, interpret_h(h)))
-cat("Interpretation:\n")
-cat("  h < 0.2  : Negligible\n")
-cat("  0.2 ≤ h < 0.5 : Small\n")
-cat("  0.5 ≤ h < 0.8 : Medium\n")
-cat("  h ≥ 0.8  : Large\n")
 ```
+
+### Effect Size (Cohen's h)
+
+Statistical significance doesn't mean practical significance. The effect size helps assess the magnitude of the change:
+
+- **h** = `r sprintf("%.3f", h)` (`r interpret_h(h)` effect)
+
+**Interpretation**:
+- h < 0.2: Negligible
+- 0.2 ≤ h < 0.5: Small
+- 0.5 ≤ h < 0.8: Medium
+- h ≥ 0.8: Large
 
 ## Visualisation
 

@@ -59,20 +59,10 @@ glimpse(attendance_data)
 
 ## Survey Overview
 
-```{r}
-#| label: survey-summary
+- **2018**: n = `r format(survey_meta$sample_size_unweighted[1], big.mark = ",")` (weighted: `r format(survey_meta$sample_size_weighted[1], big.mark = ",")`)
+- **2024**: n = `r format(survey_meta$sample_size_unweighted[2], big.mark = ",")` (weighted: `r format(survey_meta$sample_size_weighted[2], big.mark = ",")`)
 
-cat("Survey Comparison:\n")
-cat("==================\n\n")
-cat(sprintf("2018: n = %s (weighted: %s)\n", 
-            format(survey_meta$sample_size_unweighted[1], big.mark = ","),
-            format(survey_meta$sample_size_weighted[1], big.mark = ",")))
-cat(sprintf("2024: n = %s (weighted: %s)\n", 
-            format(survey_meta$sample_size_unweighted[2], big.mark = ","),
-            format(survey_meta$sample_size_weighted[2], big.mark = ",")))
-cat(sprintf("\nSample size reduction: %.1f%%\n", 
-            (1 - survey_meta$sample_size_weighted[2] / survey_meta$sample_size_weighted[1]) * 100))
-```
+**Sample size reduction**: `r sprintf("%.1f", (1 - survey_meta$sample_size_weighted[2] / survey_meta$sample_size_weighted[1]) * 100)`%
 
 ## Red Flag #1: Internal Consistency Check
 
@@ -99,39 +89,32 @@ binary_2024 <- attendance_data %>%
          response_category == "Yes - in the past year")
 
 binary_pct_2024 <- binary_2024$total_pct
-
-# Display comparison
-cat("Internal Consistency Check (2024 Survey):\n")
-cat("==========================================\n\n")
-cat(sprintf("Binary 'Yes - in the past year': %.1f%%\n", binary_pct_2024))
-cat(sprintf("Sum of frequency categories:     %.1f%%\n", freq_sum_2024))
-cat(sprintf("Discrepancy:                     %.1f percentage points\n\n", 
-            abs(freq_sum_2024 - binary_pct_2024)))
-
-if (abs(freq_sum_2024 - binary_pct_2024) > 2) {
-  cat("🚩 RED FLAG: Internal inconsistency detected!\n")
-  cat("This suggests measurement error or question order effects.\n")
-} else {
-  cat("✓ Internal consistency check passed.\n")
-}
+discrepancy <- abs(freq_sum_2024 - binary_pct_2024)
+is_inconsistent <- discrepancy > 2
 ```
+
+### Internal Consistency Check (2024 Survey)
+
+The 2024 survey asked both a binary question and a frequency question. If these are measuring the same thing, they should yield consistent results:
+
+- **Binary 'Yes - in the past year'**: `r sprintf("%.1f", binary_pct_2024)`%
+- **Sum of frequency categories**: `r sprintf("%.1f", freq_sum_2024)`%
+- **Discrepancy**: `r sprintf("%.1f", discrepancy)` percentage points
+
+`r if (is_inconsistent) {"🚩 **RED FLAG**: Internal inconsistency detected! This suggests measurement error or question order effects."} else {"✓ Internal consistency check passed."}`
 
 ## Red Flag #2: Question Format Differences
 
 The surveys used different question formats, which makes direct comparison problematic:
 
-```{r}
-#| label: question-format
+### Question Format Comparison
 
-cat("Question Format Comparison:\n")
-cat("===========================\n\n")
-cat("2018: Single frequency question only\n")
-cat("     'Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?'\n\n")
-cat("2024: Binary question FIRST, then frequency question\n")
-cat("     This order may prime respondents differently.\n\n")
-cat("🚩 RED FLAG: Question order effects are a known source of bias.\n")
-cat("The binary question may influence responses to the frequency question.\n")
-```
+- **2018**: Single frequency question only
+  - 'Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?'
+- **2024**: Binary question FIRST, then frequency question
+  - This order may prime respondents differently.
+
+🚩 **RED FLAG**: Question order effects are a known source of bias. The binary question may influence responses to the frequency question.
 
 ## Basic Attendance Statistics
 
