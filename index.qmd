@@ -38,6 +38,8 @@ Critical analysis and discussion of statistical papers and research.
 
 This site is built with [Quarto](https://quarto.org/) and uses R for all statistical demonstrations. All code is reproducible and available for you to experiment with. The goal is to make statistical concepts more accessible through hands-on learning.
 
+All of the source code for this project can be found on GitHub: [https://github.com/NathOrmond/statistics-notes.git](https://github.com/NathOrmond/statistics-notes.git)
+
 ---
 
 ## Getting Started

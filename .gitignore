@@ -24,3 +24,8 @@ Thumbs.db
 *.temp
 
 **/*.quarto_ipynb
+
+# Large data files (uncomment if needed)
+# data/*/raw/*.sqlite
+# data/*/raw/*.db
+# data/*/raw/*.parquet

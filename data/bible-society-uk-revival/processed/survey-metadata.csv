@@ -1,0 +1,13 @@
+survey_year,sample_size_unweighted,sample_size_weighted,fieldwork_start,fieldwork_end,survey_methodology,key_question,response_scale
+2018,19101,19875,2018-10-11,2018-11-13,YouGov online panel,"Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?","Daily/almost daily; A few times a week; About once a week; About once a fortnight; About once a month; A few times a year; About once a year; Hardly ever; Never"
+2024,13146,12455,2024-11-04,2024-12-02,YouGov online panel,"Church service (with binary: Yes - in the past year; Yes - more than a year ago; Never); ALSO frequency question","Binary first, then frequency scale same as 2018"
+
+# CRITICAL METHODOLOGICAL NOTES:
+# 1. Sample sizes differ substantially (19,875 vs 12,455 weighted)
+# 2. Question order differs: 2024 has binary question BEFORE frequency question  
+# 3. Binary question in 2024 may prime respondents differently
+# 4. The binary "Yes - in the past year" (24%) should theoretically equal the sum of 
+#    frequency responses for past year attendance, but there are inconsistencies
+# 5. Different weighted bases used for different questions within 2024 survey
+# 6. No information provided about demographic weighting adjustments for immigration
+# 7. YouGov panel methodology may have changed between 2018 and 2024
