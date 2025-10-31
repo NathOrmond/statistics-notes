@@ -11,15 +11,28 @@ The claim asserts that weekly church attendance increased from 7% (2018) to 11% 
 
 ## Analysis Pages
 
-### 1. [Exploratory Overview](./exploratory-overview.qmd)
+### 1. [General Overview](./general-overview.qmd)
 
-Initial data exploration, basic summaries, and detection of red flags:
-- Data loading and survey metadata
+Comprehensive descriptive comparison of all survey data:
+- Complete survey metadata and characteristics
+- Question format documentation
+- Full attendance distribution comparisons (all categories)
+- Demographic breakdowns (age, ethnicity, gender)
 - Internal consistency checks
-- Question format differences
-- Basic attendance statistics
+- Summary dashboard of key metrics
+- Visual comparisons throughout
 
-### 2. [Weekly Attendance Claim Analysis](./weekly-attendance-claim.qmd)
+### 2. [Critical Analysis Overview](./criticism-overview.qmd)
+
+Comprehensive critical evaluation with visual evidence:
+- Executive summary of findings and verdict
+- Visual summaries of key metrics
+- Red flag identification and severity assessment
+- Complete attendance distribution comparison
+- Immigration impact analysis
+- Evidence quality dashboard
+
+### 3. [Weekly Attendance Claim Analysis](./weekly-attendance-claim.qmd)
 
 Statistical testing of the 7% → 11% increase claim:
 - Point estimates with confidence intervals
@@ -27,7 +40,7 @@ Statistical testing of the 7% → 11% increase claim:
 - Effect size calculations (Cohen's h)
 - Visualisation of results
 
-### 3. [Question Order Effects](./question-order-effects.qmd)
+### 4. [Question Order Effects](./question-order-effects.qmd)
 
 Impact of different survey question formats:
 - Comparison of 2018 vs 2024 question formats
@@ -35,7 +48,7 @@ Impact of different survey question formats:
 - Evidence of acquiescence bias and anchoring effects
 - Contradictory results analysis
 
-### 4. [Demographic Analysis](./demographic-analysis.qmd)
+### 5. [Demographic Analysis](./demographic-analysis.qmd)
 
 Population composition changes and their impact:
 - Attendance by ethnicity and age groups

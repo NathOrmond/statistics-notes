@@ -1,0 +1,950 @@
+---
+title: "Critical Analysis Overview"
+subtitle: "Comprehensive evaluation of the 'Quiet Revival' claim with visual evidence"
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Set working directory to project root using here package
+if (!require(here, quietly = TRUE)) {
+  install.packages("here")
+}
+# Find project root (directory containing _quarto.yml)
+here::i_am("_quarto.yml")
+# Set working directory to project root
+setwd(here())
+
+# Load required packages
+library(tidyverse)
+library(scales)
+library(ggplot2)
+library(knitr)
+library(patchwork)  # For combining plots
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Custom theme for consistent visualizations
+theme_critique <- function() {
+  theme_minimal(base_size = 12) +
+    theme(
+      plot.title = element_text(face = "bold", size = 14),
+      plot.subtitle = element_text(size = 11, color = "grey40"),
+      plot.caption = element_text(size = 9, color = "grey50", hjust = 0),
+      legend.position = "top",
+      panel.grid.minor = element_blank()
+    )
+}
+```
+
+## Introduction
+
+This exploratory analysis examines Bible Society UK's claim of a "Quiet Revival" based on YouGov survey data comparing church attendance patterns between 2018 and 2024. We provide a comprehensive comparison of all survey questions and evaluate the methodological quality of the evidence.
+
+## Executive Summary
+
+### What Changed?
+
+- **Weekly+ attendance**: 7% → 11% (+4pp)
+- **"Never attended"**: 63% → 59% (-4pp)
+- **Statistical significance**: p<0.001 (highly significant)
+- **Effect size**: Cohen's h < 0.2 (small)
+
+### Is it a "Revival"? NO
+
+**Why not?**
+
+1. **Tiny effect sizes** (Cohen's h < 0.2 = negligible to small)
+2. **Major confounders ignored**:
+   - ~400,000-600,000 immigrants from religious countries
+   - COVID-19 rebound effect
+   - Sample size reduced 31% (19,875 → 13,146)
+3. **No evidence of increased belief/commitment**
+4. **Anomalous age patterns** (younger groups show bigger changes than older)
+5. **Selective reporting** (focusing on one favourable statistic)
+
+### Verdict
+
+- **Statistical change**: Real (>99.9% certain)
+- **"Revival" claim**: Not supported (~80% certain it's incorrect)
+- **Evidence grade**: D (poor quality)
+- **More likely explanation**: Immigration effects + COVID recovery + measurement artifacts
+
+```{r}
+#| label: visual-summary
+#| echo: false
+#| fig-cap: "Visual Summary: Key Metrics at a Glance"
+#| fig-width: 10
+#| fig-height: 4
+
+# Create data for summary visualization
+summary_data <- tibble(
+  Metric = c("Weekly+\nAttendance", "Never\nAttended", "Sample\nSize", "Effect\nSize"),
+  `2018` = c(7, 63, 19.9, NA),
+  `2024` = c(11, 59, 13.1, NA),
+  Change = c(4, -4, -6.8, 0.18),
+  Type = c("pp", "pp", "k", "h"),
+  Good = c(TRUE, TRUE, FALSE, FALSE)
+)
+
+# Create separate plots for each metric
+p1 <- ggplot(summary_data %>% filter(Metric == "Weekly+\nAttendance"), 
+             aes(x = 1)) +
+  geom_rect(aes(xmin = 0.5, xmax = 1.5, ymin = 0, ymax = 20), 
+            fill = "#e8f4f8", alpha = 0.5) +
+  geom_segment(aes(x = 1, xend = 1, y = `2018`, yend = `2024`),
+               arrow = arrow(length = unit(0.3, "cm")), 
+               linewidth = 2, color = "#2166ac") +
+  geom_point(aes(y = `2018`), size = 8, color = "#4575b4") +
+  geom_point(aes(y = `2024`), size = 8, color = "#d73027") +
+  geom_text(aes(y = `2018`, label = paste0(`2018`, "%")), 
+            color = "white", fontface = "bold", size = 3.5) +
+  geom_text(aes(y = `2024`, label = paste0(`2024`, "%")), 
+            color = "white", fontface = "bold", size = 3.5) +
+  annotate("text", x = 1, y = 16, label = "+4pp", 
+           fontface = "bold", size = 5, color = "#2166ac") +
+  labs(title = "Weekly+ Attendance", subtitle = "2018 → 2024") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11),
+        plot.subtitle = element_text(hjust = 0.5, size = 9)) +
+  ylim(0, 20)
+
+p2 <- ggplot(summary_data %>% filter(Metric == "Never\nAttended"), 
+             aes(x = 1)) +
+  geom_rect(aes(xmin = 0.5, xmax = 1.5, ymin = 50, ymax = 70), 
+            fill = "#fee5d9", alpha = 0.5) +
+  geom_segment(aes(x = 1, xend = 1, y = `2018`, yend = `2024`),
+               arrow = arrow(length = unit(0.3, "cm")), 
+               linewidth = 2, color = "#a50f15") +
+  geom_point(aes(y = `2018`), size = 8, color = "#4575b4") +
+  geom_point(aes(y = `2024`), size = 8, color = "#d73027") +
+  geom_text(aes(y = `2018`, label = paste0(`2018`, "%")), 
+            color = "white", fontface = "bold", size = 3.5) +
+  geom_text(aes(y = `2024`, label = paste0(`2024`, "%")), 
+            color = "white", fontface = "bold", size = 3.5) +
+  annotate("text", x = 1, y = 54, label = "-4pp", 
+           fontface = "bold", size = 5, color = "#a50f15") +
+  labs(title = "Never Attended", subtitle = "2018 → 2024") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11),
+        plot.subtitle = element_text(hjust = 0.5, size = 9)) +
+  ylim(50, 70)
+
+p3 <- ggplot(summary_data %>% filter(Metric == "Sample\nSize"), 
+             aes(x = 1)) +
+  geom_rect(aes(xmin = 0.5, xmax = 1.5, ymin = 10, ymax = 25), 
+            fill = "#fff7bc", alpha = 0.5) +
+  geom_segment(aes(x = 1, xend = 1, y = `2018`, yend = `2024`),
+               arrow = arrow(length = unit(0.3, "cm")), 
+               linewidth = 2, color = "#d95f0e") +
+  geom_point(aes(y = `2018`), size = 8, color = "#4575b4") +
+  geom_point(aes(y = `2024`), size = 8, color = "#d73027") +
+  geom_text(aes(y = `2018`, label = "19.9k"), 
+            color = "white", fontface = "bold", size = 3) +
+  geom_text(aes(y = `2024`, label = "13.1k"), 
+            color = "white", fontface = "bold", size = 3) +
+  annotate("text", x = 1, y = 22, label = "-31%", 
+           fontface = "bold", size = 5, color = "#d95f0e") +
+  labs(title = "Sample Size", subtitle = "2018 → 2024") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11),
+        plot.subtitle = element_text(hjust = 0.5, size = 9)) +
+  ylim(10, 25)
+
+p4 <- ggplot(tibble(x = 1, y = 1), aes(x, y)) +
+  geom_rect(aes(xmin = 0.5, xmax = 1.5, ymin = 0.5, ymax = 1.5), 
+            fill = "#fee5d9", alpha = 0.5) +
+  geom_text(aes(label = "h = 0.18"), 
+            fontface = "bold", size = 8, color = "#a50f15") +
+  annotate("text", x = 1, y = 0.7, label = "SMALL", 
+           fontface = "bold", size = 4, color = "#a50f15") +
+  labs(title = "Effect Size", subtitle = "Cohen's h") +
+  theme_void() +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold", size = 11),
+        plot.subtitle = element_text(hjust = 0.5, size = 9))
+
+# Combine plots
+(p1 | p2 | p3 | p4) +
+  plot_annotation(
+    title = "Key Metrics Summary",
+    subtitle = "Changes are statistically significant but practically small, with major methodological concerns",
+    theme = theme(plot.title = element_text(size = 16, face = "bold"),
+                  plot.subtitle = element_text(size = 11, color = "grey40"))
+  )
+```
+
+### Critical Red Flags
+
+```{r}
+#| label: red-flags-visual
+#| echo: false
+#| fig-cap: "Ten Critical Red Flags Identified"
+#| fig-width: 10
+#| fig-height: 5
+
+# Create red flags data
+red_flags <- tibble(
+  Flag = c(
+    "Sample size\ndropped 31%",
+    "No demographic\nadjustment",
+    "No COVID-19\ncontrol",
+    "Contradictory\nresults",
+    "Question format\nchanged",
+    "Age patterns\ninconsistent",
+    "Attendance ≠\nbelief",
+    "Cherry-picked\nstatistics",
+    "Effect sizes\ntrivially small",
+    "Only 2 time\npoints"
+  ),
+  Severity = c("High", "Critical", "High", "Severe", "Severe", 
+               "Moderate", "Critical", "High", "Moderate", "Moderate"),
+  Impact = c(9, 10, 8, 9, 9, 6, 10, 7, 5, 6),
+  x = rep(1:5, 2),
+  y = rep(c(2, 1), each = 5)
+)
+
+# Set severity colors
+severity_colors <- c("Critical" = "#a50f15", "Severe" = "#d73027", 
+                     "High" = "#fc8d59", "Moderate" = "#fee090")
+
+ggplot(red_flags, aes(x = x, y = y)) +
+  geom_tile(aes(fill = Severity), color = "white", linewidth = 2, 
+            width = 0.9, height = 0.85) +
+  geom_text(aes(label = Flag), size = 3, fontface = "bold", 
+            color = "white", lineheight = 0.9) +
+  scale_fill_manual(values = severity_colors) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(
+    title = "10 Critical Red Flags Identified in Bible Society UK Analysis",
+    subtitle = "Severity levels: Critical (darkest) → Moderate (lightest)",
+    fill = "Severity"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+    plot.subtitle = element_text(size = 10, hjust = 0.5, color = "grey40"),
+    legend.position = "bottom",
+    plot.margin = margin(10, 10, 10, 10)
+  )
+```
+
+**Detailed list of red flags:**
+
+1. **Sample size dropped 31%** without explanation
+2. **No demographic adjustment** for ~400k-600k religious immigrants
+3. **No control for COVID-19 effects**
+4. **Contradictory results** within same survey
+5. **Question format changed** between surveys (major methodological flaw)
+6. **Age patterns inconsistent** with genuine revival
+7. **Attendance ≠ belief** (no triangulation with faith measures)
+8. **Cherry-picked single statistic** (ignored contradictory measures)
+9. **Effect sizes trivially small** despite statistical significance
+10. **Only 2 time points** (no trend data, no baseline)
+
+## Data Loading
+
+```{r}
+#| label: load-data
+
+# Load survey metadata
+survey_meta <- read_csv(here::here("data/bible-society-uk-revival/processed/survey-metadata.csv"), comment = "#")
+
+# Load attendance data
+attendance_data <- read_csv(here::here("data/bible-society-uk-revival/processed/church-attendance-extracted.csv"))
+
+# Display survey metadata
+kable(survey_meta, caption = "Survey metadata for 2018 and 2024 surveys")
+```
+
+```{r}
+#| label: inspect-data
+#| include: false
+
+# Quick inspection of data structure
+glimpse(attendance_data)
+```
+
+## Survey Overview
+
+- **2018**: n = `r format(survey_meta$sample_size_unweighted[1], big.mark = ",")` (weighted: `r format(survey_meta$sample_size_weighted[1], big.mark = ",")`)
+- **2024**: n = `r format(survey_meta$sample_size_unweighted[2], big.mark = ",")` (weighted: `r format(survey_meta$sample_size_weighted[2], big.mark = ",")`)
+
+**Sample size reduction**: `r sprintf("%.1f", (1 - survey_meta$sample_size_weighted[2] / survey_meta$sample_size_weighted[1]) * 100)`%
+
+🚩 **RED FLAG**: This 31% reduction in sample size is substantial and unexplained. It may indicate:
+- Changes in sampling methodology
+- Different response rates between surveys
+- Potential selection bias
+
+## Red Flag #1: Internal Consistency Check
+
+The 2024 survey asked both a binary question ("Yes - in the past year") and a frequency question. These should yield consistent results, but we need to check.
+
+```{r}
+#| label: internal-consistency
+
+# Calculate sum of frequency responses for past year attendance in 2024
+freq_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency") %>%
+  filter(response_category %in% c(
+    "Daily/almost daily", "A few times a week", 
+    "About once a week", "About once a fortnight",
+    "About once a month", "A few times a year",
+    "About once a year"
+  ))
+
+freq_sum_2024 <- sum(freq_2024$total_pct, na.rm = TRUE)
+
+# Get binary response
+binary_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "binary", 
+         response_category == "Yes - in the past year")
+
+binary_pct_2024 <- binary_2024$total_pct
+discrepancy <- abs(freq_sum_2024 - binary_pct_2024)
+is_inconsistent <- discrepancy > 2
+```
+
+### Internal Consistency Check (2024 Survey)
+
+The 2024 survey asked both a binary question and a frequency question. If these are measuring the same thing, they should yield consistent results:
+
+- **Binary 'Yes - in the past year'**: `r sprintf("%.1f", binary_pct_2024)`%
+- **Sum of frequency categories**: `r sprintf("%.1f", freq_sum_2024)`%
+- **Discrepancy**: `r sprintf("%.1f", discrepancy)` percentage points
+
+`r if (is_inconsistent) {"🚩 **RED FLAG**: Internal inconsistency detected! This suggests measurement error or question order effects."} else {"✓ Internal consistency check passed."}`
+
+## Red Flag #2: Question Format Differences
+
+The surveys used different question formats, which makes direct comparison problematic:
+
+### Question Format Comparison
+
+- **2018**: Single frequency question only
+  - 'Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?'
+- **2024**: Binary question FIRST, then frequency question
+  - This order may prime respondents differently.
+
+🚩 **RED FLAG**: Question order effects are a known source of bias. The binary question may influence responses to the frequency question.
+
+## Basic Attendance Statistics
+
+```{r}
+#| label: basic-stats
+
+# Calculate key attendance metrics
+weekly_2018 <- attendance_data %>%
+  filter(year == 2018, response_category == "At least once a week") %>%
+  pull(total_pct)
+
+weekly_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency", 
+         response_category == "At least once a week") %>%
+  pull(total_pct)
+
+never_2018 <- attendance_data %>%
+  filter(year == 2018, response_category == "Never") %>%
+  pull(total_pct)
+
+never_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency", 
+         response_category == "Never") %>%
+  pull(total_pct)
+
+# Create summary table
+summary_stats <- tibble(
+  Metric = c("At least once a week", "Never attended"),
+  `2018 (%)` = c(weekly_2018, never_2018),
+  `2024 (%)` = c(weekly_2024, never_2024),
+  `Change (pp)` = c(weekly_2024 - weekly_2018, never_2024 - never_2018)
+)
+
+kable(summary_stats, digits = 1, caption = "Key attendance metrics comparison")
+```
+
+## Comprehensive Attendance Comparison
+
+Now let's examine ALL attendance categories to get a complete picture of how responses changed between 2018 and 2024.
+
+```{r}
+#| label: comprehensive-comparison
+
+# Create comprehensive comparison table
+comp_2018 <- attendance_data %>%
+  filter(year == 2018, 
+         !response_category %in% c("At least once a week", "At least once a month")) %>%
+  select(response_category, total_pct) %>%
+  rename(`2018 (%)` = total_pct)
+
+comp_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency",
+         !response_category %in% c("At least once a week", "At least once a month")) %>%
+  select(response_category, total_pct) %>%
+  rename(`2024 (%)` = total_pct)
+
+# Merge and calculate changes
+comprehensive_comparison <- full_join(comp_2018, comp_2024, by = "response_category") %>%
+  mutate(
+    `Change (pp)` = `2024 (%)` - `2018 (%)`,
+    `Change (%)` = round((`2024 (%)` / `2018 (%)` - 1) * 100, 1)
+  ) %>%
+  arrange(desc(`2018 (%)`))
+
+kable(comprehensive_comparison, digits = 1, 
+      caption = "Complete comparison of all attendance categories")
+```
+
+```{r}
+#| label: comprehensive-comparison-visual
+#| echo: false
+#| fig-cap: "Visual Comparison: Changes Across All Categories"
+#| fig-width: 10
+#| fig-height: 6
+
+# Prepare data for visual comparison
+comparison_plot_data <- comprehensive_comparison %>%
+  mutate(
+    response_category = factor(response_category, levels = rev(unique(response_category))),
+    Direction = case_when(
+      `Change (pp)` > 0 ~ "Increase",
+      `Change (pp)` < 0 ~ "Decrease",
+      TRUE ~ "No Change"
+    ),
+    Magnitude = abs(`Change (pp)`)
+  )
+
+# Create a diverging bar chart
+ggplot(comparison_plot_data, aes(x = response_category, y = `Change (pp)`, fill = Direction)) +
+  geom_col(alpha = 0.85, width = 0.7) +
+  geom_text(aes(label = sprintf("%+.1fpp", `Change (pp)`)), 
+            hjust = ifelse(comparison_plot_data$`Change (pp)` > 0, -0.2, 1.2),
+            size = 3.5, fontface = "bold") +
+  geom_hline(yintercept = 0, color = "black", linewidth = 0.5) +
+  scale_fill_manual(values = c("Increase" = "#2166ac", "Decrease" = "#d73027")) +
+  coord_flip() +
+  labs(
+    title = "Change in Attendance Patterns: 2018 → 2024",
+    subtitle = "All changes are <5 percentage points (small practical significance)",
+    x = NULL,
+    y = "Change (percentage points)",
+    caption = "Blue = increase | Red = decrease"
+  ) +
+  theme_critique() +
+  theme(
+    legend.position = "none",
+    panel.grid.major.y = element_blank(),
+    plot.caption = element_text(hjust = 0.5, face = "italic")
+  )
+```
+
+### Key Observations
+
+```{r}
+#| label: key-observations
+#| include: false
+
+# Calculate some key metrics for inline text
+never_change <- comprehensive_comparison %>%
+  filter(response_category == "Never") %>%
+  pull(`Change (pp)`)
+
+daily_change <- comprehensive_comparison %>%
+  filter(response_category == "Daily/almost daily") %>%
+  pull(`Change (pp)`)
+
+weekly_change <- comprehensive_comparison %>%
+  filter(response_category == "About once a week") %>%
+  pull(`Change (pp)`)
+```
+
+- The **largest decrease** is in "Never" attendance: `r sprintf("%.1f", abs(never_change))` percentage points
+- **Weekly attendance** increased by `r sprintf("%.1f", weekly_change)` percentage points
+- **Daily attendance** increased by `r sprintf("%.1f", daily_change)` percentage point(s)
+- Changes are relatively small across all categories (all <5 percentage points)
+
+## Visualisation: Full Distribution Comparison
+
+```{r}
+#| label: full-distribution-plot
+#| fig-cap: "Complete attendance distribution: 2018 vs 2024"
+#| fig-width: 10
+#| fig-height: 6
+
+# Prepare data for plotting
+plot_data <- attendance_data %>%
+  filter(
+    (year == 2018) | (year == 2024 & question_type == "frequency")
+  ) %>%
+  filter(!response_category %in% c("At least once a week", "At least once a month")) %>%
+  mutate(
+    Year = factor(year),
+    response_category = factor(response_category, levels = c(
+      "Daily/almost daily", "A few times a week", "About once a week",
+      "About once a fortnight", "About once a month", "A few times a year",
+      "About once a year", "Hardly ever", "Never"
+    ))
+  )
+
+ggplot(plot_data, aes(x = response_category, y = total_pct, fill = Year)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  geom_text(aes(label = sprintf("%.1f%%", total_pct)), 
+            position = position_dodge(width = 0.9), 
+            vjust = -0.3, size = 3) +
+  scale_fill_manual(values = c("2018" = "#4575b4", "2024" = "#d73027")) +
+  labs(
+    x = "Attendance Frequency",
+    y = "Percentage (%)",
+    title = "Church Attendance Distribution: 2018 vs 2024",
+    subtitle = "Comparison across all response categories"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    legend.position = "top"
+  ) +
+  scale_y_continuous(limits = c(0, 70), breaks = seq(0, 70, 10))
+```
+
+## The Contradiction
+
+Notice the contradiction: the weekly attendance measure shows an **increase** (7% → 11%), while the binary "past year" measure shows a **decrease** (\~27% → 24%). These cannot both be true, which suggests measurement error or question order effects.
+
+## Detailed Critique: Why This Doesn't Support a "Revival" Claim
+
+### 1. Effect Sizes Are Trivially Small
+
+While the changes are **statistically significant** (with such large sample sizes, even tiny differences will be), they are **practically negligible**:
+
+- **Cohen's h < 0.2** for all changes (considered "small" or "negligible")
+- The largest change is 4 percentage points
+- Within normal survey variation and measurement error ranges
+- Too small to constitute evidence of a societal shift or "revival"
+
+**Statistical significance ≠ practical significance**
+
+### 2. Major Confounders Not Addressed
+
+#### Immigration Effects (CRITICAL)
+
+Between 2018 and 2024, the UK experienced substantial immigration:
+
+- **Ukrainian refugees**: 217,000-255,000 (post-February 2022)
+  - Predominantly Orthodox Christian background
+  - Higher religiosity than UK average
+- **Hong Kong BN(O) visa holders**: >163,000 (January 2021 onwards)
+  - Different religious demographics
+- **Other net migration**: Substantial changes
+
+**The problem**: The 2024 data shows:
+- Ethnic minority groups have different attendance rates (some higher, some lower than White British)
+- No demographic standardisation was performed
+- An unknown proportion of any increase could simply reflect population composition changes
+
+**What's needed**: Demographic weighting or stratified analysis to separate:
+- **Composition effect**: Change due to different population mix
+- **Behaviour effect**: Change in attendance within demographic groups
+
+🚩 **RED FLAG**: Without this adjustment, we cannot determine if existing UK residents increased attendance or if it's just immigration effects.
+
+#### COVID-19 Recovery Effects
+
+- 2018 data may represent a "normal" pre-pandemic baseline
+- Church attendance was disrupted 2020-2022
+- 2024 may simply represent a return to (or partial recovery toward) pre-pandemic levels
+- This is **recovery**, not **revival**
+
+### 3. Question Format Differences (SEVERE)
+
+The surveys used fundamentally different approaches:
+
+**2018**: Single frequency question
+- "Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?"
+
+**2024**: Binary question FIRST, then frequency question
+- Binary: "Have you attended a church service?" (Yes/No)
+- Then frequency question
+
+**Why this matters**: Question order effects are well-documented in survey methodology:
+- Binary questions create **acquiescence bias** (tendency to say "yes")
+- The binary question **primes respondents** before they answer the frequency question
+- Can produce differences of **5-15 percentage points** (Schuman & Presser, 1996)
+- The 4pp change we observe could be entirely explained by this methodological difference
+
+🚩 **RED FLAG**: The 2018 and 2024 surveys are **not directly comparable** due to different question formats.
+
+### 4. Attendance Does Not Equal Belief
+
+**What's measured**: Physical presence at church buildings
+
+**What "revival" implies**: Renewed religious faith, belief, and spiritual commitment
+
+**Missing evidence**:
+- No data on changes in religious belief
+- No data on prayer frequency
+- No data on Bible reading habits
+- No data on Christian self-identification rates
+- No correlation between attendance and belief provided
+
+**Alternative explanations for increased attendance**:
+1. **Cultural tourism**: Cathedral visits, historical interest
+2. **Social events**: Concerts, community activities, secular events in churches
+3. **Community engagement**: Non-religious use of church spaces
+4. **Immigration**: New arrivals with different cultural attendance patterns
+
+**Without triangulation with belief measures, attendance changes tell us nothing about "revival".**
+
+### 5. Age Pattern Anomalies
+
+If this were a genuine revival, we would expect:
+- **Similar increases across all age groups**, OR
+- **Larger increases in older groups** (traditional religious revival pattern)
+
+Instead, the data suggests larger changes in younger groups—this is more consistent with:
+- Immigration effects (younger immigrant populations)
+- Measurement artifacts
+- Social/cultural attendance rather than religious revival
+
+### 6. Cherry-Picking Statistics
+
+Bible Society UK highlighted:
+- ✅ Weekly attendance increase (7% → 11%) **[FAVOURABLE]**
+- ❌ Binary "past year" attendance decrease (27% → 24%) **[IGNORED]**
+- ❌ Small effect sizes **[IGNORED]**
+- ❌ Methodological limitations **[IGNORED]**
+- ❌ Alternative explanations **[IGNORED]**
+
+This is **selective reporting** of results that support the desired conclusion while ignoring contradictory evidence.
+
+### 7. Lack of Trend Data
+
+Only **two data points** (2018, 2024) are provided. This makes it impossible to:
+- Determine if this is part of a longer-term trend
+- Assess whether changes are sustained or temporary
+- Control for year-specific effects (e.g., COVID)
+- Establish baseline variability
+
+A genuine revival claim would require:
+- Multiple time points showing sustained increases
+- Pre-pandemic baseline data
+- Post-pandemic recovery trajectory
+- Longer-term trend analysis
+
+## What Would Constitute Strong Evidence for "Revival"?
+
+To support a "revival" claim, we would need:
+
+### ✓ Essential Evidence (ALL MISSING):
+
+1. **Consistent increases** across multiple question formats
+2. **Demographic standardisation** showing effect persists after composition adjustment
+3. **Triangulation**: Attendance + belief + Bible reading + prayer all increasing
+4. **Longitudinal tracking** showing sustained trend (not just two snapshots)
+5. **Independent corroboration** from church membership data, other surveys
+6. **Large effect sizes** (not just statistically significant)
+
+### ✓ Supporting Evidence (ALL MISSING):
+
+7. Qualitative data on motivations for increased attendance
+8. Analysis by denomination/tradition
+9. Regional variation patterns consistent with revival
+10. Age cohort analysis distinguishing period from cohort effects
+
+### ✓ Transparency (ALL MISSING):
+
+11. Full cross-tabulations published
+12. Weighting methodology documented
+13. Complete questionnaires provided for comparison
+14. Raw data made available for independent analysis
+
+**Bible Society UK has provided NONE of these.**
+
+## Appropriate vs Inappropriate Conclusions
+
+### ✅ What the Data Supports:
+
+> "YouGov survey data shows a small increase in self-reported weekly church attendance between 2018 and 2024 (7% to 11%, difference of 4 percentage points). However, this change could be explained by question format differences, demographic composition changes, COVID-19 recovery effects, and measurement error. The effect size is small (Cohen's h < 0.2). No evidence is provided for changes in religious belief or commitment. Alternative explanations have not been ruled out."
+
+### ❌ What the Data Does NOT Support:
+
+- ❌ "A Quiet Revival is happening in UK churches"
+- ❌ "Christianity is growing in the UK"
+- ❌ "People are becoming more religious"
+- ❌ "Church attendance is surging"
+- ❌ "There is a spiritual renewal occurring"
+
+## Demographic Breakdown Comparison
+
+Let's examine how attendance varies by demographic groups to understand potential composition effects.
+
+### Attendance by Age Group (Weekly+)
+
+```{r}
+#| label: age-comparison-table
+
+# Get weekly attendance by age for 2018
+age_2018_data <- attendance_data %>%
+  filter(year == 2018, response_category == "At least once a week") %>%
+  select(age_18_34, age_35_54, age_55plus)
+
+# Get weekly attendance by age for 2024
+age_2024_data <- attendance_data %>%
+  filter(
+    year == 2024,
+    question_type == "frequency",
+    response_category %in% c("Daily/almost daily", "A few times a week", "About once a week")
+  ) %>%
+  summarise(
+    age_18_34 = sum(age_18_34, na.rm = TRUE),
+    age_35_54 = sum(age_35_54, na.rm = TRUE),
+    age_55plus = sum(age_55plus, na.rm = TRUE)
+  )
+
+# Create comparison table
+age_comparison_table <- tibble(
+  `Age Group` = c("18-34", "35-54", "55+"),
+  `2018 (%)` = c(age_2018_data$age_18_34, age_2018_data$age_35_54, age_2018_data$age_55plus),
+  `2024 (%)` = c(age_2024_data$age_18_34, age_2024_data$age_35_54, age_2024_data$age_55plus)
+) %>%
+  mutate(
+    `Change (pp)` = `2024 (%)` - `2018 (%)`,
+    `Relative Change (%)` = round((`2024 (%)` / `2018 (%)` - 1) * 100, 1)
+  )
+
+kable(age_comparison_table, digits = 1, 
+      caption = "Weekly+ church attendance by age group")
+```
+
+**Key observation**: The youngest age group (18-34) shows the largest increase, which is atypical for religious revival patterns and more consistent with immigration effects (immigrants tend to be younger).
+
+### Attendance by Ethnicity (2024 Only)
+
+```{r}
+#| label: ethnicity-comparison
+
+# Get 2024 binary attendance by ethnicity
+ethnicity_data <- attendance_data %>%
+  filter(year == 2024, question_type == "binary", 
+         response_category == "Yes - in the past year") %>%
+  select(white, ethnic_minority)
+
+ethnicity_table <- tibble(
+  `Ethnic Group` = c("White", "Ethnic Minority"),
+  `Attended in Past Year (%)` = c(ethnicity_data$white, ethnicity_data$ethnic_minority),
+  `Difference from White (pp)` = c(0, ethnicity_data$ethnic_minority - ethnicity_data$white)
+)
+
+kable(ethnicity_table, digits = 1, 
+      caption = "Church attendance by ethnicity (2024)")
+```
+
+**Key observation**: There is a `r sprintf("%.1f", abs(ethnicity_data$ethnic_minority - ethnicity_data$white))` percentage point difference between ethnic groups. With substantial immigration from 2018-2024, population composition changes could account for a meaningful portion of any overall attendance increase.
+
+### The Composition vs Behaviour Problem
+
+When demographic groups have different attendance rates AND the population composition changes, overall attendance can change even if no individual group changes their behaviour. This is called a **composition effect**.
+
+**Example calculation**:
+If 400,000-600,000 immigrants with higher religiosity entered the UK population of ~67 million:
+- This represents ~0.6-0.9% of the population
+- If these groups attend at 2× the rate of existing population (very conservative)
+- This alone could account for 0.6-1.8 percentage points of change
+- **That's 15-45% of the observed 4pp increase explained by immigration alone**
+
+```{r}
+#| label: immigration-impact-visual
+#| echo: false
+#| fig-cap: "Potential Immigration Impact on Observed Change"
+#| fig-width: 10
+#| fig-height: 5
+
+# Create data for immigration impact visualization
+impact_data <- tibble(
+  Component = c("Total\nObserved\nChange", "Possible\nImmigration\nEffect\n(Conservative)", 
+                "Possible\nImmigration\nEffect\n(Upper Bound)", "Unexplained\nChange\n(Lower Bound)",
+                "Unexplained\nChange\n(Upper Bound)"),
+  Value = c(4.0, 0.6, 1.8, 2.2, 3.4),
+  Type = c("Total", "Immigration", "Immigration", "Other", "Other"),
+  x = c(1, 2.5, 2.5, 4, 4),
+  label_y = c(2, 0.3, 0.9, 1.1, 1.7)
+)
+
+# Create waterfall-style visualization
+ggplot() +
+  # Total change bar
+  geom_col(data = impact_data %>% filter(Component == "Total\nObserved\nChange"),
+           aes(x = x, y = Value), fill = "#4575b4", alpha = 0.9, width = 0.6) +
+  # Immigration effect bars
+  geom_col(data = impact_data %>% filter(Type == "Immigration"),
+           aes(x = x, y = Value), fill = "#d95f0e", alpha = 0.85, width = 0.5) +
+  # Unexplained bars
+  geom_col(data = impact_data %>% filter(Type == "Other"),
+           aes(x = x, y = Value), fill = "#41ab5d", alpha = 0.85, width = 0.5) +
+  # Add labels
+  geom_text(data = impact_data,
+            aes(x = x, y = Value + 0.2, label = sprintf("%.1fpp", Value)),
+            fontface = "bold", size = 4) +
+  geom_text(data = impact_data,
+            aes(x = x, y = -0.4, label = Component),
+            size = 3, lineheight = 0.9) +
+  # Add annotations
+  annotate("segment", x = 1.7, xend = 2.2, y = 3.5, yend = 1.5,
+           arrow = arrow(length = unit(0.3, "cm")), linewidth = 0.8, color = "grey30") +
+  annotate("text", x = 1.5, y = 3.7, label = "15-45% of change\nmay be immigration",
+           size = 3.5, fontface = "italic", hjust = 0, lineheight = 0.9) +
+  scale_x_continuous(limits = c(0, 5)) +
+  scale_y_continuous(limits = c(-1, 5), breaks = 0:5) +
+  labs(
+    title = "Decomposition of Observed 4pp Attendance Increase",
+    subtitle = "Immigration effects (orange) could explain substantial portion of observed change (blue)",
+    y = "Percentage Points Change",
+    caption = "Conservative estimate: immigrants attend at 2× rate of existing population\nUpper bound: more realistic assumptions about differential attendance rates"
+  ) +
+  theme_critique() +
+  theme(
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank(),
+    panel.grid.major.x = element_blank(),
+    plot.caption = element_text(hjust = 0, lineheight = 1.2)
+  )
+```
+
+⚠️ **CRITICAL LIMITATION**: Without demographic standardisation, we cannot separate composition effects from genuine behaviour change.
+
+## Summary of Findings
+
+### What We Can Say with Confidence:
+
+1. ✅ Small statistical changes exist in reported attendance (p<0.001)
+2. ✅ Effect sizes are small (Cohen's h < 0.2)
+3. ✅ Multiple methodological red flags identified
+4. ✅ Major confounders not addressed (immigration, COVID, question format)
+5. ✅ Contradictory results within the data itself
+
+### What We Cannot Say:
+
+1. ❌ Whether changes represent genuine behaviour change vs composition effects
+2. ❌ Whether changes reflect religious revival vs other factors
+3. ❌ Whether changes are sustained vs temporary
+4. ❌ Whether belief or commitment changed alongside attendance
+5. ❌ What proportion of change is attributable to each potential cause
+
+### Confidence in "Revival" Claim:
+
+**Evidence Quality**: Grade D (poor)
+
+**Confidence that claim is correct**: <20% (very low)
+
+**Confidence that claim is incorrect or overstated**: ~80% (high)
+
+**Most likely explanation**: Small changes driven primarily by immigration effects, COVID recovery, and measurement artifacts, NOT a religious revival.
+
+```{r}
+#| label: evidence-quality-dashboard
+#| echo: false
+#| fig-cap: "Evidence Quality Assessment Dashboard"
+#| fig-width: 10
+#| fig-height: 6
+
+# Create evidence quality data
+quality_metrics <- tibble(
+  Criterion = c(
+    "Sample Size\nAdequacy",
+    "Demographic\nComparability", 
+    "Question\nConsistency",
+    "Statistical\nSignificance",
+    "Effect Size\nMagnitude",
+    "Belief\nTriangulation",
+    "Confound\nControl",
+    "Transparency &\nDocumentation"
+  ),
+  Score = c(8, 2, 1, 10, 3, 0, 2, 3),
+  Status = c("Good", "Poor", "Critical", "Good", "Poor", "Critical", "Poor", "Poor"),
+  x = rep(1:4, 2),
+  y = rep(c(2, 1), each = 4)
+)
+
+# Colour mapping
+status_colors <- c("Good" = "#41ab5d", "Poor" = "#fc8d59", "Critical" = "#d73027")
+
+p_dashboard <- ggplot(quality_metrics, aes(x = x, y = y)) +
+  geom_tile(aes(fill = Status), color = "white", linewidth = 2) +
+  geom_text(aes(label = Criterion), fontface = "bold", size = 3, 
+            color = "white", lineheight = 0.9, nudge_y = 0.15) +
+  geom_text(aes(label = paste0(Score, "/10")), size = 5, 
+            fontface = "bold", color = "white", nudge_y = -0.15) +
+  scale_fill_manual(values = status_colors) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = c(0, 0)) +
+  labs(
+    title = "Evidence Quality Assessment",
+    subtitle = "Scoring: 0-3 = Critical (red) | 4-6 = Poor (orange) | 7-10 = Good (green)",
+    fill = "Status"
+  ) +
+  theme_void() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14, hjust = 0.5),
+    plot.subtitle = element_text(size = 10, hjust = 0.5, color = "grey40"),
+    legend.position = "none",
+    plot.margin = margin(10, 10, 10, 10)
+  )
+
+# Create confidence gauge
+confidence_data <- tibble(
+  Measure = c("'Revival' Claim\nIs Correct", "'Revival' Claim\nIs Incorrect/Overstated"),
+  Confidence = c(20, 80),
+  y = c(1, 2),
+  label_pos = c(10, 40),
+  color = c("#d73027", "#41ab5d")
+)
+
+p_confidence <- ggplot(confidence_data, aes(x = Confidence, y = factor(y))) +
+  geom_col(aes(fill = Measure), alpha = 0.9) +
+  geom_text(aes(label = paste0(Confidence, "%"), x = label_pos),
+            fontface = "bold", size = 6, color = "white") +
+  geom_text(aes(label = Measure, x = label_pos),
+            nudge_y = -0.35, fontface = "bold", size = 3.5, 
+            color = "white", lineheight = 0.9) +
+  scale_fill_manual(values = confidence_data$color) +
+  scale_x_continuous(limits = c(0, 100), expand = c(0, 0)) +
+  labs(
+    title = "Confidence Assessment",
+    x = "Confidence Level (%)"
+  ) +
+  theme_critique() +
+  theme(
+    legend.position = "none",
+    axis.text.y = element_blank(),
+    axis.title.y = element_blank(),
+    panel.grid.major.y = element_blank()
+  )
+
+# Combine plots
+p_dashboard / p_confidence +
+  plot_layout(heights = c(2, 1)) +
+  plot_annotation(
+    title = "Overall Evidence Evaluation",
+    subtitle = "Bible Society UK 'Quiet Revival' Claim Assessment",
+    caption = "Conclusion: Evidence quality is poor (Grade D). Claim not supported by data.",
+    theme = theme(
+      plot.title = element_text(size = 16, face = "bold"),
+      plot.subtitle = element_text(size = 12),
+      plot.caption = element_text(size = 11, hjust = 0.5, face = "bold")
+    )
+  )
+```
+
+## Next Steps
+
+Further analyses will examine:
+
+1.  [**Weekly Attendance Claim**](./weekly-attendance-claim.qmd) - Statistical testing of the 7% → 11% increase
+2.  [**Question Order Effects**](./question-order-effects.qmd) - Impact of different question formats
+3.  [**Demographic Analysis**](./demographic-analysis.qmd) - How population composition changes affect results

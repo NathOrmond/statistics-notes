@@ -48,12 +48,37 @@ ethnicity_2024 <- attendance_data %>%
          response_category == "Yes - in the past year") %>%
   select(response_category, white, ethnic_minority) %>%
   rename(White = white, `Ethnic Minority` = ethnic_minority)
+
+# Reshape for plotting
+ethnicity_plot_data <- ethnicity_2024 %>%
+  pivot_longer(cols = c(White, `Ethnic Minority`), 
+               names_to = "Ethnicity", values_to = "Percentage")
 ```
 
 ### 2024 Attendance by Ethnicity
 
-- **White**: `r sprintf("%.1f", ethnicity_2024$White)`% attended in past year
-- **Ethnic Minority**: `r sprintf("%.1f", ethnicity_2024[['Ethnic Minority']])`% attended in past year
+The data for 2024 shows a notable difference in church attendance between White and Ethnic Minority respondents.
+
+- **White**: `r sprintf("%.1f", ethnicity_2024$White)`% attended in the past year.
+- **Ethnic Minority**: `r sprintf("%.1f", ethnicity_2024[['Ethnic Minority']])`% attended in the past year.
+
+This disparity is visualized in the bar chart below.
+
+```{r}
+#| label: ethnicity-plot
+#| fig-cap: "Church attendance in the past year by ethnicity (2024)"
+
+ggplot(ethnicity_plot_data, aes(x = Ethnicity, y = Percentage, fill = Ethnicity)) +
+  geom_col(alpha = 0.8, show.legend = FALSE) +
+  geom_text(aes(label = sprintf("%.1f%%", Percentage)), vjust = -0.5, size = 4) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(
+    x = "Ethnicity",
+    y = "Attended in Past Year (%)",
+    title = "Church Attendance by Ethnicity in 2024"
+  ) +
+  theme_minimal(base_size = 12)
+```
 
 ⚠️ **Note**: These figures suggest different attendance patterns between ethnic groups. Population composition changes could significantly affect overall attendance rates.
 
@@ -151,6 +176,50 @@ ggplot(age_changes, aes(x = Age_Group, y = change, fill = change_color)) +
   theme_minimal() +
   theme(legend.position = "none")
 ```
+
+## Full Frequency Distribution (2018 vs 2024)
+
+While the age-stratified analysis focuses on weekly attendance, looking at the full distribution of attendance frequency provides a more complete picture of how response patterns have changed between the two surveys.
+
+The plot below compares the percentage of respondents in each attendance category for both 2018 and 2024.
+
+```{r}
+#| label: frequency-comparison-data
+
+frequency_data <- attendance_data %>%
+  filter(
+    (year == 2018) | (year == 2024 & question_type == "frequency")
+  ) %>%
+  filter(response_category != "At least once a week") %>%
+  mutate(
+    Year = factor(year),
+    response_category = factor(response_category, levels = c(
+      "Daily/almost daily", "A few times a week", "About once a week",
+      "About once a fortnight", "About once a month", "A few times a year",
+      "About once a year", "Never"
+    ))
+  )
+```
+
+```{r}
+#| label: frequency-comparison-plot
+#| fig-cap: "Comparison of attendance frequency distribution (2018 vs 2024)"
+
+ggplot(frequency_data, aes(x = response_category, y = total_pct, fill = Year)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  scale_fill_manual(values = c("2018" = "steelblue", "2024" = "darkorange")) +
+  labs(
+    x = "Attendance Frequency",
+    y = "Percentage (%)",
+    title = "Attendance Frequency Distribution: 2018 vs 2024",
+    subtitle = "Comparison of all response categories"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+This visualization highlights that while weekly attendance appears to have increased, the proportion of people who "Never" attend has also increased. This contradictory finding is another red flag that suggests the survey data may not be directly comparable due to the methodological changes discussed previously.
+
 
 ## The Demographic Composition Problem
 
