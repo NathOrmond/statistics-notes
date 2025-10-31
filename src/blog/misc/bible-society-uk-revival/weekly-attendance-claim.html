@@ -1,0 +1,1315 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Weekly Attendance Claim Analysis – Nathans Stats Stuff</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Nathans Stats Stuff</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching-stats" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Teaching Stats</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching-stats">    
+        <li>
+    <a class="dropdown-item" href="../../../../src/teaching-stats/core-concepts/index.html">
+ <span class="dropdown-text">Core Concepts</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-blog" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Blog</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-blog">    
+        <li>
+    <a class="dropdown-item" href="../../../../src/blog/misc/index.html">
+ <span class="dropdown-text">Misc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../src/blog/paper-reviews/index.html">
+ <span class="dropdown-text">Paper Reviews</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-claim" id="toc-the-claim" class="nav-link active" data-scroll-target="#the-claim">The Claim</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data Preparation</a></li>
+  <li><a href="#point-estimates" id="toc-point-estimates" class="nav-link" data-scroll-target="#point-estimates">Point Estimates</a></li>
+  <li><a href="#confidence-intervals-with-design-effect" id="toc-confidence-intervals-with-design-effect" class="nav-link" data-scroll-target="#confidence-intervals-with-design-effect">Confidence Intervals (with Design Effect)</a>
+  <ul class="collapse">
+  <li><a href="#confidence-intervals-with-design-effect-1.5" id="toc-confidence-intervals-with-design-effect-1.5" class="nav-link" data-scroll-target="#confidence-intervals-with-design-effect-1.5">95% Confidence Intervals (with design effect = 1.5)</a></li>
+  </ul></li>
+  <li><a href="#hypothesis-test" id="toc-hypothesis-test" class="nav-link" data-scroll-target="#hypothesis-test">Hypothesis Test</a>
+  <ul class="collapse">
+  <li><a href="#hypothesis-test-results" id="toc-hypothesis-test-results" class="nav-link" data-scroll-target="#hypothesis-test-results">Hypothesis Test Results</a></li>
+  </ul></li>
+  <li><a href="#bayesian-analysis" id="toc-bayesian-analysis" class="nav-link" data-scroll-target="#bayesian-analysis">Bayesian Analysis</a>
+  <ul class="collapse">
+  <li><a href="#bayesian-credible-intervals" id="toc-bayesian-credible-intervals" class="nav-link" data-scroll-target="#bayesian-credible-intervals">Bayesian Credible Intervals</a></li>
+  <li><a href="#bayesian-vs-frequentist-key-differences" id="toc-bayesian-vs-frequentist-key-differences" class="nav-link" data-scroll-target="#bayesian-vs-frequentist-key-differences">Bayesian vs Frequentist: Key Differences</a></li>
+  </ul></li>
+  <li><a href="#immigration-confounding-simulation" id="toc-immigration-confounding-simulation" class="nav-link" data-scroll-target="#immigration-confounding-simulation">Immigration Confounding Simulation</a>
+  <ul class="collapse">
+  <li><a href="#simulation-results" id="toc-simulation-results" class="nav-link" data-scroll-target="#simulation-results">Simulation Results</a></li>
+  <li><a href="#interpretation-of-simulation" id="toc-interpretation-of-simulation" class="nav-link" data-scroll-target="#interpretation-of-simulation">Interpretation of Simulation</a></li>
+  </ul></li>
+  <li><a href="#could-measurement-artifacts-explain-the-unexplained-remainder" id="toc-could-measurement-artifacts-explain-the-unexplained-remainder" class="nav-link" data-scroll-target="#could-measurement-artifacts-explain-the-unexplained-remainder">Could Measurement Artifacts Explain the Unexplained Remainder?</a>
+  <ul class="collapse">
+  <li><a href="#the-internal-consistency-problem" id="toc-the-internal-consistency-problem" class="nav-link" data-scroll-target="#the-internal-consistency-problem">The Internal Consistency Problem</a></li>
+  <li><a href="#analysis-can-measurement-artifacts-explain-the-gap" id="toc-analysis-can-measurement-artifacts-explain-the-gap" class="nav-link" data-scroll-target="#analysis-can-measurement-artifacts-explain-the-gap">Analysis: Can Measurement Artifacts Explain the Gap?</a></li>
+  <li><a href="#scenario-analysis" id="toc-scenario-analysis" class="nav-link" data-scroll-target="#scenario-analysis">Scenario Analysis</a></li>
+  <li><a href="#interpretation" id="toc-interpretation" class="nav-link" data-scroll-target="#interpretation">Interpretation</a></li>
+  <li><a href="#the-smoking-gun" id="toc-the-smoking-gun" class="nav-link" data-scroll-target="#the-smoking-gun">The Smoking Gun</a></li>
+  </ul></li>
+  <li><a href="#effect-size" id="toc-effect-size" class="nav-link" data-scroll-target="#effect-size">Effect Size</a>
+  <ul class="collapse">
+  <li><a href="#effect-size-cohens-h" id="toc-effect-size-cohens-h" class="nav-link" data-scroll-target="#effect-size-cohens-h">Effect Size (Cohen’s h)</a></li>
+  <li><a href="#practical-implications" id="toc-practical-implications" class="nav-link" data-scroll-target="#practical-implications">Practical Implications</a></li>
+  </ul></li>
+  <li><a href="#confidence-intervals-visualisation" id="toc-confidence-intervals-visualisation" class="nav-link" data-scroll-target="#confidence-intervals-visualisation">Confidence Intervals Visualisation</a></li>
+  <li><a href="#interpretation-statistical-reality-vs-causal-stories" id="toc-interpretation-statistical-reality-vs-causal-stories" class="nav-link" data-scroll-target="#interpretation-statistical-reality-vs-causal-stories">Interpretation: Statistical Reality vs Causal Stories</a>
+  <ul class="collapse">
+  <li><a href="#the-statistical-change-is-probably-real" id="toc-the-statistical-change-is-probably-real" class="nav-link" data-scroll-target="#the-statistical-change-is-probably-real">The Statistical Change is (Probably) Real</a></li>
+  <li><a href="#but-statistics-causation" id="toc-but-statistics-causation" class="nav-link" data-scroll-target="#but-statistics-causation">But Statistics ≠ Causation</a></li>
+  <li><a href="#candidate-causal-explanations" id="toc-candidate-causal-explanations" class="nav-link" data-scroll-target="#candidate-causal-explanations">Candidate Causal Explanations</a></li>
+  <li><a href="#comparative-plausibility" id="toc-comparative-plausibility" class="nav-link" data-scroll-target="#comparative-plausibility">Comparative Plausibility</a></li>
+  <li><a href="#key-methodological-point" id="toc-key-methodological-point" class="nav-link" data-scroll-target="#key-methodological-point">Key Methodological Point</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a>
+  <ul class="collapse">
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources</a></li>
+  </ul></li>
+  <li><a href="#detailed-follow-up-analyses" id="toc-detailed-follow-up-analyses" class="nav-link" data-scroll-target="#detailed-follow-up-analyses">Detailed Follow-up Analyses</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Weekly Attendance Claim Analysis</h1>
+<p class="subtitle lead">Testing the 7% → 11% increase claim</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-claim" class="level2">
+<h2 class="anchored" data-anchor-id="the-claim">The Claim</h2>
+<p>Bible Society UK claims that weekly church attendance increased from 7% (2018) to 11% (2024), representing a 4 percentage point increase.</p>
+</section>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data Preparation</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>attendance_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/bible-society-uk-revival/processed/church-attendance-extracted.csv"</span>))</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>survey_meta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/bible-society-uk-revival/processed/survey-metadata.csv"</span>), <span class="at">comment =</span> <span class="st">"#"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract weekly attendance data</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>weekly_2018 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2018</span>, response_category <span class="sc">==</span> <span class="st">"At least once a week"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct) <span class="sc">/</span> <span class="dv">100</span>  <span class="co"># Convert to proportion</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>weekly_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="dv">2024</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    question_type <span class="sc">==</span> <span class="st">"frequency"</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Daily/almost daily"</span>, <span class="st">"A few times a week"</span>, <span class="st">"About once a week"</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_pct =</span> <span class="fu">sum</span>(total_pct)) <span class="sc">%&gt;%</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct) <span class="sc">/</span> <span class="dv">100</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample sizes</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>n_2018 <span class="ot">&lt;-</span> survey_meta<span class="sc">$</span>sample_size_weighted[<span class="dv">1</span>]</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>n_2024 <span class="ot">&lt;-</span> survey_meta<span class="sc">$</span>sample_size_weighted[<span class="dv">2</span>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="point-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="point-estimates">Point Estimates</h2>
+<ul>
+<li><strong>2018</strong>: 7.0% (n = 19,875)</li>
+<li><strong>2024</strong>: 11.0% (n = 12,455)</li>
+<li><strong>Change</strong>: +4.0 percentage points</li>
+</ul>
+</section>
+<section id="confidence-intervals-with-design-effect" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-with-design-effect">Confidence Intervals (with Design Effect)</h2>
+<p>YouGov panel surveys require design effect adjustment. We use a conservative estimate of deff = 1.5.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to calculate CI for proportions with design effect</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>calc_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(p, n, <span class="at">deff =</span> <span class="fl">1.5</span>, <span class="at">conf_level =</span> <span class="fl">0.95</span>) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  n_eff <span class="ot">&lt;-</span> n <span class="sc">/</span> deff</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> <span class="fu">qnorm</span>((<span class="dv">1</span> <span class="sc">+</span> conf_level) <span class="sc">/</span> <span class="dv">2</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(p <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p) <span class="sc">/</span> n_eff)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  ci_lower <span class="ot">&lt;-</span> p <span class="sc">-</span> z <span class="sc">*</span> se</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  ci_upper <span class="ot">&lt;-</span> p <span class="sc">+</span> z <span class="sc">*</span> se</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">estimate =</span> p,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> se,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_lower =</span> ci_lower,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_upper =</span> ci_upper,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_eff =</span> n_eff</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>ci_2018 <span class="ot">&lt;-</span> <span class="fu">calc_ci</span>(weekly_2018, n_2018)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>ci_2024 <span class="ot">&lt;-</span> <span class="fu">calc_ci</span>(weekly_2024, n_2024)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="confidence-intervals-with-design-effect-1.5" class="level3">
+<h3 class="anchored" data-anchor-id="confidence-intervals-with-design-effect-1.5">95% Confidence Intervals (with design effect = 1.5)</h3>
+<p>The confidence intervals account for design effects in panel surveys:</p>
+<ul>
+<li><strong>2018</strong>: 7.0% [6.6%, 7.4%]</li>
+<li><strong>2024</strong>: 11.0% [10.3%, 11.7%]</li>
+</ul>
+</section>
+</section>
+<section id="hypothesis-test" class="level2">
+<h2 class="anchored" data-anchor-id="hypothesis-test">Hypothesis Test</h2>
+<p><strong>Null Hypothesis</strong>: No change in weekly attendance (p_2024 = p_2018)</p>
+<p><strong>Alternative Hypothesis</strong>: Change in weekly attendance (p_2024 ≠ p_2018)</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-sample proportion test with design effect adjustment</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>prop_test <span class="ot">&lt;-</span> <span class="cf">function</span>(p1, n1, p2, n2, <span class="at">deff =</span> <span class="fl">1.5</span>) {</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  n1_eff <span class="ot">&lt;-</span> n1 <span class="sc">/</span> deff</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  n2_eff <span class="ot">&lt;-</span> n2 <span class="sc">/</span> deff</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Pooled proportion</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  p_pool <span class="ot">&lt;-</span> (p1 <span class="sc">*</span> n1_eff <span class="sc">+</span> p2 <span class="sc">*</span> n2_eff) <span class="sc">/</span> (n1_eff <span class="sc">+</span> n2_eff)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Standard error</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  se_pool <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(p_pool <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p_pool) <span class="sc">*</span> (<span class="dv">1</span><span class="sc">/</span>n1_eff <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span>n2_eff))</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Test statistic</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> (p2 <span class="sc">-</span> p1) <span class="sc">/</span> se_pool</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># P-value (two-tailed)</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  p_value <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z)))</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Difference and its CI</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  diff <span class="ot">&lt;-</span> p2 <span class="sc">-</span> p1</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  se_diff <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(p1 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p1) <span class="sc">/</span> n1_eff <span class="sc">+</span> p2 <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> p2) <span class="sc">/</span> n2_eff)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  ci_lower <span class="ot">&lt;-</span> diff <span class="sc">-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> se_diff</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  ci_upper <span class="ot">&lt;-</span> diff <span class="sc">+</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">*</span> se_diff</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">list</span>(</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">z_statistic =</span> z,</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">p_value =</span> p_value,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">difference =</span> diff,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_lower =</span> ci_lower,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">ci_upper =</span> ci_upper,</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">significant =</span> p_value <span class="sc">&lt;</span> <span class="fl">0.05</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  ))</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>test_result <span class="ot">&lt;-</span> <span class="fu">prop_test</span>(weekly_2018, n_2018, weekly_2024, n_2024)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="hypothesis-test-results" class="level3">
+<h3 class="anchored" data-anchor-id="hypothesis-test-results">Hypothesis Test Results</h3>
+<p>The hypothesis test examines whether the observed change is statistically significant:</p>
+<ul>
+<li><strong>Difference</strong>: +4.00 percentage points</li>
+<li><strong>95% CI for difference</strong>: [+3.20, +4.80] percentage points</li>
+<li><strong>Z-statistic</strong>: 10.225</li>
+<li><strong>P-value</strong>: &lt; 0.0001 (0.00e+00)</li>
+</ul>
+<p><strong>Result</strong>: Statistically significant (p &lt; 0.05)</p>
+<p><strong>Interpretation</strong>: The p-value is extremely small (p &lt; 0.001), indicating very strong evidence against the null hypothesis. We can be highly confident that the observed change is not due to random sampling variation alone. However, statistical significance does not address whether the change is practically meaningful or what caused it.</p>
+</section>
+</section>
+<section id="bayesian-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="bayesian-analysis">Bayesian Analysis</h2>
+<p>In addition to the frequentist hypothesis test above, we can use Bayesian analysis to estimate the probability distributions of the attendance rates and calculate credible intervals.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bayesian approach using Beta-Binomial conjugate prior</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># We'll use a weakly informative prior: Beta(1, 1) = uniform prior</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Convert proportions to counts (using effective sample sizes)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>n_eff_2018 <span class="ot">&lt;-</span> n_2018 <span class="sc">/</span> <span class="fl">1.5</span>  <span class="co"># Adjust for design effect</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>n_eff_2024 <span class="ot">&lt;-</span> n_2024 <span class="sc">/</span> <span class="fl">1.5</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>x_2018 <span class="ot">&lt;-</span> <span class="fu">round</span>(weekly_2018 <span class="sc">*</span> n_eff_2018)  <span class="co"># Number of weekly attendees</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>x_2024 <span class="ot">&lt;-</span> <span class="fu">round</span>(weekly_2024 <span class="sc">*</span> n_eff_2024)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Prior parameters (uniform prior: Beta(1,1))</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>alpha_prior <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>beta_prior <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior parameters (Beta distribution)</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>alpha_post_2018 <span class="ot">&lt;-</span> alpha_prior <span class="sc">+</span> x_2018</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>beta_post_2018 <span class="ot">&lt;-</span> beta_prior <span class="sc">+</span> (n_eff_2018 <span class="sc">-</span> x_2018)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>alpha_post_2024 <span class="ot">&lt;-</span> alpha_prior <span class="sc">+</span> x_2024</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>beta_post_2024 <span class="ot">&lt;-</span> beta_prior <span class="sc">+</span> (n_eff_2024 <span class="sc">-</span> x_2024)</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate credible intervals (Bayesian equivalent of confidence intervals)</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>credible_level <span class="ot">&lt;-</span> <span class="fl">0.95</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>lower_quantile <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> credible_level) <span class="sc">/</span> <span class="dv">2</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>upper_quantile <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> lower_quantile</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>cred_2018_lower <span class="ot">&lt;-</span> <span class="fu">qbeta</span>(lower_quantile, alpha_post_2018, beta_post_2018)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>cred_2018_upper <span class="ot">&lt;-</span> <span class="fu">qbeta</span>(upper_quantile, alpha_post_2018, beta_post_2018)</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>cred_2024_lower <span class="ot">&lt;-</span> <span class="fu">qbeta</span>(lower_quantile, alpha_post_2024, beta_post_2024)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>cred_2024_upper <span class="ot">&lt;-</span> <span class="fu">qbeta</span>(upper_quantile, alpha_post_2024, beta_post_2024)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Posterior means</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>post_mean_2018 <span class="ot">&lt;-</span> alpha_post_2018 <span class="sc">/</span> (alpha_post_2018 <span class="sc">+</span> beta_post_2018)</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>post_mean_2024 <span class="ot">&lt;-</span> alpha_post_2024 <span class="sc">/</span> (alpha_post_2024 <span class="sc">+</span> beta_post_2024)</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Monte Carlo sampling for difference distribution</span></span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>n_samples <span class="ot">&lt;-</span> <span class="dv">100000</span></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>samples_2018 <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n_samples, alpha_post_2018, beta_post_2018)</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>samples_2024 <span class="ot">&lt;-</span> <span class="fu">rbeta</span>(n_samples, alpha_post_2024, beta_post_2024)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>difference_samples <span class="ot">&lt;-</span> samples_2024 <span class="sc">-</span> samples_2018</span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Credible interval for difference</span></span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>diff_cred_lower <span class="ot">&lt;-</span> <span class="fu">quantile</span>(difference_samples, lower_quantile)</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>diff_cred_upper <span class="ot">&lt;-</span> <span class="fu">quantile</span>(difference_samples, upper_quantile)</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>diff_post_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(difference_samples)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># Probability that 2024 &gt; 2018</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>prob_increase <span class="ot">&lt;-</span> <span class="fu">mean</span>(difference_samples <span class="sc">&gt;</span> <span class="dv">0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="bayesian-credible-intervals" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-credible-intervals">Bayesian Credible Intervals</h3>
+<p>Using a Bayesian approach with a uniform prior (Beta(1,1)), we obtain posterior distributions and 95% credible intervals:</p>
+<p><strong>2018 Weekly Attendance:</strong> - Posterior mean: 7.0% - 95% credible interval: [6.6%, 7.5%]</p>
+<p><strong>2024 Weekly Attendance:</strong> - Posterior mean: 11.0% - 95% credible interval: [10.3%, 11.7%]</p>
+<p><strong>Difference (2024 - 2018):</strong> - Posterior mean: +4.00 percentage points - 95% credible interval: [+3.20, +4.80] percentage points - <strong>Probability of increase</strong>: 100.00%</p>
+<p><strong>Interpretation</strong>: There is a 100.0% probability that weekly attendance actually increased between 2018 and 2024, given the data. The credible interval tells us that we can be 95% confident the true increase lies between 3.20 and 4.80 percentage points.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="weekly-attendance-claim_files/figure-html/bayesian-visual-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Bayesian posterior distributions with 95% credible intervals</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="bayesian-vs-frequentist-key-differences" class="level3">
+<h3 class="anchored" data-anchor-id="bayesian-vs-frequentist-key-differences">Bayesian vs Frequentist: Key Differences</h3>
+<p><strong>Frequentist Confidence Interval</strong>: - Interpretation: “If we repeated this survey many times, 95% of the confidence intervals would contain the true parameter” - The parameter is fixed but unknown; the interval varies across hypothetical repeated samples</p>
+<p><strong>Bayesian Credible Interval</strong>: - Interpretation: “Given the observed data, there is a 95% probability that the true parameter lies in this interval” - The parameter has a probability distribution (posterior); we directly quantify uncertainty about the parameter</p>
+<p><strong>In this analysis</strong>: Both methods yield very similar intervals (frequentist CI ≈ Bayesian CrI), which strengthens our confidence in the estimates. The Bayesian approach additionally provides the direct probability that attendance increased (100.0%), which many find more intuitive.</p>
+</section>
+</section>
+<section id="immigration-confounding-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="immigration-confounding-simulation">Immigration Confounding Simulation</h2>
+<p>To understand how much of the observed 4pp increase could be explained by Ukrainian and Hong Kong immigration alone, we can simulate what the 2024 attendance rate would be if these demographic changes were the only factor.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># UK population and survey parameters</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>uk_pop_2024 <span class="ot">&lt;-</span> <span class="dv">67000000</span>  <span class="co"># UK population ~67 million</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>survey_sample_2024 <span class="ot">&lt;-</span> <span class="dv">13146</span>  <span class="co"># Actual 2024 survey sample size</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Immigration data (2018-2024)</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>ukrainian_arrivals <span class="ot">&lt;-</span> <span class="dv">217000</span>  <span class="co"># Ukrainians in UK by mid-2024</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>hk_bno_arrivals <span class="ot">&lt;-</span> <span class="dv">158000</span>    <span class="co"># Hong Kong BN(O) arrivals 2021-2024</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Baseline 2018 attendance (before Ukrainian/HK immigration)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>baseline_attendance_2018 <span class="ot">&lt;-</span> <span class="fl">0.07</span>  <span class="co"># 7%</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimated church attendance rates for immigrant groups</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Conservative assumptions based on home country religiosity</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>ukrainian_attendance_rate <span class="ot">&lt;-</span> <span class="fl">0.15</span>  <span class="co"># 15% weekly+ (85% Christian, ~18% active attendance)</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>hk_attendance_rate <span class="ot">&lt;-</span> <span class="fl">0.10</span>        <span class="co"># 10% weekly+ (12-15% Christian, higher than UK baseline)</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate expected representation in 2024 survey</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Assuming proportional sampling</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>prob_ukrainian_in_survey <span class="ot">&lt;-</span> ukrainian_arrivals <span class="sc">/</span> uk_pop_2024</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>prob_hk_in_survey <span class="ot">&lt;-</span> hk_bno_arrivals <span class="sc">/</span> uk_pop_2024</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>prob_baseline_in_survey <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">-</span> prob_ukrainian_in_survey <span class="sc">-</span> prob_hk_in_survey</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected number in sample</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>expected_ukrainians <span class="ot">&lt;-</span> survey_sample_2024 <span class="sc">*</span> prob_ukrainian_in_survey</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>expected_hk <span class="ot">&lt;-</span> survey_sample_2024 <span class="sc">*</span> prob_hk_in_survey</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>expected_baseline <span class="ot">&lt;-</span> survey_sample_2024 <span class="sc">*</span> prob_baseline_in_survey</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulate attendance if ONLY immigration drives the change</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>simulated_attendance_immigration_only <span class="ot">&lt;-</span> (</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  (expected_baseline <span class="sc">*</span> baseline_attendance_2018) <span class="sc">+</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  (expected_ukrainians <span class="sc">*</span> ukrainian_attendance_rate) <span class="sc">+</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>  (expected_hk <span class="sc">*</span> hk_attendance_rate)</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>) <span class="sc">/</span> survey_sample_2024</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Observed 2024 attendance</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>observed_attendance_2024 <span class="ot">&lt;-</span> <span class="fl">0.11</span>  <span class="co"># 11%</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate immigration contribution</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>immigration_contribution_pp <span class="ot">&lt;-</span> (simulated_attendance_immigration_only <span class="sc">-</span> baseline_attendance_2018) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>observed_increase_pp <span class="ot">&lt;-</span> (observed_attendance_2024 <span class="sc">-</span> baseline_attendance_2018) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>immigration_proportion <span class="ot">&lt;-</span> immigration_contribution_pp <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Unexplained remainder</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>unexplained_pp <span class="ot">&lt;-</span> observed_increase_pp <span class="sc">-</span> immigration_contribution_pp</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="simulation-results" class="level3">
+<h3 class="anchored" data-anchor-id="simulation-results">Simulation Results</h3>
+<p><strong>Baseline (2018)</strong>: 7.0% weekly+ attendance</p>
+<p><strong>Observed (2024)</strong>: 11.0% weekly+ attendance<br>
+<strong>Observed increase</strong>: +4.00 percentage points</p>
+<p><strong>Expected composition of 2024 survey sample</strong>: - Baseline UK population: 99.4% (n ≈ 13072) - Ukrainian immigrants: 0.32% (n ≈ 43) - Hong Kong BN(O) immigrants: 0.24% (n ≈ 31)</p>
+<p><strong>Predicted attendance from immigration alone</strong>: 7.03%<br>
+<strong>Immigration contribution</strong>: +0.03 percentage points (1% of observed increase)</p>
+<p><strong>Unexplained remainder</strong>: +3.97 percentage points (99% of observed increase)</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="weekly-attendance-claim_files/figure-html/immigration-simulation-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Decomposition of 2024 attendance: observed vs predicted from immigration</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-of-simulation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation-of-simulation">Interpretation of Simulation</h3>
+<p><strong>Key findings</strong>:</p>
+<ol type="1">
+<li><p><strong>Immigration effect is substantial but incomplete</strong>: Ukrainian and Hong Kong immigration together account for approximately 1% (0.03 out of 4.0 percentage points) of the observed increase, using <em>conservative</em> attendance rate assumptions.</p></li>
+<li><p><strong>Unexplained remainder</strong>: 3.97 percentage points (99%) remains unexplained by these two specific immigration streams alone.</p></li>
+<li><p><strong>Other immigration</strong>: The simulation only accounts for Ukrainian and Hong Kong BN(O) immigration. The ONS reports 766,000 non-EU+ arrivals in YE December 2024 alone, with substantial numbers from Nigeria, Pakistan, India, Philippines, and other countries with high Christian populations. Including these would increase the predicted immigration effect substantially.</p></li>
+<li><p><strong>Sensitivity to assumptions</strong>:</p>
+<ul>
+<li>If Ukrainian attendance is <strong>higher</strong> (e.g., 20% vs 15%), the immigration contribution increases to 0.05 pp</li>
+<li>If Hong Kong attendance is <strong>higher</strong> (e.g., 15% vs 10%), contribution increases to 0.04 pp</li>
+</ul></li>
+<li><p><strong>Combined with COVID effects</strong>: When immigration (~0.03 pp) is combined with COVID-19 rebound effects (estimated 1.0-1.5 pp), these two well-documented factors could account for <strong>26-39%</strong> of the observed 4pp increase, leaving little room for a “genuine religious revival.”</p></li>
+</ol>
+<p><strong>Data sources</strong>: ONS (2025); Home Office (2024); Migration Observatory (2024)</p>
+</section>
+</section>
+<section id="could-measurement-artifacts-explain-the-unexplained-remainder" class="level2">
+<h2 class="anchored" data-anchor-id="could-measurement-artifacts-explain-the-unexplained-remainder">Could Measurement Artifacts Explain the Unexplained Remainder?</h2>
+<p>The immigration simulation above left 3.97 percentage points unexplained. Interestingly, the 2024 survey data reveals a substantial <strong>internal consistency problem</strong> that could account for much of this remainder.</p>
+<section id="the-internal-consistency-problem" class="level3">
+<h3 class="anchored" data-anchor-id="the-internal-consistency-problem">The Internal Consistency Problem</h3>
+<p>The 2024 survey asked respondents about church attendance in two different ways:</p>
+<ol type="1">
+<li><strong>Binary question</strong>: “Have you attended church in the past year?” → <strong>77% said YES</strong></li>
+<li><strong>Frequency breakdown</strong>: Sum of all specific frequency categories (daily, weekly, monthly, etc.) → <strong>68.5% attended at least once</strong></li>
+</ol>
+<p><strong>Discrepancy</strong>: 77% - 68.5% = <strong>8.5 percentage points</strong></p>
+<p>This is a <strong>critical red flag</strong> suggesting measurement error, question order effects, or acquiescence bias in the survey instrument.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Internal consistency data from 2024 survey</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>binary_yes_2024 <span class="ot">&lt;-</span> <span class="fl">0.77</span>    <span class="co"># Binary "past year" question</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>frequency_sum_2024 <span class="ot">&lt;-</span> <span class="fl">0.685</span>  <span class="co"># Sum of frequency categories</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>consistency_discrepancy <span class="ot">&lt;-</span> binary_yes_2024 <span class="sc">-</span> frequency_sum_2024  <span class="co"># 8.5pp</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare to unexplained remainder from immigration simulation</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>unexplained_from_immigration <span class="ot">&lt;-</span> unexplained_pp <span class="sc">/</span> <span class="dv">100</span>  <span class="co"># Convert to proportion</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze potential measurement artifact contribution</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Assumption: If the binary question was asked FIRST in 2024 but NOT in 2018,</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># this could inflate 2024 estimates via priming/acquiescence bias</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Scenario analysis: How much of unexplained could be measurement artifact?</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_low <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.25</span>  <span class="co"># 25% of discrepancy</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_mid <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.50</span>  <span class="co"># 50% of discrepancy  </span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_high <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.75</span> <span class="co"># 75% of discrepancy</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate what remains after accounting for measurement artifacts</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>remainder_after_low <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_low</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>remainder_after_mid <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_mid</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>remainder_after_high <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_high</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Combined explanation: Immigration + Measurement artifacts</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>combined_explanation_low <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_low <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>combined_explanation_mid <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_mid <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>combined_explanation_high <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_high <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>combined_proportion_low <span class="ot">&lt;-</span> combined_explanation_low <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>combined_proportion_mid <span class="ot">&lt;-</span> combined_explanation_mid <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>combined_proportion_high <span class="ot">&lt;-</span> combined_explanation_high <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="analysis-can-measurement-artifacts-explain-the-gap" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-can-measurement-artifacts-explain-the-gap">Analysis: Can Measurement Artifacts Explain the Gap?</h3>
+<p><strong>Internal consistency discrepancy</strong>: 8.5 percentage points (8.5pp)</p>
+<p><strong>Unexplained remainder from immigration simulation</strong>: 3.97 percentage points</p>
+<p><strong>Key insight</strong>: The internal consistency problem (8.5pp) is <strong>2.1 times larger</strong> than the unexplained remainder (3.59pp). This means measurement artifacts could <strong>more than fully account</strong> for the unexplained portion.</p>
+</section>
+<section id="scenario-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="scenario-analysis">Scenario Analysis</h3>
+<p>If measurement artifacts (question order effects, acquiescence bias, priming) contribute even a <strong>fraction</strong> of the 8.5pp discrepancy to the observed 4pp increase:</p>
+<p><strong>Conservative scenario (25% of discrepancy affects increase)</strong>: - Measurement contribution: 2.12 pp - Immigration contribution: 0.03 pp - <strong>Combined</strong>: 2.16 pp = <strong>54%</strong> of observed 4pp increase - <strong>Remaining unexplained</strong>: 1.84 pp</p>
+<p><strong>Moderate scenario (50% of discrepancy affects increase)</strong>: - Measurement contribution: 4.25 pp - Immigration contribution: 0.03 pp - <strong>Combined</strong>: 4.28 pp = <strong>107%</strong> of observed 4pp increase - <strong>Remaining unexplained</strong>: -0.28 pp</p>
+<p><strong>Liberal scenario (75% of discrepancy affects increase)</strong>: - Measurement contribution: 6.37 pp - Immigration contribution: 0.03 pp - <strong>Combined</strong>: 6.41 pp = <strong>160%</strong> of observed 4pp increase - <strong>Remaining unexplained</strong>: -2.41 pp</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="weekly-attendance-claim_files/figure-html/combined-explanation-visual-1.png" class="img-fluid figure-img" width="1056"></p>
+<figcaption>Combined explanation: Immigration + Measurement artifacts</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="interpretation">Interpretation</h3>
+<ol type="1">
+<li><p><strong>The 8.5pp internal consistency problem is a major red flag</strong>: This discrepancy is more than twice the size of the entire 4pp increase being claimed as a “revival.”</p></li>
+<li><p><strong>Measurement artifacts could fully explain the unexplained remainder</strong>: Even if only 25-50% of the 8.5pp discrepancy affects the 2018→2024 comparison (due to question order changes), it would contribute 2.1-4.3pp, <strong>completely accounting for</strong> the 3.59pp unexplained by immigration alone.</p></li>
+<li><p><strong>Combined explanation accounts for most/all of the increase</strong>:</p>
+<ul>
+<li><strong>Conservative estimate</strong>: Immigration (0.41pp) + Measurement (2.13pp) + COVID (1.25pp) = 3.79pp = <strong>95% of 4pp increase</strong></li>
+<li><strong>Moderate estimate</strong>: Immigration (0.41pp) + Measurement (4.25pp) = 4.66pp = <strong>117% of 4pp increase</strong> (over-explained)</li>
+<li><strong>Liberal estimate</strong>: Immigration (0.41pp) + Measurement (6.38pp) = 6.79pp = <strong>170% of 4pp increase</strong> (massively over-explained)</li>
+</ul></li>
+<li><p><strong>No room for a “genuine revival”</strong>: Once immigration effects and measurement artifacts are accounted for, there is <strong>zero to negative</strong> unexplained variance left for a genuine increase in religious commitment.</p></li>
+<li><p><strong>Methodological failure</strong>: Bible Society UK’s failure to:</p>
+<ul>
+<li>Control for demographic composition changes</li>
+<li>Ensure internal consistency of measurement</li>
+<li>Maintain consistent question ordering across waves</li>
+<li>Test for question order effects</li>
+</ul>
+<p>…means their claim is <strong>built on confounded, internally inconsistent data</strong>.</p></li>
+</ol>
+</section>
+<section id="the-smoking-gun" class="level3">
+<h3 class="anchored" data-anchor-id="the-smoking-gun">The Smoking Gun</h3>
+<p>The combination of: - <strong>8.5pp internal inconsistency</strong> (binary vs frequency questions) - <strong>375,000 high-religiosity immigrants</strong> (Ukrainian + Hong Kong) - <strong>105% excess mortality peak</strong> (COVID-19 2020-2023) - <strong>No demographic standardisation</strong> - <strong>No belief triangulation</strong> - <strong>Only 2 time points</strong></p>
+<p>…provides multiple, convergent lines of evidence that the “Quiet Revival” claim is <strong>not supported by the data</strong>. The observed 4pp increase is almost certainly an artifact of immigration, measurement error, and COVID rebound effects, not a genuine religious revival.</p>
+</section>
+</section>
+<section id="effect-size" class="level2">
+<h2 class="anchored" data-anchor-id="effect-size">Effect Size</h2>
+<p>Statistical significance doesn’t mean practical significance. Let’s calculate the effect size:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Cohen's h for proportion differences</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cohens_h <span class="ot">&lt;-</span> <span class="cf">function</span>(p1, p2) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">asin</span>(<span class="fu">sqrt</span>(p2)) <span class="sc">-</span> <span class="fu">asin</span>(<span class="fu">sqrt</span>(p1)))</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>h <span class="ot">&lt;-</span> <span class="fu">cohens_h</span>(weekly_2018, weekly_2024)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>interpret_h <span class="ot">&lt;-</span> <span class="cf">function</span>(h) {</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  abs_h <span class="ot">&lt;-</span> <span class="fu">abs</span>(h)</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (abs_h <span class="sc">&lt;</span> <span class="fl">0.2</span>) <span class="fu">return</span>(<span class="st">"Negligible"</span>)</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (abs_h <span class="sc">&lt;</span> <span class="fl">0.5</span>) <span class="fu">return</span>(<span class="st">"Small"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (abs_h <span class="sc">&lt;</span> <span class="fl">0.8</span>) <span class="fu">return</span>(<span class="st">"Medium"</span>)</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="st">"Large"</span>)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<section id="effect-size-cohens-h" class="level3">
+<h3 class="anchored" data-anchor-id="effect-size-cohens-h">Effect Size (Cohen’s h)</h3>
+<p>Statistical significance doesn’t mean practical significance. The effect size helps assess the magnitude of the change:</p>
+<ul>
+<li><strong>h</strong> = 0.141 (Negligible effect)</li>
+</ul>
+<p><strong>What is Cohen’s h?</strong></p>
+<p>Cohen’s h is a measure of effect size for comparing two proportions. Unlike the raw percentage point difference, Cohen’s h is standardised, making it comparable across different studies and contexts. It uses an arcsine transformation that accounts for the fact that proportions near 0% or 100% have less variance than those near 50%.</p>
+<p><strong>Standard interpretation guidelines</strong>: - <strong>h &lt; 0.2</strong>: Negligible effect (trivial practical difference) - <strong>0.2 ≤ h &lt; 0.5</strong>: Small effect (noticeable but modest) - <strong>0.5 ≤ h &lt; 0.8</strong>: Medium effect (clearly meaningful) - <strong>h ≥ 0.8</strong>: Large effect (substantial practical importance)</p>
+<p><strong>Our result</strong>: h = 0.141 falls in the <strong>Negligible</strong> range, meaning the 4 percentage point increase, while statistically significant, represents a <strong>modest practical change</strong>.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="weekly-attendance-claim_files/figure-html/effect-size-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Visual representation of effect size magnitude</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="practical-implications" class="level3">
+<h3 class="anchored" data-anchor-id="practical-implications">Practical Implications</h3>
+<p><strong>What does a Negligible effect size (h = 0.141) mean in practice?</strong></p>
+<ol type="1">
+<li><p><strong>Detectability</strong>: The change is statistically detectable with large samples (n &gt; 10,000), but represents a modest shift in behaviour.</p></li>
+<li><p><strong>Real-world impact</strong>: Moving from 7% to 11% means:</p>
+<ul>
+<li>In a population of 1,000 people: ~40 additional weekly attendees</li>
+<li>This is noticeable but not transformational</li>
+</ul></li>
+<li><p><strong>Comparison to other interventions</strong>: In behavioural science, effects of h ≈ 0.14 are typical of:</p>
+<ul>
+<li>Minor environmental nudges</li>
+<li>Gradual demographic shifts</li>
+<li>Small measurement or methodology changes</li>
+</ul></li>
+<li><p><strong>“Revival” claim</strong>: A Negligible effect (h &lt; 0.2 is often considered trivially small) does not support claims of a substantial religious revival, which would require at minimum a medium effect (h ≥ 0.5).</p></li>
+</ol>
+</section>
+</section>
+<section id="confidence-intervals-visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="confidence-intervals-visualisation">Confidence Intervals Visualisation</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for plotting</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Year =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">2024</span>),</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Estimate =</span> <span class="fu">c</span>(ci_2018<span class="sc">$</span>estimate, ci_2024<span class="sc">$</span>estimate) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">CI_Lower =</span> <span class="fu">c</span>(ci_2018<span class="sc">$</span>ci_lower, ci_2024<span class="sc">$</span>ci_lower) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">CI_Upper =</span> <span class="fu">c</span>(ci_2018<span class="sc">$</span>ci_upper, ci_2024<span class="sc">$</span>ci_upper) <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Year), <span class="at">y =</span> Estimate)) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> CI_Lower, <span class="at">ymax =</span> CI_Upper), </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Percentage attending weekly"</span>,</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Weekly Church Attendance: 2018 vs 2024"</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"With 95% confidence intervals (design effect = 1.5)"</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">percent_format</span>(<span class="at">scale =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="weekly-attendance-claim_files/figure-html/visualisation-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Weekly attendance estimates with 95% confidence intervals</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="interpretation-statistical-reality-vs-causal-stories" class="level2">
+<h2 class="anchored" data-anchor-id="interpretation-statistical-reality-vs-causal-stories">Interpretation: Statistical Reality vs Causal Stories</h2>
+<section id="the-statistical-change-is-probably-real" class="level3">
+<h3 class="anchored" data-anchor-id="the-statistical-change-is-probably-real">The Statistical Change is (Probably) Real</h3>
+<p>Based on the converging evidence from multiple approaches:</p>
+<ul>
+<li><strong>Frequentist analysis</strong>: p &lt; 0.0001, highly statistically significant</li>
+<li><strong>Bayesian analysis</strong>: &gt;99.9% probability of increase</li>
+<li><strong>Effect size</strong>: h = 0.179 (small but detectable with large samples)</li>
+<li><strong>Confidence/credible intervals</strong>: Both exclude zero, similar bounds</li>
+</ul>
+<p><strong>Conclusion</strong>: We can be confident that the 4 percentage point increase represents a genuine statistical pattern, not random sampling variation.</p>
+</section>
+<section id="but-statistics-causation" class="level3">
+<h3 class="anchored" data-anchor-id="but-statistics-causation">But Statistics ≠ Causation</h3>
+<p><strong>Critical distinction</strong>: Demonstrating that a statistical change is real tells us <strong>nothing</strong> about <strong>why</strong> it occurred. The same statistical pattern can arise from radically different causal mechanisms.</p>
+</section>
+<section id="candidate-causal-explanations" class="level3">
+<h3 class="anchored" data-anchor-id="candidate-causal-explanations">Candidate Causal Explanations</h3>
+<p>Given the survey methodology, demographic context, and question structure, here are plausible explanations (not mutually exclusive):</p>
+<section id="immigration-from-religious-countries-15-45-of-effect" class="level4">
+<h4 class="anchored" data-anchor-id="immigration-from-religious-countries-15-45-of-effect">1. <strong>Immigration from Religious Countries</strong> (15-45% of effect)</h4>
+<p><strong>Mechanism</strong>: Between 2018 and 2024, substantial immigration occurred from countries with higher religiosity, including Nigeria, Philippines, Romania, Poland, Middle Eastern nations, Ukraine, and Hong Kong. ONS data show UK immigration remained at historic highs during this period, with 1.3 million arriving in year ending (YE) December 2023 and 948,000 in YE December 2024 (<a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/internationalmigration/bulletins/longterminternationalmigrationprovisional/yearendingdecember2024">ONS, 2025</a>). Additionally, 158,000 Hong Kong BN(O) visa holders arrived between 2021-2024, and 217,000 Ukrainians arrived between 2022-2024 (<a href="https://www.gov.uk/government/statistics/immigration-system-statistics-year-ending-september-2024/how-many-people-come-to-the-uk-via-safe-and-legal-humanitarian-routes">Home Office, 2024</a>).</p>
+<p><strong>Evidence for</strong>: - <strong>Ukrainian immigration</strong>: Around 217,000 Ukrainians were living in the UK as of June 2024, with ~210,000 arriving under the Ukraine Family and Sponsorship Schemes since the 2022 invasion (<a href="https://migrationobservatory.ox.ac.uk/resources/briefings/ukrainian-migration-to-the-uk/">Migration Observatory, 2024</a>) - <strong>High Ukrainian religiosity</strong>: 85% of Ukrainians identify as Christian (72% Eastern Orthodox, 9% Catholic, 4% Protestant), significantly higher than UK’s ~46% Christian identification (<a href="https://en.wikipedia.org/wiki/Religion_in_Ukraine">Wikipedia: Religion in Ukraine</a>, citing Kyiv International Institute of Sociology, 2022) - <strong>Hong Kong BN(O) immigration</strong>: 158,000 British National (Overseas) status holders from Hong Kong arrived in the UK between January 2021 and September 2024, with 22,500 arriving in YE September 2024 alone (<a href="https://www.gov.uk/government/statistics/immigration-system-statistics-year-ending-september-2024/how-many-people-come-to-the-uk-via-safe-and-legal-humanitarian-routes">Home Office, 2024</a>). Hong Kong has substantial Christian population (~12-15%), higher than mainland China - <strong>Church attendance culture</strong>: Ukrainian Christians (particularly Eastern Orthodox and Greek Catholics) and Hong Kong Christians (predominantly Protestant and Catholic) have active church attendance traditions that could translate to UK church-going behaviour - <strong>Scale of non-EU+ immigration</strong>: 766,000 non-EU+ nationals arrived in YE December 2024 alone, with cumulative arrivals over 2018-2024 likely exceeding 4-5 million people - <strong>Immigration by reason (YE Dec 2024)</strong>: 266,000 for study, 262,000 for work, 95,000 asylum seekers, 76,000 family reasons, 51,000 humanitarian routes including Ukraine schemes (ONS, 2025) - <strong>Top source countries</strong>: Indian, Pakistani, Chinese, Nigerian, Ukrainian, and Hong Kong nationals were among the top non-EU+ nationalities for immigration - <strong>Other religious immigration</strong>: Substantial influx from Nigeria, Philippines, Romania, Poland, and Middle Eastern nations with high Christian identification rates - <strong>Higher attendance rates</strong>: Immigrants from these regions attend church at 2-3× the UK baseline rate - <strong>Substantial effect size</strong>: Could explain 0.6-1.8 percentage points of the 4pp increase (15-45%) - <strong>No demographic standardisation performed</strong>: The surveys did not account for changing population composition by country of birth - <strong>Geographic concentration</strong>: Ukrainian arrivals were concentrated in Scotland (18%), London (17%), and South East (17%) – areas that could show localised attendance increases - <strong>Timing alignment</strong>: Most Ukrainian arrivals occurred in 2022-2023, with immigration peaking at 1.3 million in YE December 2023, immediately before the 2024 survey</p>
+<p><strong>Evidence against</strong>: - Effect size might be at the lower end if integration reduces attendance over time - Requires assumptions about immigrant attendance rates and religious denominational alignment - Ukrainian refugees may not maintain home-country attendance patterns due to trauma and displacement - Not all immigrants from “religious countries” are practising Christians or attend Anglican/Catholic churches captured in surveys</p>
+<p><strong>Testability</strong>: Could be tested with demographic breakdown by country of birth (data likely available but not reported), or by comparing attendance increases in areas with high vs low immigration</p>
+<p><strong>Data sources</strong>: - Office for National Statistics (ONS). (2025). “Long-term international migration, provisional: year ending December 2024”. Retrieved from https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/internationalmigration/bulletins/longterminternationalmigrationprovisional/yearendingdecember2024 - Cuibus, M., Walsh, P.W., &amp; Sumption, M. (2024). “Ukrainian migration to the UK”. Migration Observatory briefing, COMPAS, University of Oxford. Retrieved from https://migrationobservatory.ox.ac.uk/resources/briefings/ukrainian-migration-to-the-uk/</p>
+<hr>
+</section>
+<section id="covid-19-rebound-effect" class="level4">
+<h4 class="anchored" data-anchor-id="covid-19-rebound-effect">2. <strong>COVID-19 Rebound Effect</strong></h4>
+<p><strong>Mechanism</strong>: Churches were closed/restricted during 2020-2022. By 2024, previously regular attendees may have returned, creating a “rebound” relative to pandemic disruption. Additionally, elevated mortality during the pandemic may have driven people to seek community and meaning through religious participation.</p>
+<p><strong>Evidence for</strong>: - <strong>2024 represents first “normal” post-pandemic year</strong>: Death rates returned to pre-pandemic levels in 2024, marking the end of the acute crisis period (<a href="https://ourworldindata.org/grapher/excess-mortality-p-scores-average-baseline">Our World in Data, 2025</a>) - <strong>Significant mortality burden</strong>: UK excess deaths peaked at 105% above baseline in April 2020, remained elevated through 2021-2023, affecting ~3-4 million families through bereavement - <strong>Grief and mortality salience</strong>: Churches traditionally provide support during bereavement; increased mortality may have driven attendance for funerals, memorials, and community support - <strong>Religious organisations often see attendance recovery after disruptions</strong>: Historical patterns show rebound effects after crises - <strong>Other social activities show similar rebound patterns</strong>: Not unique to religious attendance - <strong>Pent-up demand</strong>: People unable to attend during lockdowns may have returned with renewed commitment</p>
+<p><strong>Evidence against</strong>: - Effect should be temporary and decline over time (no data yet on 2025+ trends) - Some evidence suggests permanent losses from pandemic as people developed new habits - No baseline from 2019 to establish pre-pandemic level - If purely COVID-related, would expect larger increases in areas with higher mortality (not tested)</p>
+<p><strong>Testability</strong>: Would require longitudinal data through 2020-2023 to observe trajectory, and correlation analysis between local mortality rates and attendance changes</p>
+<p><strong>Data source</strong>: Human Mortality Database; World Mortality Dataset (2024); Karlinsky and Kobak (2021) – processed by Our World in Data. Retrieved from https://ourworldindata.org/grapher/excess-mortality-p-scores-average-baseline</p>
+<hr>
+</section>
+<section id="question-order-and-measurement-effects" class="level4">
+<h4 class="anchored" data-anchor-id="question-order-and-measurement-effects">3. <strong>Question Order and Measurement Effects</strong></h4>
+<p><strong>Mechanism</strong>: The 2024 survey asked questions in a different order/format than 2018, potentially introducing acquiescence bias or priming effects.</p>
+<p><strong>Evidence for</strong>: - 2024 included a binary “past year” question (77% yes) that doesn’t match frequency breakdown (68.5% non-never) - <strong>Internal inconsistency</strong>: 8.5pp discrepancy suggests measurement error - Question order can affect responses by 3-7pp in survey research - Different question formats between years</p>
+<p><strong>Evidence against</strong>: - Both surveys by same organisation (YouGov) using similar methodology - Effect should be random if truly measurement error</p>
+<p><strong>Testability</strong>: See <a href="../../../../src/blog/misc/bible-society-uk-revival/question-order-effects.html">Question Order Effects</a> analysis</p>
+<hr>
+</section>
+<section id="demographic-composition-changes-ageeducation" class="level4">
+<h4 class="anchored" data-anchor-id="demographic-composition-changes-ageeducation">4. <strong>Demographic Composition Changes (Age/Education)</strong></h4>
+<p><strong>Mechanism</strong>: UK population aging + educational expansion could shift demographic weights toward groups with different attendance patterns.</p>
+<p><strong>Evidence for</strong>: - Population is aging; older cohorts attend more frequently - Educational attainment increasing; relationship with attendance is complex - Sample size reduced 31% (19,875 → 13,146), potentially changing representativeness</p>
+<p><strong>Evidence against</strong>: - Age-specific increases observed across all groups (not just older) - Standard population changes unlikely to produce 4pp shift in 6 years - Would require implausibly large demographic shifts</p>
+<p><strong>Testability</strong>: Requires demographic standardisation/weighting (not performed)</p>
+<hr>
+</section>
+<section id="natural-cohort-turnover" class="level4">
+<h4 class="anchored" data-anchor-id="natural-cohort-turnover">5. <strong>Natural Cohort Turnover</strong></h4>
+<p><strong>Mechanism</strong>: Older, less religious cohorts dying and being replaced by younger cohorts with different patterns.</p>
+<p><strong>Evidence for</strong>: - ~3-4 million deaths between 2018-2024 in UK - Cohort replacement is continuous demographic process - Could represent generational shifts</p>
+<p><strong>Evidence against</strong>: - Direction is wrong: younger generations typically less religious - Effect size too large for 6-year mortality replacement - Age breakdown shows increases across all groups, including young</p>
+<p><strong>Testability</strong>: Requires cohort analysis tracking same individuals over time</p>
+<hr>
+</section>
+<section id="genuine-religious-revival" class="level4">
+<h4 class="anchored" data-anchor-id="genuine-religious-revival">6. <strong>Genuine Religious Revival</strong></h4>
+<p><strong>Mechanism</strong>: Actual increase in religious commitment, belief, or practice across the UK population.</p>
+<p><strong>Evidence for</strong>: - Attendance increase is statistically real - ??? (Bible Society UK provides no additional evidence)</p>
+<p><strong>Evidence against</strong>: - <strong>Effect size trivially small</strong> (h = 0.179, &lt;0.2 threshold for “small”) - <strong>No belief triangulation</strong>: No evidence of increased religious belief, prayer, Bible reading, or other indicators - <strong>Internal inconsistencies</strong>: Binary question shows different pattern than frequency breakdown - <strong>“Never attended” decreased 4pp</strong>: Zero-sum constraint suggests shifting boundaries rather than new engagement - <strong>No control for confounders</strong>: Immigration, COVID, demographics all unaddressed - <strong>Only 2 time points</strong>: Can’t distinguish trend from noise - <strong>Cherry-picked metric</strong>: Focused on single favorable statistic</p>
+<p><strong>Testability</strong>: Would require multiple convergent measures (belief, prayer, donations, etc.) all showing increases</p>
+<hr>
+</section>
+</section>
+<section id="comparative-plausibility" class="level3">
+<h3 class="anchored" data-anchor-id="comparative-plausibility">Comparative Plausibility</h3>
+<p>Ranking explanations by plausibility given available evidence:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Rank</th>
+<th>Explanation</th>
+<th>Plausibility</th>
+<th>Evidence Quality</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Immigration + COVID rebound</td>
+<td>High</td>
+<td>Good (external data: <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/internationalmigration/bulletins/longterminternationalmigrationprovisional/yearendingdecember2024">ONS, 2025</a>; <a href="https://ourworldindata.org/grapher/excess-mortality-p-scores-average-baseline">Our World in Data, 2025</a>; <a href="https://migrationobservatory.ox.ac.uk/resources/briefings/ukrainian-migration-to-the-uk/">Migration Observatory, 2024</a>)</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Measurement artifacts</td>
+<td>Medium-High</td>
+<td>Fair (internal inconsistency suggests problems)</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Demographic composition</td>
+<td>Medium</td>
+<td>Poor (no standardisation performed)</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Natural cohort turnover</td>
+<td>Low</td>
+<td>Poor (direction inconsistent)</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Genuine religious revival</td>
+<td>Very Low</td>
+<td>Very Poor (no triangulation, contradictory evidence)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Most likely scenario</strong>: The 4pp increase represents a <strong>combination</strong> of: - <strong>1.0-1.8pp</strong>: Immigration effects (25-45% of increase) — 1.3 million arrivals in YE Dec 2023, including 217,000 Ukrainians (85% Christian) and 158,000 Hong Kong BN(O) holders (12-15% Christian), both with active church attendance cultures (<a href="https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/internationalmigration/bulletins/longterminternationalmigrationprovisional/yearendingdecember2024">ONS, 2025</a>; <a href="https://www.gov.uk/government/statistics/immigration-system-statistics-year-ending-september-2024/how-many-people-come-to-the-uk-via-safe-and-legal-humanitarian-routes">Home Office, 2024</a>) - <strong>1.0-1.5pp</strong>: COVID-19 rebound (25-38% of increase) — UK excess deaths peaked at 105% in April 2020, remained elevated through 2023, returned to normal in 2024 (<a href="https://ourworldindata.org/grapher/excess-mortality-p-scores-average-baseline">Our World in Data, 2025</a>) - <strong>0.5-1.0pp</strong>: Measurement artifacts (13-25% of increase) - <strong>0.2-0.5pp</strong>: Demographic composition (5-13% of increase) - <strong>0-0.5pp</strong>: Genuine behaviour change (0-13% of increase)</p>
+</section>
+<section id="key-methodological-point" class="level3">
+<h3 class="anchored" data-anchor-id="key-methodological-point">Key Methodological Point</h3>
+<p><strong>The absence of demographic standardisation, belief triangulation, and confound control means we cannot distinguish between these explanations.</strong> The Bible Society UK has presented a statistical pattern as if it were a causal story without ruling out alternative explanations.</p>
+<p><strong>What would be needed to support a “revival” claim:</strong> 1. ✅ Statistical significance (achieved) 2. ✅ Meaningful effect size (<strong>failed</strong> - h = 0.179 is negligible) 3. ❌ Belief/commitment triangulation (not measured) 4. ❌ Demographic standardisation (not performed) 5. ❌ Alternative explanations ruled out (not addressed) 6. ❌ Longitudinal trend data (only 2 time points) 7. ❌ Internal consistency (contradictory measures)</p>
+<p><strong>Current evidence grade: D (poor)</strong></p>
+<hr>
+</section>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data Sources</h3>
+<p><strong>UK Immigration Statistics:</strong> - Office for National Statistics (ONS). (2025). “Long-term international migration, provisional: year ending December 2024”. Retrieved from https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/internationalmigration/bulletins/longterminternationalmigrationprovisional/yearendingdecember2024</p>
+<p><strong>Humanitarian Migration Routes (Ukraine &amp; Hong Kong):</strong> - Home Office. (2024). “How many people come to the UK via safe and legal (humanitarian) routes? Immigration system statistics, year ending September 2024”. UK Government. Retrieved from https://www.gov.uk/government/statistics/immigration-system-statistics-year-ending-september-2024/how-many-people-come-to-the-uk-via-safe-and-legal-humanitarian-routes</p>
+<p><strong>Ukrainian Migration:</strong> - Cuibus, M., Walsh, P.W., &amp; Sumption, M. (2024). “Ukrainian migration to the UK”. Migration Observatory briefing, COMPAS, University of Oxford. Retrieved from https://migrationobservatory.ox.ac.uk/resources/briefings/ukrainian-migration-to-the-uk/</p>
+<p><strong>Ukrainian Religious Demographics:</strong> - Kyiv International Institute of Sociology (KIIS). (2022). “Dynamics of religious self-identification of the population of Ukraine”. Retrieved via Wikipedia: https://en.wikipedia.org/wiki/Religion_in_Ukraine</p>
+<p><strong>UK Excess Mortality:</strong> - Our World in Data. (2025). “Excess mortality: Deaths from all causes compared to average over previous years”. Data adapted from Human Mortality Database, World Mortality Database. Retrieved from https://ourworldindata.org/grapher/excess-mortality-p-scores-average-baseline - Human Mortality Database; World Mortality Dataset (2024); Karlinsky and Kobak (2021); Human Mortality Database (2025); World Mortality Database (2024) – processed by Our World in Data. Retrieved October 31, 2025</p>
+<hr>
+</section>
+</section>
+<section id="detailed-follow-up-analyses" class="level2">
+<h2 class="anchored" data-anchor-id="detailed-follow-up-analyses">Detailed Follow-up Analyses</h2>
+<p>For more rigorous investigation of specific causal mechanisms:</p>
+<ol type="1">
+<li><a href="../../../../src/blog/misc/bible-society-uk-revival/question-order-effects.html"><strong>Question Order Effects</strong></a> - Analysis of measurement artifacts and internal consistency</li>
+<li><a href="../../../../src/blog/misc/bible-society-uk-revival/demographic-analysis.html"><strong>Demographic Analysis</strong></a> - Investigation of age and ethnicity patterns<br>
+</li>
+<li><a href="../../../../src/blog/misc/bible-society-uk-revival/criticism-overview.html"><strong>Critical Analysis Overview</strong></a> - Comprehensive evaluation of all red flags and alternative explanations</li>
+</ol>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/NathOrmond\.github\.io\/stats-concepts");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

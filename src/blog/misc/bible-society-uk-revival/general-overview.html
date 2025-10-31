@@ -1,0 +1,2049 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>General Overview – Nathans Stats Stuff</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../../">
+<script src="../../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../../index.html">
+    <span class="navbar-title">Nathans Stats Stuff</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching-stats" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Teaching Stats</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching-stats">    
+        <li>
+    <a class="dropdown-item" href="../../../../src/teaching-stats/core-concepts/index.html">
+ <span class="dropdown-text">Core Concepts</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-blog" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Blog</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-blog">    
+        <li>
+    <a class="dropdown-item" href="../../../../src/blog/misc/index.html">
+ <span class="dropdown-text">Misc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../../src/blog/paper-reviews/index.html">
+ <span class="dropdown-text">Paper Reviews</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#survey-metadata" id="toc-survey-metadata" class="nav-link" data-scroll-target="#survey-metadata">Survey Metadata</a>
+  <ul class="collapse">
+  <li><a href="#key-survey-characteristics" id="toc-key-survey-characteristics" class="nav-link" data-scroll-target="#key-survey-characteristics">Key Survey Characteristics</a></li>
+  <li><a href="#sample-size-and-statistical-precision" id="toc-sample-size-and-statistical-precision" class="nav-link" data-scroll-target="#sample-size-and-statistical-precision">Sample Size and Statistical Precision</a></li>
+  </ul></li>
+  <li><a href="#data-loading" id="toc-data-loading" class="nav-link" data-scroll-target="#data-loading">Data Loading</a></li>
+  <li><a href="#survey-question-overview" id="toc-survey-question-overview" class="nav-link" data-scroll-target="#survey-question-overview">Survey Question Overview</a>
+  <ul class="collapse">
+  <li><a href="#question-count-summary" id="toc-question-count-summary" class="nav-link" data-scroll-target="#question-count-summary">Question Count Summary</a></li>
+  <li><a href="#detailed-breakdown" id="toc-detailed-breakdown" class="nav-link" data-scroll-target="#detailed-breakdown">Detailed Breakdown</a></li>
+  <li><a href="#comparability-assessment" id="toc-comparability-assessment" class="nav-link" data-scroll-target="#comparability-assessment">Comparability Assessment</a></li>
+  <li><a href="#key-observations" id="toc-key-observations" class="nav-link" data-scroll-target="#key-observations">Key Observations</a></li>
+  </ul></li>
+  <li><a href="#complete-survey-question-inventory" id="toc-complete-survey-question-inventory" class="nav-link" data-scroll-target="#complete-survey-question-inventory">Complete Survey Question Inventory</a>
+  <ul class="collapse">
+  <li><a href="#question-categories" id="toc-question-categories" class="nav-link" data-scroll-target="#question-categories">Question Categories</a></li>
+  <li><a href="#summary-statistics" id="toc-summary-statistics" class="nav-link" data-scroll-target="#summary-statistics">Summary Statistics</a></li>
+  <li><a href="#visual-summary-question-coverage" id="toc-visual-summary-question-coverage" class="nav-link" data-scroll-target="#visual-summary-question-coverage">Visual Summary: Question Coverage</a></li>
+  <li><a href="#key-findings-from-complete-inventory" id="toc-key-findings-from-complete-inventory" class="nav-link" data-scroll-target="#key-findings-from-complete-inventory">Key Findings from Complete Inventory</a></li>
+  <li><a href="#data-availability-for-analysis" id="toc-data-availability-for-analysis" class="nav-link" data-scroll-target="#data-availability-for-analysis">Data Availability for Analysis</a></li>
+  </ul></li>
+  <li><a href="#question-format-comparison" id="toc-question-format-comparison" class="nav-link" data-scroll-target="#question-format-comparison">Question Format Comparison</a>
+  <ul class="collapse">
+  <li><a href="#survey-question" id="toc-survey-question" class="nav-link" data-scroll-target="#survey-question">2018 Survey Question</a></li>
+  <li><a href="#survey-questions" id="toc-survey-questions" class="nav-link" data-scroll-target="#survey-questions">2024 Survey Questions</a></li>
+  </ul></li>
+  <li><a href="#complete-attendance-distribution-comparison" id="toc-complete-attendance-distribution-comparison" class="nav-link" data-scroll-target="#complete-attendance-distribution-comparison">Complete Attendance Distribution Comparison</a>
+  <ul class="collapse">
+  <li><a href="#frequency-question-responses" id="toc-frequency-question-responses" class="nav-link" data-scroll-target="#frequency-question-responses">Frequency Question Responses</a></li>
+  <li><a href="#visual-comparison-complete-distribution" id="toc-visual-comparison-complete-distribution" class="nav-link" data-scroll-target="#visual-comparison-complete-distribution">Visual Comparison: Complete Distribution</a></li>
+  <li><a href="#change-magnitude-visualisation" id="toc-change-magnitude-visualisation" class="nav-link" data-scroll-target="#change-magnitude-visualisation">Change Magnitude Visualisation</a></li>
+  </ul></li>
+  <li><a href="#summary-statistics-grouped-categories" id="toc-summary-statistics-grouped-categories" class="nav-link" data-scroll-target="#summary-statistics-grouped-categories">Summary Statistics: Grouped Categories</a>
+  <ul class="collapse">
+  <li><a href="#weekly-and-monthly-attendance" id="toc-weekly-and-monthly-attendance" class="nav-link" data-scroll-target="#weekly-and-monthly-attendance">Weekly and Monthly Attendance</a></li>
+  </ul></li>
+  <li><a href="#demographic-breakdowns" id="toc-demographic-breakdowns" class="nav-link" data-scroll-target="#demographic-breakdowns">Demographic Breakdowns</a>
+  <ul class="collapse">
+  <li><a href="#by-age-group" id="toc-by-age-group" class="nav-link" data-scroll-target="#by-age-group">By Age Group</a></li>
+  <li><a href="#change-by-age-group" id="toc-change-by-age-group" class="nav-link" data-scroll-target="#change-by-age-group">Change by Age Group</a></li>
+  <li><a href="#by-ethnicity-2024-only" id="toc-by-ethnicity-2024-only" class="nav-link" data-scroll-target="#by-ethnicity-2024-only">By Ethnicity (2024 Only)</a></li>
+  <li><a href="#by-gender-2024-only" id="toc-by-gender-2024-only" class="nav-link" data-scroll-target="#by-gender-2024-only">By Gender (2024 Only)</a></li>
+  </ul></li>
+  <li><a href="#binary-question-results" id="toc-binary-question-results" class="nav-link" data-scroll-target="#binary-question-results">2024 Binary Question Results</a></li>
+  <li><a href="#internal-consistency-check-2024" id="toc-internal-consistency-check-2024" class="nav-link" data-scroll-target="#internal-consistency-check-2024">Internal Consistency Check (2024)</a></li>
+  <li><a href="#summary-dashboard" id="toc-summary-dashboard" class="nav-link" data-scroll-target="#summary-dashboard">Summary Dashboard</a></li>
+  <li><a href="#key-observations-1" id="toc-key-observations-1" class="nav-link" data-scroll-target="#key-observations-1">Key Observations</a>
+  <ul class="collapse">
+  <li><a href="#main-findings" id="toc-main-findings" class="nav-link" data-scroll-target="#main-findings">Main Findings</a></li>
+  </ul></li>
+  <li><a href="#methodological-notes" id="toc-methodological-notes" class="nav-link" data-scroll-target="#methodological-notes">Methodological Notes</a></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">General Overview</h1>
+<p class="subtitle lead">Comprehensive comparison of 2018 and 2024 survey responses</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>This document provides a comprehensive, descriptive comparison of all survey questions common to both the 2018 and 2024 YouGov surveys on church attendance in the UK. The focus here is on presenting the data clearly , showing what was asked and how responses differed between the two time points.</p>
+</section>
+<section id="survey-metadata" class="level2">
+<h2 class="anchored" data-anchor-id="survey-metadata">Survey Metadata</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load survey metadata</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>survey_meta <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/bible-society-uk-revival/processed/survey-metadata.csv"</span>), </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>                        <span class="at">comment =</span> <span class="st">"#"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+<div style="overflow-x: auto; overflow-y: auto; max-height: 400px; border: 1px solid #ddd; padding: 10px; margin-bottom: 20px;">
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Survey metadata for 2018 and 2024</caption>
+<colgroup>
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 3%">
+<col style="width: 5%">
+<col style="width: 32%">
+<col style="width: 40%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: right;">survey_year</th>
+<th style="text-align: right;">sample_size_unweighted</th>
+<th style="text-align: right;">sample_size_weighted</th>
+<th style="text-align: left;">fieldwork_start</th>
+<th style="text-align: left;">fieldwork_end</th>
+<th style="text-align: left;">survey_methodology</th>
+<th style="text-align: left;">key_question</th>
+<th style="text-align: left;">response_scale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2018</td>
+<td style="text-align: right;">19101</td>
+<td style="text-align: right;">19875</td>
+<td style="text-align: left;">2018-10-11</td>
+<td style="text-align: left;">2018-11-13</td>
+<td style="text-align: left;">YouGov online panel</td>
+<td style="text-align: left;">Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?</td>
+<td style="text-align: left;">Daily/almost daily; A few times a week; About once a week; About once a fortnight; About once a month; A few times a year; About once a year; Hardly ever; Never</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2024</td>
+<td style="text-align: right;">13146</td>
+<td style="text-align: right;">12455</td>
+<td style="text-align: left;">2024-11-04</td>
+<td style="text-align: left;">2024-12-02</td>
+<td style="text-align: left;">YouGov online panel</td>
+<td style="text-align: left;">Church service (with binary: Yes - in the past year; Yes - more than a year ago; Never); ALSO frequency question</td>
+<td style="text-align: left;">Binary first, then frequency scale same as 2018</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<section id="key-survey-characteristics" class="level3">
+<h3 class="anchored" data-anchor-id="key-survey-characteristics">Key Survey Characteristics</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>characteristics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Characteristic =</span> <span class="fu">c</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Survey Organisation"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Survey Type"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Fieldwork Period"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sample Size (Unweighted)"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Sample Size (Weighted)"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Primary Question Topic"</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2018</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"YouGov"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Online panel"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"11 Oct - 13 Nov 2018"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">format</span>(survey_meta<span class="sc">$</span>sample_size_unweighted[<span class="dv">1</span>], <span class="at">big.mark =</span> <span class="st">","</span>),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">format</span>(survey_meta<span class="sc">$</span>sample_size_weighted[<span class="dv">1</span>], <span class="at">big.mark =</span> <span class="st">","</span>),</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Church attendance frequency"</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2024</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"YouGov"</span>,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Online panel"</span>,</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"4 Nov - 2 Dec 2024"</span>,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">format</span>(survey_meta<span class="sc">$</span>sample_size_unweighted[<span class="dv">2</span>], <span class="at">big.mark =</span> <span class="st">","</span>),</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="fu">format</span>(survey_meta<span class="sc">$</span>sample_size_weighted[<span class="dv">2</span>], <span class="at">big.mark =</span> <span class="st">","</span>),</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Church attendance (binary + frequency)"</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(characteristics, <span class="at">caption =</span> <span class="st">"Survey characteristics comparison"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Survey characteristics comparison</caption>
+<colgroup>
+<col style="width: 27%">
+<col style="width: 30%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Characteristic</th>
+<th style="text-align: left;">2018</th>
+<th style="text-align: left;">2024</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Survey Organisation</td>
+<td style="text-align: left;">YouGov</td>
+<td style="text-align: left;">YouGov</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Survey Type</td>
+<td style="text-align: left;">Online panel</td>
+<td style="text-align: left;">Online panel</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Fieldwork Period</td>
+<td style="text-align: left;">11 Oct - 13 Nov 2018</td>
+<td style="text-align: left;">4 Nov - 2 Dec 2024</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sample Size (Unweighted)</td>
+<td style="text-align: left;">19,101</td>
+<td style="text-align: left;">13,146</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Sample Size (Weighted)</td>
+<td style="text-align: left;">19,875</td>
+<td style="text-align: left;">12,455</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Primary Question Topic</td>
+<td style="text-align: left;">Church attendance frequency</td>
+<td style="text-align: left;">Church attendance (binary + frequency)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Note</strong>: The 2024 survey has 37.3% fewer respondents than 2018.</p>
+</section>
+<section id="sample-size-and-statistical-precision" class="level3">
+<h3 class="anchored" data-anchor-id="sample-size-and-statistical-precision">Sample Size and Statistical Precision</h3>
+<p><strong>Central Limit Theorem Implications:</strong></p>
+<p>According to the Central Limit Theorem, with sufficiently large sample sizes, the sampling distribution of proportions approaches a normal distribution, allowing us to make reliable statistical inferences. Both surveys have sample sizes well above the typical threshold (n ≥ 30) required for the CLT to apply.</p>
+<p><strong>Statistical Precision Comparison:</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 10%">
+<col style="width: 17%">
+<col style="width: 35%">
+<col style="width: 35%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Survey</th>
+<th>Sample Size</th>
+<th>Margin of Error (95% CI)</th>
+<th>With Design Effect (1.5)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2018</td>
+<td>19,875</td>
+<td>±0.70%</td>
+<td>±0.85%</td>
+</tr>
+<tr class="even">
+<td>2024</td>
+<td>12,455</td>
+<td>±0.88%</td>
+<td>±1.08%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Key Points:</strong></p>
+<ol type="1">
+<li><p><strong>Both samples are statistically adequate</strong>: With n &gt; 12,000 in both surveys, the Central Limit Theorem ensures the sampling distributions are approximately normal, providing robust statistical properties.</p></li>
+<li><p><strong>Minimal precision loss</strong>: The 2024 survey has a margin of error only ~0.18 percentage points wider than 2018. This difference is negligible for practical purposes.</p></li>
+<li><p><strong>Design effect adjustment</strong>: Assuming a design effect of 1.5 (typical for online panel surveys), effective sample sizes are still large (13,250 and 8,303 respectively), with margins of error remaining under 1%.</p></li>
+<li><p><strong>Representativeness vs.&nbsp;Precision</strong>: The more important concern is not statistical precision (both surveys are precise) but <strong>representativeness</strong>:</p>
+<ul>
+<li><strong>Why did the sample size drop 31%?</strong> Potential reasons include:
+<ul>
+<li>Changes in response rates</li>
+<li>Different sampling frame or recruitment methods</li>
+<li>Changes in panel composition</li>
+<li>Different fielding conditions</li>
+</ul></li>
+</ul></li>
+<li><p><strong>Selection bias risk</strong>: The substantial reduction in sample size may indicate differential non-response or systematic changes in who participates in the survey. This could affect representativeness even though statistical precision remains high.</p></li>
+</ol>
+<p><strong>Conclusion</strong>: From a pure Central Limit Theorem perspective, both sample sizes are excellent and provide similar statistical precision. However, the unexplained 31% reduction raises questions about potential changes in survey methodology or response patterns that could affect comparability between the two time points.</p>
+</section>
+</section>
+<section id="data-loading" class="level2">
+<h2 class="anchored" data-anchor-id="data-loading">Data Loading</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load attendance data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>attendance_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"data/bible-society-uk-revival/processed/church-attendance-extracted.csv"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="survey-question-overview" class="level2">
+<h2 class="anchored" data-anchor-id="survey-question-overview">Survey Question Overview</h2>
+<p>This section examines how many questions about church attendance were asked in each survey and which questions are comparable.</p>
+<section id="question-count-summary" class="level3">
+<h3 class="anchored" data-anchor-id="question-count-summary">Question Count Summary</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Survey Year</th>
+<th>Number of Church Attendance Questions</th>
+<th>Question Types</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>2018</strong></td>
+<td>1</td>
+<td>Frequency only</td>
+</tr>
+<tr class="even">
+<td><strong>2024</strong></td>
+<td>2</td>
+<td>Binary + Frequency</td>
+</tr>
+<tr class="odd">
+<td><strong>Common Questions</strong></td>
+<td>1</td>
+<td>Frequency question</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="detailed-breakdown" class="level3">
+<h3 class="anchored" data-anchor-id="detailed-breakdown">Detailed Breakdown</h3>
+<p><strong>2018 Survey (1 question):</strong></p>
+<ol type="1">
+<li><strong>Frequency Question</strong>: “Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?”
+<ul>
+<li>Response scale: 9 categories from “Daily/almost daily” to “Never”</li>
+</ul></li>
+</ol>
+<p><strong>2024 Survey (2 questions):</strong></p>
+<ol type="1">
+<li><strong>Binary Question</strong> (NEW): “Have you attended a church service?”
+<ul>
+<li>Response options: “Yes - in the past year”, “Yes - more than a year ago”, “Never”</li>
+<li>Asked FIRST before the frequency question</li>
+</ul></li>
+<li><strong>Frequency Question</strong> (SAME as 2018): Church attendance frequency
+<ul>
+<li>Response scale: Same 9 categories as 2018</li>
+<li>Asked SECOND, after the binary question</li>
+</ul></li>
+</ol>
+</section>
+<section id="comparability-assessment" class="level3">
+<h3 class="anchored" data-anchor-id="comparability-assessment">Comparability Assessment</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/comparability-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Survey question structure comparison</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="key-observations" class="level3">
+<h3 class="anchored" data-anchor-id="key-observations">Key Observations</h3>
+<ol type="1">
+<li><p><strong>Direct Comparability</strong>: Only <strong>1 out of 2</strong> questions from the 2024 survey is directly comparable to 2018 (the frequency question)</p></li>
+<li><p><strong>Question Order Changed</strong>: Even the comparable frequency question appears in a different context:</p>
+<ul>
+<li><strong>2018</strong>: Asked as the only question</li>
+<li><strong>2024</strong>: Asked as the second question, after a binary screener</li>
+</ul></li>
+<li><p><strong>New Binary Question</strong>: The 2024 binary question provides additional data not available in 2018, but also introduces potential <strong>question order effects</strong></p></li>
+<li><p><strong>Methodological Implication</strong>: The change from 1 question (2018) to 2 questions (2024) means:</p>
+<ul>
+<li>2024 respondents are primed by the binary question before answering the frequency question</li>
+<li>This priming may affect how they respond to the frequency question</li>
+<li>The 2018 and 2024 frequency questions are not truly equivalent due to different question contexts</li>
+</ul></li>
+</ol>
+<p><strong>Conclusion</strong>: While both surveys include a frequency question with identical response categories, the 2024 survey’s addition of a binary question asked first creates a different response context. This means <strong>only partial comparability</strong> exists between the two surveys.</p>
+</section>
+</section>
+<section id="complete-survey-question-inventory" class="level2">
+<h2 class="anchored" data-anchor-id="complete-survey-question-inventory">Complete Survey Question Inventory</h2>
+<p>This section provides a comprehensive inventory of ALL questions asked in both the 2018 and 2024 surveys, showing which questions are common and which are unique to each survey.</p>
+<section id="question-categories" class="level3">
+<h3 class="anchored" data-anchor-id="question-categories">Question Categories</h3>
+<p>Based on the survey documentation, both surveys covered multiple topics related to religion and church attendance. Below is a complete comparison:</p>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Complete inventory of survey questions across both years</caption>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 43%">
+<col style="width: 6%">
+<col style="width: 4%">
+<col style="width: 10%">
+<col style="width: 13%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Category</th>
+<th style="text-align: left;">Question Topic</th>
+<th style="text-align: left;">2018</th>
+<th style="text-align: left;">2024</th>
+<th style="text-align: left;">Comparable?</th>
+<th style="text-align: left;">Data Available</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Church Attendance</td>
+<td style="text-align: left;">Frequency of church service attendance (past year)</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Partial*</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Church Attendance</td>
+<td style="text-align: left;">Ever attended church service (binary)</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes (2024 only)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Church Attendance</td>
+<td style="text-align: left;">When last attended (if not in past year)</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes (2024 only)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Religious Identification</td>
+<td style="text-align: left;">Religious affiliation/denomination</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Religious Identification</td>
+<td style="text-align: left;">Christian denomination (if Christian)</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bible/Religious Beliefs</td>
+<td style="text-align: left;">Bible reading frequency</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Unknown**</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Bible/Religious Beliefs</td>
+<td style="text-align: left;">Bible can change society for the better</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Unknown**</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Bible/Religious Beliefs</td>
+<td style="text-align: left;">Other religious belief questions</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Unknown**</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Demographics</td>
+<td style="text-align: left;">Age group</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Demographics</td>
+<td style="text-align: left;">Ethnicity</td>
+<td style="text-align: left;">Limited</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Partial***</td>
+<td style="text-align: left;">Yes (2024 only)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Demographics</td>
+<td style="text-align: left;">Gender</td>
+<td style="text-align: left;">Limited</td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Partial***</td>
+<td style="text-align: left;">Yes (2024 only)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p><strong>Notes:</strong></p>
+<ul>
+<li>* <strong>Partial comparability</strong>: Question wording identical, but asked in different contexts (2024 has binary question first)</li>
+<li>** <strong>Unknown comparability</strong>: Questions asked in both surveys, but exact wording not documented in our data extracts</li>
+<li>*** <strong>Partial demographic data</strong>: 2018 had limited ethnicity/gender breakdowns compared to 2024</li>
+</ul>
+</section>
+<section id="summary-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="summary-statistics">Summary Statistics</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Topics covered in 2018</strong></td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td><strong>Topics covered in 2024</strong></td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td><strong>Common topics (asked in both)</strong></td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td><strong>Unique to 2024</strong></td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td><strong>Directly comparable</strong></td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td><strong>Data extracted and available for analysis</strong></td>
+<td>4 topics</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="visual-summary-question-coverage" class="level3">
+<h3 class="anchored" data-anchor-id="visual-summary-question-coverage">Visual Summary: Question Coverage</h3>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/question-coverage-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Venn diagram style comparison of survey question coverage</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="key-findings-from-complete-inventory" class="level3">
+<h3 class="anchored" data-anchor-id="key-findings-from-complete-inventory">Key Findings from Complete Inventory</h3>
+<ol type="1">
+<li><p><strong>Both surveys covered similar topic areas</strong>: Church attendance, religious identification, beliefs about the Bible, and demographics</p></li>
+<li><p><strong>2024 expanded church attendance questions</strong>: Added binary attendance question and follow-up about when people last attended</p></li>
+<li><p><strong>Demographic data improved in 2024</strong>: More comprehensive ethnicity and gender breakdowns</p></li>
+<li><p><strong>Limited data extraction</strong>: Our analysis focuses on church attendance patterns because:</p>
+<ul>
+<li>These are the questions highlighted in Bible Society UK’s “Quiet Revival” claim</li>
+<li>Full cross-tabulations for other questions were not included in the published reports</li>
+<li>Demographic data was only partially available for 2018</li>
+</ul></li>
+<li><p><strong>Comparability challenges</strong>: Even for topics covered in both years:</p>
+<ul>
+<li>Question wording may have changed (not fully documented)</li>
+<li>Response scales may differ</li>
+<li>Question context/ordering changed</li>
+<li>Demographic weighting methodology not disclosed</li>
+</ul></li>
+</ol>
+</section>
+<section id="data-availability-for-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="data-availability-for-analysis">Data Availability for Analysis</h3>
+<p>Of all the questions asked across both surveys, we have extracted and analyzable data for:</p>
+<ul>
+<li>✅ <strong>Church attendance frequency</strong> (both years)</li>
+<li>✅ <strong>Binary church attendance</strong> (2024 only)</li>
+<li>✅ <strong>Age breakdowns</strong> (both years)</li>
+<li>✅ <strong>Ethnicity breakdowns</strong> (2024 only, limited in 2018)</li>
+<li>✅ <strong>Gender breakdowns</strong> (2024 only)</li>
+</ul>
+<p>For other questions (religious identification, Bible reading, beliefs), the published reports provided: - Summary statistics only (no cross-tabulations) - Selected highlights (not comprehensive data) - Insufficient detail for rigorous comparative analysis</p>
+<p>This limitation means our analysis necessarily focuses on what data is available: church attendance patterns and basic demographic breakdowns.</p>
+</section>
+</section>
+<section id="question-format-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="question-format-comparison">Question Format Comparison</h2>
+<section id="survey-question" class="level3">
+<h3 class="anchored" data-anchor-id="survey-question">2018 Survey Question</h3>
+<p><strong>Question wording</strong>: “Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?”</p>
+<p><strong>Response options</strong>: - Daily/almost daily - A few times a week - About once a week - About once a fortnight - About once a month - A few times a year - About once a year - Hardly ever - Never</p>
+</section>
+<section id="survey-questions" class="level3">
+<h3 class="anchored" data-anchor-id="survey-questions">2024 Survey Questions</h3>
+<p><strong>Two separate questions were asked:</strong></p>
+<p><strong>Question 1 (Binary)</strong>: “Have you attended a church service?” [exact wording not fully documented]</p>
+<p><strong>Response options</strong>: - Yes - in the past year - Yes - more than a year ago - Never</p>
+<p><strong>Question 2 (Frequency)</strong>: Same frequency scale as 2018</p>
+<p>⚠️ <strong>Important methodological note</strong>: The binary question was asked BEFORE the frequency question in 2024, which was not the case in 2018. This ordering may influence responses.</p>
+</section>
+</section>
+<section id="complete-attendance-distribution-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="complete-attendance-distribution-comparison">Complete Attendance Distribution Comparison</h2>
+<section id="frequency-question-responses" class="level3">
+<h3 class="anchored" data-anchor-id="frequency-question-responses">Frequency Question Responses</h3>
+<p>This is the most directly comparable question between the two surveys.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract frequency responses for both years</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>freq_2018 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2018</span>, </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"At least once a week"</span>, <span class="st">"At least once a month"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(response_category, total_pct) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span> <span class="ot">=</span> total_pct)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>freq_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"frequency"</span>,</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"At least once a week"</span>, <span class="st">"At least once a month"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(response_category, total_pct) <span class="sc">%&gt;%</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="ot">=</span> total_pct)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Merge and calculate changes</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>freq_comparison <span class="ot">&lt;-</span> <span class="fu">full_join</span>(freq_2018, freq_2024, <span class="at">by =</span> <span class="st">"response_category"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Change (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>((<span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(<span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span>))</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(freq_comparison, <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Church attendance frequency: 2018 vs 2024"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Church attendance frequency: 2018 vs 2024</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">response_category</th>
+<th style="text-align: right;">2018 (%)</th>
+<th style="text-align: right;">2024 (%)</th>
+<th style="text-align: right;">Change (pp)</th>
+<th style="text-align: right;">Change (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Never</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">-6.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hardly ever</td>
+<td style="text-align: right;">13</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-7.7</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">A few times a year</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-14.3</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">About once a year</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">-1</td>
+<td style="text-align: right;">-14.3</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">About once a week</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">40.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A few times a week</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">50.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">About once a fortnight</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">0.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">About once a month</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">100.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Daily/almost daily</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">Inf</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<section id="visual-comparison-complete-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="visual-comparison-complete-distribution">Visual Comparison: Complete Distribution</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for plotting</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>plot_data <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    (year <span class="sc">==</span> <span class="dv">2018</span>) <span class="sc">|</span> (year <span class="sc">==</span> <span class="dv">2024</span> <span class="sc">&amp;</span> question_type <span class="sc">==</span> <span class="st">"frequency"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"At least once a week"</span>, <span class="st">"At least once a month"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> <span class="fu">factor</span>(year),</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">response_category =</span> <span class="fu">factor</span>(response_category, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Daily/almost daily"</span>, <span class="st">"A few times a week"</span>, <span class="st">"About once a week"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">"About once a fortnight"</span>, <span class="st">"About once a month"</span>, <span class="st">"A few times a year"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">"About once a year"</span>, <span class="st">"Hardly ever"</span>, <span class="st">"Never"</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(plot_data, <span class="fu">aes</span>(<span class="at">x =</span> response_category, <span class="at">y =</span> total_pct, <span class="at">fill =</span> Year)) <span class="sc">+</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, total_pct)), </span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.7</span>), </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"2018"</span> <span class="ot">=</span> <span class="st">"#4575b4"</span>, <span class="st">"2024"</span> <span class="ot">=</span> <span class="st">"#d73027"</span>),</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"2018"</span> <span class="ot">=</span> <span class="st">"2018 (n=19,875)"</span>, <span class="st">"2024"</span> <span class="ot">=</span> <span class="st">"2024 (n=12,455)"</span>)) <span class="sc">+</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Church Attendance Frequency Distribution: 2018 vs 2024"</span>,</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Direct comparison of identical question format"</span>,</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Attendance Frequency"</span>,</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Percentage of Respondents (%)"</span>,</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Survey Year"</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"top"</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">70</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">70</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/full-distribution-visual-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Complete church attendance distribution comparison</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="change-magnitude-visualisation" class="level3">
+<h3 class="anchored" data-anchor-id="change-magnitude-visualisation">Change Magnitude Visualisation</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare data for diverging bar chart</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>change_plot_data <span class="ot">&lt;-</span> freq_comparison <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">response_category =</span> <span class="fu">factor</span>(response_category, </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                               <span class="at">levels =</span> <span class="fu">rev</span>(response_category)),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Direction =</span> <span class="fu">case_when</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Increase"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"Decrease"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"No Change"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(change_plot_data, <span class="fu">aes</span>(<span class="at">x =</span> response_category, <span class="at">y =</span> <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span>, <span class="at">fill =</span> Direction)) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%+.1f"</span>, <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span>)), </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="fu">ifelse</span>(change_plot_data<span class="sc">$</span><span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="sc">-</span><span class="fl">0.2</span>, <span class="fl">1.2</span>),</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Increase"</span> <span class="ot">=</span> <span class="st">"#2166ac"</span>, <span class="st">"Decrease"</span> <span class="ot">=</span> <span class="st">"#d73027"</span>)) <span class="sc">+</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Change in Attendance by Category: 2018 → 2024"</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Percentage point change for each response category"</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Change (percentage points)"</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Direction"</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.y =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/change-magnitude-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Magnitude and direction of changes in attendance categories</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="summary-statistics-grouped-categories" class="level2">
+<h2 class="anchored" data-anchor-id="summary-statistics-grouped-categories">Summary Statistics: Grouped Categories</h2>
+<section id="weekly-and-monthly-attendance" class="level3">
+<h3 class="anchored" data-anchor-id="weekly-and-monthly-attendance">Weekly and Monthly Attendance</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate grouped statistics</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>grouped_stats <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">Category =</span> <span class="fu">c</span>(<span class="st">"At least once a week"</span>, <span class="st">"At least once a month"</span>, <span class="st">"Never"</span>),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    attendance_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2018</span>, response_category <span class="sc">==</span> <span class="st">"At least once a week"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(total_pct),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    attendance_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2018</span>, response_category <span class="sc">==</span> <span class="st">"At least once a month"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(total_pct),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    attendance_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2018</span>, response_category <span class="sc">==</span> <span class="st">"Never"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(total_pct)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Weekly: sum of daily + few times a week + once a week</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    attendance_data <span class="sc">%&gt;%</span> </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"frequency"</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>             response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Daily/almost daily"</span>, <span class="st">"A few times a week"</span>, <span class="st">"About once a week"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(total_pct) <span class="sc">%&gt;%</span> <span class="fu">sum</span>(),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Monthly: weekly + fortnight + month</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    attendance_data <span class="sc">%&gt;%</span> </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"frequency"</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>             response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Daily/almost daily"</span>, <span class="st">"A few times a week"</span>, <span class="st">"About once a week"</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"About once a fortnight"</span>, <span class="st">"About once a month"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>      <span class="fu">pull</span>(total_pct) <span class="sc">%&gt;%</span> <span class="fu">sum</span>(),</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Never</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    attendance_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"frequency"</span>, response_category <span class="sc">==</span> <span class="st">"Never"</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(total_pct)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span>,</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Relative Change (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>((<span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(grouped_stats, <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Grouped attendance categories comparison"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Grouped attendance categories comparison</caption>
+<colgroup>
+<col style="width: 30%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 16%">
+<col style="width: 27%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Category</th>
+<th style="text-align: right;">2018 (%)</th>
+<th style="text-align: right;">2024 (%)</th>
+<th style="text-align: right;">Change (pp)</th>
+<th style="text-align: right;">Relative Change (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">At least once a week</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">57.1</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">At least once a month</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">55.6</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Never</td>
+<td style="text-align: right;">63</td>
+<td style="text-align: right;">59</td>
+<td style="text-align: right;">-4</td>
+<td style="text-align: right;">-6.3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape for plotting</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>grouped_plot_data <span class="ot">&lt;-</span> grouped_stats <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Category, <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span>, <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span>, <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span>), </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Percentage"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Year =</span> <span class="fu">str_extract</span>(Year, <span class="st">"</span><span class="sc">\\</span><span class="st">d{4}"</span>),</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Category =</span> <span class="fu">factor</span>(Category, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"At least once a week"</span>, <span class="st">"At least once a month"</span>, <span class="st">"Never"</span>))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(grouped_plot_data, <span class="fu">aes</span>(<span class="at">x =</span> Category, <span class="at">y =</span> Percentage, <span class="at">fill =</span> Year)) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, Percentage)), </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.7</span>), </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"2018"</span> <span class="ot">=</span> <span class="st">"#4575b4"</span>, <span class="st">"2024"</span> <span class="ot">=</span> <span class="st">"#d73027"</span>)) <span class="sc">+</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Grouped Attendance Categories: 2018 vs 2024"</span>,</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Weekly and monthly attendance show increases; 'Never' shows decrease"</span>,</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Percentage (%)"</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Survey Year"</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="dv">1</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">70</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">70</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/grouped-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Comparison of grouped attendance categories</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="demographic-breakdowns" class="level2">
+<h2 class="anchored" data-anchor-id="demographic-breakdowns">Demographic Breakdowns</h2>
+<section id="by-age-group" class="level3">
+<h3 class="anchored" data-anchor-id="by-age-group">By Age Group</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get weekly attendance by age for 2018</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>age_2018 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2018</span>, response_category <span class="sc">==</span> <span class="st">"At least once a week"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age_18_34, age_35_54, age_55plus)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Get weekly attendance by age for 2024</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>age_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="dv">2024</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    question_type <span class="sc">==</span> <span class="st">"frequency"</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Daily/almost daily"</span>, <span class="st">"A few times a week"</span>, <span class="st">"About once a week"</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_18_34 =</span> <span class="fu">sum</span>(age_18_34, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_35_54 =</span> <span class="fu">sum</span>(age_35_54, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_55plus =</span> <span class="fu">sum</span>(age_55plus, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Create comparison table</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>age_comparison <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Age Group</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"18-34"</span>, <span class="st">"35-54"</span>, <span class="st">"55+"</span>),</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(age_2018<span class="sc">$</span>age_18_34, age_2018<span class="sc">$</span>age_35_54, age_2018<span class="sc">$</span>age_55plus),</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(age_2024<span class="sc">$</span>age_18_34, age_2024<span class="sc">$</span>age_35_54, age_2024<span class="sc">$</span>age_55plus)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span> <span class="ot">=</span> <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="sc">-</span> <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span>,</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>    <span class="st">`</span><span class="at">Relative Change (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">round</span>((<span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span> <span class="sc">/</span> <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span> <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">1</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(age_comparison, <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Weekly+ church attendance by age group"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Weekly+ church attendance by age group</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Age Group</th>
+<th style="text-align: right;">2018 (%)</th>
+<th style="text-align: right;">2024 (%)</th>
+<th style="text-align: right;">Change (pp)</th>
+<th style="text-align: right;">Relative Change (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">18-34</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">35-54</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">55+</td>
+<td style="text-align: right;">10</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">20</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reshape for plotting</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>age_plot_data <span class="ot">&lt;-</span> age_comparison <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="st">`</span><span class="at">Age Group</span><span class="st">`</span>, <span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span>, <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">2018 (%)</span><span class="st">`</span>, <span class="st">`</span><span class="at">2024 (%)</span><span class="st">`</span>), </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">"Year"</span>, <span class="at">values_to =</span> <span class="st">"Percentage"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Year =</span> <span class="fu">str_extract</span>(Year, <span class="st">"</span><span class="sc">\\</span><span class="st">d{4}"</span>))</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(age_plot_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Age Group</span><span class="st">`</span>, <span class="at">y =</span> Percentage, <span class="at">fill =</span> Year)) <span class="sc">+</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, Percentage)), </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>            <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.6</span>), </span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"2018"</span> <span class="ot">=</span> <span class="st">"#4575b4"</span>, <span class="st">"2024"</span> <span class="ot">=</span> <span class="st">"#d73027"</span>)) <span class="sc">+</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Weekly+ Church Attendance by Age Group"</span>,</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Comparison between 2018 and 2024"</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age Group"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Percentage Attending Weekly or More (%)"</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Survey Year"</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">20</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">20</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/age-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Weekly+ attendance by age group: 2018 vs 2024</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="change-by-age-group" class="level3">
+<h3 class="anchored" data-anchor-id="change-by-age-group">Change by Age Group</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(age_comparison, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Age Group</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#2166ac"</span>, <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%+.1f pp"</span>, <span class="st">`</span><span class="at">Change (pp)</span><span class="st">`</span>)), </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Change in Weekly+ Attendance by Age Group (2018 → 2024)"</span>,</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"All age groups show increases, with 18-34 showing the largest change"</span>,</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age Group"</span>,</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Change (percentage points)"</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">9</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">9</span>, <span class="dv">1</span>), </span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/age-change-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>Absolute change in weekly+ attendance by age group</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="by-ethnicity-2024-only" class="level3">
+<h3 class="anchored" data-anchor-id="by-ethnicity-2024-only">By Ethnicity (2024 Only)</h3>
+<p>The 2024 survey includes ethnicity breakdowns that were not available in 2018.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get 2024 binary attendance by ethnicity</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>ethnicity_data <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"binary"</span>, </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>         response_category <span class="sc">==</span> <span class="st">"Yes - in the past year"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(white, ethnic_minority)</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>ethnicity_table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Ethnic Group</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"White"</span>, <span class="st">"Ethnic Minority"</span>),</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Attended in Past Year (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(ethnicity_data<span class="sc">$</span>white, ethnicity_data<span class="sc">$</span>ethnic_minority),</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Difference from White (pp)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, ethnicity_data<span class="sc">$</span>ethnic_minority <span class="sc">-</span> ethnicity_data<span class="sc">$</span>white)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(ethnicity_table, <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Church attendance by ethnicity (2024 survey only)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Church attendance by ethnicity (2024 survey only)</caption>
+<colgroup>
+<col style="width: 23%">
+<col style="width: 37%">
+<col style="width: 39%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Ethnic Group</th>
+<th style="text-align: right;">Attended in Past Year (%)</th>
+<th style="text-align: right;">Difference from White (pp)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">White</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Ethnic Minority</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(ethnicity_table, <span class="fu">aes</span>(<span class="at">x =</span> <span class="st">`</span><span class="at">Ethnic Group</span><span class="st">`</span>, <span class="at">y =</span> <span class="st">`</span><span class="at">Attended in Past Year (%)</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"#4575b4"</span>, <span class="st">"#d73027"</span>), <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, <span class="st">`</span><span class="at">Attended in Past Year (%)</span><span class="st">`</span>)), </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Church Attendance by Ethnicity (2024)"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Percentage attending in the past year"</span>,</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Ethnic Group"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Attended in Past Year (%)"</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/ethnicity-visual-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Church attendance by ethnicity (2024)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="by-gender-2024-only" class="level3">
+<h3 class="anchored" data-anchor-id="by-gender-2024-only">By Gender (2024 Only)</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get 2024 binary attendance by gender</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gender_data <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"binary"</span>, </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>         response_category <span class="sc">==</span> <span class="st">"Yes - in the past year"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(male, female)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>gender_table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">Gender =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>),</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Attended in Past Year (%)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(gender_data<span class="sc">$</span>male, gender_data<span class="sc">$</span>female),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Difference from Male (pp)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, gender_data<span class="sc">$</span>female <span class="sc">-</span> gender_data<span class="sc">$</span>male)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(gender_table, <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Church attendance by gender (2024 survey only)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Church attendance by gender (2024 survey only)</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Gender</th>
+<th style="text-align: right;">Attended in Past Year (%)</th>
+<th style="text-align: right;">Difference from Male (pp)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Male</td>
+<td style="text-align: right;">23</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Female</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gender_table, <span class="fu">aes</span>(<span class="at">x =</span> Gender, <span class="at">y =</span> <span class="st">`</span><span class="at">Attended in Past Year (%)</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"#4575b4"</span>, <span class="st">"#d73027"</span>), <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, <span class="st">`</span><span class="at">Attended in Past Year (%)</span><span class="st">`</span>)), </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Church Attendance by Gender (2024)"</span>,</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Percentage attending in the past year"</span>,</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Attended in Past Year (%)"</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/gender-visual-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Church attendance by gender (2024)</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="binary-question-results" class="level2">
+<h2 class="anchored" data-anchor-id="binary-question-results">2024 Binary Question Results</h2>
+<p>The 2024 survey included an additional binary question asked before the frequency question.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>binary_data <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"binary"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(response_category, total_pct) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at">Percentage (%)</span><span class="st">`</span> <span class="ot">=</span> total_pct)</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(binary_data, <span class="at">digits =</span> <span class="dv">1</span>, </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"2024 binary question responses"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>2024 binary question responses</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">response_category</th>
+<th style="text-align: right;">Percentage (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Yes - in the past year</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yes - more than a year ago</td>
+<td style="text-align: right;">45</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Never</td>
+<td style="text-align: right;">28</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Net: Yes (ever)</td>
+<td style="text-align: right;">68</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(binary_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(response_category, <span class="sc">-</span><span class="st">`</span><span class="at">Percentage (%)</span><span class="st">`</span>), </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">y =</span> <span class="st">`</span><span class="at">Percentage (%)</span><span class="st">`</span>)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#fdae61"</span>, <span class="st">"#4575b4"</span>, <span class="st">"#91bfdb"</span>), </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, <span class="st">`</span><span class="at">Percentage (%)</span><span class="st">`</span>)), </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Binary Question Responses (2024)"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Have you attended a church service?"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Response"</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Percentage (%)"</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">20</span>, <span class="at">hjust =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="dv">10</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/binary-visual-1.png" class="img-fluid figure-img" width="960"></p>
+<figcaption>2024 binary question responses</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="internal-consistency-check-2024" class="level2">
+<h2 class="anchored" data-anchor-id="internal-consistency-check-2024">Internal Consistency Check (2024)</h2>
+<p>We can check whether the binary and frequency questions in 2024 give consistent results.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate sum of frequency responses for past year attendance in 2024</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>freq_sum_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"frequency"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(response_category <span class="sc">%in%</span> <span class="fu">c</span>(</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Daily/almost daily"</span>, <span class="st">"A few times a week"</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"About once a week"</span>, <span class="st">"About once a fortnight"</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"About once a month"</span>, <span class="st">"A few times a year"</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"About once a year"</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">%&gt;%</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct) <span class="sc">%&gt;%</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sum</span>()</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Get binary response</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>binary_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"binary"</span>, </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>         response_category <span class="sc">==</span> <span class="st">"Yes - in the past year"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct)</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>consistency <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">Measure =</span> <span class="fu">c</span>(<span class="st">"Binary: 'Yes - in the past year'"</span>, </span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Frequency: Sum of all 'past year' categories"</span>,</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Discrepancy"</span>),</span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(binary_2024, freq_sum_2024, <span class="fu">abs</span>(freq_sum_2024 <span class="sc">-</span> binary_2024))</span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(consistency, <span class="at">digits =</span> <span class="dv">1</span>, <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Measure"</span>, <span class="st">"Percentage (%)"</span>),</span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>      <span class="at">caption =</span> <span class="st">"Internal consistency check: 2024 survey"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Internal consistency check: 2024 survey</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Measure</th>
+<th style="text-align: right;">Percentage (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Binary: ‘Yes - in the past year’</td>
+<td style="text-align: right;">24</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Frequency: Sum of all ‘past year’ categories</td>
+<td style="text-align: right;">26</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Discrepancy</td>
+<td style="text-align: right;">2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Show the code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>consistency_plot <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">Measure =</span> <span class="fu">c</span>(<span class="st">"Binary Question</span><span class="sc">\n</span><span class="st">('Yes - in past year')"</span>, </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>              <span class="st">"Frequency Question</span><span class="sc">\n</span><span class="st">(Sum of past year categories)"</span>),</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">Value =</span> <span class="fu">c</span>(binary_2024, freq_sum_2024)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(consistency_plot, <span class="fu">aes</span>(<span class="at">x =</span> Measure, <span class="at">y =</span> Value)) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="fu">c</span>(<span class="st">"#d73027"</span>, <span class="st">"#4575b4"</span>), <span class="at">alpha =</span> <span class="fl">0.85</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, Value)), </span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.3</span>, <span class="at">size =</span> <span class="dv">6</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="dv">1</span>, <span class="at">xend =</span> <span class="dv">2</span>, <span class="at">y =</span> binary_2024, <span class="at">yend =</span> freq_sum_2024),</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>               <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">linewidth =</span> <span class="dv">1</span>, <span class="at">color =</span> <span class="st">"grey40"</span>) <span class="sc">+</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">1.5</span>, <span class="at">y =</span> (binary_2024 <span class="sc">+</span> freq_sum_2024)<span class="sc">/</span><span class="dv">2</span>, </span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"Difference:</span><span class="sc">\n</span><span class="st">%.1f pp"</span>, <span class="fu">abs</span>(freq_sum_2024 <span class="sc">-</span> binary_2024)),</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">4</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Internal Consistency Check: 2024 Survey"</span>,</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Do the binary and frequency questions give the same answer?"</span>,</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Percentage (%)"</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_comparison</span>() <span class="sc">+</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>), <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/consistency-visual-1.png" class="img-fluid figure-img" width="768"></p>
+<figcaption>Internal consistency comparison</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Observation</strong>: The two measures differ by 2.0 percentage points. These should theoretically be identical if measuring the same construct.</p>
+</section>
+<section id="summary-dashboard" class="level2">
+<h2 class="anchored" data-anchor-id="summary-dashboard">Summary Dashboard</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="general-overview_files/figure-html/summary-dashboard-1.png" class="img-fluid figure-img" width="1152"></p>
+<figcaption>Summary dashboard of key findings</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="key-observations-1" class="level2">
+<h2 class="anchored" data-anchor-id="key-observations-1">Key Observations</h2>
+<section id="main-findings" class="level3">
+<h3 class="anchored" data-anchor-id="main-findings">Main Findings</h3>
+<ol type="1">
+<li><p><strong>Weekly+ attendance increased</strong> from 7% (2018) to 11% (2024) - a change of <strong>+4 percentage points</strong></p></li>
+<li><p><strong>“Never attended” decreased</strong> from 63% (2018) to 59% (2024) - a change of <strong>-4 percentage points</strong></p></li>
+<li><p><strong>All changes are relatively small</strong> - no category changed by more than 4 percentage points</p></li>
+<li><p><strong>Age patterns</strong>: The youngest age group (18-34) showed the largest increase in weekly attendance (+7.0pp), compared to middle (+1.0pp) and older (+2.0pp) age groups</p></li>
+<li><p><strong>Internal consistency</strong>: The 2024 binary and frequency questions show a discrepancy of 2.0 percentage points</p></li>
+<li><p><strong>Sample size</strong>: The 2024 survey has 31% fewer respondents than 2018</p></li>
+<li><p><strong>Demographic differences</strong>: Ethnic minority respondents show different attendance patterns than White respondents in 2024</p></li>
+</ol>
+</section>
+</section>
+<section id="methodological-notes" class="level2">
+<h2 class="anchored" data-anchor-id="methodological-notes">Methodological Notes</h2>
+<p><strong>Question format differences</strong>: - 2018: Single frequency question only - 2024: Binary question FIRST, then frequency question - This difference in question order may affect comparability</p>
+<p><strong>Sample size changes</strong>: - 2018: 19,875 (weighted) - 2024: 12,455 (weighted) - Represents a 31% reduction</p>
+<p><strong>Demographic data availability</strong>: - Ethnicity and gender breakdowns only available for 2024 - This limits ability to assess population composition changes</p>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<p>For critical analysis of these findings, see:</p>
+<ul>
+<li><a href="../../../../src/blog/misc/bible-society-uk-revival/criticism-overview.html"><strong>Critical Analysis Overview</strong></a> - Evaluation of methodological quality and alternative explanations</li>
+<li><a href="../../../../src/blog/misc/bible-society-uk-revival/weekly-attendance-claim.html"><strong>Weekly Attendance Claim</strong></a> - Statistical testing of the observed changes</li>
+<li><a href="../../../../src/blog/misc/bible-society-uk-revival/question-order-effects.html"><strong>Question Order Effects</strong></a> - Impact of methodological differences</li>
+<li><a href="../../../../src/blog/misc/bible-society-uk-revival/demographic-analysis.html"><strong>Demographic Analysis</strong></a> - Population composition effects</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/NathOrmond\.github\.io\/stats-concepts");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

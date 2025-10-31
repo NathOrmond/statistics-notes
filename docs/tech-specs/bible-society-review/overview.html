@@ -1,0 +1,1759 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>overview – Nathans Stats Stuff</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Nathans Stats Stuff</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-teaching-stats" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Teaching Stats</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-teaching-stats">    
+        <li>
+    <a class="dropdown-item" href="../../../src/teaching-stats/core-concepts/index.html">
+ <span class="dropdown-text">Core Concepts</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-blog" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Blog</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-blog">    
+        <li>
+    <a class="dropdown-item" href="../../../src/blog/misc/index.html">
+ <span class="dropdown-text">Misc</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../src/blog/paper-reviews/index.html">
+ <span class="dropdown-text">Paper Reviews</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#bible-society-quiet-revival-claim---analytical-framework" id="toc-bible-society-quiet-revival-claim---analytical-framework" class="nav-link active" data-scroll-target="#bible-society-quiet-revival-claim---analytical-framework">Bible Society “Quiet Revival” Claim - Analytical Framework</a></li>
+  <li><a href="#analysis-plan-for-evaluating-church-attendance-claims-2018-vs-2024" id="toc-analysis-plan-for-evaluating-church-attendance-claims-2018-vs-2024" class="nav-link" data-scroll-target="#analysis-plan-for-evaluating-church-attendance-claims-2018-vs-2024">Analysis Plan for Evaluating Church Attendance Claims (2018 vs 2024)</a>
+  <ul class="collapse">
+  <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data Sources</a>
+  <ul class="collapse">
+  <li><a href="#survey" id="toc-survey" class="nav-link" data-scroll-target="#survey">2018 Survey</a></li>
+  <li><a href="#survey-1" id="toc-survey-1" class="nav-link" data-scroll-target="#survey-1">2024 Survey</a></li>
+  </ul></li>
+  <li><a href="#critical-methodological-issues-identified" id="toc-critical-methodological-issues-identified" class="nav-link" data-scroll-target="#critical-methodological-issues-identified">Critical Methodological Issues Identified</a>
+  <ul class="collapse">
+  <li><a href="#survey-design-differences" id="toc-survey-design-differences" class="nav-link" data-scroll-target="#survey-design-differences">1. Survey Design Differences</a></li>
+  <li><a href="#population-demographic-changes" id="toc-population-demographic-changes" class="nav-link" data-scroll-target="#population-demographic-changes">2. Population Demographic Changes</a></li>
+  <li><a href="#attendance-vs-belief-confound" id="toc-attendance-vs-belief-confound" class="nav-link" data-scroll-target="#attendance-vs-belief-confound">3. Attendance vs Belief Confound</a></li>
+  </ul></li>
+  <li><a href="#key-statistics-to-extract-and-compare" id="toc-key-statistics-to-extract-and-compare" class="nav-link" data-scroll-target="#key-statistics-to-extract-and-compare">Key Statistics to Extract and Compare</a>
+  <ul class="collapse">
+  <li><a href="#primary-attendance-measure" id="toc-primary-attendance-measure" class="nav-link" data-scroll-target="#primary-attendance-measure">Primary Attendance Measure</a></li>
+  <li><a href="#demographic-breakdowns-required" id="toc-demographic-breakdowns-required" class="nav-link" data-scroll-target="#demographic-breakdowns-required">Demographic Breakdowns Required</a></li>
+  <li><a href="#belief-indicators-for-triangulation" id="toc-belief-indicators-for-triangulation" class="nav-link" data-scroll-target="#belief-indicators-for-triangulation">Belief Indicators (for triangulation)</a></li>
+  </ul></li>
+  <li><a href="#statistical-analysis-plan" id="toc-statistical-analysis-plan" class="nav-link" data-scroll-target="#statistical-analysis-plan">Statistical Analysis Plan</a>
+  <ul class="collapse">
+  <li><a href="#phase-1-data-extraction-and-cleaning" id="toc-phase-1-data-extraction-and-cleaning" class="nav-link" data-scroll-target="#phase-1-data-extraction-and-cleaning">Phase 1: Data Extraction and Cleaning</a></li>
+  <li><a href="#phase-2-descriptive-statistics-and-red-flag-detection" id="toc-phase-2-descriptive-statistics-and-red-flag-detection" class="nav-link" data-scroll-target="#phase-2-descriptive-statistics-and-red-flag-detection">Phase 2: Descriptive Statistics and Red Flag Detection</a></li>
+  <li><a href="#phase-3-inferential-statistical-analysis" id="toc-phase-3-inferential-statistical-analysis" class="nav-link" data-scroll-target="#phase-3-inferential-statistical-analysis">Phase 3: Inferential Statistical Analysis</a></li>
+  <li><a href="#phase-4-demographic-stratification-analysis" id="toc-phase-4-demographic-stratification-analysis" class="nav-link" data-scroll-target="#phase-4-demographic-stratification-analysis">Phase 4: Demographic Stratification Analysis</a></li>
+  <li><a href="#phase-5-triangulation-with-belief-measures" id="toc-phase-5-triangulation-with-belief-measures" class="nav-link" data-scroll-target="#phase-5-triangulation-with-belief-measures">Phase 5: Triangulation with Belief Measures</a></li>
+  <li><a href="#phase-6-sensitivity-analysis-and-robustness-checks" id="toc-phase-6-sensitivity-analysis-and-robustness-checks" class="nav-link" data-scroll-target="#phase-6-sensitivity-analysis-and-robustness-checks">Phase 6: Sensitivity Analysis and Robustness Checks</a></li>
+  </ul></li>
+  <li><a href="#visualisation-plan" id="toc-visualisation-plan" class="nav-link" data-scroll-target="#visualisation-plan">Visualisation Plan</a>
+  <ul class="collapse">
+  <li><a href="#primary-findings-visualisations" id="toc-primary-findings-visualisations" class="nav-link" data-scroll-target="#primary-findings-visualisations">1. Primary Findings Visualisations</a></li>
+  <li><a href="#diagnostic-visualisations" id="toc-diagnostic-visualisations" class="nav-link" data-scroll-target="#diagnostic-visualisations">2. Diagnostic Visualisations</a></li>
+  <li><a href="#communication-visualisations" id="toc-communication-visualisations" class="nav-link" data-scroll-target="#communication-visualisations">3. Communication Visualisations</a></li>
+  </ul></li>
+  <li><a href="#expected-outputs" id="toc-expected-outputs" class="nav-link" data-scroll-target="#expected-outputs">Expected Outputs</a>
+  <ul class="collapse">
+  <li><a href="#data-files" id="toc-data-files" class="nav-link" data-scroll-target="#data-files">1. Data Files</a></li>
+  <li><a href="#analysis-scripts" id="toc-analysis-scripts" class="nav-link" data-scroll-target="#analysis-scripts">2. Analysis Scripts</a></li>
+  <li><a href="#results-files" id="toc-results-files" class="nav-link" data-scroll-target="#results-files">3. Results Files</a></li>
+  <li><a href="#report-document" id="toc-report-document" class="nav-link" data-scroll-target="#report-document">4. Report Document</a></li>
+  </ul></li>
+  <li><a href="#key-statistical-considerations" id="toc-key-statistical-considerations" class="nav-link" data-scroll-target="#key-statistical-considerations">Key Statistical Considerations</a>
+  <ul class="collapse">
+  <li><a href="#power-analysis" id="toc-power-analysis" class="nav-link" data-scroll-target="#power-analysis">Power Analysis</a></li>
+  <li><a href="#multiple-comparisons" id="toc-multiple-comparisons" class="nav-link" data-scroll-target="#multiple-comparisons">Multiple Comparisons</a></li>
+  <li><a href="#practical-vs-statistical-significance" id="toc-practical-vs-statistical-significance" class="nav-link" data-scroll-target="#practical-vs-statistical-significance">Practical vs Statistical Significance</a></li>
+  <li><a href="#causal-inference-limitations" id="toc-causal-inference-limitations" class="nav-link" data-scroll-target="#causal-inference-limitations">Causal Inference Limitations</a></li>
+  </ul></li>
+  <li><a href="#critical-evaluation-framework" id="toc-critical-evaluation-framework" class="nav-link" data-scroll-target="#critical-evaluation-framework">Critical Evaluation Framework</a>
+  <ul class="collapse">
+  <li><a href="#claims-to-test" id="toc-claims-to-test" class="nav-link" data-scroll-target="#claims-to-test">Claims to Test</a></li>
+  <li><a href="#plausible-alternative-explanations" id="toc-plausible-alternative-explanations" class="nav-link" data-scroll-target="#plausible-alternative-explanations">Plausible Alternative Explanations</a></li>
+  </ul></li>
+  <li><a href="#r-package-requirements" id="toc-r-package-requirements" class="nav-link" data-scroll-target="#r-package-requirements">R Package Requirements</a></li>
+  <li><a href="#timeline-and-priorities" id="toc-timeline-and-priorities" class="nav-link" data-scroll-target="#timeline-and-priorities">Timeline and Priorities</a>
+  <ul class="collapse">
+  <li><a href="#priority-1-essential" id="toc-priority-1-essential" class="nav-link" data-scroll-target="#priority-1-essential">Priority 1 (Essential)</a></li>
+  <li><a href="#priority-2-important" id="toc-priority-2-important" class="nav-link" data-scroll-target="#priority-2-important">Priority 2 (Important)</a></li>
+  <li><a href="#priority-3-additional" id="toc-priority-3-additional" class="nav-link" data-scroll-target="#priority-3-additional">Priority 3 (Additional)</a></li>
+  </ul></li>
+  <li><a href="#reporting-recommendations" id="toc-reporting-recommendations" class="nav-link" data-scroll-target="#reporting-recommendations">Reporting Recommendations</a>
+  <ul class="collapse">
+  <li><a href="#what-the-data-does-show" id="toc-what-the-data-does-show" class="nav-link" data-scroll-target="#what-the-data-does-show">What the data DOES show:</a></li>
+  <li><a href="#what-the-data-does-not-show" id="toc-what-the-data-does-not-show" class="nav-link" data-scroll-target="#what-the-data-does-not-show">What the data DOES NOT show:</a></li>
+  <li><a href="#appropriate-conclusions" id="toc-appropriate-conclusions" class="nav-link" data-scroll-target="#appropriate-conclusions">Appropriate Conclusions:</a></li>
+  <li><a href="#inappropriate-conclusions" id="toc-inappropriate-conclusions" class="nav-link" data-scroll-target="#inappropriate-conclusions">Inappropriate Conclusions:</a></li>
+  </ul></li>
+  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next Steps</a></li>
+  </ul></li>
+  <li><a href="#bible-society-analysis---next-steps-guide" id="toc-bible-society-analysis---next-steps-guide" class="nav-link" data-scroll-target="#bible-society-analysis---next-steps-guide">Bible Society Analysis - Next Steps Guide</a>
+  <ul class="collapse">
+  <li><a href="#what-has-been-completed" id="toc-what-has-been-completed" class="nav-link" data-scroll-target="#what-has-been-completed">What Has Been Completed</a>
+  <ul class="collapse">
+  <li><a href="#phase-1-planning-and-red-flag-detection" id="toc-phase-1-planning-and-red-flag-detection" class="nav-link" data-scroll-target="#phase-1-planning-and-red-flag-detection">✅ Phase 1: Planning and Red Flag Detection</a></li>
+  </ul></li>
+  <li><a href="#what-you-need-to-do-next" id="toc-what-you-need-to-do-next" class="nav-link" data-scroll-target="#what-you-need-to-do-next">What You Need to Do Next</a>
+  <ul class="collapse">
+  <li><a href="#immediate-priority-complete-data-extraction" id="toc-immediate-priority-complete-data-extraction" class="nav-link" data-scroll-target="#immediate-priority-complete-data-extraction">Immediate Priority: Complete Data Extraction</a></li>
+  <li><a href="#critical-tables-to-extract" id="toc-critical-tables-to-extract" class="nav-link" data-scroll-target="#critical-tables-to-extract">Critical Tables to Extract</a></li>
+  </ul></li>
+  <li><a href="#recommended-workflow" id="toc-recommended-workflow" class="nav-link" data-scroll-target="#recommended-workflow">Recommended Workflow</a>
+  <ul class="collapse">
+  <li><a href="#step-1-complete-data-extraction-1-2-hours" id="toc-step-1-complete-data-extraction-1-2-hours" class="nav-link" data-scroll-target="#step-1-complete-data-extraction-1-2-hours">Step 1: Complete Data Extraction (1-2 hours)</a></li>
+  <li><a href="#step-2-run-initial-analysis-script-30-minutes" id="toc-step-2-run-initial-analysis-script-30-minutes" class="nav-link" data-scroll-target="#step-2-run-initial-analysis-script-30-minutes">Step 2: Run Initial Analysis Script (30 minutes)</a></li>
+  <li><a href="#step-3-demographic-standardisation-2-3-hours" id="toc-step-3-demographic-standardisation-2-3-hours" class="nav-link" data-scroll-target="#step-3-demographic-standardisation-2-3-hours">Step 3: Demographic Standardisation (2-3 hours)</a></li>
+  <li><a href="#step-4-age-stratified-analysis-1-2-hours" id="toc-step-4-age-stratified-analysis-1-2-hours" class="nav-link" data-scroll-target="#step-4-age-stratified-analysis-1-2-hours">Step 4: Age-Stratified Analysis (1-2 hours)</a></li>
+  <li><a href="#step-5-create-comprehensive-visualisations-2-3-hours" id="toc-step-5-create-comprehensive-visualisations-2-3-hours" class="nav-link" data-scroll-target="#step-5-create-comprehensive-visualisations-2-3-hours">Step 5: Create Comprehensive Visualisations (2-3 hours)</a></li>
+  <li><a href="#step-6-write-full-quarto-report-3-4-hours" id="toc-step-6-write-full-quarto-report-3-4-hours" class="nav-link" data-scroll-target="#step-6-write-full-quarto-report-3-4-hours">Step 6: Write Full Quarto Report (3-4 hours)</a></li>
+  </ul></li>
+  <li><a href="#key-questions-to-answer" id="toc-key-questions-to-answer" class="nav-link" data-scroll-target="#key-questions-to-answer">Key Questions to Answer</a>
+  <ul class="collapse">
+  <li><a href="#methodological-questions" id="toc-methodological-questions" class="nav-link" data-scroll-target="#methodological-questions">Methodological Questions:</a></li>
+  <li><a href="#substantive-questions" id="toc-substantive-questions" class="nav-link" data-scroll-target="#substantive-questions">Substantive Questions:</a></li>
+  </ul></li>
+  <li><a href="#expected-timeline" id="toc-expected-timeline" class="nav-link" data-scroll-target="#expected-timeline">Expected Timeline</a></li>
+  <li><a href="#output-structure" id="toc-output-structure" class="nav-link" data-scroll-target="#output-structure">Output Structure</a></li>
+  <li><a href="#quick-start-commands" id="toc-quick-start-commands" class="nav-link" data-scroll-target="#quick-start-commands">Quick Start Commands</a></li>
+  <li><a href="#critical-success-factors" id="toc-critical-success-factors" class="nav-link" data-scroll-target="#critical-success-factors">Critical Success Factors</a></li>
+  <li><a href="#what-makes-this-analysis-strong" id="toc-what-makes-this-analysis-strong" class="nav-link" data-scroll-target="#what-makes-this-analysis-strong">What Makes This Analysis Strong</a></li>
+  <li><a href="#when-youre-stuck" id="toc-when-youre-stuck" class="nav-link" data-scroll-target="#when-youre-stuck">When You’re Stuck</a></li>
+  <li><a href="#final-deliverables" id="toc-final-deliverables" class="nav-link" data-scroll-target="#final-deliverables">Final Deliverables</a></li>
+  <li><a href="#good-luck" id="toc-good-luck" class="nav-link" data-scroll-target="#good-luck">Good Luck!</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<section id="bible-society-quiet-revival-claim---analytical-framework" class="level1">
+<h1>Bible Society “Quiet Revival” Claim - Analytical Framework</h1>
+</section>
+<section id="analysis-plan-for-evaluating-church-attendance-claims-2018-vs-2024" class="level1">
+<h1>Analysis Plan for Evaluating Church Attendance Claims (2018 vs 2024)</h1>
+<section id="project-overview" class="level2">
+<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
+<p>This document outlines a comprehensive statistical analysis framework to evaluate Bible Society UK’s claim of a “Quiet Revival” based on church attendance data from YouGov surveys conducted in 2018 and 2024.</p>
+</section>
+<section id="data-sources" class="level2">
+<h2 class="anchored" data-anchor-id="data-sources">Data Sources</h2>
+<section id="survey" class="level3">
+<h3 class="anchored" data-anchor-id="survey">2018 Survey</h3>
+<ul>
+<li><strong>Sample Size</strong>: 19,101 (Unweighted: 19,101; Weighted base: 19,875)</li>
+<li><strong>Fieldwork Dates</strong>: 11th October - 13th November 2018</li>
+<li><strong>Key Question</strong>: “Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?”</li>
+</ul>
+</section>
+<section id="survey-1" class="level3">
+<h3 class="anchored" data-anchor-id="survey-1">2024 Survey</h3>
+<ul>
+<li><strong>Sample Size</strong>: 13,146 (Weighted base: 13,146; some questions 12,455)</li>
+<li><strong>Fieldwork Dates</strong>: 4th November - 2nd December 2024</li>
+<li><strong>Key Questions</strong>:
+<ul>
+<li>“Church service” - with response “Yes - in the past year” at 24%</li>
+<li>Same frequency question as 2018 also asked</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="critical-methodological-issues-identified" class="level2">
+<h2 class="anchored" data-anchor-id="critical-methodological-issues-identified">Critical Methodological Issues Identified</h2>
+<section id="survey-design-differences" class="level3">
+<h3 class="anchored" data-anchor-id="survey-design-differences">1. Survey Design Differences</h3>
+<p><strong>Problem</strong>: The surveys use different question formats and ordering - 2018: Direct frequency question - 2024: Binary “ever attended” question followed by frequency question - <strong>Impact</strong>: Question order effects can bias responses (acquiescence bias)</p>
+</section>
+<section id="population-demographic-changes" class="level3">
+<h3 class="anchored" data-anchor-id="population-demographic-changes">2. Population Demographic Changes</h3>
+<p><strong>Problem</strong>: Significant demographic shifts between 2018-2024 without proper controls</p>
+<section id="major-demographic-changes" class="level4">
+<h4 class="anchored" data-anchor-id="major-demographic-changes">Major demographic changes:</h4>
+<ul>
+<li><strong>Ukrainian refugees</strong>: ~217,000-255,000 (post-February 2022)</li>
+<li><strong>Hong Kong BN(O) visa holders</strong>: &gt;163,000 (January 2021 - March 2025)<br>
+</li>
+<li><strong>Other immigration changes</strong>: Net migration patterns altered significantly</li>
+</ul>
+<p><strong>Impact</strong>: - Different religious composition of population - Cultural attendance patterns may differ - No demographic weighting provided to account for this</p>
+</section>
+</section>
+<section id="attendance-vs-belief-confound" class="level3">
+<h3 class="anchored" data-anchor-id="attendance-vs-belief-confound">3. Attendance vs Belief Confound</h3>
+<p><strong>Problem</strong>: Church attendance does not equal religious commitment or belief - Social attendance (tourism, cultural events, community activities) - Weddings/baptisms/funerals explicitly excluded, but other social events may be included - No measures of: - Religious belief changes - Prayer frequency changes - Bible reading changes - Self-identified Christian population changes</p>
+<hr>
+</section>
+</section>
+<section id="key-statistics-to-extract-and-compare" class="level2">
+<h2 class="anchored" data-anchor-id="key-statistics-to-extract-and-compare">Key Statistics to Extract and Compare</h2>
+<section id="primary-attendance-measure" class="level3">
+<h3 class="anchored" data-anchor-id="primary-attendance-measure">Primary Attendance Measure</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>2018</th>
+<th>2024</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“At least once a week”</td>
+<td>7%</td>
+<td>11% (calculated)</td>
+<td>+4pp</td>
+</tr>
+<tr class="even">
+<td>“At least once a month”</td>
+<td>9%</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+<tr class="odd">
+<td>“Once to few times a year”</td>
+<td>13%</td>
+<td>TBD</td>
+<td>TBD</td>
+</tr>
+<tr class="even">
+<td>“Never”</td>
+<td>63%</td>
+<td>59%</td>
+<td>-4pp</td>
+</tr>
+<tr class="odd">
+<td>“Net: Ever attended in past year”</td>
+<td>~27%</td>
+<td>24%</td>
+<td>-3pp</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Red Flag</strong>: Different questions yield contradictory results</p>
+</section>
+<section id="demographic-breakdowns-required" class="level3">
+<h3 class="anchored" data-anchor-id="demographic-breakdowns-required">Demographic Breakdowns Required</h3>
+<ol type="1">
+<li>Age groups (18-34, 35-54, 55+)</li>
+<li>Ethnicity (White, Ethnic minority subgroups)</li>
+<li>Gender</li>
+<li>Geographic distribution (if available)</li>
+</ol>
+</section>
+<section id="belief-indicators-for-triangulation" class="level3">
+<h3 class="anchored" data-anchor-id="belief-indicators-for-triangulation">Belief Indicators (for triangulation)</h3>
+<ol type="1">
+<li>“Society could be changed for the better by the message of the Bible”
+<ul>
+<li>2018 Net Agree: 28%</li>
+<li>2024: Need to extract</li>
+</ul></li>
+<li>Bible reading frequency</li>
+<li>Christian self-identification rates</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="statistical-analysis-plan" class="level2">
+<h2 class="anchored" data-anchor-id="statistical-analysis-plan">Statistical Analysis Plan</h2>
+<section id="phase-1-data-extraction-and-cleaning" class="level3">
+<h3 class="anchored" data-anchor-id="phase-1-data-extraction-and-cleaning">Phase 1: Data Extraction and Cleaning</h3>
+<p><strong>Objective</strong>: Create machine-readable datasets</p>
+<ol type="1">
+<li><strong>Extract raw frequency tables</strong> from both surveys
+<ul>
+<li>Church attendance by age/ethnicity/gender</li>
+<li>Belief questions</li>
+<li>Self-identification data</li>
+<li>Demographic composition</li>
+</ul></li>
+<li><strong>Standardise response categories</strong>
+<ul>
+<li>Map 2024 responses to 2018 categories</li>
+<li>Create comparable time periods</li>
+<li>Handle “Don’t know” / “Not answered” consistently</li>
+</ul></li>
+<li><strong>Calculate sample sizes and weights</strong>
+<ul>
+<li>Document weighting methodology</li>
+<li>Check for differential non-response</li>
+<li>Calculate effective sample sizes for subgroups</li>
+</ul></li>
+</ol>
+</section>
+<section id="phase-2-descriptive-statistics-and-red-flag-detection" class="level3">
+<h3 class="anchored" data-anchor-id="phase-2-descriptive-statistics-and-red-flag-detection">Phase 2: Descriptive Statistics and Red Flag Detection</h3>
+<section id="internal-consistency-checks" class="level4">
+<h4 class="anchored" data-anchor-id="internal-consistency-checks">2.1 Internal Consistency Checks</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if responses within 2024 survey are consistent</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 1: "Ever attended in past year" = 24%</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Question 2: Sum of all frequency categories for "past year"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># These should match. If they don't, investigate why.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sample-composition-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="sample-composition-comparison">2.2 Sample Composition Comparison</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare demographic composition 2018 vs 2024</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Age distribution</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Ethnic composition  </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Gender balance</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether shifts are statistically significant</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="response-pattern-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="response-pattern-analysis">2.3 Response Pattern Analysis</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Acquiescence bias (more "yes" in 2024 due to binary question first?)</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Social desirability bias  </span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Satisficing (selecting first acceptable response)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="phase-3-inferential-statistical-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="phase-3-inferential-statistical-analysis">Phase 3: Inferential Statistical Analysis</h3>
+<section id="confidence-intervals-for-point-estimates" class="level4">
+<h4 class="anchored" data-anchor-id="confidence-intervals-for-point-estimates">3.1 Confidence Intervals for Point Estimates</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For each year, calculate 95% CI for:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - % attending at least weekly</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - % attending at least monthly</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - % never attending</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Design effect correction for YouGov panel sampling</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Conservative estimate: deff = 1.5 to 2.0</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Formula</strong>: <span class="math display">\[
+CI = \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n_{eff}}}
+\]</span></p>
+<p>where <span class="math inline">\(n_{eff} = \frac{n}{deff}\)</span></p>
+</section>
+<section id="hypothesis-testing" class="level4">
+<h4 class="anchored" data-anchor-id="hypothesis-testing">3.2 Hypothesis Testing</h4>
+<p><strong>Null Hypothesis</strong>: No change in church attendance between 2018 and 2024</p>
+<p><strong>Test 1: Two-sample proportion test</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For each attendance category</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># H0: p_2024 = p_2018</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># HA: p_2024 ≠ p_2018</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Test 2: Chi-square test for independence</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether attendance distribution has changed</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># across full frequency spectrum</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Test 3: Logistic regression</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Model: attended_weekly ~ year + age + ethnicity + gender</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># This isolates "year effect" from demographic shifts</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="effect-size-calculations" class="level4">
+<h4 class="anchored" data-anchor-id="effect-size-calculations">3.3 Effect Size Calculations</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Beyond statistical significance, calculate:</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Cohen's h (for proportion differences)</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Cramer's V (for categorical associations)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Relative risk / odds ratios</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Example: </span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>h <span class="ot">=</span> <span class="dv">2</span> <span class="sc">*</span> (<span class="fu">arcsin</span>(<span class="fu">sqrt</span>(p1)) <span class="sc">-</span> <span class="fu">arcsin</span>(<span class="fu">sqrt</span>(p2)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="phase-4-demographic-stratification-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="phase-4-demographic-stratification-analysis">Phase 4: Demographic Stratification Analysis</h3>
+<section id="age-stratified-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="age-stratified-analysis">4.1 Age-stratified Analysis</h4>
+<p><strong>Rationale</strong>: Younger cohorts may have different patterns</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate analysis for:</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - 18-34 year olds</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - 35-54 year olds  </span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - 55+ year olds</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - Within-group changes 2018→2024</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co"># - 95% CIs for each stratum</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co"># - Test for interaction effects (does change vary by age?)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="ethnicity-stratified-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="ethnicity-stratified-analysis">4.2 Ethnicity-stratified Analysis</h4>
+<p><strong>Rationale</strong>: Immigration changes ethnic composition</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate analysis for:</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - White British</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Black (potential Ukrainian/HK immigrants)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Asian</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Mixed</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># - Other</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Key calculations:</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># - Attendance rates within each ethnic group</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># - Population share changes 2018→2024</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co"># - Compositional effect calculation</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>Compositional Effect Formula</strong>: <span class="math display">\[
+\Delta_{composition} = \sum_{i} (w_{i,2024} - w_{i,2018}) \times p_{i,2018}
+\]</span></p>
+<p>where <span class="math inline">\(w_i\)</span> is the population weight for group <span class="math inline">\(i\)</span> and <span class="math inline">\(p_i\)</span> is attendance rate.</p>
+</section>
+<section id="demographic-standardisation" class="level4">
+<h4 class="anchored" data-anchor-id="demographic-standardisation">4.3 Demographic Standardisation</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Direct standardisation to 2018 population structure</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Shows what 2024 rates would be with 2018 demographics</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Indirect standardisation to 2024 population structure  </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Shows what 2018 rates would be with 2024 demographics</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare observed 2024 rate to both standardised estimates</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="phase-5-triangulation-with-belief-measures" class="level3">
+<h3 class="anchored" data-anchor-id="phase-5-triangulation-with-belief-measures">Phase 5: Triangulation with Belief Measures</h3>
+<section id="belief-behaviour-correlation" class="level4">
+<h4 class="anchored" data-anchor-id="belief-behaviour-correlation">5.1 Belief-Behaviour Correlation</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Within each year, calculate:</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Correlation between attendance and "Bible can change society"</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Correlation between attendance and Bible reading</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Correlation between attendance and Christian identity</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Compare correlations across years</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># If attendance↑ but beliefs→ or ↓, suggests non-religious attendance</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="latent-class-analysis-if-data-permits" class="level4">
+<h4 class="anchored" data-anchor-id="latent-class-analysis-if-data-permits">5.2 Latent Class Analysis (if data permits)</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Identify unobserved groups:</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - "Cultural attenders" (attend but low belief)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - "Committed believers" (attend + high belief)  </span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - "Non-attenders"</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Test whether proportion in each class changed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="phase-6-sensitivity-analysis-and-robustness-checks" class="level3">
+<h3 class="anchored" data-anchor-id="phase-6-sensitivity-analysis-and-robustness-checks">Phase 6: Sensitivity Analysis and Robustness Checks</h3>
+<section id="weighting-sensitivity" class="level4">
+<h4 class="anchored" data-anchor-id="weighting-sensitivity">6.1 Weighting Sensitivity</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Re-run analyses with:</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - No weights</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Alternative weighting schemes</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Trimmed weights (cap extreme values)</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if substantive conclusions change</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="missing-data-handling" class="level4">
+<h4 class="anchored" data-anchor-id="missing-data-handling">6.2 Missing Data Handling</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original: Exclude "Don't know" / "Not answered"</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative: Multiple imputation</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternative: Worst/best case bounds</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate range of plausible estimates</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="design-effect-sensitivity" class="level4">
+<h4 class="anchored" data-anchor-id="design-effect-sensitivity">6.3 Design Effect Sensitivity</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Vary assumed design effect from 1.0 to 3.0</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Show how confidence intervals change</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Establish whether "revival" claim survives conservative assumptions</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="visualisation-plan" class="level2">
+<h2 class="anchored" data-anchor-id="visualisation-plan">Visualisation Plan</h2>
+<section id="primary-findings-visualisations" class="level3">
+<h3 class="anchored" data-anchor-id="primary-findings-visualisations">1. Primary Findings Visualisations</h3>
+<section id="church-attendance-frequency-comparison" class="level4">
+<h4 class="anchored" data-anchor-id="church-attendance-frequency-comparison">1.1 Church Attendance Frequency Comparison</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stacked bar chart or side-by-side bars</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># X-axis: Attendance frequency categories</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Y-axis: Percentage</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Colours: 2018 (one colour), 2024 (another)</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Error bars: 95% confidence intervals</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Annotations: Sample sizes, significance tests</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="trend-by-demographic-group" class="level4">
+<h4 class="anchored" data-anchor-id="trend-by-demographic-group">1.2 Trend by Demographic Group</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Faceted plots showing:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Separate panel for each age group</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Separate panel for each ethnic group</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Lines connecting 2018→2024 for each attendance level</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Shaded confidence regions</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="compositional-shift-decomposition" class="level4">
+<h4 class="anchored" data-anchor-id="compositional-shift-decomposition">1.3 Compositional Shift Decomposition</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Stacked area chart or waterfall plot showing:</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - 2018 overall rate</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Effect of demographic composition change</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Effect of within-group behaviour change</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - 2024 overall rate</span></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="co"># This visualises how much of any change is "real" vs demographic</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="diagnostic-visualisations" class="level3">
+<h3 class="anchored" data-anchor-id="diagnostic-visualisations">2. Diagnostic Visualisations</h3>
+<section id="sample-composition-comparison-1" class="level4">
+<h4 class="anchored" data-anchor-id="sample-composition-comparison-1">2.1 Sample Composition Comparison</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Population pyramid style chart</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 2018 composition on left, 2024 on right</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Highlight significant demographic shifts</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="internal-consistency-check" class="level4">
+<h4 class="anchored" data-anchor-id="internal-consistency-check">2.2 Internal Consistency Check</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot:</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># X-axis: Sum of frequency responses for "past year"</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Y-axis: "Attended in past year" binary question response</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Should fall on identity line</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Deviations indicate measurement issues</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="belief-attendance-correlation" class="level4">
+<h4 class="anchored" data-anchor-id="belief-attendance-correlation">2.3 Belief-Attendance Correlation</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatter plot with:</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co"># X-axis: Belief measure (e.g., "Bible can change society")</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Y-axis: Attendance frequency</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Separate points/colours for 2018 and 2024</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Trend lines</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="communication-visualisations" class="level3">
+<h3 class="anchored" data-anchor-id="communication-visualisations">3. Communication Visualisations</h3>
+<section id="evidence-quality-dashboard" class="level4">
+<h4 class="anchored" data-anchor-id="evidence-quality-dashboard">3.1 “Evidence Quality” Dashboard</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Traffic light system showing:</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Sample size adequacy: GREEN</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Demographic comparability: RED/AMBER</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Question consistency: RED</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Statistical significance: (depends on analysis)</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co"># - Effect size: (depends on analysis)</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - Triangulation support: (depends on analysis)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="uncertainty-fan-chart" class="level4">
+<h4 class="anchored" data-anchor-id="uncertainty-fan-chart">3.2 Uncertainty Fan Chart</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Central estimate with expanding confidence bands</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Showing uncertainty grows with more conservative assumptions</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Highlights fragility of "revival" claim</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+</section>
+</section>
+<section id="expected-outputs" class="level2">
+<h2 class="anchored" data-anchor-id="expected-outputs">Expected Outputs</h2>
+<section id="data-files" class="level3">
+<h3 class="anchored" data-anchor-id="data-files">1. Data Files</h3>
+<ul>
+<li><code>church_attendance_2018.csv</code> - Clean, analysis-ready 2018 data</li>
+<li><code>church_attendance_2024.csv</code> - Clean, analysis-ready 2024 data<br>
+</li>
+<li><code>demographic_composition.csv</code> - Population composition both years</li>
+<li><code>belief_indicators.csv</code> - Triangulation variables</li>
+</ul>
+</section>
+<section id="analysis-scripts" class="level3">
+<h3 class="anchored" data-anchor-id="analysis-scripts">2. Analysis Scripts</h3>
+<ul>
+<li><code>01_data_extraction.R</code> - Extract from PDFs/text</li>
+<li><code>02_data_cleaning.R</code> - Standardise and validate</li>
+<li><code>03_descriptive_stats.R</code> - Sample descriptions, red flags</li>
+<li><code>04_inference.R</code> - Hypothesis tests, CIs, effect sizes</li>
+<li><code>05_demographics.R</code> - Stratified analyses, standardisation</li>
+<li><code>06_triangulation.R</code> - Belief-behaviour analyses</li>
+<li><code>07_sensitivity.R</code> - Robustness checks</li>
+<li><code>08_visualisations.R</code> - All plots and charts</li>
+</ul>
+</section>
+<section id="results-files" class="level3">
+<h3 class="anchored" data-anchor-id="results-files">3. Results Files</h3>
+<ul>
+<li><code>summary_statistics.csv</code> - All point estimates with CIs</li>
+<li><code>hypothesis_tests.csv</code> - All test results with p-values</li>
+<li><code>effect_sizes.csv</code> - Practical significance measures</li>
+<li><code>demographic_breakdown.csv</code> - Stratified results</li>
+</ul>
+</section>
+<section id="report-document" class="level3">
+<h3 class="anchored" data-anchor-id="report-document">4. Report Document</h3>
+<ul>
+<li>Quarto markdown document integrating:
+<ul>
+<li>Methodology assessment</li>
+<li>Statistical findings</li>
+<li>Visualisations</li>
+<li>Critical evaluation of “revival” claim</li>
+<li>Recommendations for better measurement</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="key-statistical-considerations" class="level2">
+<h2 class="anchored" data-anchor-id="key-statistical-considerations">Key Statistical Considerations</h2>
+<section id="power-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="power-analysis">Power Analysis</h3>
+<p>With n≈19,000 (2018) and n≈13,000 (2024), we have power &gt;0.95 to detect differences of 2 percentage points at α=0.05. This is not a power issue.</p>
+</section>
+<section id="multiple-comparisons" class="level3">
+<h3 class="anchored" data-anchor-id="multiple-comparisons">Multiple Comparisons</h3>
+<p>With many subgroup analyses, apply Bonferroni or FDR correction: <span class="math display">\[
+\alpha_{adjusted} = \frac{\alpha}{k}
+\]</span> where k is number of comparisons.</p>
+</section>
+<section id="practical-vs-statistical-significance" class="level3">
+<h3 class="anchored" data-anchor-id="practical-vs-statistical-significance">Practical vs Statistical Significance</h3>
+<p>A 2-4 percentage point change may be statistically significant but: - Is it practically meaningful for “revival” claim? - Is it within measurement error margins? - Could it be explained by demographic shifts alone?</p>
+</section>
+<section id="causal-inference-limitations" class="level3">
+<h3 class="anchored" data-anchor-id="causal-inference-limitations">Causal Inference Limitations</h3>
+<p>This is observational data. We cannot establish: - Why attendance might have changed - Whether changes are sustained - Direction of causality (did beliefs cause attendance or vice versa?)</p>
+<hr>
+</section>
+</section>
+<section id="critical-evaluation-framework" class="level2">
+<h2 class="anchored" data-anchor-id="critical-evaluation-framework">Critical Evaluation Framework</h2>
+<section id="claims-to-test" class="level3">
+<h3 class="anchored" data-anchor-id="claims-to-test">Claims to Test</h3>
+<p><strong>Claim 1</strong>: Church attendance increased between 2018 and 2024 - <strong>Evidence needed</strong>: Statistically significant increase in comparable measures - <strong>Red flags</strong>: Different question formats, inconsistent internal responses</p>
+<p><strong>Claim 2</strong>: This represents a “Quiet Revival” of Christian faith - <strong>Evidence needed</strong>: Attendance increase + belief increase + commitment increase - <strong>Red flags</strong>: No belief change data shown, demographic confounding not addressed</p>
+<p><strong>Claim 3</strong>: UK is experiencing renewed religious interest - <strong>Evidence needed</strong>: Sustained trend, corroboration from other sources - <strong>Red flags</strong>: Single comparison point, no triangulation with church membership data, no accounting for immigration effects</p>
+</section>
+<section id="plausible-alternative-explanations" class="level3">
+<h3 class="anchored" data-anchor-id="plausible-alternative-explanations">Plausible Alternative Explanations</h3>
+<ol type="1">
+<li><strong>Sampling variation</strong>: Natural fluctuation within margin of error</li>
+<li><strong>Demographic composition</strong>: Immigration from more religious populations</li>
+<li><strong>Question order effects</strong>: Binary question before frequency question biases responses upward</li>
+<li><strong>Social attendance increase</strong>: Non-religious attendance (cultural events, tourism) increased</li>
+<li><strong>Measurement error</strong>: Different methodologies yield different (contradictory) results</li>
+<li><strong>Regression to the mean</strong>: 2018 might have been unusually low</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="r-package-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="r-package-requirements">R Package Requirements</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Data manipulation</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical inference  </span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)        <span class="co"># Complex survey design</span></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr)         <span class="co"># Survey design with tidyverse</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)         <span class="co"># Tidy statistical outputs</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)         <span class="co"># Modern inference</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Effect sizes</span></span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(effectsize)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(es calc)</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualisation</span></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Tables</span></span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtsummary)</span>
+<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Sensitivity analysis</span></span>
+<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(sensemakr)</span>
+<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Reporting</span></span>
+<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quarto)</span>
+<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmarkdown)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="timeline-and-priorities" class="level2">
+<h2 class="anchored" data-anchor-id="timeline-and-priorities">Timeline and Priorities</h2>
+<section id="priority-1-essential" class="level3">
+<h3 class="anchored" data-anchor-id="priority-1-essential">Priority 1 (Essential)</h3>
+<ol type="1">
+<li>Extract and clean raw data</li>
+<li>Calculate basic point estimates with CIs</li>
+<li>Test whether differences are statistically significant</li>
+<li>Create primary comparison visualisations</li>
+<li>Document all red flags and limitations</li>
+</ol>
+</section>
+<section id="priority-2-important" class="level3">
+<h3 class="anchored" data-anchor-id="priority-2-important">Priority 2 (Important)</h3>
+<ol start="6" type="1">
+<li>Demographic stratified analyses</li>
+<li>Standardisation to account for population changes</li>
+<li>Belief-behaviour triangulation</li>
+<li>Effect size calculations</li>
+<li>Comprehensive visualisation suite</li>
+</ol>
+</section>
+<section id="priority-3-additional" class="level3">
+<h3 class="anchored" data-anchor-id="priority-3-additional">Priority 3 (Additional)</h3>
+<ol start="11" type="1">
+<li>Sensitivity analyses</li>
+<li>Latent class analysis</li>
+<li>Detailed robustness checks</li>
+<li>Extended discussion document</li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="reporting-recommendations" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-recommendations">Reporting Recommendations</h2>
+<section id="what-the-data-does-show" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-data-does-show">What the data DOES show:</h3>
+<ul>
+<li>Precise point estimates for attendance rates in both years</li>
+<li>Statistical significance of any differences observed</li>
+<li>Magnitude of changes with appropriate uncertainty</li>
+<li>Demographic composition has shifted</li>
+<li>Question formats differed between surveys</li>
+</ul>
+</section>
+<section id="what-the-data-does-not-show" class="level3">
+<h3 class="anchored" data-anchor-id="what-the-data-does-not-show">What the data DOES NOT show:</h3>
+<ul>
+<li>Causal reasons for any changes</li>
+<li>Whether changes represent genuine religious revival</li>
+<li>Sustainability of any trends</li>
+<li>Belief changes accompanying attendance changes</li>
+<li>Effects properly adjusted for demographic composition</li>
+</ul>
+</section>
+<section id="appropriate-conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="appropriate-conclusions">Appropriate Conclusions:</h3>
+<ul>
+<li>“There is evidence that reported church attendance frequency increased slightly between 2018 and 2024”</li>
+<li>“However, this could be explained by [demographic changes / measurement differences / question order effects]”</li>
+<li>“No evidence is provided for changes in religious belief or commitment”</li>
+<li>“The term ‘revival’ is not supported by the data presented”</li>
+</ul>
+</section>
+<section id="inappropriate-conclusions" class="level3">
+<h3 class="anchored" data-anchor-id="inappropriate-conclusions">Inappropriate Conclusions:</h3>
+<ul>
+<li>“A Quiet Revival is happening” (overstatement)</li>
+<li>“Christianity is growing in the UK” (not measured)</li>
+<li>“People are becoming more religious” (belief not measured)</li>
+<li>“This is definitely due to [specific cause]” (causality not established)</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="next-steps" class="level2">
+<h2 class="anchored" data-anchor-id="next-steps">Next Steps</h2>
+<ol type="1">
+<li><strong>Data Extraction</strong>: Parse the 2018 images via OCR and 2024 text file</li>
+<li><strong>Initial Analysis</strong>: Run Priority 1 analyses</li>
+<li><strong>Red Flag Report</strong>: Document all methodological issues found</li>
+<li><strong>Preliminary Results</strong>: Create summary statistics and main visualisations</li>
+<li><strong>Full Report</strong>: Comprehensive Quarto document with all analyses</li>
+</ol>
+<p>This framework provides rigorous evaluation of Bible Society UK’s claims while maintaining scientific integrity and appropriate scepticism.</p>
+<hr>
+</section>
+</section>
+<section id="bible-society-analysis---next-steps-guide" class="level1">
+<h1>Bible Society Analysis - Next Steps Guide</h1>
+<section id="what-has-been-completed" class="level2">
+<h2 class="anchored" data-anchor-id="what-has-been-completed">What Has Been Completed</h2>
+<section id="phase-1-planning-and-red-flag-detection" class="level3">
+<h3 class="anchored" data-anchor-id="phase-1-planning-and-red-flag-detection">✅ Phase 1: Planning and Red Flag Detection</h3>
+<ol type="1">
+<li><strong>Comprehensive Analysis Plan</strong> (<code>ANALYSIS_PLAN.md</code>)
+<ul>
+<li>6-phase statistical framework</li>
+<li>Detailed methodology for each analysis type</li>
+<li>Visualisation specifications</li>
+<li>R package requirements</li>
+<li>Timeline and priorities</li>
+</ul></li>
+<li><strong>Red Flag Summary</strong> (<code>RED_FLAG_SUMMARY.md</code>)
+<ul>
+<li>Executive summary of critical issues</li>
+<li>5 major red flags identified and explained</li>
+<li>Statistical interpretation of preliminary findings</li>
+<li>Recommendations for Bible Society UK</li>
+</ul></li>
+<li><strong>Initial Data Extraction</strong> (<code>church_attendance_extracted.csv</code>)
+<ul>
+<li>Key statistics from both surveys</li>
+<li>Structured in analysis-ready format</li>
+<li>Demographic breakdowns where available</li>
+</ul></li>
+<li><strong>Analysis Script Template</strong> (<code>01_initial_analysis.R</code>)
+<ul>
+<li>Complete red flag detection code</li>
+<li>Confidence interval calculations</li>
+<li>Hypothesis testing framework</li>
+<li>Effect size computations</li>
+<li>Preliminary visualisations</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="what-you-need-to-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-you-need-to-do-next">What You Need to Do Next</h2>
+<section id="immediate-priority-complete-data-extraction" class="level3">
+<h3 class="anchored" data-anchor-id="immediate-priority-complete-data-extraction">Immediate Priority: Complete Data Extraction</h3>
+<p>The 2018 PDF is actually a ZIP file containing JPEG images, and the 2024 file is plain text. You need to:</p>
+<section id="for-2018-data" class="level4">
+<h4 class="anchored" data-anchor-id="for-2018-data">For 2018 Data:</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract the images</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /mnt/project</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> BibleSoc_Results_2018.pdf <span class="at">-d</span> BibleSoc_2018_images</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 1: Use OCR (if you need exact extraction)</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Install tesseract if not available</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install tesseract-ocr</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Run OCR on each image</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> img <span class="kw">in</span> BibleSoc_2018_images/<span class="pp">*</span>.jpeg<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="ex">tesseract</span> <span class="st">"</span><span class="va">$img</span><span class="st">"</span> <span class="st">"</span><span class="va">${img</span><span class="op">%</span>.jpeg<span class="va">}</span><span class="st">"</span> <span class="at">-l</span> eng</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Option 2: Manual extraction from project knowledge search results</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co"># The search results already show the key tables - you can extract these</span></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co"># manually into CSV format</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="for-2024-data" class="level4">
+<h4 class="anchored" data-anchor-id="for-2024-data">For 2024 Data:</h4>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The file is already plain text</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Parse it programmatically or manually extract tables</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /mnt/project/BibleSoc_Results_2024.pdf <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-A</span> 20 <span class="st">"Church service"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="critical-tables-to-extract" class="level3">
+<h3 class="anchored" data-anchor-id="critical-tables-to-extract">Critical Tables to Extract</h3>
+<p>You need complete cross-tabulations for:</p>
+<ol type="1">
+<li><strong>Church attendance frequency</strong>
+<ul>
+<li>By age group (18-34, 35-54, 55+)</li>
+<li>By ethnicity (White, Mixed, Asian, Black, Other)</li>
+<li>By gender</li>
+<li>By Christian denomination (among Christians only)</li>
+</ul></li>
+<li><strong>Belief measures</strong> (2018 only available so far):
+<ul>
+<li>“Society could be changed for the better by the message of the Bible”</li>
+<li>Bible reading frequency</li>
+<li>By all demographic breakdowns</li>
+</ul></li>
+<li><strong>Religious identification</strong> (2018):
+<ul>
+<li>Christian denomination</li>
+<li>Non-religious identification</li>
+<li>By demographics</li>
+</ul></li>
+<li><strong>Sample composition</strong>:
+<ul>
+<li>Weighted vs unweighted bases</li>
+<li>Demographic distributions</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="recommended-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-workflow">Recommended Workflow</h2>
+<section id="step-1-complete-data-extraction-1-2-hours" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-complete-data-extraction-1-2-hours">Step 1: Complete Data Extraction (1-2 hours)</h3>
+<p>Create separate CSV files:</p>
+<pre><code>data/
+  ├── 2018_attendance_full.csv
+  ├── 2018_beliefs.csv
+  ├── 2018_demographics.csv
+  ├── 2024_attendance_full.csv
+  ├── 2024_beliefs.csv (if available)
+  └── 2024_demographics.csv</code></pre>
+</section>
+<section id="step-2-run-initial-analysis-script-30-minutes" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-run-initial-analysis-script-30-minutes">Step 2: Run Initial Analysis Script (30 minutes)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># In RStudio or R console</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"01_initial_analysis.R"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co"># This will:</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Perform red flag checks</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co"># - Calculate confidence intervals</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - Run hypothesis tests</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co"># - Create preliminary visualisations</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-3-demographic-standardisation-2-3-hours" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-demographic-standardisation-2-3-hours">Step 3: Demographic Standardisation (2-3 hours)</h3>
+<p>Create <code>02_demographic_standardisation.R</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Pseudo-code structure:</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Calculate attendance rates within each demographic group</span></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co">#    (age × ethnicity × gender cells)</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate population weights for each group in both years</span></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Direct standardisation:</span></span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Apply 2018 population weights to 2024 attendance rates</span></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Shows: "What would 2024 attendance be with 2018 demographics?"</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Indirect standardisation:</span></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Apply 2024 population weights to 2018 attendance rates</span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Shows: "What would 2018 attendance be with 2024 demographics?"</span></span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Decompose change into:</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Compositional effect (demographic shifts)</span></span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a><span class="co">#    - Behavioural effect (actual change in attendance behaviour)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-4-age-stratified-analysis-1-2-hours" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-age-stratified-analysis-1-2-hours">Step 4: Age-Stratified Analysis (1-2 hours)</h3>
+<p>Create <code>03_age_stratified_analysis.R</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For each age group separately:</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Calculate 2018 vs 2024 changes</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Test statistical significance within each stratum</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Calculate effect sizes</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co"># - Check if "revival" is consistent across ages</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   (or limited to specific cohorts)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="step-5-create-comprehensive-visualisations-2-3-hours" class="level3">
+<h3 class="anchored" data-anchor-id="step-5-create-comprehensive-visualisations-2-3-hours">Step 5: Create Comprehensive Visualisations (2-3 hours)</h3>
+<p>Create <code>04_visualisations.R</code> with:</p>
+<ol type="1">
+<li><strong>Comparison charts</strong> (bar charts with CIs)</li>
+<li><strong>Demographic decomposition</strong> (waterfall or stacked area)</li>
+<li><strong>Forest plots</strong> (showing all subgroup effects)</li>
+<li><strong>Belief-attendance correlations</strong> (if 2024 belief data available)</li>
+<li><strong>Uncertainty visualisations</strong> (fan charts showing sensitivity)</li>
+</ol>
+</section>
+<section id="step-6-write-full-quarto-report-3-4-hours" class="level3">
+<h3 class="anchored" data-anchor-id="step-6-write-full-quarto-report-3-4-hours">Step 6: Write Full Quarto Report (3-4 hours)</h3>
+<p>Create <code>bible_society_analysis.qmd</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"Evaluation of Bible Society UK's 'Quiet Revival' Claim"</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">subtitle</span><span class="kw">:</span><span class="at"> </span><span class="st">"Statistical Analysis of Church Attendance Surveys 2018-2024"</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">"Your Name"</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> today</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">code-fold</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc-depth</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Include sections: 1. Executive Summary 2. Background and Claims 3. Methodology 4. Red Flags Identified 5. Statistical Analysis Results 6. Demographic Analysis 7. Limitations 8. Conclusions 9. Recommendations 10. Technical Appendix</p>
+<hr>
+</section>
+</section>
+<section id="key-questions-to-answer" class="level2">
+<h2 class="anchored" data-anchor-id="key-questions-to-answer">Key Questions to Answer</h2>
+<section id="methodological-questions" class="level3">
+<h3 class="anchored" data-anchor-id="methodological-questions">Methodological Questions:</h3>
+<ol type="1">
+<li><strong>Are the 2024 responses internally consistent?</strong>
+<ul>
+<li>Does frequency sum = binary response?</li>
+<li>If not, what’s the discrepancy?</li>
+</ul></li>
+<li><strong>How much of any change is demographic composition?</strong>
+<ul>
+<li>Calculate compositional effect</li>
+<li>Calculate behavioural effect within groups</li>
+</ul></li>
+<li><strong>Is the change consistent across demographics?</strong>
+<ul>
+<li>Age groups</li>
+<li>Ethnic groups</li>
+<li>Gender</li>
+</ul></li>
+</ol>
+</section>
+<section id="substantive-questions" class="level3">
+<h3 class="anchored" data-anchor-id="substantive-questions">Substantive Questions:</h3>
+<ol start="4" type="1">
+<li><strong>Is there evidence of belief changes?</strong>
+<ul>
+<li>Compare 2018 belief measures with 2024 (if available)</li>
+<li>Check belief-attendance correlations</li>
+</ul></li>
+<li><strong>Could immigration explain the changes?</strong>
+<ul>
+<li>Compare ethnic minority vs White British changes</li>
+<li>Estimate effect of 217k-255k Ukrainian + 163k+ HK immigrants</li>
+</ul></li>
+<li><strong>What is the range of plausible estimates?</strong>
+<ul>
+<li>Sensitivity analysis with different assumptions</li>
+<li>Best case and worst case scenarios</li>
+</ul></li>
+</ol>
+<hr>
+</section>
+</section>
+<section id="expected-timeline" class="level2">
+<h2 class="anchored" data-anchor-id="expected-timeline">Expected Timeline</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Time</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Complete data extraction</td>
+<td>1-2 hrs</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>Run initial analysis script</td>
+<td>0.5 hrs</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td>Red flag documentation</td>
+<td>1 hr</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>Demographic standardisation</td>
+<td>2-3 hrs</td>
+<td>High</td>
+</tr>
+<tr class="odd">
+<td>Age-stratified analysis</td>
+<td>1-2 hrs</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<td>Full visualisation suite</td>
+<td>2-3 hrs</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<td>Quarto report writing</td>
+<td>3-4 hrs</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<td>Sensitivity analyses</td>
+<td>1-2 hrs</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<td>Final review and polish</td>
+<td>1-2 hrs</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<td><strong>TOTAL</strong></td>
+<td><strong>12-19 hrs</strong></td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="output-structure" class="level2">
+<h2 class="anchored" data-anchor-id="output-structure">Output Structure</h2>
+<p>Your final project should have:</p>
+<pre><code>project/
+├── data/
+│   ├── raw/
+│   │   ├── BibleSoc_2018_images/ (extracted JPEGs)
+│   │   └── BibleSoc_2024.txt (plain text)
+│   └── processed/
+│       ├── church_attendance_extracted.csv
+│       ├── 2018_attendance_full.csv
+│       ├── 2018_beliefs.csv
+│       ├── 2024_attendance_full.csv
+│       └── demographics.csv
+├── scripts/
+│   ├── 01_initial_analysis.R
+│   ├── 02_demographic_standardisation.R
+│   ├── 03_age_stratified_analysis.R
+│   ├── 04_visualisations.R
+│   └── 05_sensitivity_analysis.R
+├── outputs/
+│   ├── plots/
+│   │   ├── plot_01_point_estimates_ci.png
+│   │   ├── plot_02_frequency_distribution.png
+│   │   ├── plot_03_demographic_decomposition.png
+│   │   └── ... (more plots)
+│   ├── tables/
+│   │   ├── summary_statistics.csv
+│   │   ├── hypothesis_tests.csv
+│   │   └── effect_sizes.csv
+│   └── report/
+│       └── bible_society_analysis.html
+├── docs/
+│   ├── ANALYSIS_PLAN.md
+│   ├── RED_FLAG_SUMMARY.md
+│   └── METHODOLOGY_NOTES.md
+└── bible_society_analysis.qmd (main report source)</code></pre>
+<hr>
+</section>
+<section id="quick-start-commands" class="level2">
+<h2 class="anchored" data-anchor-id="quick-start-commands">Quick Start Commands</h2>
+<p>Once you have the data extracted, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set up your R environment</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">"tidyverse"</span>, <span class="st">"survey"</span>, <span class="st">"effectsize"</span>, <span class="st">"gt"</span>, </span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"patchwork"</span>, <span class="st">"scales"</span>))</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and check your data</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a>attendance <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/processed/church_attendance_extracted.csv"</span>)</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(attendance)</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the initial analysis</span></span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"scripts/01_initial_analysis.R"</span>)</span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Review outputs</span></span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="fu">list.files</span>(<span class="st">"outputs/plots/"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="critical-success-factors" class="level2">
+<h2 class="anchored" data-anchor-id="critical-success-factors">Critical Success Factors</h2>
+<p>To produce a compelling analysis:</p>
+<ol type="1">
+<li><strong>Be thorough</strong> with data extraction (garbage in = garbage out)</li>
+<li><strong>Be transparent</strong> about all assumptions</li>
+<li><strong>Be fair</strong> to Bible Society (acknowledge what they did right)</li>
+<li><strong>Be critical</strong> of methodological flaws (that’s the point)</li>
+<li><strong>Be clear</strong> about uncertainty (show confidence intervals everywhere)</li>
+<li><strong>Be visual</strong> (good plots &gt; tables of numbers)</li>
+<li><strong>Be precise</strong> in language (distinguish statistical vs practical significance)</li>
+</ol>
+<hr>
+</section>
+<section id="what-makes-this-analysis-strong" class="level2">
+<h2 class="anchored" data-anchor-id="what-makes-this-analysis-strong">What Makes This Analysis Strong</h2>
+<p>Your analysis will be credible because:</p>
+<ol type="1">
+<li><strong>Pre-specified plan</strong> (ANALYSIS_PLAN.md shows you’re not p-hacking)</li>
+<li><strong>Multiple approaches</strong> (CIs, hypothesis tests, effect sizes, standardisation)</li>
+<li><strong>Demographic adjustment</strong> (most critical missing piece in Bible Society’s analysis)</li>
+<li><strong>Triangulation</strong> (checking consistency across measures)</li>
+<li><strong>Sensitivity analysis</strong> (showing robustness of conclusions)</li>
+<li><strong>Full transparency</strong> (all code and data documented)</li>
+<li><strong>Appropriate scepticism</strong> (you’re not claiming more than the data supports)</li>
+</ol>
+<hr>
+</section>
+<section id="when-youre-stuck" class="level2">
+<h2 class="anchored" data-anchor-id="when-youre-stuck">When You’re Stuck</h2>
+<p>If you need help:</p>
+<ol type="1">
+<li><strong>Statistical questions</strong>: Refer to ANALYSIS_PLAN.md for methods</li>
+<li><strong>Code issues</strong>: Check R script comments for explanations</li>
+<li><strong>Interpretation</strong>: RED_FLAG_SUMMARY.md has examples</li>
+<li><strong>Data extraction</strong>: Use project_knowledge_search tool on the PDFs</li>
+</ol>
+<hr>
+</section>
+<section id="final-deliverables" class="level2">
+<h2 class="anchored" data-anchor-id="final-deliverables">Final Deliverables</h2>
+<p>When complete, you should have:</p>
+<ol type="1">
+<li>✅ Complete data extraction (CSV files)</li>
+<li>✅ All analysis scripts (commented and reproducible)</li>
+<li>✅ Comprehensive visualisations (publication quality)</li>
+<li>✅ Full Quarto report (HTML with embedded plots)</li>
+<li>✅ Executive summary (1-page PDF)</li>
+<li>✅ Technical appendix (detailed methodology)</li>
+</ol>
+<p><strong>The goal</strong>: A professional-quality statistical analysis that definitively shows whether Bible Society UK’s “Quiet Revival” claim is supported by the data.</p>
+<p>Based on the preliminary analysis, your conclusion will likely be: <strong>“The claim is not supported due to multiple methodological confounds, small effect sizes, and lack of triangulation with belief measures.”</strong></p>
+<hr>
+</section>
+<section id="good-luck" class="level2">
+<h2 class="anchored" data-anchor-id="good-luck">Good Luck!</h2>
+<p>You have a solid foundation. The analysis plan is comprehensive, the red flags are clearly documented, and you have working R code to build from.</p>
+<p>Focus on: 1. Getting the full data extracted 2. Running the demographic standardisation (this is the killer blow to the “revival” claim) 3. Creating clear, compelling visualisations 4. Writing a fair but critical report</p>
+<p>The evidence is on your side. Bible Society UK’s claim is statistically weak and methodologically flawed. Your job is to demonstrate this clearly and convincingly.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/NathOrmond\.github\.io\/stats-concepts");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
