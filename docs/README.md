@@ -2,6 +2,33 @@
 
 This directory contains technical documentation for the stats-concepts project.
 
+## Development Setup
+
+This project uses `renv` to ensure a reproducible R environment. All required packages are listed in the `renv.lock` file.
+
+To get started, follow these steps in your R console:
+
+1.  **Restore the Environment:**
+    This command installs the exact versions of all R packages used in the project.
+    ```r
+    renv::restore()
+    ```
+
+2.  **Developing and Adding Packages:**
+    If you need to add a new package for your analysis, use:
+    ```r
+    renv::install("new-package-name")
+    ```
+
+3.  **Save Your Changes:**
+    After installing or updating packages, save your changes to the lockfile. This is crucial for reproducibility.
+    ```r
+    renv::snapshot()
+    ```
+    Commit the updated `renv.lock` file to your Git repository.
+
+---
+
 ## Available Documentation
 
 ### [Routing System](./routing-system.md)

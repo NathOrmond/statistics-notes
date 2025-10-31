@@ -1,0 +1,195 @@
+---
+title: "Question Order Effects"
+subtitle: "Impact of survey design differences on responses"
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Set working directory to project root using here package
+if (!require(here, quietly = TRUE)) {
+  install.packages("here")
+}
+# Find project root (directory containing _quarto.yml)
+here::i_am("_quarto.yml")
+# Set working directory to project root
+
+library(tidyverse)
+library(scales)
+library(ggplot2)
+```
+
+## The Problem
+
+The 2018 and 2024 surveys used fundamentally different question formats:
+
+- **2018**: Single frequency question only
+- **2024**: Binary question FIRST ("Yes - in the past year"), THEN frequency question
+
+This violates best practice in survey methodology, as question order can significantly bias responses.
+
+## Question Format Comparison
+
+### 2018 Survey Format
+
+**Question**: 'Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?'
+
+**Response options**:
+- Daily/almost daily
+- A few times a week
+- About once a week
+- [other frequency options...]
+- Never
+
+### 2024 Survey Format
+
+**Question 1 (BINARY)**: 'Have you attended a church service in the past year?'
+- Yes - in the past year
+- Yes - more than a year ago
+- Never
+
+**Question 2 (FREQUENCY)**: 'How often did you attend?'
+[Same frequency scale as 2018]
+
+🚩 **CRITICAL**: The binary question primes respondents before they consider frequency, which can lead to:
+
+- Acquiescence bias (tendency to say 'yes')
+- Anchoring effects (binary framing affects frequency judgements)
+- Non-comparable measures between years
+
+## Internal Consistency Check
+
+If the questions are measuring the same thing, the binary response should match the sum of frequency responses:
+
+```{r}
+#| label: consistency-check
+
+attendance_data <- read_csv(here::here("data/bible-society-uk-revival/processed/church-attendance-extracted.csv"))
+
+# 2024 binary response
+binary_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "binary", 
+         response_category == "Yes - in the past year") %>%
+  pull(total_pct)
+
+# Sum of frequency responses (past year categories)
+freq_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency") %>%
+  filter(response_category %in% c(
+    "Daily/almost daily", "A few times a week", 
+    "About once a week", "About once a fortnight",
+    "About once a month", "A few times a year",
+    "About once a year"
+  ))
+
+freq_sum_2024 <- sum(freq_2024$total_pct, na.rm = TRUE)
+discrepancy <- abs(freq_sum_2024 - binary_2024)
+is_inconsistent <- discrepancy > 2
+```
+
+### Internal Consistency Check (2024)
+
+If the questions are measuring the same thing, the binary response should match the sum of frequency responses:
+
+- **Binary 'Yes - in the past year'**: `r sprintf("%.1f", binary_2024)`%
+- **Sum of frequency categories**: `r sprintf("%.1f", freq_sum_2024)`%
+- **Discrepancy**: `r sprintf("%.1f", discrepancy)` percentage points
+
+`r if (is_inconsistent) {
+  "🚩 **INCONSISTENCY DETECTED**\n\nThis discrepancy suggests:\n1. Question order effects are influencing responses\n2. Respondents interpret the questions differently\n3. Measurement error in the data extraction process"
+} else {
+  "✓ Responses are internally consistent"
+}`
+
+## Evidence from Survey Methodology Literature
+
+Question order effects are well-documented:
+
+- **Schuman & Presser (1996)**: Found order effects of 5-15 percentage points
+- **Acquiescence bias**: Tendency to agree with yes/no questions
+- **Anchoring effects**: First question frames subsequent responses
+
+The 2024 survey design violates the principle that questions should be asked in a way that minimises priming effects when making comparisons over time.
+
+## Impact on Weekly Attendance Claim
+
+```{r}
+#| label: impact-analysis
+
+# Weekly attendance in 2024 might be inflated by:
+# 1. Acquiescence bias from binary question
+# 2. Anchoring effects affecting frequency judgements
+
+weekly_2018 <- attendance_data %>%
+  filter(year == 2018, response_category == "At least once a week") %>%
+  pull(total_pct) / 100
+
+weekly_2024 <- attendance_data %>%
+  filter(
+    year == 2024,
+    question_type == "frequency",
+    response_category %in% c("Daily/almost daily", "A few times a week", "About once a week")
+  ) %>%
+  summarise(total_pct = sum(total_pct)) %>%
+  pull(total_pct) / 100
+```
+
+### Weekly Attendance Comparison
+
+The weekly attendance in 2024 might be inflated by acquiescence bias from the binary question and anchoring effects affecting frequency judgements:
+
+- **2018 (frequency question only)**: `r sprintf("%.1f", weekly_2018 * 100)`%
+- **2024 (after binary question)**: `r sprintf("%.1f", weekly_2024 * 100)`%
+- **Difference**: `r sprintf("%+.1f", (weekly_2024 - weekly_2018) * 100)` percentage points
+
+⚠️ **CAUTION**: The apparent increase may be an artefact of question order effects rather than true behavioural change. Without the binary priming question, the 2024 figure might be lower, showing no real change or even a decrease.
+
+## The Contradictory Evidence
+
+Interestingly, the binary question itself shows a **decrease**:
+
+```{r}
+#| label: contradictory-evidence
+
+# 2018 "ever attended" estimate (sum of all frequency categories except "Never")
+ever_2018 <- attendance_data %>%
+  filter(year == 2018) %>%
+  filter(response_category != "Never") %>%
+  summarise(total = sum(total_pct, na.rm = TRUE)) %>%
+  pull(total)
+
+binary_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "binary", 
+         response_category == "Yes - in the past year") %>%
+  pull(total_pct)
+```
+
+### 'Ever Attended' Comparison
+
+Interestingly, the binary question itself shows a decrease:
+
+- **2018 (frequency-based)**: ~`r sprintf("%.0f", ever_2018)`%
+- **2024 (binary question)**: `r sprintf("%.1f", binary_2024)`%
+- **Change**: `r sprintf("%.1f", binary_2024 - ever_2018)` percentage points
+
+🚩 **CONTRADICTION**:
+
+The binary question shows a DECREASE (27% → 24%), while the frequency question shows an INCREASE (7% → 11%). This contradiction is critical evidence:
+
+These cannot both be true. This is strong evidence that question order effects are creating measurement error.
+
+## Conclusion
+
+The different question formats make direct comparison between 2018 and 2024 problematic. The question order effects likely:
+
+1. Inflate the weekly attendance figure in 2024 due to acquiescence bias
+2. Create internal inconsistencies within the 2024 survey
+3. Produce contradictory results that cannot both be true
+
+**Recommendation**: The 7% → 11% increase claim should be treated with extreme caution. The methodological differences make the comparison invalid without controlling for question order effects.
+

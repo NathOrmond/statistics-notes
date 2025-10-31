@@ -10,6 +10,7 @@ renv/
 _site/
 _site.yml
 _quarto_nav.yml
+_freeze/
 
 # OS specific files
 .DS_Store
@@ -24,3 +25,8 @@ Thumbs.db
 *.temp
 
 **/*.quarto_ipynb
+
+# Large data files (uncomment if needed)
+# data/*/raw/*.sqlite
+# data/*/raw/*.db
+# data/*/raw/*.parquet

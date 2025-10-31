@@ -115,29 +115,28 @@ cd stats-concepts
 
 ### 2. Install R Dependencies
 
-This project uses `renv` for reproducible R package management.
+This project uses `renv` to ensure a reproducible R environment. All required packages are listed in the `renv.lock` file.
 
-**First-time setup or new dependencies:**
+To get started, follow these steps in your R console:
 
-1.  **Run the setup script:**
-    Open your RStudio project (`stats-concepts.Rproj`) and run the following command in the R console:
-    ```r
-    source("setup_project_packages.R")
-    ```
-    This script will install all necessary packages into your project's `renv` library and update `renv.lock`.
-
-2.  **For new users or when `renv.lock` changes:**
-    If you are a new user cloning the repository, or if the `renv.lock` file has been updated (e.g., by another developer adding new packages), you can restore the project's environment by running:
+1.  **Restore the Environment:**
+    This command installs the exact versions of all R packages used in the project.
     ```r
     renv::restore()
     ```
-    This will install all packages specified in `renv.lock` into your project's private library.
 
-3.  **For developers adding new packages:**
-    If you add new R packages to the project, remember to run `renv::snapshot()` in the R console after installation. This will update `renv.lock` to include the new dependencies, ensuring reproducibility for others.
+2.  **Developing and Adding Packages:**
+    If you need to add a new package for your analysis, use:
+    ```r
+    renv::install("new-package-name")
+    ```
+
+3.  **Save Your Changes:**
+    After installing or updating packages, save your changes to the lockfile. This is crucial for reproducibility.
     ```r
     renv::snapshot()
     ```
+    Commit the updated `renv.lock` file to your Git repository.
 
 ### 3. Verify Setup
 
