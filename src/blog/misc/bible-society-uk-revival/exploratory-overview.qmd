@@ -1,0 +1,181 @@
+---
+title: "Exploratory Overview"
+subtitle: "Data loading, basic summaries, and red flag detection"
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Set working directory to project root using here package
+if (!require(here, quietly = TRUE)) {
+  install.packages("here")
+}
+# Find project root (directory containing _quarto.yml)
+here::i_am("_quarto.yml")
+# Set working directory to project root
+setwd(here())
+
+# Load required packages
+library(tidyverse)
+library(scales)
+library(ggplot2)
+library(knitr)
+
+# Set seed for reproducibility
+set.seed(123)
+```
+
+## Introduction
+
+This exploratory analysis examines Bible Society UK's claim of a "Quiet Revival" based on YouGov survey data comparing church attendance patterns between 2018 and 2024. We begin by loading the data and conducting initial descriptive analyses and consistency checks.
+
+## Data Loading
+
+```{r}
+#| label: load-data
+
+# Load survey metadata
+survey_meta <- read_csv(here::here("data/bible-society-uk-revival/processed/survey-metadata.csv"), comment = "#")
+
+# Load attendance data
+attendance_data <- read_csv(here::here("data/bible-society-uk-revival/processed/church-attendance-extracted.csv"))
+
+# Display survey metadata
+kable(survey_meta, caption = "Survey metadata for 2018 and 2024 surveys")
+```
+
+```{r}
+#| label: inspect-data
+#| include: false
+
+# Quick inspection of data structure
+glimpse(attendance_data)
+```
+
+## Survey Overview
+
+```{r}
+#| label: survey-summary
+
+cat("Survey Comparison:\n")
+cat("==================\n\n")
+cat(sprintf("2018: n = %s (weighted: %s)\n", 
+            format(survey_meta$sample_size_unweighted[1], big.mark = ","),
+            format(survey_meta$sample_size_weighted[1], big.mark = ",")))
+cat(sprintf("2024: n = %s (weighted: %s)\n", 
+            format(survey_meta$sample_size_unweighted[2], big.mark = ","),
+            format(survey_meta$sample_size_weighted[2], big.mark = ",")))
+cat(sprintf("\nSample size reduction: %.1f%%\n", 
+            (1 - survey_meta$sample_size_weighted[2] / survey_meta$sample_size_weighted[1]) * 100))
+```
+
+## Red Flag #1: Internal Consistency Check
+
+The 2024 survey asked both a binary question ("Yes - in the past year") and a frequency question. These should yield consistent results, but we need to check.
+
+```{r}
+#| label: internal-consistency
+
+# Calculate sum of frequency responses for past year attendance in 2024
+freq_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency") %>%
+  filter(response_category %in% c(
+    "Daily/almost daily", "A few times a week", 
+    "About once a week", "About once a fortnight",
+    "About once a month", "A few times a year",
+    "About once a year"
+  ))
+
+freq_sum_2024 <- sum(freq_2024$total_pct, na.rm = TRUE)
+
+# Get binary response
+binary_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "binary", 
+         response_category == "Yes - in the past year")
+
+binary_pct_2024 <- binary_2024$total_pct
+
+# Display comparison
+cat("Internal Consistency Check (2024 Survey):\n")
+cat("==========================================\n\n")
+cat(sprintf("Binary 'Yes - in the past year': %.1f%%\n", binary_pct_2024))
+cat(sprintf("Sum of frequency categories:     %.1f%%\n", freq_sum_2024))
+cat(sprintf("Discrepancy:                     %.1f percentage points\n\n", 
+            abs(freq_sum_2024 - binary_pct_2024)))
+
+if (abs(freq_sum_2024 - binary_pct_2024) > 2) {
+  cat("🚩 RED FLAG: Internal inconsistency detected!\n")
+  cat("This suggests measurement error or question order effects.\n")
+} else {
+  cat("✓ Internal consistency check passed.\n")
+}
+```
+
+## Red Flag #2: Question Format Differences
+
+The surveys used different question formats, which makes direct comparison problematic:
+
+```{r}
+#| label: question-format
+
+cat("Question Format Comparison:\n")
+cat("===========================\n\n")
+cat("2018: Single frequency question only\n")
+cat("     'Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?'\n\n")
+cat("2024: Binary question FIRST, then frequency question\n")
+cat("     This order may prime respondents differently.\n\n")
+cat("🚩 RED FLAG: Question order effects are a known source of bias.\n")
+cat("The binary question may influence responses to the frequency question.\n")
+```
+
+## Basic Attendance Statistics
+
+```{r}
+#| label: basic-stats
+
+# Calculate key attendance metrics
+weekly_2018 <- attendance_data %>%
+  filter(year == 2018, response_category == "At least once a week") %>%
+  pull(total_pct)
+
+weekly_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency", 
+         response_category == "At least once a week") %>%
+  pull(total_pct)
+
+never_2018 <- attendance_data %>%
+  filter(year == 2018, response_category == "Never") %>%
+  pull(total_pct)
+
+never_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency", 
+         response_category == "Never") %>%
+  pull(total_pct)
+
+# Create summary table
+summary_stats <- tibble(
+  Metric = c("At least once a week", "Never attended"),
+  `2018 (%)` = c(weekly_2018, never_2018),
+  `2024 (%)` = c(weekly_2024, never_2024),
+  `Change (pp)` = c(weekly_2024 - weekly_2018, never_2024 - never_2018)
+)
+
+kable(summary_stats, digits = 1, caption = "Key attendance metrics comparison")
+```
+
+## The Contradiction
+
+Notice the contradiction: the weekly attendance measure shows an **increase** (7% → 11%), while the binary "past year" measure shows a **decrease** (\~27% → 24%). These cannot both be true, which suggests measurement error or question order effects.
+
+## Next Steps
+
+Further analyses will examine:
+
+1.  [**Weekly Attendance Claim**](./weekly-attendance-claim.qmd) - Statistical testing of the 7% → 11% increase
+2.  [**Question Order Effects**](./question-order-effects.qmd) - Impact of different question formats
+3.  [**Demographic Analysis**](./demographic-analysis.qmd) - How population composition changes affect results

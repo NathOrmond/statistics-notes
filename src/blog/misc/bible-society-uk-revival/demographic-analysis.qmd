@@ -1,0 +1,173 @@
+---
+title: "Demographic Analysis"
+subtitle: "Population composition changes and their impact"
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Set working directory to project root using here package
+if (!require(here, quietly = TRUE)) {
+  install.packages("here")
+}
+# Find project root (directory containing _quarto.yml)
+here::i_am("_quarto.yml")
+# Set working directory to project root
+setwd(here())
+
+library(tidyverse)
+library(scales)
+library(ggplot2)
+```
+
+## Introduction
+
+Between 2018 and 2024, the UK population composition changed significantly due to immigration, particularly:
+
+- **Ukrainian refugees**: ~217,000-255,000 (post-February 2022)
+- **Hong Kong BN(O) visa holders**: >163,000 (January 2021 - March 2025)
+- Other net migration changes
+
+These groups may have different religious attendance patterns than the existing UK population, which could explain apparent changes in church attendance.
+
+## Attendance by Ethnicity (2024)
+
+```{r}
+#| label: ethnicity-breakdown
+
+attendance_data <- read_csv(here::here("data/bible-society-uk-revival/processed/church-attendance-extracted.csv"))
+
+# Extract 2024 attendance by ethnicity
+ethnicity_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "binary", 
+         response_category == "Yes - in the past year") %>%
+  select(response_category, white, ethnic_minority) %>%
+  rename(White = white, `Ethnic Minority` = ethnic_minority)
+
+cat("2024 Attendance by Ethnicity:\n")
+cat("=============================\n\n")
+cat(sprintf("White:          %.1f%% attended in past year\n", ethnicity_2024$White))
+cat(sprintf("Ethnic Minority: %.1f%% attended in past year\n\n", ethnicity_2024$`Ethnic Minority`))
+
+cat("⚠️  Note: These figures suggest different attendance patterns\n")
+cat("between ethnic groups. Population composition changes could\n")
+cat("significantly affect overall attendance rates.\n")
+```
+
+## Age-Stratified Analysis
+
+```{r}
+#| label: age-breakdown
+
+# Weekly attendance by age group in both years
+age_comparison <- attendance_data %>%
+  filter(
+    (year == 2018 & response_category == "At least once a week") |
+    (year == 2024 & question_type == "frequency" & response_category == "At least once a week")
+  ) %>%
+  select(year, age_18_34, age_35_54, age_55plus) %>%
+  rename(
+    Year = year,
+    `18-34` = age_18_34,
+    `35-54` = age_35_54,
+    `55+` = age_55plus
+  )
+
+cat("Weekly Attendance by Age Group:\n")
+cat("==============================\n\n")
+cat("2018:\n")
+cat(sprintf("  18-34: %.1f%%\n", age_comparison$`18-34`[age_comparison$Year == 2018]))
+cat(sprintf("  35-54: %.1f%%\n", age_comparison$`35-54`[age_comparison$Year == 2018]))
+cat(sprintf("  55+:   %.1f%%\n\n", age_comparison$`55+`[age_comparison$Year == 2018]))
+
+cat("2024:\n")
+cat(sprintf("  18-34: %.1f%%\n", age_comparison$`18-34`[age_comparison$Year == 2024]))
+cat(sprintf("  35-54: %.1f%%\n", age_comparison$`35-54`[age_comparison$Year == 2024]))
+cat(sprintf("  55+:   %.1f%%\n\n", age_comparison$`55+`[age_comparison$Year == 2024]))
+
+# Calculate changes
+cat("Changes (2024 - 2018):\n")
+cat(sprintf("  18-34: %+.1f percentage points\n", 
+            age_comparison$`18-34`[age_comparison$Year == 2024] - 
+            age_comparison$`18-34`[age_comparison$Year == 2018]))
+cat(sprintf("  35-54: %+.1f percentage points\n", 
+            age_comparison$`35-54`[age_comparison$Year == 2024] - 
+            age_comparison$`35-54`[age_comparison$Year == 2018]))
+cat(sprintf("  55+:   %+.1f percentage points\n\n", 
+            age_comparison$`55+`[age_comparison$Year == 2024] - 
+            age_comparison$`55+`[age_comparison$Year == 2018]))
+```
+
+## Visualisation: Age-Stratified Changes
+
+```{r}
+#| label: age-visualisation
+#| fig-cap: "Weekly attendance by age group: 2018 vs 2024"
+
+age_plot_data <- age_comparison %>%
+  pivot_longer(cols = c(`18-34`, `35-54`, `55+`), 
+               names_to = "Age_Group", values_to = "Percentage") %>%
+  mutate(Year = factor(Year))
+
+ggplot(age_plot_data, aes(x = Age_Group, y = Percentage, fill = Year)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  scale_fill_manual(values = c("2018" = "steelblue", "2024" = "darkorange")) +
+  labs(
+    x = "Age Group",
+    y = "Weekly Attendance (%)",
+    title = "Weekly Church Attendance by Age Group",
+    subtitle = "2018 vs 2024 comparison",
+    fill = "Year"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+## The Demographic Composition Problem
+
+**Critical Issue**: The surveys do not appear to control for demographic composition changes.
+
+```{r}
+#| label: composition-problem
+
+cat("The Demographic Composition Problem:\n")
+cat("====================================\n\n")
+cat("Major population changes 2018-2024:\n\n")
+cat("1. Ukrainian refugees: 217,000-255,000\n")
+cat("   - Higher Orthodox Christian attendance rates\n")
+cat("   - Different cultural patterns\n\n")
+cat("2. Hong Kong BN(O) visa holders: >163,000\n")
+cat("   - Different religious demographics\n")
+cat("   - May have higher church attendance rates\n\n")
+cat("3. Other net migration: Substantial\n\n")
+cat("⚠️  PROBLEM:\n\n")
+cat("If the surveys are not weighted or standardised to account\n")
+cat("for these demographic shifts, any apparent change in attendance\n")
+cat("could simply reflect:\n")
+cat("  - More religious immigrants entering the population\n")
+cat("  - Different attendance patterns of new arrivals\n")
+cat("  - NOT a 'revival' among existing UK residents\n\n")
+cat("This is a form of 'composition change' vs 'behaviour change'\n")
+cat("confound that must be addressed to make valid comparisons.\n")
+```
+
+## Implications
+
+Without demographic standardisation, we cannot determine whether:
+
+1. Attendance genuinely increased among existing UK residents (revival)
+2. Attendance increased due to immigration (composition effect)
+3. A combination of both
+
+**Recommendation**: Any claims about a "revival" should control for demographic composition changes through:
+- Demographic weighting adjustments
+- Stratified analysis by immigration status
+- Age/ethnicity standardisation
+
+Until such analyses are conducted, the demographic composition issue remains a critical red flag.
+

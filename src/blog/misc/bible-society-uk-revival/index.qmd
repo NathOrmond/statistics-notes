@@ -1,6 +1,66 @@
 ---
 title: "Bible Society UK Revival"
+subtitle: "Analysis of Bible Society UK's 'Quiet Revival' claim"
 ---
 
-This page contains analysis of the Bible Society UK Revival data.
+## Overview
 
+This section contains a comprehensive analysis of Bible Society UK's claim of a "Quiet Revival" based on YouGov survey data comparing church attendance patterns between 2018 and 2024.
+
+The claim asserts that weekly church attendance increased from 7% (2018) to 11% (2024), representing a 4 percentage point increase. However, our analysis identifies multiple critical methodological issues that cast serious doubt on this claim.
+
+## Analysis Pages
+
+### 1. [Exploratory Overview](./exploratory-overview.qmd)
+
+Initial data exploration, basic summaries, and detection of red flags:
+- Data loading and survey metadata
+- Internal consistency checks
+- Question format differences
+- Basic attendance statistics
+
+### 2. [Weekly Attendance Claim Analysis](./weekly-attendance-claim.qmd)
+
+Statistical testing of the 7% → 11% increase claim:
+- Point estimates with confidence intervals
+- Hypothesis testing (with design effect adjustment)
+- Effect size calculations (Cohen's h)
+- Visualisation of results
+
+### 3. [Question Order Effects](./question-order-effects.qmd)
+
+Impact of different survey question formats:
+- Comparison of 2018 vs 2024 question formats
+- Internal consistency checks within 2024 survey
+- Evidence of acquiescence bias and anchoring effects
+- Contradictory results analysis
+
+### 4. [Demographic Analysis](./demographic-analysis.qmd)
+
+Population composition changes and their impact:
+- Attendance by ethnicity and age groups
+- Impact of immigration (Ukrainian refugees, Hong Kong BN(O) visa holders)
+- Composition vs behaviour change confound
+- Implications for the "revival" claim
+
+## Key Findings
+
+Our analysis reveals multiple red flags:
+
+1. **Internal Inconsistencies**: The 2024 survey shows contradictory results
+2. **Question Order Effects**: Different question formats make comparison invalid
+3. **Demographic Confounds**: Population changes may explain apparent increases
+4. **Small Effect Sizes**: Even if statistically significant, practical significance is limited
+
+## Data Sources
+
+- **2018 Survey**: n = 19,101 (weighted: 19,875), October-November 2018
+- **2024 Survey**: n = 13,146 (weighted: 12,455), November-December 2024
+- **Source Documents**: `resources/papers/BibleSoc_Results_2018.pdf`, `BibleSoc_Results_2024.pdf`
+- **Extracted Data**: `data/bible-society-uk-revival/processed/`
+
+## Documentation
+
+For detailed methodology, analysis plans, and technical specifications, see:
+- `docs/tech-specs/bible-society-review/overview.md` - Comprehensive analysis framework
+- `docs/tech-specs/bible-society-review/red-flag-summary.md` - Summary of critical issues

@@ -1,19 +1,22 @@
-# This script installs all required packages for the project and updates renv.lock
+# This project uses renv for package management.
+# The required packages are listed in the renv.lock file.
 
-# List of required packages
-required_packages <- c("ggplot2", "dplyr", "gridExtra", "moments", "nortest", "tidyr")
+# To restore the project's dependencies from the lock file, run this in your R console:
+# renv::restore()
 
-# Install packages if not already installed
-for(pkg in required_packages) {
-  if(!require(pkg, character.only = TRUE, quietly = TRUE)) {
-    install.packages(pkg, dependencies = TRUE)
-  }
-}
+# If you need to install a new package for your analysis, use:
+# renv::install("package_name")
 
-# Ensure renv is loaded and snapshot the environment
-if (!requireNamespace("renv", quietly = TRUE)) {
-  install.packages("renv")
-}
-renv::snapshot()
+# After installing or updating packages, run this to save your changes to the lock file:
+# renv::snapshot()
 
-message("All required packages installed and renv snapshot updated.")
+# --- Core Packages ---
+# The main packages used in this project are:
+# - tidyverse
+# - ggplot2
+# - dplyr
+# - gridExtra
+# - moments
+# - nortest
+# - tidyr
+# - here

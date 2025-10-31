@@ -1,0 +1,240 @@
+---
+title: "Weekly Attendance Claim Analysis"
+subtitle: "Testing the 7% → 11% increase claim"
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# Set working directory to project root using here package
+if (!require(here, quietly = TRUE)) {
+  install.packages("here")
+}
+# Find project root (directory containing _quarto.yml)
+here::i_am("_quarto.yml")
+# Set working directory to project root
+library(tidyverse)
+library(scales)
+library(ggplot2)
+```
+
+## The Claim
+
+Bible Society UK claims that weekly church attendance increased from 7% (2018) to 11% (2024), representing a 4 percentage point increase.
+
+## Data Preparation
+
+```{r}
+#| label: load-data
+
+# Load data
+attendance_data <- read_csv(here::here("data/bible-society-uk-revival/processed/church-attendance-extracted.csv"))
+survey_meta <- read_csv(here::here("data/bible-society-uk-revival/processed/survey-metadata.csv"), comment = "#")
+
+# Extract weekly attendance data
+weekly_2018 <- attendance_data %>%
+  filter(year == 2018, response_category == "At least once a week") %>%
+  pull(total_pct) / 100  # Convert to proportion
+
+weekly_2024 <- attendance_data %>%
+  filter(
+    year == 2024,
+    question_type == "frequency",
+    response_category %in% c("Daily/almost daily", "A few times a week", "About once a week")
+  ) %>%
+  summarise(total_pct = sum(total_pct)) %>%
+  pull(total_pct) / 100
+
+# Sample sizes
+n_2018 <- survey_meta$sample_size_weighted[1]
+n_2024 <- survey_meta$sample_size_weighted[2]
+```
+
+## Point Estimates
+
+```{r}
+#| label: point-estimates
+
+cat("Weekly Attendance Estimates:\n")
+cat("============================\n\n")
+cat(sprintf("2018: %.1f%% (n = %s)\n", weekly_2018 * 100, format(n_2018, big.mark = ",")))
+cat(sprintf("2024: %.1f%% (n = %s)\n", weekly_2024 * 100, format(n_2024, big.mark = ",")))
+cat(sprintf("Change: %+.1f percentage points\n\n", (weekly_2024 - weekly_2018) * 100))
+```
+
+## Confidence Intervals (with Design Effect)
+
+YouGov panel surveys require design effect adjustment. We use a conservative estimate of deff = 1.5.
+
+```{r}
+#| label: confidence-intervals
+
+# Function to calculate CI for proportions with design effect
+calc_ci <- function(p, n, deff = 1.5, conf_level = 0.95) {
+  n_eff <- n / deff
+  z <- qnorm((1 + conf_level) / 2)
+  se <- sqrt(p * (1 - p) / n_eff)
+  ci_lower <- p - z * se
+  ci_upper <- p + z * se
+  
+  return(list(
+    estimate = p,
+    se = se,
+    ci_lower = ci_lower,
+    ci_upper = ci_upper,
+    n_eff = n_eff
+  ))
+}
+
+ci_2018 <- calc_ci(weekly_2018, n_2018)
+ci_2024 <- calc_ci(weekly_2024, n_2024)
+
+# Display results
+cat("95% Confidence Intervals (with design effect = 1.5):\n")
+cat("=====================================================\n\n")
+cat(sprintf("2018: %.1f%% [%.1f%%, %.1f%%]\n", 
+            ci_2018$estimate * 100,
+            ci_2018$ci_lower * 100,
+            ci_2018$ci_upper * 100))
+cat(sprintf("2024: %.1f%% [%.1f%%, %.1f%%]\n\n", 
+            ci_2024$estimate * 100,
+            ci_2024$ci_lower * 100,
+            ci_2024$ci_upper * 100))
+```
+
+## Hypothesis Test
+
+**Null Hypothesis**: No change in weekly attendance (p_2024 = p_2018)
+
+**Alternative Hypothesis**: Change in weekly attendance (p_2024 ≠ p_2018)
+
+```{r}
+#| label: hypothesis-test
+
+# Two-sample proportion test with design effect adjustment
+prop_test <- function(p1, n1, p2, n2, deff = 1.5) {
+  n1_eff <- n1 / deff
+  n2_eff <- n2 / deff
+  
+  # Pooled proportion
+  p_pool <- (p1 * n1_eff + p2 * n2_eff) / (n1_eff + n2_eff)
+  
+  # Standard error
+  se_pool <- sqrt(p_pool * (1 - p_pool) * (1/n1_eff + 1/n2_eff))
+  
+  # Test statistic
+  z <- (p2 - p1) / se_pool
+  
+  # P-value (two-tailed)
+  p_value <- 2 * (1 - pnorm(abs(z)))
+  
+  # Difference and its CI
+  diff <- p2 - p1
+  se_diff <- sqrt(p1 * (1 - p1) / n1_eff + p2 * (1 - p2) / n2_eff)
+  ci_lower <- diff - qnorm(0.975) * se_diff
+  ci_upper <- diff + qnorm(0.975) * se_diff
+  
+  return(list(
+    z_statistic = z,
+    p_value = p_value,
+    difference = diff,
+    ci_lower = ci_lower,
+    ci_upper = ci_upper,
+    significant = p_value < 0.05
+  ))
+}
+
+test_result <- prop_test(weekly_2018, n_2018, weekly_2024, n_2024)
+
+cat("Hypothesis Test Results:\n")
+cat("=========================\n\n")
+cat(sprintf("Difference: %+.2f percentage points\n", test_result$difference * 100))
+cat(sprintf("95%% CI for difference: [%+.2f, %+.2f] percentage points\n", 
+            test_result$ci_lower * 100, test_result$ci_upper * 100))
+cat(sprintf("Z-statistic: %.3f\n", test_result$z_statistic))
+cat(sprintf("P-value: %.4f\n\n", test_result$p_value))
+
+if (test_result$significant) {
+  cat("Result: Statistically significant (p < 0.05)\n")
+} else {
+  cat("Result: Not statistically significant (p ≥ 0.05)\n")
+}
+```
+
+## Effect Size
+
+Statistical significance doesn't mean practical significance. Let's calculate the effect size:
+
+```{r}
+#| label: effect-size
+
+# Cohen's h for proportion differences
+cohens_h <- function(p1, p2) {
+  2 * (asin(sqrt(p2)) - asin(sqrt(p1)))
+}
+
+h <- cohens_h(weekly_2018, weekly_2024)
+
+interpret_h <- function(h) {
+  abs_h <- abs(h)
+  if (abs_h < 0.2) return("Negligible")
+  if (abs_h < 0.5) return("Small")
+  if (abs_h < 0.8) return("Medium")
+  return("Large")
+}
+
+cat("Effect Size (Cohen's h):\n")
+cat("========================\n\n")
+cat(sprintf("h = %.3f (%s effect)\n\n", h, interpret_h(h)))
+cat("Interpretation:\n")
+cat("  h < 0.2  : Negligible\n")
+cat("  0.2 ≤ h < 0.5 : Small\n")
+cat("  0.5 ≤ h < 0.8 : Medium\n")
+cat("  h ≥ 0.8  : Large\n")
+```
+
+## Visualisation
+
+```{r}
+#| label: visualisation
+#| fig-cap: "Weekly attendance estimates with 95% confidence intervals"
+
+# Prepare data for plotting
+plot_data <- tibble(
+  Year = c(2018, 2024),
+  Estimate = c(ci_2018$estimate, ci_2024$estimate) * 100,
+  CI_Lower = c(ci_2018$ci_lower, ci_2024$ci_lower) * 100,
+  CI_Upper = c(ci_2018$ci_upper, ci_2024$ci_upper) * 100
+)
+
+ggplot(plot_data, aes(x = factor(Year), y = Estimate)) +
+  geom_point(size = 3, color = "steelblue") +
+  geom_errorbar(aes(ymin = CI_Lower, ymax = CI_Upper), 
+                width = 0.2, color = "steelblue", linewidth = 1) +
+  geom_hline(yintercept = 0, linetype = "dashed", alpha = 0.3) +
+  labs(
+    x = "Year",
+    y = "Percentage attending weekly",
+    title = "Weekly Church Attendance: 2018 vs 2024",
+    subtitle = "With 95% confidence intervals (design effect = 1.5)"
+  ) +
+  theme_minimal() +
+  scale_y_continuous(labels = scales::percent_format(scale = 1))
+```
+
+## Interpretation
+
+Even if the change is statistically significant, several caveats apply:
+
+1. **Question order effects**: The 2024 survey format differs from 2018
+2. **Demographic composition**: Population changes may explain part of the change
+3. **Small effect size**: The practical significance is limited
+4. **Contradictory evidence**: Other measures show decreases
+
+See the [Question Order Effects](./question-order-effects.qmd) and [Demographic Analysis](./demographic-analysis.qmd) pages for more detailed investigation.
+
