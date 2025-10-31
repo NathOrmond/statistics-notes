@@ -10,6 +10,7 @@ renv/
 _site/
 _site.yml
 _quarto_nav.yml
+_freeze/
 
 # OS specific files
 .DS_Store
