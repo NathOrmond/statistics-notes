@@ -1,0 +1,90 @@
+metric,source,year,value,unit,age_group,notes
+church_attendance_weekly,CofE,2024,702000,people,all_ages,Average weekly attendance October count
+church_attendance_weekly_adults,CofE,2024,608000,people,16+,Average weekly attendance October count
+church_attendance_weekly_children,CofE,2024,94000,people,0-15,Average weekly attendance October count
+church_attendance_sunday,CofE,2024,581000,people,all_ages,Average Sunday attendance October count
+church_attendance_sunday_adults,CofE,2024,506000,people,16+,Average Sunday attendance October count
+church_attendance_sunday_children,CofE,2024,75000,people,0-15,Average Sunday attendance October count
+usual_sunday_attendance,CofE,2024,592000,people,all_ages,Usual Sunday attendance
+worshipping_community,CofE,2024,1009000,people,all_ages,Regular worshippers (monthly+)
+worshipping_community_0_10,CofE,2024,129000,people,0-10,
+worshipping_community_11_17,CofE,2024,58000,people,11-17,
+worshipping_community_18_69,CofE,2024,470000,people,18-69,
+worshipping_community_70plus,CofE,2024,353000,people,70+,
+worshipping_community_pct,CofE,2024,1.7,percent_of_england_population,all_ages,
+electoral_roll,CofE,2024,1009000,people,all_ages,Parish electoral roll
+easter_attendance,CofE,2024,953000,people,all_ages,Easter Day and vigil
+christmas_attendance,CofE,2024,1858000,people,all_ages,Christmas Eve and Christmas Day
+advent_attendance_congregation,CofE,2024,2248000,people,all_ages,Congregation and community services
+baptisms_total,CofE,2024,61600,events,all_ages,Baptisms and thanksgivings
+baptisms_infants,CofE,2024,26900,events,0-1,
+baptisms_children_1_4,CofE,2024,18300,events,1-4,
+baptisms_children_5_10,CofE,2024,5300,events,5-10,
+baptisms_young_people_11_17,CofE,2024,2400,events,11-17,
+baptisms_adults_18plus,CofE,2024,8700,events,18+,
+marriages_total,CofE,2024,21600,events,all_ages,Marriages and services of prayer/dedication
+funerals_total,CofE,2024,87400,events,all_ages,All funerals
+funerals_in_church,CofE,2024,59600,events,all_ages,
+funerals_crematorium_cemetery,CofE,2024,27700,events,all_ages,
+confirmations,CofE,2024,11300,events,all_ages,
+change_2019_2024_weekly_attendance,CofE,2024,-19,percent,all_ages,Decline from 2019 baseline
+change_2019_2024_worshipping_community,CofE,2024,-9.4,percent,all_ages,Decline from 2019 baseline
+change_2023_2024_weekly_attendance,CofE,2024,1.6,percent,all_ages,Year-on-year change
+change_2023_2024_worshipping_community,CofE,2024,0.6,percent,all_ages,Year-on-year change
+church_at_home_offering,CofE,2024,29,percent_of_churches,all_ages,Churches offering Church at Home services in October
+church_at_home_worshippers_pct,CofE,2024,5,percent_of_worshipping_community,all_ages,Entirely or predominantly online
+new_congregations_started,CofE,2024,1300,events,all_ages,New congregations/worshipping communities
+congregations_ended,CofE,2024,570,events,all_ages,Congregations that came to an end
+net_new_congregations,CofE,2024,730,events,all_ages,Net increase
+churches_no_children_attendance,CofE,2024,33,percent_of_churches,0-15,Churches with zero child attendance in October
+churches_no_children_worshipping,CofE,2024,32,percent_of_churches,0-17,Churches with no children in Worshipping Community
+attended_church_service_past_year,BibleSoc,2024,24,percent,all_ages,YouGov survey England/Wales adults
+attended_church_service_past_year_18_34,BibleSoc,2024,26,percent,18-34,
+attended_church_service_past_year_35_54,BibleSoc,2024,18,percent,35-54,
+attended_church_service_past_year_55plus,BibleSoc,2024,27,percent,55+,
+attended_church_ever,BibleSoc,2024,68,percent,all_ages,Ever attended church service
+visited_cathedral_past_year,BibleSoc,2024,21,percent,all_ages,Sightseeing in cathedral/church
+visited_cathedral_ever,BibleSoc,2024,53,percent,all_ages,
+bible_could_change_society_agree,BibleSoc,2024,32,percent,all_ages,Agree society could be changed by Bible message
+bible_could_change_society_agree_18_34,BibleSoc,2024,31,percent,18-34,
+bible_could_change_society_agree_35_54,BibleSoc,2024,27,percent,35-54,
+bible_could_change_society_agree_55plus,BibleSoc,2024,37,percent,55+,
+bible_could_change_society_disagree,BibleSoc,2024,31,percent,all_ages,
+happy_reading_bible_public_agree,BibleSoc,2024,29,percent,all_ages,Would be happy reading Bible in public
+bible_stories_in_schools_agree,BibleSoc,2024,41,percent,all_ages,Bible stories should be taught in schools
+bible_stories_in_schools_disagree,BibleSoc,2024,28,percent,all_ages,
+faith_status_christian,BibleSoc,2024,39,percent,all_ages,Self-identified as Christian
+faith_status_christian_anglican,BibleSoc,2024,48,percent_of_christians,all_ages,Anglican among Christians
+faith_status_christian_catholic,BibleSoc,2024,22,percent_of_christians,all_ages,Catholic among Christians
+faith_status_non_religious,BibleSoc,2024,49,percent,all_ages,Non-Christian faiths or no religion
+attend_church_weekly_or_more,BibleSoc,2024,11,percent,all_ages,"Daily/almost daily, few times a week, or weekly"
+attend_church_weekly_18_34,BibleSoc,2024,16,percent,18-34,
+attend_church_weekly_35_54,BibleSoc,2024,7,percent,35-54,
+attend_church_weekly_55plus,BibleSoc,2024,12,percent,55+,
+attend_church_never,BibleSoc,2024,59,percent,all_ages,Never attend apart from weddings/baptisms/funerals
+survey_sample_size,BibleSoc,2024,13146,people,all_ages,YouGov survey sample
+england_wales_population,BibleSoc,2024,60500000,people,all_ages,Approximate 2024 population
+attended_church_service_past_year,BibleSoc,2018,NA,percent,all_ages,Not directly comparable question format
+bible_could_change_society_agree,BibleSoc,2018,28,percent,all_ages,Agree society could be changed by Bible message
+bible_could_change_society_agree_18_34,BibleSoc,2018,20,percent,18-34,
+bible_could_change_society_agree_35_54,BibleSoc,2018,26,percent,35-54,
+bible_could_change_society_agree_55plus,BibleSoc,2018,38,percent,55+,
+bible_could_change_society_disagree,BibleSoc,2018,34,percent,all_ages,
+faith_status_christian,BibleSoc,2018,39,percent,all_ages,Self-identified as Christian - unchanged from 2018
+faith_status_non_religious,BibleSoc,2018,49,percent,all_ages,Non-Christian faiths or no religion
+england_population_2021_census,ONS,2021,56766000,people,all_ages,Used in CofE calculations
+church_attendance_weekly,CofE,2019,864000,people,all_ages,Pre-pandemic baseline
+church_attendance_weekly_adults,CofE,2019,740000,people,16+,Pre-pandemic baseline
+church_attendance_weekly_children,CofE,2019,124000,people,0-15,Pre-pandemic baseline
+worshipping_community,CofE,2019,1114000,people,all_ages,Pre-pandemic baseline
+usual_sunday_attendance,CofE,2019,691000,people,all_ages,Pre-pandemic baseline
+easter_attendance,CofE,2019,1177000,people,all_ages,Pre-pandemic baseline
+christmas_attendance,CofE,2019,2328000,people,all_ages,Pre-pandemic baseline
+baptisms_total,CofE,2019,89600,events,all_ages,Pre-pandemic baseline
+marriages_total,CofE,2019,31700,events,all_ages,Pre-pandemic baseline
+funerals_total,CofE,2019,114700,events,all_ages,Pre-pandemic baseline
+church_attendance_weekly,CofE,2023,691000,people,all_ages,
+worshipping_community,CofE,2023,1003000,people,all_ages,
+usual_sunday_attendance,CofE,2023,582000,people,all_ages,
+easter_attendance,CofE,2023,937000,people,all_ages,
+christmas_attendance,CofE,2023,1961000,people,all_ages,

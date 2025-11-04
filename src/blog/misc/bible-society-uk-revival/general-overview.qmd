@@ -44,7 +44,15 @@ theme_comparison <- function() {
 
 ## Introduction
 
-This document provides a comprehensive, descriptive comparison of all survey questions common to both the 2018 and 2024 YouGov surveys on church attendance in the UK. The focus here is on presenting the data clearly , showing what was asked and how responses differed between the two time points.
+This document provides a comprehensive, descriptive comparison of all survey questions common to both the 2018 and 2024 YouGov surveys on church attendance in the UK. The focus here is on presenting the data clearly, showing what was asked and how responses differed between the two time points.
+
+**Important context**: This analysis presents the survey data as reported. However, when compared with actual church attendance records, significant discrepancies emerge. See [Survey Claims vs Church Records](./cofe-comparison.qmd) for a detailed comparison showing that:
+
+- Survey claims 6.66 million weekly attenders
+- Actual church records show ~1.46 million across all Christian denominations  
+- This 3.7x over-reporting undermines claims based solely on survey data
+
+For immigration context that may explain apparent changes, see [Demographic Analysis](./demographic-analysis.qmd).
 
 ## Survey Metadata
 
@@ -231,8 +239,8 @@ question_structure <- tibble(
   Question = c("Frequency Question", "Binary Question (NEW)", "Frequency Question"),
   Order = c(1, 1, 2),
   Comparable = c("Yes", "No", "Yes"),
-  y_pos = c(2, 1, 1),
-  x_pos = c(1, 1, 2)
+  y_pos = c(1.5, 2, 1),
+  x_pos = c(1, 1, 1)
 )
 
 ggplot(question_structure, aes(x = x_pos, y = y_pos)) +
@@ -1067,12 +1075,19 @@ p4 <- ggplot(consistency_plot, aes(x = Measure, y = Value)) +
 ### Main Findings
 
 1. **Weekly+ attendance increased** from 7% (2018) to 11% (2024) - a change of **+4 percentage points**
+   - **However**: Survey claims 6.66M weekly attenders vs actual church records of ~1.46M (3.7x over-reporting)
+   - See [Survey Claims vs Church Records](./cofe-comparison.qmd) for detailed comparison
 
 2. **"Never attended" decreased** from 63% (2018) to 59% (2024) - a change of **-4 percentage points**
 
 3. **All changes are relatively small** - no category changed by more than 4 percentage points
+   - **Context**: 4.2 million net migration (6.9% of E&W population) between surveys
+   - Immigration could explain ~70% of the 4pp increase
+   - See [Demographic Analysis](./demographic-analysis.qmd) for ONS migration data analysis
 
 4. **Age patterns**: The youngest age group (18-34) showed the largest increase in weekly attendance (+7.0pp), compared to middle (+1.0pp) and older (+2.0pp) age groups
+   - **Note**: This contradicts CofE data showing elderly (70+) make up 35% of worshippers
+   - Suggests systematic over-reporting among younger respondents
 
 5. **Internal consistency**: The 2024 binary and frequency questions show a discrepancy of `r sprintf("%.1f", abs(freq_sum_2024 - binary_2024))` percentage points
 
@@ -1100,8 +1115,9 @@ p4 <- ggplot(consistency_plot, aes(x = Measure, y = Value)) +
 
 For critical analysis of these findings, see:
 
-- [**Critical Analysis Overview**](./criticism-overview.qmd) - Evaluation of methodological quality and alternative explanations
+- [**Survey Claims vs Church Records**](./cofe-comparison.qmd) - **START HERE** - Comparison with actual CofE and Catholic attendance data showing 3.7x over-reporting
+- [**Demographic Analysis**](./demographic-analysis.qmd) - ONS migration data showing 4.2M net migration could explain ~70% of the apparent increase
+- [**Critical Analysis Overview**](./criticism-overview.qmd) - Comprehensive evaluation of methodological quality and alternative explanations
 - [**Weekly Attendance Claim**](./weekly-attendance-claim.qmd) - Statistical testing of the observed changes
 - [**Question Order Effects**](./question-order-effects.qmd) - Impact of methodological differences
-- [**Demographic Analysis**](./demographic-analysis.qmd) - Population composition effects
 

@@ -32,7 +32,18 @@ Comprehensive critical evaluation with visual evidence:
 - Immigration impact analysis
 - Evidence quality dashboard
 
-### 3. [Weekly Attendance Claim Analysis](./weekly-attendance-claim.qmd)
+### 3. [Survey Claims vs Church Records](./cofe-comparison.qmd)
+
+Comparing Bible Society survey data with actual church attendance from CofE and Catholic churches:
+- Weekly attendance: Survey claims (6.66M) vs actual records across denominations (1.80M)
+- The ~4.9 million "phantom attenders" problem
+- Age distribution paradox: Survey vs reality
+- Testing the "+25% revival" claim against CofE and Catholic data
+- Both major denominations show decline from 2019, not revival
+- Over-reporting analysis and reconciliation
+- Summary dashboard comparing all metrics
+
+### 4. [Weekly Attendance Claim Analysis](./weekly-attendance-claim.qmd)
 
 Statistical testing of the 7% → 11% increase claim:
 - Point estimates with confidence intervals
@@ -40,7 +51,7 @@ Statistical testing of the 7% → 11% increase claim:
 - Effect size calculations (Cohen's h)
 - Visualisation of results
 
-### 4. [Question Order Effects](./question-order-effects.qmd)
+### 5. [Question Order Effects](./question-order-effects.qmd)
 
 Impact of different survey question formats:
 - Comparison of 2018 vs 2024 question formats
@@ -48,29 +59,87 @@ Impact of different survey question formats:
 - Evidence of acquiescence bias and anchoring effects
 - Contradictory results analysis
 
-### 5. [Demographic Analysis](./demographic-analysis.qmd)
+### 6. [Demographic Analysis](./demographic-analysis.qmd)
 
-Population composition changes and their impact:
-- Attendance by ethnicity and age groups
-- Impact of immigration (Ukrainian refugees, Hong Kong BN(O) visa holders)
-- Composition vs behaviour change confound
-- Implications for the "revival" claim
+ONS migration data analysis and population composition changes:
+- **Official ONS data**: 4.2 million net migration (2019-2024) = 6.9% of E&W population
+- **Immigration impact quantified**: Conservative estimates show immigration could explain ~70% of the 4pp increase
+- **"Smoking gun" age evidence**: 64% of Non-EU+ immigrants are 16-34, perfectly explaining why this age group showed largest survey increase (+7.0pp)
+- **Strong correlation (r = 0.98)** between immigrant age composition and survey age patterns
+- **Composition vs behaviour confound**: No demographic controls applied by Bible Society
+- **Conclusion**: Immigration effects, not revival among existing residents
 
 ## Key Findings
 
-Our analysis reveals multiple red flags:
+Our analysis reveals multiple critical red flags that comprehensively undermine the "Quiet Revival" claim. When survey data is compared with actual church records and official migration statistics, the "revival" narrative collapses:
 
-1. **Internal Inconsistencies**: The 2024 survey shows contradictory results
-2. **Question Order Effects**: Different question formats make comparison invalid
-3. **Demographic Confounds**: Population changes may explain apparent increases
-4. **Small Effect Sizes**: Even if statistically significant, practical significance is limited
+### 1. **Massive Discrepancy with Church Records**
+- Survey claims: **6.66 million** weekly attenders (11%)
+- Actual records: **~1.46 million** across all Christian denominations
+  - CofE (2024): 702,000
+  - Catholic (2023): 555,000
+  - Other denominations (estimated): ~200,000
+- Gap: **~5.2 million "phantom attenders"** (3.7x over-reporting)
+- See [Survey Claims vs Church Records](./cofe-comparison.qmd)
+
+### 2. **"Revival" Claim Contradicts Church Data**
+- Bible Society claim: **+25%** CofE attendance increase (2018-2024)
+- **CofE actual statistics:** **-19%** decline (2019-2024)
+- **Catholic actual statistics:** **-21%** decline (2019-2023)
+- **Both major denominations** show the same pattern: pandemic recovery to below pre-2019 levels, NOT revival
+
+### 3. **Age Distribution Paradox**
+- Survey: Young people (18-34) attend MORE than middle-aged (26% vs 18%)
+- Reality: Elderly (70+) dominate church attendance (35% of worshippers)
+- Suggests systematic over-reporting among younger respondents
+
+### 4. **Immigration Composition Effect** (NEW - with ONS data)
+- **4.2 million net migration** between surveys (2019-2024) = **6.9%** of England & Wales population
+- **~70% of the 4pp increase** explained by immigration alone (conservative estimate)
+- **"Smoking gun" age evidence**: **64% of Non-EU+ immigrants are aged 16-34**
+  - This perfectly explains why 18-34s showed +7.0pp increase (largest of all age groups)
+  - Strong correlation (r = 0.98) between immigrant age composition and survey increases
+  - Contradicts typical religious revival patterns (which skew older)
+- **No demographic controls** applied by Bible Society
+- Composition change (new immigrants arriving) vs behaviour change (revival among existing residents) not separated
+- See [Demographic Analysis](./demographic-analysis.qmd) for detailed calculations and age analysis
+
+### 5. **Internal Inconsistencies**
+- The 2024 survey shows contradictory results
+- Binary question (77% attended) vs frequency sum (68.5% attended) = 8.5pp discrepancy
+
+### 6. **Question Order Effects**
+- Different question formats between 2018 and 2024 make comparison invalid
+- See [Question Order Effects](./question-order-effects.qmd)
+
+### 7. **Small Effect Sizes**
+- Cohen's h = 0.179 (below "small" threshold)
+- Even if statistically significant, practical significance is negligible
 
 ## Data Sources
 
+### Bible Society Surveys
 - **2018 Survey**: n = 19,101 (weighted: 19,875), October-November 2018
 - **2024 Survey**: n = 13,146 (weighted: 12,455), November-December 2024
-- **Source Documents**: `resources/papers/BibleSoc_Results_2018.pdf`, `BibleSoc_Results_2024.pdf`
+- **Source Documents**: `resources/papers/uk-church-attendance/BibleSoc_Results_2018.pdf`, `BibleSoc_Results_2024.pdf`
 - **Extracted Data**: `data/bible-society-uk-revival/processed/`
+
+### Church of England Statistics
+- **CofE Statistics for Mission 2024**: 12,707 churches responding (89% response rate)
+- **Source Document**: `resources/papers/uk-church-attendance/2024-c-of-e-statistics-for-mission.pdf`
+- **Comparison Data**: `data/c-of-e-church-attendance-2024/processed/cofe-vs-bibsoc.csv`
+
+### Catholic Church Statistics
+- **Bishops' Conference of England and Wales**: Mass attendance data 2019-2023
+- **Source**: Drozdziak, A. (2025). "UK Mass attendance jumps significantly, numbers still not quite pre-pandemic." *Catholic Review* / OSV News. [Link](https://catholicreview.org/uk-mass-attendance-jumps-significantly-numbers-still-not-quite-pre-pandemic/)
+- **Analysis**: Prof. Stephen Bullivant, St. Mary's University, London
+
+### ONS Migration Statistics
+- **Long-term International Migration, provisional: year ending December 2024**
+- **Source**: Office for National Statistics (published 22 May 2025)
+- **Coverage**: Year Ending June 2012 to Year Ending December 2024
+- **Data file**: `data/ons/provisional-migration-2024/raw/Table 1-Table 1.csv`
+- **Methodology**: Admin-based migration estimates using Home Office borders data, HMRC/DWP RAPID database, and International Passenger Survey
 
 ## Documentation
 
