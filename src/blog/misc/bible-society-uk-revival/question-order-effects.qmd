@@ -33,28 +33,53 @@ The 2018 and 2024 surveys used fundamentally different question formats:
 
 This violates best practice in survey methodology, as question order can significantly bias responses.
 
-## Question Format Comparison
+## Visualizing the Structural Difference
 
-### 2018 Survey Format
+The most significant methodological flaw is the change in question structure between the two surveys. The 2018 survey asked a single question about frequency, while the 2024 survey first asked a binary yes/no question before asking about frequency. This change introduces a "priming" effect that makes the results from the two years not directly comparable. The chart below illustrates this structural difference.
 
-**Question**: 'Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?'
+```{r}
+#| label: question-flow-chart
+#| fig-cap: "Visual comparison of the 2018 and 2024 survey question structures."
+#| echo: false
 
-**Response options**:
-- Daily/almost daily
-- A few times a week
-- About once a week
-- [other frequency options...]
-- Never
+library(ggplot2)
+library(tibble)
+library(dplyr)
 
-### 2024 Survey Format
+nodes <- tribble(
+  ~survey, ~step, ~label,
+  "2018 Survey", 1, "1. How often do you\nattend church?",
+  "2024 Survey", 1, "1. Have you attended church\nin the past year?",
+  "2024 Survey", 2, "2. How often did you attend?"
+) %>% 
+  mutate(x = 1, y = -step)
 
-**Question 1 (BINARY)**: 'Have you attended a church service in the past year?'
-- Yes - in the past year
-- Yes - more than a year ago
-- Never
+edges <- tribble(
+  ~survey, ~x, ~y, ~xend, ~yend,
+  "2024 Survey", 1, -1.2, 1, -1.8
+)
 
-**Question 2 (FREQUENCY)**: 'How often did you attend?'
-[Same frequency scale as 2018]
+ggplot() +
+  geom_label(data = nodes, aes(x = x, y = y, label = label, fill = survey),
+             color = "white", fontface = "bold", size = 4, lineheight = 0.9, 
+             label.padding = unit(0.5, "lines"), label.size = 0) +
+  geom_segment(data = edges, aes(x=x,y=y,xend=xend,yend=yend),
+               arrow = arrow(length = unit(0.3, "cm")), linewidth = 1.5, color = "grey30") +
+  facet_wrap(~survey, ncol = 2) +
+  scale_fill_manual(values = c("2018 Survey" = "#4575b4", "2024 Survey" = "#d73027")) +
+  theme_void() +
+  labs(
+    title = "Comparability Assessment: Survey Question Structure",
+    subtitle = "The 2024 survey introduced a binary question, priming respondents before the frequency question."
+  ) +
+  theme(
+    plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 11, hjust = 0.5, color = "grey40"),
+    strip.text = element_text(size = 14, face = "bold"),
+    legend.position = "none",
+    plot.margin = margin(10,10,10,10)
+  )
+```
 
 🚩 **CRITICAL**: The binary question primes respondents before they consider frequency, which can lead to:
 
@@ -105,6 +130,36 @@ If the questions are measuring the same thing, the binary response should match 
 } else {
   "✓ Responses are internally consistent"
 }`
+
+```{r}
+#| label: inconsistency-chart
+#| fig-cap: "Internal inconsistency in the 2024 survey. The sum of frequency responses does not match the binary 'Yes' response."
+#| echo: false
+
+inconsistency_data <- tibble(
+  Source = c("Binary Question\\n('Yes - in past year')", "Sum of Frequency Questions\\n(annual categories)"),
+  Percentage = c(binary_2024, freq_sum_2024)
+)
+
+ggplot(inconsistency_data, aes(x = Source, y = Percentage, fill = Source)) +
+  geom_col(width = 0.6, alpha = 0.8) +
+  geom_text(aes(label = sprintf("%.1f%%", Percentage)), vjust = -0.5, size = 5, fontface = "bold") +
+  scale_fill_manual(values = c("#d7191c", "#fdae61")) +
+  theme_minimal(base_size = 14) +
+  labs(
+    title = "Internal Inconsistency in 2024 Survey Data",
+    subtitle = sprintf("Discrepancy of %.1f percentage points between two measures of annual attendance", discrepancy),
+    x = "Data Source within 2024 Survey",
+    y = "Percentage (%)"
+  ) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "grey40"),
+    panel.grid.major.x = element_blank()
+  ) +
+  ylim(0, 30)
+```
 
 ## Evidence from Survey Methodology Literature
 
@@ -173,9 +228,43 @@ binary_2024 <- attendance_data %>%
 
 Interestingly, the binary question itself shows a decrease:
 
-- **2018 (frequency-based)**: ~`r sprintf("%.0f", ever_2018)`%
+- **2018 (frequency-based)**: `r sprintf("%.0f", ever_2018)`%
 - **2024 (binary question)**: `r sprintf("%.1f", binary_2024)`%
 - **Change**: `r sprintf("%.1f", binary_2024 - ever_2018)` percentage points
+
+```{r}
+#| label: contradictory-trend-chart
+#| fig-cap: "Contradictory trends between weekly and annual attendance measures."
+#| echo: false
+
+trend_data <- tibble(
+  Metric = c("Weekly Attendance", "Weekly Attendance", "Annual Attendance", "Annual Attendance"),
+  Year = c("2018", "2024", "2018", "2024"),
+  Value = c(weekly_2018 * 100, weekly_2024 * 100, ever_2018, binary_2024)
+)
+
+ggplot(trend_data, aes(x = Year, y = Value, group = Metric, color = Metric, shape = Metric)) +
+  geom_line(linewidth = 2, alpha = 0.8) +
+  geom_point(size = 5) +
+  geom_text(aes(label = sprintf("%.1f%%", Value)),
+            vjust = -1.5, fontface = "bold", size = 5) +
+  scale_color_manual(values = c("Weekly Attendance" = "#2166ac", "Annual Attendance" = "#d73027")) +
+  scale_shape_manual(values = c("Weekly Attendance" = 16, "Annual Attendance" = 15)) +
+  guides(color = guide_legend(override.aes = list(linetype = 0))) +
+  theme_minimal(base_size = 14) +
+  labs(
+    title = "Contradictory Trends: Weekly vs. Annual Attendance",
+    subtitle = "Weekly attendance appears to increase while annual attendance decreases—a logical impossibility.",
+    x = "Survey Year",
+    y = "Percentage (%)"
+  ) +
+  theme(
+    legend.position = "top",
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(color = "grey40")
+  ) +
+  ylim(0, 30)
+```
 
 🚩 **CONTRADICTION**:
 

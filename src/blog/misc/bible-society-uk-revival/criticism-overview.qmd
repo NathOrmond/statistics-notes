@@ -62,7 +62,7 @@ This exploratory analysis examines Bible Society UK's claim of a "Quiet Revival"
 
 1. **Tiny effect sizes** (Cohen's h < 0.2 = negligible to small)
 2. **Major confounders ignored**:
-   - ~400,000-600,000 immigrants from religious countries
+   - **4.2 million net migration** (2019-2024) = 6.9% of England & Wales population
    - COVID-19 rebound effect
    - Sample size reduced 31% (19,875 → 13,146)
 3. **No evidence of increased belief/commitment**
@@ -238,7 +238,7 @@ ggplot(red_flags, aes(x = x, y = y)) +
 **Detailed list of red flags:**
 
 1. **Sample size dropped 31%** without explanation
-2. **No demographic adjustment** for ~400k-600k religious immigrants
+2. **No demographic adjustment** for **4.2 million net migration** (6.9% of E&W population)
 3. **No control for COVID-19 effects**
 4. **Contradictory results** within same survey
 5. **Question format changed** between surveys (major methodological flaw)
@@ -618,25 +618,32 @@ While the changes are **statistically significant** (with such large sample size
 
 #### Immigration Effects (CRITICAL)
 
-Between 2018 and 2024, the UK experienced substantial immigration:
+Using **ONS Long-term International Migration data**, we can precisely quantify the demographic change between surveys:
 
-- **Ukrainian refugees**: 217,000-255,000 (post-February 2022)
-  - Predominantly Orthodox Christian background
-  - Higher religiosity than UK average
-- **Hong Kong BN(O) visa holders**: >163,000 (January 2021 onwards)
-  - Different religious demographics
-- **Other net migration**: Substantial changes
+**Net Migration (2019-2024):**
+- **Total**: **4.2 million** people
+- **As % of England & Wales pop**: **6.9%** (roughly 1 in every 14 people)
+- **Non-EU+ immigration surge**: From 346,000 (YE Mar 2019) to 1,122,000 (YE Mar 2024)
+- **Includes**:
+  - Ukrainian refugees (post-February 2022)
+  - Hong Kong BN(O) visa holders (>163,000)
+  - International students, skilled workers, family migration
 
-**The problem**: The 2024 data shows:
-- Ethnic minority groups have different attendance rates (some higher, some lower than White British)
-- No demographic standardisation was performed
-- An unknown proportion of any increase could simply reflect population composition changes
+**The problem**: The 2024 survey data shows:
+- Ethnic minority groups have different attendance rates than White British
+- **No demographic standardisation** was performed by Bible Society
+- Different religious attendance patterns among immigrant groups
 
 **What's needed**: Demographic weighting or stratified analysis to separate:
-- **Composition effect**: Change due to different population mix
-- **Behaviour effect**: Change in attendance within demographic groups
+- **Composition effect**: Change due to different population mix (immigration)
+- **Behaviour effect**: Change in attendance within demographic groups (actual "revival")
 
-🚩 **RED FLAG**: Without this adjustment, we cannot determine if existing UK residents increased attendance or if it's just immigration effects.
+🚩 **CRITICAL RED FLAG**: With 6.9% population change from immigration and no demographic controls, the "revival" claim is **unsupported**.
+
+**Conservative calculation** (see [Demographic Analysis](./demographic-analysis.qmd) for full details):
+- Assuming immigrants attend at 1.5× baseline rate (7% → 10.5%)
+- Immigration could explain **~70%** of the 4 percentage point increase
+- Even at equal attendance rates: immigration explains **~44%** of the increase
 
 #### COVID-19 Recovery Effects
 
@@ -835,12 +842,17 @@ kable(ethnicity_table, digits = 1,
 
 When demographic groups have different attendance rates AND the population composition changes, overall attendance can change even if no individual group changes their behaviour. This is called a **composition effect**.
 
-**Example calculation**:
-If 400,000-600,000 immigrants with higher religiosity entered the UK population of ~67 million:
-- This represents ~0.6-0.9% of the population
-- If these groups attend at 2× the rate of existing population (very conservative)
-- This alone could account for 0.6-1.8 percentage points of change
-- **That's 15-45% of the observed 4pp increase explained by immigration alone**
+**Actual calculation using ONS data**:
+
+With **4.2 million net migration** to UK (6.9% of England & Wales population):
+
+| Scenario | Immigrant Attendance Rate | % of 4pp Increase Explained |
+|----------|---------------------------|---------------------------|
+| **Equal to baseline** | 7% (1.0x) | **44%** |
+| **Conservative** | 10.5% (1.5x) | **70%** |
+| **Moderate** | 14% (2.0x) | **96%** (nearly all) |
+
+**Key finding**: Even under the most conservative assumptions, immigration could account for the **majority** of the observed 4pp increase. See [Demographic Analysis](./demographic-analysis.qmd) for detailed calculations and sensitivity analysis.
 
 ```{r}
 #| label: immigration-impact-visual
@@ -849,15 +861,16 @@ If 400,000-600,000 immigrants with higher religiosity entered the UK population 
 #| fig-width: 10
 #| fig-height: 6
 
-# Create data for immigration impact visualization
+# Create data for immigration impact visualization using actual ONS data
+# Based on detailed calculation in demographic-analysis.qmd
 impact_data <- tibble(
-  Component = c("Total\nObserved\nChange", "Immigration\nEffect\n(Conservative)", 
-                "Immigration\nEffect\n(Upper Bound)", "Unexplained\n(Lower Bound)",
-                "Unexplained\n(Upper Bound)"),
-  Value = c(4.0, 0.6, 1.8, 2.2, 3.4),
+  Component = c("Total\nObserved\nChange", "Immigration\nEffect\n(Equal Rate)", 
+                "Immigration\nEffect\n(1.5x Rate)", "Unexplained\n(1.5x scenario)",
+                "Unexplained\n(Equal rate)"),
+  Value = c(4.0, 1.76, 2.8, 1.2, 2.24),
   Type = c("Total", "Immigration", "Immigration", "Other", "Other"),
   x = c(1, 2.5, 2.5, 4, 4),
-  label_y = c(2, 0.3, 0.9, 1.1, 1.7)
+  label_y = c(2, 0.88, 1.4, 0.6, 1.12)
 )
 
 # Create waterfall-style visualization
@@ -879,17 +892,17 @@ ggplot() +
             aes(x = x, y = -0.8, label = Component),
             size = 3, lineheight = 0.9, fontface = "bold") +
   # Add annotations
-  annotate("segment", x = 1.7, xend = 2.2, y = 3.5, yend = 1.5,
+  annotate("segment", x = 1.7, xend = 2.2, y = 3.5, yend = 2.0,
            arrow = arrow(length = unit(0.3, "cm")), linewidth = 0.8, color = "grey30") +
-  annotate("text", x = 1.5, y = 3.7, label = "15-45% of change\nmay be immigration",
-           size = 3.5, fontface = "italic", hjust = 0, lineheight = 0.9) +
+  annotate("text", x = 1.5, y = 3.7, label = "44-70% of change\nexplained by immigration",
+           size = 3.5, fontface = "bold", hjust = 0, lineheight = 0.9, color = "#d73027") +
   scale_x_continuous(limits = c(0, 5)) +
   scale_y_continuous(limits = c(-2, 5), breaks = 0:5, expand = expansion(mult = c(0.02, 0.05))) +
   labs(
     title = "Decomposition of Observed 4pp Attendance Increase",
-    subtitle = "Immigration effects (orange) could explain substantial portion of observed change (blue)",
+    subtitle = "Immigration effects (orange) explain majority of observed change using ONS data",
     y = "Percentage Points Change",
-    caption = "Conservative estimate: immigrants attend at 2× rate of existing population\nUpper bound: more realistic assumptions about differential attendance rates"
+    caption = "Source: ONS Long-term International Migration (2019-2024); 4.2M net migration\nLower bound: immigrants attend at equal rate (7%); Upper bound: 1.5x rate (10.5%)"
   ) +
   theme_critique() +
   theme(
@@ -1026,6 +1039,35 @@ p_dashboard / p_confidence +
     )
   )
 ```
+
+## External Expert Criticism: Professor David Voas
+
+The criticisms outlined in this analysis are echoed and expanded upon by Professor David Voas (UCL Social Research Institute), a leading quantitative social scientist specializing in religious change. In a June 2025 article, he expresses deep skepticism about the "revival" claim, reinforcing the methodological and data-related concerns.
+
+> Voas, D. (2025, June 16). *Comment: Is there really a religious revival in England? Why I’m sceptical of a new report*. UCL News. [https://www.ucl.ac.uk/news/2025/jun/comment-there-really-religious-revival-england-why-im-sceptical-new-report](https://www.ucl.ac.uk/news/2025/jun/comment-there-really-religious-revival-england-why-im-sceptical-new-report)
+
+**Key arguments from Professor Voas's critique:**
+
+-   **Contradiction with Gold-Standard Surveys**: The Bible Society's findings are directly contradicted by high-quality probability surveys like the **British Social Attitudes (BSA)** survey, which shows a *decline* in churchgoing (from 12.2% to 9.3% between 2018 and 2023).
+
+-   **Contradiction with Denominational Data**: The report's claims are inconsistent with the churches' own attendance counts.
+    -   **Church of England**: Attendance is down about 20% from pre-pandemic levels.
+    -   **Catholic Church**: The report implies Catholic attendance more than doubled. However, the Catholic Church's own data shows a **21% drop** in mass attendance between 2019 and 2023.
+
+-   **Inconsistent YouGov Data**: Another YouGov panel conducted for the British Election Study (BES) shows a *decline* in Christian churchgoers from 8.0% to 6.6% between 2015 and 2024, the opposite of what the Bible Society's YouGov poll suggests.
+
+-   **Flawed Survey Methodology**:
+    -   The YouGov panel is a **non-probability, opt-in panel**, not a random sample. Findings cannot be reliably generalized to the whole population.
+    -   Claims of a "1% margin of error" are **misleading** for this type of survey.
+    -   Voas points to a similar YouGov poll for the Economist about Holocaust denial among young Americans, which was later shown to be "almost certainly fallacious".
+
+-   **Unrepresentative Young Adult Samples**: Young adults are a "hard-to-reach population". Those who do respond to online panels may not be representative and are often more religious than their peers.
+
+-   **Anomalous Gender Gap Finding**: The report's claim that "men are now more likely to attend church than women" would make England and Wales a major outlier among Western countries and is highly suspect.
+
+-   **Lack of Transparency**: The Bible Society has not published the dataset for independent analysis, which violates the basic scientific expectation of open access to data.
+
+Professor Voas's independent analysis strongly supports the conclusion that the "Quiet Revival" claim is an artifact of flawed methodology and data, not a reflection of genuine religious change.
 
 ## Next Steps
 

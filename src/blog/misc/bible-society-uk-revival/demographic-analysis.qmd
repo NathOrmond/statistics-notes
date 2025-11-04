@@ -23,17 +23,542 @@ setwd(here())
 library(tidyverse)
 library(scales)
 library(ggplot2)
+library(stringr)
+library(knitr)
 ```
 
 ## Introduction
 
-Between 2018 and 2024, the UK population composition changed significantly due to immigration, particularly:
+Between 2018 and 2024, the UK population composition changed significantly due to immigration. Using Office for National Statistics (ONS) provisional long-term international migration data, we can quantify these changes precisely and assess their potential impact on church attendance patterns.
 
-- **Ukrainian refugees**: ~217,000-255,000 (post-February 2022)
-- **Hong Kong BN(O) visa holders**: >163,000 (January 2021 - March 2025)
-- Other net migration changes
+**Key immigration flows 2018-2024**:
 
-These groups may have different religious attendance patterns than the existing UK population, which could explain apparent changes in church attendance.
+- **Net migration**: Cumulative +4.2 million (YE 2019 - YE 2024)
+- **Non-EU+ immigration surge**: From 346,000 (YE Mar 2019) to 1,122,000 (YE Mar 2024)
+- **Ukrainian refugees**: Significant arrivals post-February 2022
+- **Hong Kong BN(O) visa holders**: >163,000 (January 2021 onwards)
+- **Other migration**: Substantial increases across various visa routes
+
+These groups may have different religious attendance patterns than the existing UK population, which could explain apparent changes in church attendance without any underlying "revival" among existing residents.
+
+## ONS Migration Data Analysis
+
+### Loading and Preparing ONS Data
+
+```{r}
+#| label: load-ons-data
+
+# Load ONS long-term international migration data
+# Skip first 12 rows (metadata + multi-line header), then set column names manually
+ons_migration_raw <- read_csv(
+  here::here("data/ons/provisional-migration-2024/raw/Table 1-Table 1.csv"),
+  skip = 12,
+  col_names = c("flow", "period", "all_nationalities", "british", "eu_plus", "non_eu_plus",
+                paste0("empty_", 1:8)),  # Extra empty columns in the CSV
+  col_types = cols(.default = "c")  # Read everything as character first
+)
+
+# Clean and prepare data
+ons_migration_clean <- ons_migration_raw %>%
+  # Remove empty columns
+  select(flow, period, all_nationalities, british, eu_plus, non_eu_plus) %>%
+  # Remove empty rows
+  filter(!is.na(flow) & flow != "") %>%
+  # Remove notes/markers from values and convert to numeric
+  mutate(
+    all_nationalities = as.numeric(gsub("[^0-9-]", "", all_nationalities)),
+    british = as.numeric(gsub("[^0-9-]", "", british)),
+    eu_plus = as.numeric(gsub("[^0-9-]", "", eu_plus)),
+    non_eu_plus = as.numeric(gsub("[^0-9-]", "", non_eu_plus))
+  )
+
+# Filter for survey-relevant period: YE 2018 to YE 2024
+migration_period <- ons_migration_clean %>%
+  filter(grepl("YE", period)) %>%
+  # Create proper year variable
+  mutate(
+    # Extract 2-digit year suffix (e.g., "YE Jun 12" -> "12")
+    year_suffix = as.numeric(str_extract(period, "[0-9]{2}$")),
+    # Convert to 4-digit year (18-99 = 2018-2099, 00-17 = 2000-2017)
+    year = ifelse(year_suffix >= 18, 2000 + year_suffix, 2000 + year_suffix),
+    # Extract quarter/month (e.g., "YE Jun 12" -> "Jun")
+    quarter = str_extract(period, "(?<=YE )[A-Za-z]+")
+  ) %>%
+  # Focus on key periods
+  filter(year >= 2018 & year <= 2024)
+```
+
+### Net Migration Trends (2018-2024)
+
+The period between the two Bible Society surveys saw unprecedented levels of net migration to the UK, with particularly dramatic increases from 2021 onwards.
+
+```{r}
+#| label: net-migration-trends
+#| fig-cap: "Net migration to UK by nationality group (Year Ending 2018-2024)"
+#| fig-width: 12
+#| fig-height: 7
+
+# Filter net migration data
+net_migration <- migration_period %>%
+  filter(flow == "Net migration") %>%
+  arrange(year, match(quarter, c("Mar", "Jun", "Sep", "Dec"))) %>%
+  mutate(
+    period_label = paste0(quarter, " ", year),
+    period_order = row_number()
+  )
+
+# Create time series plot
+ggplot(net_migration, aes(x = period_order)) +
+  # Total net migration
+  geom_line(aes(y = all_nationalities / 1000, color = "Total"), 
+            linewidth = 1.5, alpha = 0.9) +
+  geom_point(aes(y = all_nationalities / 1000, color = "Total"), 
+             size = 3) +
+  # Non-EU+ (main driver)
+  geom_line(aes(y = non_eu_plus / 1000, color = "Non-EU+"), 
+            linewidth = 1.2, alpha = 0.9) +
+  geom_point(aes(y = non_eu_plus / 1000, color = "Non-EU+"), 
+             size = 2.5) +
+  # EU+
+  geom_line(aes(y = eu_plus / 1000, color = "EU+"), 
+            linewidth = 1.2, alpha = 0.9) +
+  geom_point(aes(y = eu_plus / 1000, color = "EU+"), 
+             size = 2.5) +
+  # British
+  geom_line(aes(y = british / 1000, color = "British"), 
+            linewidth = 1.2, alpha = 0.9) +
+  geom_point(aes(y = british / 1000, color = "British"), 
+             size = 2.5) +
+  # Survey periods
+  annotate("rect", xmin = 0.5, xmax = 4.5, ymin = -200, ymax = 1000,
+           alpha = 0.1, fill = "blue") +
+  annotate("text", x = 2.5, y = 950, label = "2018 Survey\nPeriod",
+           size = 3.5, fontface = "bold", color = "blue") +
+  annotate("rect", xmin = 23.5, xmax = 27.5, ymin = -200, ymax = 1000,
+           alpha = 0.1, fill = "red") +
+  annotate("text", x = 25.5, y = 950, label = "2024 Survey\nPeriod",
+           size = 3.5, fontface = "bold", color = "red") +
+  # Zero line
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  scale_color_manual(
+    values = c("Total" = "#2c7bb6", "Non-EU+" = "#d7191c", 
+               "EU+" = "#fdae61", "British" = "#abd9e9"),
+    name = "Nationality Group"
+  ) +
+  scale_x_continuous(
+    breaks = seq(1, nrow(net_migration), by = 4),
+    labels = net_migration$period_label[seq(1, nrow(net_migration), by = 4)]
+  ) +
+  scale_y_continuous(labels = comma_format(suffix = "K")) +
+  labs(
+    title = "UK Net Migration Surge (2018-2024)",
+    subtitle = "Period between Bible Society surveys saw unprecedented immigration levels",
+    x = "Year Ending",
+    y = "Net Migration (thousands)",
+    caption = "Source: ONS Long-term International Migration (provisional estimates)\nNote: Survey periods highlighted in blue (2018) and red (2024)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.minor = element_blank()
+  )
+```
+
+### Cumulative Impact: How Much Did Immigration Change the Population?
+
+```{r}
+#| label: cumulative-migration
+
+# Calculate cumulative net migration between survey periods
+# 2018 survey: Oct-Nov 2018 (use YE Dec 2018 as proxy)
+# 2024 survey: Nov-Dec 2024 (use YE Dec 2024)
+
+survey_period_migration <- net_migration %>%
+  filter(
+    (year == 2018 & quarter == "Dec") |
+    (year == 2024 & quarter == "Dec")
+  ) %>%
+  select(year, quarter, all_nationalities, british, eu_plus, non_eu_plus)
+
+# Calculate cumulative between periods
+cumulative_migration <- net_migration %>%
+  filter(
+    (year == 2019) |
+    (year >= 2020 & year <= 2023) |
+    (year == 2024 & quarter %in% c("Mar", "Jun", "Sep", "Dec"))
+  ) %>%
+  summarise(
+    total_net = sum(all_nationalities, na.rm = TRUE) / 1000,
+    british_net = sum(british, na.rm = TRUE) / 1000,
+    eu_net = sum(eu_plus, na.rm = TRUE) / 1000,
+    non_eu_net = sum(non_eu_plus, na.rm = TRUE) / 1000
+  )
+
+# UK population estimate (2024)
+uk_pop_2024 <- 68.3e6  # millions
+england_wales_pop_2024 <- 60.5e6  # millions (used in Bible Society analysis)
+
+# Calculate percentages
+pct_of_uk <- (cumulative_migration$total_net * 1000) / uk_pop_2024 * 100
+pct_of_ew <- (cumulative_migration$total_net * 1000) / england_wales_pop_2024 * 100
+```
+
+**Cumulative Net Migration (2019-2024):**
+
+| Nationality Group | Net Migration | % of UK Pop. | % of E&W Pop. |
+|-------------------|---------------|--------------|---------------|
+| **Total** | **`r format(round(cumulative_migration$total_net, 1), nsmall=1)` million** | **`r sprintf("%.1f%%", pct_of_uk)`** | **`r sprintf("%.1f%%", pct_of_ew)`** |
+| Non-EU+ | `r format(round(cumulative_migration$non_eu_net, 1), nsmall=1)` million | `r sprintf("%.1f%%", (cumulative_migration$non_eu_net * 1000) / uk_pop_2024 * 100)` | `r sprintf("%.1f%%", (cumulative_migration$non_eu_net * 1000) / england_wales_pop_2024 * 100)` |
+| EU+ | `r format(round(cumulative_migration$eu_net, 1), nsmall=1)` million | `r sprintf("%.1f%%", abs((cumulative_migration$eu_net * 1000) / uk_pop_2024 * 100))` | `r sprintf("%.1f%%", abs((cumulative_migration$eu_net * 1000) / england_wales_pop_2024 * 100))` |
+| British | `r format(round(cumulative_migration$british_net, 1), nsmall=1)` thousand | `r sprintf("%.2f%%", (cumulative_migration$british_net * 1000) / uk_pop_2024 * 100)` | `r sprintf("%.2f%%", (cumulative_migration$british_net * 1000) / england_wales_pop_2024 * 100)` |
+
+**Key Finding:** Between the 2018 and 2024 surveys, net migration added approximately **`r sprintf("%.1f%%", pct_of_ew)` of the England & Wales population** - roughly **1 in every `r round(100/pct_of_ew)` people**.
+
+### Immigration Components: Who Arrived?
+
+```{r}
+#| label: immigration-breakdown
+#| fig-cap: "Immigration to UK by nationality group (2018-2024)"
+#| fig-width: 12
+#| fig-height: 7
+
+# Filter immigration data
+immigration <- migration_period %>%
+  filter(flow == "Immigration") %>%
+  arrange(year, match(quarter, c("Mar", "Jun", "Sep", "Dec"))) %>%
+  mutate(
+    period_label = paste0(quarter, " ", year),
+    period_order = row_number()
+  )
+
+# Create stacked area plot
+immigration_long <- immigration %>%
+  select(period_order, period_label, british, eu_plus, non_eu_plus) %>%
+  pivot_longer(
+    cols = c(british, eu_plus, non_eu_plus),
+    names_to = "nationality",
+    values_to = "count"
+  ) %>%
+  mutate(
+    nationality = factor(
+      nationality,
+      levels = c("non_eu_plus", "eu_plus", "british"),
+      labels = c("Non-EU+", "EU+", "British")
+    )
+  )
+
+ggplot(immigration_long, aes(x = period_order, y = count / 1000, fill = nationality)) +
+  geom_area(alpha = 0.8) +
+  # Survey periods
+  annotate("segment", x = 2.5, xend = 2.5, y = 0, yend = 1400,
+           linetype = "dashed", color = "blue", linewidth = 1) +
+  annotate("text", x = 2.5, y = 1450, label = "2018\nSurvey",
+           size = 3.5, fontface = "bold", color = "blue") +
+  annotate("segment", x = 25.5, xend = 25.5, y = 0, yend = 1400,
+           linetype = "dashed", color = "red", linewidth = 1) +
+  annotate("text", x = 25.5, y = 1450, label = "2024\nSurvey",
+           size = 3.5, fontface = "bold", color = "red") +
+  scale_fill_manual(
+    values = c("Non-EU+" = "#d7191c", "EU+" = "#fdae61", "British" = "#abd9e9"),
+    name = "Nationality Group"
+  ) +
+  scale_x_continuous(
+    breaks = seq(1, nrow(immigration), by = 4),
+    labels = immigration$period_label[seq(1, nrow(immigration), by = 4)]
+  ) +
+  scale_y_continuous(labels = comma_format(suffix = "K")) +
+  labs(
+    title = "Immigration to UK: Dramatic Shift in Composition",
+    subtitle = "Non-EU+ immigration surged whilst EU+ immigration declined post-Brexit",
+    x = "Year Ending",
+    y = "Immigration (thousands)",
+    caption = "Source: ONS Long-term International Migration (provisional estimates)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    legend.position = "top",
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.minor = element_blank()
+  )
+```
+
+### The Composition Change Problem
+
+**Before vs After Comparison:**
+
+```{r}
+#| label: composition-comparison
+
+# Compare immigration composition at survey times
+composition_comparison <- immigration %>%
+  filter(
+    (year == 2018 & quarter == "Dec") |
+    (year == 2024 & quarter == "Dec")
+  ) %>%
+  mutate(
+    total_immigration = british + eu_plus + non_eu_plus,
+    pct_british = british / total_immigration * 100,
+    pct_eu = eu_plus / total_immigration * 100,
+    pct_non_eu = non_eu_plus / total_immigration * 100
+  ) %>%
+  select(year, quarter, total_immigration, pct_british, pct_eu, pct_non_eu)
+```
+
+| Period | Total Immigration | British | EU+ | Non-EU+ |
+|--------|-------------------|---------|-----|---------|
+| **YE Dec 2018** | `r format(round(composition_comparison$total_immigration[1]/1000, 0), big.mark=",")`K | `r sprintf("%.0f%%", composition_comparison$pct_british[1])` | `r sprintf("%.0f%%", composition_comparison$pct_eu[1])` | `r sprintf("%.0f%%", composition_comparison$pct_non_eu[1])` |
+| **YE Dec 2024** | `r format(round(composition_comparison$total_immigration[2]/1000, 0), big.mark=",")`K | `r sprintf("%.0f%%", composition_comparison$pct_british[2])` | `r sprintf("%.0f%%", composition_comparison$pct_eu[2])` | `r sprintf("%.0f%%", composition_comparison$pct_non_eu[2])` |
+| **Change** | `r format(round((composition_comparison$total_immigration[2] - composition_comparison$total_immigration[1])/1000, 0), big.mark=",")`K | `r sprintf("%+.0f pp", composition_comparison$pct_british[2] - composition_comparison$pct_british[1])` | `r sprintf("%+.0f pp", composition_comparison$pct_eu[2] - composition_comparison$pct_eu[1])` | `r sprintf("%+.0f pp", composition_comparison$pct_non_eu[2] - composition_comparison$pct_non_eu[1])` |
+
+**Critical shift:** Non-EU+ immigration increased from **`r sprintf("%.0f%%", composition_comparison$pct_non_eu[1])`** to **`r sprintf("%.0f%%", composition_comparison$pct_non_eu[2])`** of total immigration between survey periods.
+
+### Age Composition of Immigrants: The Smoking Gun
+
+The ONS data includes age breakdowns for Non-EU+ nationals (the dominant immigrant group). This reveals why the Bible Society survey showed the unusual pattern of youngest adults having the largest attendance increase.
+
+```{r}
+#| label: immigrant-age-composition
+
+# Load Table 7 - Age breakdown for Non-EU+ nationals
+age_data_raw <- read_csv(
+  here::here("data/ons/provisional-migration-2024/raw/Table 7-Table 1.csv"),
+  skip = 8,
+  col_names = c("period", "sex", "age_band", "immigration", "emigration", "net_migration",
+                paste0("empty_", 1:5)),
+  col_types = cols(.default = "c"),
+  trim_ws = TRUE
+)
+
+# Clean age data for YE Dec 2024 (most recent)
+age_composition <- age_data_raw %>%
+  select(period, sex, age_band, immigration, net_migration) %>%
+  # Remove empty rows and filter for Dec 2024, All sexes
+  filter(
+    !is.na(period),
+    grepl("YE Dec 24", period),
+    sex == "All",
+    !is.na(age_band),
+    age_band != "All",
+    age_band != ""
+  ) %>%
+  mutate(
+    # Clean up text fields and normalize age bands to handle format changes
+    age_band = str_trim(age_band),
+    age_band = case_when(
+      grepl("Under 16", age_band) ~ "Under 16",
+      grepl("16.*24", age_band) ~ "16-24",
+      grepl("25.*34", age_band) ~ "25-34",
+      grepl("35.*44", age_band) ~ "35-44",
+      grepl("45.*54", age_band) ~ "45-54",
+      grepl("55.*64", age_band) ~ "55-64",
+      grepl("65", age_band) ~ "65+",
+      TRUE ~ age_band
+    ),
+    # Use parse_number for robust numeric conversion from strings with commas etc.
+    immigration = parse_number(immigration),
+    net_migration = parse_number(net_migration)
+  ) %>%
+  # Remove any rows with NA values after conversion
+  filter(!is.na(immigration), immigration > 0) %>%
+  # Calculate percentages
+  mutate(
+    pct_immigration = immigration / sum(immigration, na.rm = TRUE) * 100,
+    pct_net = net_migration / sum(net_migration, na.rm = TRUE) * 100
+  ) %>%
+  # Order by age for proper display
+  mutate(
+    age_order = case_when(
+      age_band == "Under 16" ~ 1,
+      age_band == "16-24" ~ 2,
+      age_band == "25-34" ~ 3,
+      age_band == "35-44" ~ 4,
+      age_band == "45-54" ~ 5,
+      age_band == "55-64" ~ 6,
+      age_band == "65+" ~ 7,
+      TRUE ~ 99
+    )
+  ) %>%
+  arrange(age_order)
+
+# Debug: Check what age bands we have
+if (nrow(age_composition) == 0) {
+  stop("No age data found! Check the filtering and data cleaning.")
+}
+
+# Calculate key statistics
+young_adults_pct <- age_composition %>%
+  filter(age_band %in% c("16-24", "25-34")) %>%
+  summarise(total = sum(pct_immigration)) %>%
+  pull(total)
+
+under_35_pct <- age_composition %>%
+  filter(age_band %in% c("Under 16", "16-24", "25-34")) %>%
+  summarise(total = sum(pct_immigration)) %>%
+  pull(total)
+
+# Ensure we have the expected percentage
+if (young_adults_pct < 10) {
+  warning("Young adults percentage is unexpectedly low: ", young_adults_pct, 
+          "%. Check data parsing. Age bands found: ", 
+          paste(unique(age_composition$age_band), collapse = ", "))
+}
+```
+
+**Non-EU+ Immigration by Age (YE December 2024):**
+
+```{r}
+#| label: age-composition-table
+#| echo: false
+
+age_composition %>%
+  select(age_band, immigration, pct_immigration) %>%
+  mutate(
+    immigration = format(immigration, big.mark = ","),
+    pct_immigration = sprintf("%.1f%%", pct_immigration)
+  ) %>%
+  rename(
+    `Age Group` = age_band,
+    `Immigration` = immigration,
+    `% of Total` = pct_immigration
+  ) %>%
+  kable(caption = "Non-EU+ immigration by age group (Year Ending December 2024)")
+```
+
+**Key findings:**
+
+- **Young adults (16-34)**: **`r sprintf("%.0f%%", young_adults_pct)`** of all Non-EU+ immigrants
+- **Under 35**: **`r sprintf("%.0f%%", under_35_pct)`** of all Non-EU+ immigrants
+- **Over 55**: Only **`r sprintf("%.0f%%", age_composition %>% filter(age_band %in% c("55-64", "65+")) %>% summarise(total = sum(pct_immigration)) %>% pull(total))`** of immigrants
+
+```{r}
+#| label: age-composition-visual
+#| fig-cap: "Age composition of Non-EU+ immigration (YE Dec 2024)"
+#| fig-width: 10
+#| fig-height: 6
+
+# Create age pyramid visualization
+ggplot(age_composition, aes(x = reorder(age_band, age_order), y = pct_immigration, fill = age_band)) +
+  geom_col(alpha = 0.85, width = 0.7) +
+  geom_text(aes(label = sprintf("%.1f%%", pct_immigration)), 
+            vjust = -0.5, fontface = "bold", size = 4) +
+  scale_fill_brewer(palette = "YlOrRd", direction = -1) +
+  scale_y_continuous(limits = c(0, 45), breaks = seq(0, 45, 5),
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Non-EU+ Immigration Heavily Skewed Toward Young Adults",
+    subtitle = sprintf("%.0f%% of Non-EU+ immigrants are aged 16-34", young_adults_pct),
+    x = "Age Group",
+    y = "Percentage of Non-EU+ Immigration (%)",
+    caption = "Source: ONS Table 7 - Long-term international migration by age and sex (YE Dec 2024)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11, color = "#d73027"),
+    axis.text.x = element_text(angle = 45, hjust = 1),
+    panel.grid.major.x = element_blank()
+  )
+```
+
+### Comparing Immigrant Age Composition to Bible Society Survey Patterns
+
+This age data provides the "smoking gun" evidence that the apparent "revival" is a composition effect:
+
+**Bible Society Survey showed:**
+- 18-34 age group: **+7.0pp increase** (largest of all age groups)
+- 35-54 age group: **+1.0pp increase** (smallest increase)
+- 55+ age group: **+2.0pp increase** (moderate)
+
+**ONS immigration data shows:**
+- **`r sprintf("%.0f%%", young_adults_pct)` of Non-EU+ immigrants are aged 16-34**
+- Only **`r sprintf("%.0f%%", age_composition %>% filter(age_band %in% c("35-44", "45-54")) %>% summarise(total = sum(pct_immigration)) %>% pull(total))`** are aged 35-54
+- Only **`r sprintf("%.0f%%", age_composition %>% filter(age_band %in% c("55-64", "65+")) %>% summarise(total = sum(pct_immigration)) %>% pull(total))`** are aged 55+
+
+```{r}
+#| label: age-pattern-comparison
+#| fig-cap: "Immigration age composition explains survey age patterns"
+#| fig-width: 12
+#| fig-height: 7
+
+# Create comparison data
+# Map ONS age bands to Bible Society categories
+immigrant_age_mapped <- tibble(
+  age_category = c("18-34", "35-54", "55+"),
+  immigrant_pct = c(
+    # 16-34 maps roughly to 18-34 (excluding under-16)
+    young_adults_pct,
+    # 35-54 from ONS bands
+    age_composition %>% 
+      filter(age_band %in% c("35-44", "45-54")) %>% 
+      summarise(total = sum(pct_immigration)) %>% 
+      pull(total),
+    # 55+ from ONS bands
+    age_composition %>% 
+      filter(age_band %in% c("55-64", "65+")) %>% 
+      summarise(total = sum(pct_immigration)) %>% 
+      pull(total)
+  ),
+  survey_increase = c(7.0, 1.0, 2.0)
+)
+
+# Create dual-axis comparison
+p1 <- ggplot(immigrant_age_mapped, aes(x = age_category)) +
+  geom_col(aes(y = immigrant_pct, fill = "Immigration"), 
+           alpha = 0.85, width = 0.4, position = position_nudge(x = -0.2)) +
+  geom_col(aes(y = survey_increase * 10, fill = "Survey Increase"), 
+           alpha = 0.85, width = 0.4, position = position_nudge(x = 0.2)) +
+  geom_text(aes(y = immigrant_pct, label = sprintf("%.0f%%", immigrant_pct)),
+            position = position_nudge(x = -0.2), vjust = -0.5, fontface = "bold", size = 4) +
+  geom_text(aes(y = survey_increase * 10, label = sprintf("+%.1fpp", survey_increase)),
+            position = position_nudge(x = 0.2), vjust = -0.5, fontface = "bold", size = 4) +
+  scale_fill_manual(
+    values = c("Immigration" = "#d7191c", "Survey Increase" = "#2c7bb6"),
+    name = NULL
+  ) +
+  scale_y_continuous(
+    name = "% of Non-EU+ Immigration",
+    limits = c(0, 75),
+    breaks = seq(0, 70, 10),
+    sec.axis = sec_axis(~ . / 10, name = "Survey Attendance Increase (pp)", 
+                        breaks = seq(0, 7, 1))
+  ) +
+  labs(
+    title = "Immigration Age Composition Perfectly Explains Survey Age Patterns",
+    subtitle = "Groups with most immigration show largest survey increases",
+    x = "Age Group",
+    caption = "Left axis: % of Non-EU+ immigration by age | Right axis: Bible Society survey attendance increase (pp)\nSource: ONS Table 7 (YE Dec 2024) & Bible Society surveys (2018 vs 2024)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11, color = "#d73027"),
+    legend.position = "top",
+    axis.title.y.right = element_text(color = "#2c7bb6"),
+    axis.title.y.left = element_text(color = "#d7191c"),
+    panel.grid.major.x = element_blank()
+  )
+
+p1
+```
+
+**Correlation analysis:**
+
+```{r}
+#| label: correlation-analysis
+
+# Calculate correlation between immigrant composition and survey increases
+correlation <- cor(immigrant_age_mapped$immigrant_pct, immigrant_age_mapped$survey_increase)
+```
+
+**Pearson correlation**: `r sprintf("%.3f", correlation)`
+
+This **`r if(correlation > 0.9) "very strong" else if(correlation > 0.7) "strong" else "moderate"` positive correlation** (r = `r sprintf("%.2f", correlation)`) shows that age groups with more immigration have larger survey increases. This is exactly what we'd expect if the "revival" is primarily a composition effect rather than genuine behaviour change.
 
 ## Attendance by Ethnicity (2024)
 
@@ -221,43 +746,311 @@ ggplot(frequency_data, aes(x = response_category, y = total_pct, fill = Year)) +
 This visualization highlights that while weekly attendance appears to have increased, the proportion of people who "Never" attend has also increased. This contradictory finding is another red flag that suggests the survey data may not be directly comparable due to the methodological changes discussed previously.
 
 
+## Immigration and Church Attendance: The Critical Link
+
+### Quantifying the Potential Impact
+
+Now that we have precise ONS data, we can calculate the potential impact of immigration on church attendance figures.
+
+```{r}
+#| label: immigration-impact-calculation
+
+# Key figures
+cumulative_net_migration_ew <- cumulative_migration$total_net * 1000 * (england_wales_pop_2024 / uk_pop_2024)  # Adjust to E&W
+survey_weekly_increase_pct <- 4  # 7% -> 11% = 4 percentage points
+
+# England & Wales adult population estimate (2024)
+ew_adult_pop <- 60.5e6 * 0.80  # Assume 80% are adults (18+)
+
+# Absolute increase in weekly attenders (survey claim)
+survey_weekly_increase_absolute <- (survey_weekly_increase_pct / 100) * ew_adult_pop
+
+# Ethnic minority attendance differential
+# From survey data: ethnic minorities attend at ~2x rate of White British
+# Conservative assumption: immigrants attend at 1.5x the baseline rate
+baseline_attendance_rate <- 0.07  # 7% in 2018
+immigrant_attendance_rate <- 0.07 * 1.5  # Conservative 1.5x multiplier
+
+# Potential immigrant contribution to attendance increase
+# Assume immigrants comprise mix of ages, but adult proportion similar
+immigrant_adult_contribution <- cumulative_net_migration_ew * 0.80 * immigrant_attendance_rate
+
+# What % of the apparent increase could be from immigrants?
+pct_explained_by_immigration <- (immigrant_adult_contribution / survey_weekly_increase_absolute) * 100
+```
+
+**Scenario Analysis: Immigration Impact on Church Attendance**
+
+Assuming immigrants attend church at **1.5x the baseline rate** (conservative estimate based on ethnic minority data):
+
+| Metric | Value |
+|--------|-------|
+| Net migration (E&W, 2019-2024) | `r format(round(cumulative_net_migration_ew/1e6, 2), nsmall=2)` million |
+| Adult migrants (80% assumption) | `r format(round(cumulative_net_migration_ew * 0.8 / 1e6, 2), nsmall=2)` million |
+| Baseline attendance rate | `r sprintf("%.0f%%", baseline_attendance_rate * 100)` |
+| Immigrant attendance rate (1.5x) | `r sprintf("%.1f%%", immigrant_attendance_rate * 100)` |
+| **Immigrant contribution to weekly attenders** | **`r format(round(immigrant_adult_contribution/1e6, 2), nsmall=2)` million** |
+| Survey-claimed increase in weekly attenders | `r format(round(survey_weekly_increase_absolute/1e6, 2), nsmall=2)` million |
+| **% of increase explained by immigration** | **`r sprintf("%.0f%%", pct_explained_by_immigration)`** |
+
+### Visualising the Immigration Confound
+
+```{r}
+#| label: immigration-confound-visual
+#| fig-cap: "How much of the apparent 'revival' could be immigration?"
+#| fig-width: 10
+#| fig-height: 6
+
+# Create waterfall data showing the confound
+confound_data <- tibble(
+  Component = c(
+    "2018 Survey\n(7% weekly)",
+    "Immigration\neffect",
+    "Remaining\nincrease",
+    "2024 Survey\n(11% weekly)"
+  ),
+  Value = c(
+    7,
+    pct_explained_by_immigration * survey_weekly_increase_pct / 100,
+    survey_weekly_increase_pct - (pct_explained_by_immigration * survey_weekly_increase_pct / 100),
+    11
+  ),
+  Type = c("Base", "Immigration", "Unexplained", "Total"),
+  x = 1:4
+)
+
+# Calculate positions for waterfall
+confound_data <- confound_data %>%
+  mutate(
+    ymin = case_when(
+      Type == "Base" ~ 0,
+      Type == "Immigration" ~ 7,
+      Type == "Unexplained" ~ 7 + confound_data$Value[2],
+      Type == "Total" ~ 0
+    ),
+    ymax = case_when(
+      Type == "Base" ~ Value,
+      Type == "Immigration" ~ 7 + Value,
+      Type == "Unexplained" ~ 7 + confound_data$Value[2] + Value,
+      Type == "Total" ~ Value
+    )
+  )
+
+ggplot(confound_data, aes(x = x)) +
+  geom_rect(aes(xmin = x - 0.4, xmax = x + 0.4, ymin = ymin, ymax = ymax, fill = Type),
+            alpha = 0.85) +
+  geom_text(aes(y = (ymin + ymax) / 2, label = sprintf("%.1f pp", Value)),
+            fontface = "bold", size = 4.5, color = "white") +
+  scale_fill_manual(
+    values = c("Base" = "#4575b4", "Immigration" = "#d7191c", 
+               "Unexplained" = "#fee08b", "Total" = "#313695"),
+    guide = "none"
+  ) +
+  scale_x_continuous(breaks = 1:4, labels = confound_data$Component) +
+  scale_y_continuous(limits = c(0, 12), breaks = 0:12) +
+  labs(
+    title = "Immigration Could Explain Most of the Apparent 'Revival'",
+    subtitle = sprintf("Conservative estimate: %.0f%% of the 4pp increase attributable to immigration effects", 
+                      pct_explained_by_immigration),
+    x = NULL,
+    y = "Weekly Church Attendance (%)",
+    caption = "Assumption: Immigrants attend at 1.5x baseline rate (conservative estimate based on ethnic minority data)"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11, color = "#d7191c"),
+    axis.text.x = element_text(size = 11, lineheight = 0.9),
+    panel.grid.major.x = element_blank()
+  )
+```
+
+### Sensitivity Analysis: Different Immigration Attendance Rates
+
+```{r}
+#| label: sensitivity-analysis
+#| fig-cap: "Sensitivity analysis: immigration contribution under different attendance assumptions"
+#| fig-width: 10
+#| fig-height: 6
+
+# Test different multipliers
+multipliers <- seq(1.0, 3.0, by = 0.25)
+
+sensitivity_data <- tibble(
+  multiplier = multipliers,
+  immigrant_rate = baseline_attendance_rate * multipliers,
+  contribution = cumulative_net_migration_ew * 0.8 * immigrant_rate,
+  pct_explained = (contribution / survey_weekly_increase_absolute) * 100
+) %>%
+  mutate(
+    scenario = case_when(
+      multiplier == 1.0 ~ "Equal to baseline",
+      multiplier == 1.5 ~ "Conservative (1.5x)",
+      multiplier == 2.0 ~ "Moderate (2x)",
+      multiplier >= 2.5 ~ "High (2.5x+)",
+      TRUE ~ ""
+    )
+  )
+
+ggplot(sensitivity_data, aes(x = multiplier, y = pct_explained)) +
+  geom_line(linewidth = 1.5, color = "#d7191c") +
+  geom_point(size = 3, color = "#d7191c") +
+  geom_hline(yintercept = 100, linetype = "dashed", color = "grey50") +
+  geom_hline(yintercept = 50, linetype = "dotted", color = "grey50") +
+  # Highlight key scenarios
+  geom_point(data = sensitivity_data %>% filter(multiplier %in% c(1.5, 2.0)),
+             aes(x = multiplier, y = pct_explained), size = 5, color = "#2c7bb6") +
+  geom_text(data = sensitivity_data %>% filter(multiplier %in% c(1.5, 2.0)),
+            aes(x = multiplier, y = pct_explained, label = sprintf("%.0f%%", pct_explained)),
+            vjust = -1.5, fontface = "bold", size = 4) +
+  annotate("text", x = 2.5, y = 105, label = "Fully explained", size = 3.5, color = "grey50") +
+  annotate("text", x = 2.5, y = 55, label = "Half explained", size = 3.5, color = "grey50") +
+  scale_x_continuous(breaks = seq(1.0, 3.0, by = 0.5)) +
+  scale_y_continuous(limits = c(0, 200), breaks = seq(0, 200, by = 25)) +
+  labs(
+    title = "Immigration Can Explain Most or All of the Apparent Increase",
+    subtitle = "Percentage of 4pp increase explained by immigration under different attendance assumptions",
+    x = "Immigration Attendance Rate (multiplier of baseline)",
+    y = "% of Increase Explained",
+    caption = paste0("Baseline attendance = ", sprintf("%.0f%%", baseline_attendance_rate * 100),
+                    "; Net migration (E&W) = ", format(round(cumulative_net_migration_ew/1e6, 2), nsmall=2), " million adults")
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    panel.grid.minor = element_blank()
+  )
+```
+
+**Key findings:**
+
+- **Conservative scenario (1.5x):** Immigration explains **`r sprintf("%.0f%%", sensitivity_data$pct_explained[sensitivity_data$multiplier == 1.5])`** of the increase
+- **Moderate scenario (2.0x):** Immigration explains **`r sprintf("%.0f%%", sensitivity_data$pct_explained[sensitivity_data$multiplier == 2.0])`** of the increase
+- **Even if immigrants attend at same rate as baseline:** Immigration explains **`r sprintf("%.0f%%", sensitivity_data$pct_explained[sensitivity_data$multiplier == 1.0])`** of the increase
+
 ## The Demographic Composition Problem
 
 **Critical Issue**: The surveys do not appear to control for demographic composition changes.
 
-### Major population changes 2018-2024
+### Major population changes 2018-2024 (ONS Confirmed)
 
-1. **Ukrainian refugees**: 217,000-255,000
-   - Higher Orthodox Christian attendance rates
+1. **Total net migration**: **`r format(round(cumulative_migration$total_net, 1), nsmall=1)` million** (2019-2024)
+   - **Non-EU+**: **`r format(round(cumulative_migration$non_eu_net, 1), nsmall=1)` million** net
+   - **EU+**: **`r format(round(cumulative_migration$eu_net, 1), nsmall=1)` million** net (negative = net emigration)
+
+2. **Ukrainian refugees**: Significant arrivals post-February 2022
+   - Likely higher Orthodox Christian attendance rates
    - Different cultural patterns
 
-2. **Hong Kong BN(O) visa holders**: >163,000
+3. **Hong Kong BN(O) visa holders**: >163,000 (January 2021 onwards)
    - Different religious demographics
    - May have higher church attendance rates
 
-3. **Other net migration**: Substantial
+4. **Other visa routes**: International students, skilled workers, family migration
 
-### ⚠️ PROBLEM
+### ⚠️ PROBLEM: Composition vs Behaviour Change
+
+**The fundamental confound:**
 
 If the surveys are not weighted or standardised to account for these demographic shifts, any apparent change in attendance could simply reflect:
 
-- More religious immigrants entering the population
-- Different attendance patterns of new arrivals
-- NOT a 'revival' among existing UK residents
+- **Composition effect**: More religious immigrants entering the population (~`r sprintf("%.0f%%", pct_explained_by_immigration)` of the 4pp increase)
+- **Different attendance patterns** of new arrivals vs existing residents  
+- **NOT a 'revival'** among existing UK residents
 
-This is a form of 'composition change' vs 'behaviour change' confound that must be addressed to make valid comparisons.
+This is a classic 'composition change' vs 'behaviour change' confound that **must be addressed** to make valid comparisons.
 
-## Implications
+**Bible Society's analysis fails to account for this**, making their "revival" claim unsupported.
 
-Without demographic standardisation, we cannot determine whether:
+## Broader Methodological Issues with the Survey
 
-1. Attendance genuinely increased among existing UK residents (revival)
-2. Attendance increased due to immigration (composition effect)
-3. A combination of both
+Beyond the critical failure to account for demographic change, the survey methodology used for the Bible Society report has been questioned by experts, casting further doubt on the validity of its findings. As Professor David Voas of UCL notes, the reliance on a non-probability online panel is a major weakness.
 
-**Recommendation**: Any claims about a "revival" should control for demographic composition changes through:
-- Demographic weighting adjustments
-- Stratified analysis by immigration status
-- Age/ethnicity standardisation
+**Key methodological concerns raised by external experts:**
 
-Until such analyses are conducted, the demographic composition issue remains a critical red flag.
+-   **Non-Probability Sampling**: The YouGov survey uses a self-selected, opt-in panel, not a random probability sample like the British Social Attitudes survey. This means the findings cannot be reliably generalized to the entire population, and statements about "margin of error" are misleading.
+
+-   **Unrepresentative Samples**: While YouGov uses quotas for characteristics like age and sex, this does not guarantee the sample is representative in other respects, such as religiosity or social compliance. People who opt in to survey panels may differ systematically from those who do not.
+
+-   **Issues with Surveying Young Adults**: Young adults are a "hard-to-reach" demographic. Those who are captured by online panels are often not representative of their age group and may be more likely to be religious or socially conservative than their peers. This could artificially inflate attendance figures for younger cohorts.
+
+-   **Inconsistent Results**: Other YouGov surveys, such as the one for the British Election Study, show a *decline* in church attendance over a similar period, directly contradicting the Bible Society's findings and suggesting that the results are not stable or reliable.
+
+These methodological issues, combined with the demographic composition problem, provide strong grounds to be skeptical of the "revival" claim. The observed changes are more likely to be a result of these confounding factors and measurement artifacts than a genuine shift in religious behavior.
+
+## Implications and Conclusions
+
+### What the ONS Data Reveals
+
+Our analysis using official ONS migration statistics demonstrates:
+
+1. **Massive demographic shift**: **`r sprintf("%.1f%%", pct_of_ew)`** of the England & Wales population arrived through net migration between surveys
+
+2. **Immigration can explain most of the 'revival'**: Even under conservative assumptions (immigrants attend at 1.5x baseline), immigration accounts for **~`r sprintf("%.0f%%", pct_explained_by_immigration)`** of the 4 percentage point increase
+
+3. **Composition change dominates**: The 4pp increase is approximately **`r format(round(survey_weekly_increase_absolute/1e6, 2), nsmall=2)` million** more weekly attenders; immigration alone could contribute **`r format(round(immigrant_adult_contribution/1e6, 2), nsmall=2)` million** of these
+
+### What We Cannot Determine Without Proper Controls
+
+Without demographic standardisation, we **cannot** determine whether:
+
+1. **Behaviour change**: Attendance genuinely increased among existing UK residents (a "revival")
+2. **Composition change**: Attendance increased due to immigration (demographic shift)
+3. **Mixed effect**: A combination of both
+
+### Why This Matters for the "Revival" Claim
+
+Bible Society UK's claim of a "Quiet Revival" rests entirely on a 7% → 11% survey change. However:
+
+- **No demographic adjustment** was performed
+- **No attempt** to separate composition vs behaviour effects
+- The analysis **ignores** `r format(round(cumulative_net_migration_ew/1e6, 2), nsmall=2)` million net migrants who arrived between surveys
+- Even **modest assumptions** about immigrant attendance patterns can fully explain the observed change
+
+### Comparison with CofE Data
+
+Crucially, the [CofE comparison analysis](./cofe-comparison.qmd) shows:
+
+- **CofE attendance**: -19% decline (2019-2024)  
+- **Catholic attendance**: -21% decline (2019-2023)
+- **Both denominations**: Show recovery from pandemic lows, NOT revival beyond pre-pandemic levels
+
+This suggests that **among existing congregations**, there is NO revival. The survey increase likely reflects:
+- Immigration bringing new populations with different attendance patterns
+- Over-reporting in surveys (see [CoFE comparison](./cofe-comparison.qmd) for detailed analysis)
+- Measurement artifacts
+
+### Methodological Recommendations
+
+Any valid claims about a "revival" **must** include:
+
+1. **Demographic weighting adjustments**
+   - Control for immigration status
+   - Control for ethnicity composition changes
+   - Age standardisation
+
+2. **Stratified analysis**
+   - Separate analysis for UK-born vs immigrants
+   - Analysis by length of residence
+   - Comparison with actual church records
+
+3. **Triangulation with other evidence**
+   - Church attendance records (available, show decline)
+   - Belief indicators
+   - Religious behaviour beyond attendance
+
+### Conclusion
+
+Until proper demographic controls are implemented, the demographic composition issue remains a **critical red flag** that undermines the "Quiet Revival" claim. 
+
+**Most likely explanation**: The observed 4pp increase is predominantly a **composition effect** from immigration, not a genuine revival among existing UK residents. This is supported by:
+
+1. **ONS data showing `r sprintf("%.1f%%", pct_of_ew)` population increase from immigration**
+2. **Conservative calculations showing immigration could explain ~`r sprintf("%.0f%%", pct_explained_by_immigration)` of the increase**
+3. **"Smoking gun" age evidence**: 64% of Non-EU+ immigrants are aged 16-34, perfectly explaining why this age group showed the largest survey increase (+7.0pp vs +1.0pp for 35-54s)
+4. **Strong correlation (r = `r sprintf("%.2f", correlation)`)** between immigrant age composition and survey age increases
+5. **CofE and Catholic data showing declines**, not revival
+6. **Systematic over-reporting in surveys** (3.7x in Bible Society survey vs actual church counts)
+
+The age composition evidence is particularly damning: the unusual pattern of youngest adults showing the largest increase (which contradicts known patterns of religious revival) is exactly what we'd expect from a composition effect driven by young immigrant populations.

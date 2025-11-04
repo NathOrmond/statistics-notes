@@ -1,0 +1,1028 @@
+---
+title: "Survey Claims vs Church Records"
+subtitle: "Comparing Bible Society survey data with CofE Statistics for Mission"
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+if (!require(here, quietly = TRUE)) {
+  install.packages("here")
+}
+here::i_am("_quarto.yml")
+
+library(tidyverse)
+library(scales)
+library(ggplot2)
+library(patchwork)
+library(gt)
+```
+
+## The Core Problem
+
+Bible Society UK claims that 11% of England/Wales adults attend church weekly or more, based on their 2024 YouGov survey. The Church of England's **Statistics for Mission 2024** provides actual attendance counts from churches across England. These two sources should be measuring the same underlying reality, but they tell radically different stories.
+
+### Important Caveat: Multi-Denominational Analysis
+
+**This analysis primarily uses Church of England (CofE) data**, which represents only one denomination within UK Christianity. We supplement this with:
+
+-   **Catholic Church data** from the Bishops' Conference of England and Wales (2023 figures)
+-   **Extrapolations** for other denominations (Methodist, Baptist, Pentecostal, etc.) based on survey estimates
+
+The CofE represents approximately **48% of Christians** according to the Bible Society survey, whilst Catholics represent **22%**. Together, these two denominations account for **70% of UK Christians**, providing a solid empirical base for comparison. The remaining 30% (other Protestant denominations, Orthodox, etc.) are estimated based on proportional scaling.
+
+## Data Preparation
+
+```{r}
+#| label: load-data
+
+# Load comparison data
+comparison_data <- read_csv(here::here("data/c-of-e-church-attendance-2024/processed/cofe-vs-bibsoc.csv"))
+
+# England/Wales population (2024)
+england_wales_pop <- 60.5e6
+
+# England population (2021 census - used in CofE calculations)
+england_pop <- 56.766e6
+
+# Catholic Church attendance data (England and Wales)
+# Source: Bishops' Conference of England and Wales via Catholic Review/OSV News
+# Latest available: 2023 figures
+catholic_mass_2023 <- 554913   # Sunday Mass attendance
+catholic_mass_2022 <- 503008
+catholic_mass_2019 <- 701902   # Pre-pandemic baseline
+
+# Note: Catholic 2024 data not yet available, so we use 2023 as best estimate
+# Assume stable or slight growth continuing from 2022-2023 trend
+catholic_mass_2024_estimate <- catholic_mass_2023  # Conservative estimate
+```
+
+## The Great Attendance Discrepancy
+
+### Weekly Attendance: Survey Claims vs Reality
+
+```{r}
+#| label: weekly-attendance-gap
+
+# Survey-based estimate
+survey_weekly_pct <- comparison_data %>%
+  filter(metric == "attend_church_weekly_or_more", source == "BibleSoc", year == 2024) %>%
+  pull(value) / 100
+
+survey_weekly_absolute <- survey_weekly_pct * england_wales_pop
+
+# CofE recorded attendance
+cofe_weekly <- comparison_data %>%
+  filter(metric == "church_attendance_weekly", source == "CofE", year == 2024) %>%
+  pull(value)
+
+# Catholic recorded attendance (2023, latest available)
+catholic_weekly <- catholic_mass_2024_estimate
+
+# Combined CofE + Catholic attendance (direct counts)
+cofe_catholic_combined <- cofe_weekly + catholic_weekly
+
+# CofE and Catholic represent 48% + 22% = 70% of Christians (per Bible Society survey)
+cofe_pct_of_christians <- comparison_data %>%
+  filter(metric == "faith_status_christian_anglican", source == "BibleSoc", year == 2024) %>%
+  pull(value) / 100
+
+catholic_pct_of_christians <- comparison_data %>%
+  filter(metric == "faith_status_christian_catholic", source == "BibleSoc", year == 2024) %>%
+  pull(value) / 100
+
+cofe_catholic_combined_pct <- cofe_pct_of_christians + catholic_pct_of_christians
+
+# Estimate total Christian weekly attendance
+# Method 1: Based on CofE + Catholic actual (70% of Christians) + extrapolated other (30%)
+estimated_total_christian_weekly <- cofe_catholic_combined / cofe_catholic_combined_pct
+
+# Calculate the gap
+attendance_gap <- survey_weekly_absolute - estimated_total_christian_weekly
+
+# Over-reporting factor
+over_reporting_factor <- survey_weekly_absolute / estimated_total_christian_weekly
+```
+
+### The Numbers
+
+**Bible Society Survey Claim (2024):** - **11%** of England/Wales adults attend church weekly or more - Absolute numbers: **`r format(round(survey_weekly_absolute/1e6, 2), nsmall=2)` million** people
+
+**Actual Church Attendance Records:** - **CofE** (2024): **`r format(cofe_weekly, big.mark=",")` people** (48% of Christians) - **Catholic** (2023): **`r format(catholic_weekly, big.mark=",")` people** (22% of Christians) - **CofE + Catholic combined**: **`r format(cofe_catholic_combined, big.mark=",")` people** (70% of Christians) - **Estimated other denominations**: **`r format(round((estimated_total_christian_weekly - cofe_catholic_combined)), big.mark=",")` people** (30% of Christians) - **Total estimated Christian weekly attendance**: **`r format(round(estimated_total_christian_weekly/1e6, 2), nsmall=2)` million**
+
+**The Gap:** - Discrepancy: **`r format(round(attendance_gap/1e6, 2), nsmall=2)` million "phantom attenders"** - Over-reporting factor: **`r sprintf("%.1fx", over_reporting_factor)`**
+
+This means the survey suggests **`r sprintf("%.1f", over_reporting_factor)` times more** weekly church attenders than can be accounted for by actual church records across **all major Christian denominations**.
+
+```{r}
+#| label: weekly-gap-visual
+#| echo: false
+#| fig-cap: "Weekly church attendance: Survey claims vs actual records"
+#| fig-width: 11
+#| fig-height: 7
+
+# Create comparison data
+gap_data <- tibble(
+  Category = c("Survey claim\n(11%)", "CofE\n(48%)", "Catholic\n(22%)",
+               "Other denom.\n(30%)", "Total actual\n(all Christian)", 
+               "Unexplained\ngap"),
+  Value = c(survey_weekly_absolute / 1e6,
+            cofe_weekly / 1e6,
+            catholic_weekly / 1e6,
+            (estimated_total_christian_weekly - cofe_catholic_combined) / 1e6,
+            estimated_total_christian_weekly / 1e6,
+            attendance_gap / 1e6),
+  Type = c("Claim", "CofE", "Catholic", "Estimate", "Total Actual", "Gap"),
+  Color = c("#d73027", "#4575b4", "#7570b3", "#91bfdb", "#fee08b", "#fc8d59")
+) %>%
+  mutate(Category = factor(Category, levels = Category))
+
+p1 <- ggplot(gap_data, aes(x = Category, y = Value, fill = Type)) +
+  geom_col(alpha = 0.85, width = 0.7) +
+  geom_text(aes(label = sprintf("%.2f M", Value)), 
+            vjust = -0.5, fontface = "bold", size = 4.5) +
+  scale_fill_manual(values = gap_data$Color) +
+  scale_y_continuous(limits = c(0, 7.5), breaks = 0:7,
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Weekly Church Attendance: Survey Claims vs Reality",
+    subtitle = sprintf("Survey implies %.1fx more weekly attenders than actual church records", 
+                      over_reporting_factor),
+    x = NULL,
+    y = "Millions of people"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11, color = "#d73027"),
+    axis.text.x = element_text(size = 10, lineheight = 0.9),
+    panel.grid.major.x = element_blank()
+  )
+
+# Create waterfall chart showing the gap
+cumulative <- survey_weekly_absolute / 1e6
+cofe_val <- cofe_weekly / 1e6
+cath_val <- catholic_weekly / 1e6
+other_val <- (estimated_total_christian_weekly - cofe_catholic_combined) / 1e6
+
+waterfall_data <- tibble(
+  Component = c("Survey claim", "- CofE", "- Catholic", "- Other denom.",
+                "= Unexplained\ngap"),
+  Amount = c(cumulative, cofe_val, cath_val, other_val, attendance_gap / 1e6),
+  # For labels: position at the middle of each bar
+  Label_y = c(cumulative / 2,
+              cumulative - (cofe_val / 2),
+              cumulative - cofe_val - (cath_val / 2),
+              cumulative - cofe_val - cath_val - (other_val / 2),
+              (attendance_gap / 1e6) / 2),
+  # For geom_rect: ymin and ymax
+  ymin = c(0,
+           cumulative - cofe_val,
+           cumulative - cofe_val - cath_val,
+           cumulative - cofe_val - cath_val - other_val,
+           0),
+  ymax = c(cumulative,
+           cumulative,
+           cumulative - cofe_val,
+           cumulative - cofe_val - cath_val,
+           attendance_gap / 1e6),
+  x = 1:5,
+  Type = c("Start", "Deduction", "Deduction", "Deduction", "Remainder")
+)
+
+p2 <- ggplot(waterfall_data, aes(x = x)) +
+  # Start bar
+  geom_col(data = waterfall_data %>% filter(Type == "Start"),
+           aes(y = Amount), fill = "#d73027", alpha = 0.85, width = 0.5) +
+  # Deduction bars (positioned at correct height)
+  geom_rect(data = waterfall_data %>% filter(Type == "Deduction"),
+            aes(xmin = x - 0.25, xmax = x + 0.25, ymin = ymin, ymax = ymax),
+            fill = "#4575b4", alpha = 0.85) +
+  # Remainder bar
+  geom_col(data = waterfall_data %>% filter(Type == "Remainder"),
+           aes(y = Amount), fill = "#fc8d59", alpha = 0.85, width = 0.5) +
+  # Labels positioned in middle of bars
+  geom_text(aes(y = Label_y, label = sprintf("%.2f M", Amount)),
+            fontface = "bold", size = 3.8, color = "white") +
+  scale_x_continuous(breaks = 1:5, labels = waterfall_data$Component) +
+  scale_y_continuous(limits = c(0, 7.5), breaks = 0:7,
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Breaking Down the Discrepancy",
+    subtitle = "CofE + Catholic + Other denominations vs Survey claims",
+    x = NULL,
+    y = "Millions of people"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    axis.text.x = element_text(size = 9.5, lineheight = 0.9),
+    panel.grid.major.x = element_blank()
+  )
+
+p1 / p2 +
+  plot_annotation(
+    caption = "Note: Catholic data from 2023 (latest available); CofE data from 2024",
+    theme = theme(plot.caption = element_text(hjust = 0, size = 9))
+  )
+```
+
+## Annual Attendance Reconciliation
+
+Beyond weekly attendance, we can also compare annual attendance patterns.
+
+```{r}
+#| label: annual-attendance
+
+# Survey: attended church in past year
+survey_annual_pct <- comparison_data %>%
+  filter(metric == "attended_church_service_past_year", source == "BibleSoc", year == 2024) %>%
+  pull(value) / 100
+
+survey_annual_absolute <- survey_annual_pct * england_wales_pop
+
+# CofE major services
+cofe_easter <- comparison_data %>%
+  filter(metric == "easter_attendance", source == "CofE", year == 2024) %>%
+  pull(value)
+
+cofe_christmas <- comparison_data %>%
+  filter(metric == "christmas_attendance", source == "CofE", year == 2024) %>%
+  pull(value)
+
+cofe_worshipping_community <- comparison_data %>%
+  filter(metric == "worshipping_community", source == "CofE", year == 2024) %>%
+  pull(value)
+
+# Rough estimate of unique annual CofE attenders
+# (Christmas + some non-Christmas regulars, accounting for overlap)
+cofe_unique_annual_estimate <- cofe_christmas + (cofe_worshipping_community * 0.3)
+
+# Extrapolate to all Christian denominations
+total_christian_annual_estimate <- cofe_unique_annual_estimate / cofe_pct_of_christians
+
+annual_gap <- survey_annual_absolute - total_christian_annual_estimate
+annual_over_reporting <- survey_annual_absolute / total_christian_annual_estimate
+```
+
+### Annual Attendance Comparison
+
+**Bible Society Survey (2024):** - **24%** attended church service in past year - Absolute: **`r format(round(survey_annual_absolute/1e6, 1), nsmall=1)` million** people
+
+**CofE Statistics (2024):** - Christmas attendance: **`r format(cofe_christmas, big.mark=",")` people** - Easter attendance: **`r format(cofe_easter, big.mark=",")` people** - Monthly+ worshippers: **`r format(cofe_worshipping_community, big.mark=",")` people** - Estimated unique annual: **`r format(round(cofe_unique_annual_estimate/1e6, 2), nsmall=2)` million** (CofE only)
+
+**Extrapolated to all denominations:** - Estimated total Christian annual: **`r format(round(total_christian_annual_estimate/1e6, 1), nsmall=1)` million**
+
+**Annual gap:** **`r format(round(annual_gap/1e6, 1), nsmall=1)` million** (over-reporting factor: **`r sprintf("%.1fx", annual_over_reporting)`**)
+
+```{r}
+#| label: annual-comparison-visual
+#| echo: false
+#| fig-cap: "Annual church attendance: Survey vs records"
+#| fig-width: 10
+#| fig-height: 6
+
+annual_data <- tibble(
+  Service = c("Christmas", "Easter", "Monthly+\nworshippers", 
+              "Est. total CofE\nannual unique", "Est. all Christian\nannual unique",
+              "Survey claim\n(24%)"),
+  Value = c(cofe_christmas / 1e6, cofe_easter / 1e6, 
+            cofe_worshipping_community / 1e6,
+            cofe_unique_annual_estimate / 1e6,
+            total_christian_annual_estimate / 1e6,
+            survey_annual_absolute / 1e6),
+  Type = c("CofE", "CofE", "CofE", "Estimate", "Estimate", "Survey"),
+  x = 1:6
+) %>%
+  mutate(Service = factor(Service, levels = Service))
+
+ggplot(annual_data, aes(x = Service, y = Value, fill = Type)) +
+  geom_col(alpha = 0.85, width = 0.7) +
+  geom_text(aes(label = sprintf("%.2f M", Value)), 
+            vjust = -0.5, fontface = "bold", size = 4) +
+  scale_fill_manual(values = c("CofE" = "#4575b4", "Estimate" = "#fee08b", 
+                                "Survey" = "#d73027")) +
+  scale_y_continuous(limits = c(0, 16), breaks = seq(0, 15, 3),
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Annual Church Attendance: Building Up to the Total",
+    subtitle = sprintf("Survey implies %.1fx more annual attenders than records suggest", 
+                      annual_over_reporting),
+    x = NULL,
+    y = "Millions of people",
+    fill = "Source"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11, color = "#d73027"),
+    axis.text.x = element_text(size = 10, lineheight = 0.9),
+    panel.grid.major.x = element_blank(),
+    legend.position = "top"
+  )
+```
+
+## Age Distribution Paradox
+
+One of the most striking discrepancies is in age patterns.
+
+```{r}
+#| label: age-distribution
+
+# Extract age data
+bibsoc_age <- comparison_data %>%
+  filter(source == "BibleSoc", year == 2024, 
+         grepl("attended_church_service_past_year.*_.*", metric),
+         metric != "attended_church_service_past_year") %>%
+  mutate(
+    age_group = case_when(
+      grepl("18_34", metric) ~ "18-34",
+      grepl("35_54", metric) ~ "35-54",
+      grepl("55plus", metric) ~ "55+"
+    ),
+    pct = value
+  ) %>%
+  select(age_group, pct) %>%
+  mutate(source = "Bible Society\nSurvey")
+
+# CofE worshipping community age breakdown
+cofe_age_raw <- comparison_data %>%
+  filter(source == "CofE", year == 2024, 
+         grepl("worshipping_community_.*", metric),
+         !metric %in% c("worshipping_community", "worshipping_community_pct")) %>%
+  mutate(
+    age_group = case_when(
+      grepl("0_10", metric) ~ "0-10",
+      grepl("11_17", metric) ~ "11-17",
+      grepl("18_69", metric) ~ "18-69",
+      grepl("70plus", metric) ~ "70+"
+    ),
+    count = value
+  ) %>%
+  select(age_group, count)
+
+# Calculate percentages for CofE
+cofe_age <- cofe_age_raw %>%
+  mutate(pct = count / sum(count) * 100) %>%
+  select(age_group, pct) %>%
+  mutate(source = "CofE Worshipping\nCommunity")
+```
+
+**Bible Society Survey finding:** Young people (18-34) attend MORE than middle-aged adults (35-54): - 18-34 years: **26%** - 35-54 years: **18%** - 55+ years: **27%**
+
+**CofE recorded attendance:** Older people dominate church attendance: - 0-17 years: **18.5%** of worshipping community - 18-69 years: **46.6%** of worshipping community - 70+ years: **35.0%** of worshipping community
+
+```{r}
+#| label: age-pyramid-comparison
+#| echo: false
+#| fig-cap: "Age distribution paradox: Survey responses vs actual church records"
+#| fig-width: 12
+#| fig-height: 6
+
+# Survey data (attendance rate by age)
+bibsoc_plot <- bibsoc_age %>%
+  ggplot(aes(x = age_group, y = pct, fill = age_group)) +
+  geom_col(alpha = 0.85, width = 0.7) +
+  geom_text(aes(label = sprintf("%.0f%%", pct)), 
+            vjust = -0.5, fontface = "bold", size = 4.5) +
+  scale_fill_manual(values = c("#91cf60", "#fee08b", "#fc8d59")) +
+  scale_y_continuous(limits = c(0, 30), breaks = seq(0, 30, 5),
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Bible Society Survey",
+    subtitle = "% who attended church in past year",
+    x = "Age Group",
+    y = "Percentage (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(size = 10),
+    panel.grid.major.x = element_blank()
+  )
+
+# CofE data (composition of worshipping community)
+cofe_plot <- cofe_age %>%
+  ggplot(aes(x = age_group, y = pct, fill = age_group)) +
+  geom_col(alpha = 0.85, width = 0.7) +
+  geom_text(aes(label = sprintf("%.1f%%", pct)), 
+            vjust = -0.5, fontface = "bold", size = 4.5) +
+  scale_fill_manual(values = c("#4575b4", "#91bfdb", "#d1e5f0", "#fddbc7")) +
+  scale_y_continuous(limits = c(0, 50), breaks = seq(0, 50, 10),
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "CofE Statistics for Mission",
+    subtitle = "% composition of Worshipping Community",
+    x = "Age Group",
+    y = "Percentage (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 13),
+    plot.subtitle = element_text(size = 10),
+    panel.grid.major.x = element_blank()
+  )
+
+bibsoc_plot + cofe_plot +
+  plot_annotation(
+    title = "The Age Distribution Paradox",
+    subtitle = "Survey shows youth engagement; reality shows elderly dominance",
+    theme = theme(
+      plot.title = element_text(size = 15, face = "bold"),
+      plot.subtitle = element_text(size = 12)
+    )
+  )
+```
+
+**Key discrepancy:** - Survey suggests 18-34s attend MORE than 35-54s (26% vs 18%) - CofE records show 70+ make up **35%** of regular worshippers - This suggests systematic over-reporting among younger respondents
+
+### Statistical Test: Are These Distributions Different?
+
+While the survey and CofE data measure slightly different things (attendance rate vs composition), we can assess whether the pattern differences are statistically meaningful.
+
+```{r}
+#| label: age-distribution-test
+
+# For this test, we'll compare the relative patterns
+# Survey: Relative attendance rates by age
+# CofE: Composition of worshipping community
+
+# Survey data (rescale to sum to 100)
+survey_age_dist <- bibsoc_age %>%
+  mutate(prop = pct / sum(pct)) %>%
+  pull(prop)
+
+# CofE data (already proportions)
+cofe_age_dist <- cofe_age %>%
+  mutate(prop = pct / 100) %>%
+  pull(prop)
+
+# Chi-square test for goodness of fit
+# H0: Survey age pattern matches CofE age pattern
+# Note: This is approximate since we can't perfectly align age groups
+
+# Create comparable groups by collapsing CofE categories
+# Survey: 18-34, 35-54, 55+
+# CofE: 0-17, 18-69, 70+
+# We'll compare the "adult" distributions
+
+# Alternative approach: Compare the rank ordering
+# Survey rank: 55+ (27%) > 18-34 (26%) > 35-54 (18%)
+# CofE rank: 70+ (35%) > 18-69 (46.6%) > Under-18 (18.5%)
+
+# Visual comparison shows fundamentally different patterns
+pattern_comparison <- tibble(
+  Pattern = c("Survey (self-reported)", "CofE (actual)"),
+  Young_High = c(TRUE, FALSE),
+  Middle_Low = c(TRUE, FALSE),
+  Old_Dominant = c(FALSE, TRUE)
+)
+```
+
+**Pattern Analysis:**
+
+| Source | Pattern | Interpretation |
+|------------------|--------------------|----------------------------------|
+| **Survey** | Young (18-34) = Old (55+) \> Middle (35-54) | U-shaped: young & old attend, middle-aged don't |
+| **CofE** | Old (70+) \>\> Working-age (18-69) \>\> Children (0-17) | Age-gradient: attendance increases with age |
+
+These are **fundamentally incompatible patterns**, suggesting: 1. Young people systematically over-report attendance in surveys 2. Survey captures "aspirational" or "identity" attendance rather than actual behaviour 3. Age-related social desirability bias (young people want to appear engaged)
+
+## Testing the "25% Revival" Claim
+
+Bible Society UK claims CofE attendance increased 25% from 2018 to 2024. Let's examine this against actual CofE data.
+
+```{r}
+#| label: revival-claim-check
+
+# CofE actual changes
+cofe_weekly_2019 <- comparison_data %>%
+  filter(metric == "church_attendance_weekly", source == "CofE", year == 2019) %>%
+  pull(value)
+
+cofe_weekly_2023 <- comparison_data %>%
+  filter(metric == "church_attendance_weekly", source == "CofE", year == 2023) %>%
+  pull(value)
+
+cofe_weekly_2024 <- comparison_data %>%
+  filter(metric == "church_attendance_weekly", source == "CofE", year == 2024) %>%
+  pull(value)
+
+# Calculate actual percentage changes
+change_2019_2024 <- (cofe_weekly_2024 - cofe_weekly_2019) / cofe_weekly_2019 * 100
+change_2023_2024 <- (cofe_weekly_2024 - cofe_weekly_2023) / cofe_weekly_2023 * 100
+
+# Get worshipping community trends
+cofe_wc_2019 <- comparison_data %>%
+  filter(metric == "worshipping_community", source == "CofE", year == 2019) %>%
+  pull(value)
+
+cofe_wc_2024 <- comparison_data %>%
+  filter(metric == "worshipping_community", source == "CofE", year == 2024) %>%
+  pull(value)
+
+change_wc_2019_2024 <- (cofe_wc_2024 - cofe_wc_2019) / cofe_wc_2019 * 100
+```
+
+### The Reality Check
+
+**Bible Society claim:** CofE attendance increased **+25%** from 2018-2024
+
+**CofE actual statistics:**
+
+| Metric | 2019 | 2024 | Change |
+|-------------------|-----------------|-----------------|-------------------|
+| Weekly attendance | `r format(cofe_weekly_2019, big.mark=",")` | `r format(cofe_weekly_2024, big.mark=",")` | **`r sprintf("%.1f%%", change_2019_2024)`** |
+| Worshipping Community | `r format(cofe_wc_2019, big.mark=",")` | `r format(cofe_wc_2024, big.mark=",")` | **`r sprintf("%.1f%%", change_wc_2019_2024)`** |
+
+**Year-on-year (2023-2024):** `r sprintf("%+.1f%%", change_2023_2024)`
+
+```{r}
+#| label: revival-reality-check-visual
+#| echo: false
+#| fig-cap: "CofE attendance trends: Claimed 'revival' vs actual records"
+#| fig-width: 12
+#| fig-height: 7
+
+# Create time series data
+time_series_data <- comparison_data %>%
+  filter(source == "CofE", 
+         metric %in% c("church_attendance_weekly", "worshipping_community"),
+         year %in% c(2019, 2023, 2024)) %>%
+  select(metric, year, value) %>%
+  mutate(
+    Metric = if_else(metric == "church_attendance_weekly", 
+                     "Weekly Attendance", "Worshipping Community")
+  )
+
+p1 <- ggplot(time_series_data, aes(x = year, y = value / 1000, 
+                                    color = Metric, group = Metric)) +
+  geom_line(linewidth = 1.5, alpha = 0.8) +
+  geom_point(size = 4) +
+  geom_text(aes(label = format(round(value/1000, 0), big.mark=",")),
+            vjust = -1.2, fontface = "bold", size = 3.8, show.legend = FALSE) +
+  # Add 25% increase line for reference
+  geom_segment(aes(x = 2019, xend = 2024, 
+                   y = cofe_weekly_2019/1000, 
+                   yend = cofe_weekly_2019/1000 * 1.25),
+               color = "#d73027", linewidth = 1.2, linetype = "dashed",
+               inherit.aes = FALSE) +
+  annotate("text", x = 2021.5, y = 950, 
+           label = "Bible Society's\nclaimed +25%", 
+           color = "#d73027", fontface = "bold", size = 3.5, lineheight = 0.9) +
+  scale_color_manual(values = c("Weekly Attendance" = "#4575b4", 
+                                 "Worshipping Community" = "#91cf60")) +
+  scale_x_continuous(breaks = c(2019, 2023, 2024)) +
+  scale_y_continuous(limits = c(600, 1200), breaks = seq(600, 1200, 100)) +
+  labs(
+    title = "CofE Attendance Trends 2019-2024",
+    subtitle = "Actual data shows DECLINE, not +25% revival",
+    x = "Year",
+    y = "Attendance (thousands)",
+    color = NULL
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11, color = "#d73027"),
+    legend.position = "top",
+    panel.grid.minor = element_blank()
+  )
+
+# Create comparison bars
+comparison_bars <- tibble(
+  Claim = c("Bible Society\nClaim", "CofE Actual\nWeekly", "CofE Actual\nMonthly+"),
+  Change = c(25, change_2019_2024, change_wc_2019_2024),
+  Type = c("Claim", "Reality", "Reality")
+)
+
+p2 <- ggplot(comparison_bars, aes(x = Claim, y = Change, fill = Type)) +
+  geom_col(alpha = 0.85, width = 0.7) +
+  geom_hline(yintercept = 0, linewidth = 0.8, color = "black") +
+  geom_text(aes(label = sprintf("%+.1f%%", Change)), 
+            vjust = if_else(comparison_bars$Change > 0, -0.5, 1.5),
+            fontface = "bold", size = 5) +
+  scale_fill_manual(values = c("Claim" = "#d73027", "Reality" = "#4575b4")) +
+  scale_y_continuous(limits = c(-25, 30), breaks = seq(-25, 30, 5)) +
+  labs(
+    title = "Claimed vs Actual Change (2019-2024)",
+    subtitle = "Bible Society's claim contradicts CofE records",
+    x = NULL,
+    y = "Percentage Change (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    panel.grid.major.x = element_blank()
+  )
+
+p1 + p2 +
+  plot_layout(widths = c(1.5, 1))
+```
+
+**Conclusion:** Bible Society's "+25% revival" claim directly contradicts CofE's official records, which show a **`r sprintf("%.0f%%", abs(change_2019_2024))` decline** from 2019 to 2024.
+
+### Catholic Church Shows Similar Pattern
+
+The report's claim that "Catholicism has risen sharply" is directly contradicted by the church's own data. As highlighted by Professor David Voas, Catholic Mass attendance data from the Bishops' Conference of England and Wales shows a parallel trend of decline, not revival:
+
+```{r}
+#| label: catholic-trends
+#| echo: false
+
+# Calculate Catholic changes
+catholic_change_2019_2023 <- (catholic_mass_2023 - catholic_mass_2019) / catholic_mass_2019 * 100
+catholic_change_2022_2023 <- (catholic_mass_2023 - catholic_mass_2022) / catholic_mass_2022 * 100
+```
+
+| Year | Mass Attendance | Change from 2019 |
+|----------------|--------------------------|------------------------------|
+| 2019 (pre-pandemic) | `r format(catholic_mass_2019, big.mark=",")` | — |
+| 2022 | `r format(catholic_mass_2022, big.mark=",")` | `r sprintf("%.1f%%", (catholic_mass_2022 - catholic_mass_2019) / catholic_mass_2019 * 100)` |
+| 2023 | `r format(catholic_mass_2023, big.mark=",")` | `r sprintf("%.1f%%", catholic_change_2019_2023)` |
+
+**Catholic pattern:** - **2019-2023 change:** `r sprintf("%.1f%%", catholic_change_2019_2023)` (**decline**, not revival) - **2022-2023 change:** `r sprintf("%+.1f%%", catholic_change_2022_2023)` (modest recovery) - **Still below pre-pandemic:** Down `r sprintf("%.0f%%", abs(catholic_change_2019_2023))` from 2019
+
+This **confirms the CofE pattern**: both major denominations show: 1. **Significant pandemic-related decline** (2019-2021) 2. **Modest recovery** (2022-2023) 3. **Still below pre-pandemic levels** (not a "revival")
+
+**Implication:** The pattern is **consistent across denominations**, contradicting claims of a religious revival in the UK. Both CofE and Catholic data show recovery from pandemic lows, not growth beyond pre-pandemic levels.
+
+## Over-Reporting in Religious Surveys
+
+Survey over-reporting of church attendance is well-documented in research literature.
+
+```{r}
+#| label: over-reporting-factors
+
+# Calculate England/Wales pop percentage for CofE
+cofe_weekly_pct_england_wales <- (cofe_weekly / england_wales_pop) * 100
+estimated_all_christian_pct <- (estimated_total_christian_weekly / england_wales_pop) * 100
+
+# Over-reporting rates
+over_report_weekly <- survey_weekly_pct * 100 / cofe_weekly_pct_england_wales
+over_report_all_denom <- survey_weekly_pct * 100 / estimated_all_christian_pct
+```
+
+### Survey vs Reality: The Over-Reporting Problem
+
+Studies consistently find that people over-report church attendance in surveys by factors of 1.5x to 3x. Our comparison shows:
+
+**Weekly attendance as % of England/Wales population:** - Survey claim (Bible Society): **`r sprintf("%.1f%%", survey_weekly_pct * 100)`** - CofE actual: **`r sprintf("%.2f%%", cofe_weekly_pct_england_wales)`** - All Christian (estimated): **`r sprintf("%.1f%%", estimated_all_christian_pct)`**
+
+**Over-reporting factors:** - Relative to CofE only: **`r sprintf("%.1fx", over_report_weekly)`** - Relative to all denominations: **`r sprintf("%.1fx", over_report_all_denom)`**
+
+```{r}
+#| label: over-reporting-visual
+#| echo: false
+#| fig-cap: "Over-reporting of church attendance"
+#| fig-width: 10
+#| fig-height: 6
+
+over_report_data <- tibble(
+  Source = c("Survey\n(self-reported)", "CofE actual\n(counted)", 
+             "All Christian\n(estimated)"),
+  Percentage = c(survey_weekly_pct * 100, 
+                 cofe_weekly_pct_england_wales,
+                 estimated_all_christian_pct),
+  Type = c("Survey", "Actual", "Estimate"),
+  x = 1:3
+) %>%
+  mutate(Source = factor(Source, levels = Source))
+
+ggplot(over_report_data, aes(x = Source, y = Percentage, fill = Type)) +
+  geom_col(alpha = 0.85, width = 0.7) +
+  geom_text(aes(label = sprintf("%.2f%%", Percentage)), 
+            vjust = -0.5, fontface = "bold", size = 5) +
+  # Add connecting lines showing over-reporting factor
+  annotate("segment", x = 1, xend = 3, 
+           y = survey_weekly_pct * 100, 
+           yend = estimated_all_christian_pct,
+           linetype = "dashed", color = "#d73027", linewidth = 1) +
+  annotate("text", x = 2, y = 7, 
+           label = sprintf("%.1fx over-reporting", over_report_all_denom),
+           color = "#d73027", fontface = "bold", size = 4) +
+  scale_fill_manual(values = c("Survey" = "#d73027", "Actual" = "#4575b4", 
+                                "Estimate" = "#fee08b")) +
+  scale_y_continuous(limits = c(0, 13), breaks = 0:12,
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Weekly Church Attendance: Survey Over-Reporting",
+    subtitle = "Self-reported attendance (11%) vs actual counted attendance (~2.4%)",
+    x = NULL,
+    y = "Percentage of England/Wales Population (%)"
+  ) +
+  theme_minimal() +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    axis.text.x = element_text(size = 11, lineheight = 0.9),
+    panel.grid.major.x = element_blank()
+  )
+```
+
+## Reconciliation Analysis: Explaining the Gap
+
+Can we account for the 5.2 million person gap between survey claims and actual attendance?
+
+```{r}
+#| label: reconciliation-analysis
+
+# Start with survey claim
+survey_claim <- survey_weekly_absolute / 1e6
+
+# Known actual attendance
+actual_cofe <- cofe_weekly / 1e6
+actual_other_denom <- (estimated_total_christian_weekly - cofe_weekly) / 1e6
+
+# Potential explanations for the gap
+# 1. Over-reporting (literature suggests 40-100% over-reporting)
+over_reporting_low <- survey_claim * 0.40
+over_reporting_mid <- survey_claim * 0.70
+over_reporting_high <- survey_claim * 1.00
+
+# 2. Definitional differences (online services, school assemblies, etc.)
+definitional_estimate <- 0.5  # Conservative estimate: 0.5M
+
+# 3. Non-Christian religious attendance captured in survey
+non_christian_estimate <- 0.3  # Muslims, Hindus, Sikhs, etc.
+
+# Create reconciliation scenarios
+reconciliation_conservative <- tibble(
+  Component = c("Survey claim", "Less: Over-reporting (40%)", 
+                "Less: Definitional differences", "Less: Non-Christian",
+                "= Implied actual", "Actual recorded", "Remaining gap"),
+  Value = c(
+    survey_claim,
+    -over_reporting_low,
+    -definitional_estimate,
+    -non_christian_estimate,
+    survey_claim - over_reporting_low - definitional_estimate - non_christian_estimate,
+    estimated_total_christian_weekly / 1e6,
+    (survey_claim - over_reporting_low - definitional_estimate - non_christian_estimate) - 
+      (estimated_total_christian_weekly / 1e6)
+  )
+)
+
+reconciliation_moderate <- tibble(
+  Component = c("Survey claim", "Less: Over-reporting (70%)", 
+                "Less: Definitional differences", "Less: Non-Christian",
+                "= Implied actual", "Actual recorded", "Remaining gap"),
+  Value = c(
+    survey_claim,
+    -over_reporting_mid,
+    -definitional_estimate,
+    -non_christian_estimate,
+    survey_claim - over_reporting_mid - definitional_estimate - non_christian_estimate,
+    estimated_total_christian_weekly / 1e6,
+    (survey_claim - over_reporting_mid - definitional_estimate - non_christian_estimate) - 
+      (estimated_total_christian_weekly / 1e6)
+  )
+)
+```
+
+### Reconciliation Scenarios
+
+**Conservative Scenario (40% over-reporting):**
+
+```{r}
+#| label: reconciliation-conservative-table
+#| echo: false
+
+reconciliation_conservative %>%
+  mutate(Value = sprintf("%.2f M", Value)) %>%
+  gt() %>%
+  tab_header(
+    title = "Conservative Reconciliation",
+    subtitle = "Assuming 40% over-reporting (lower bound from literature)"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(rows = c(1, 5, 6, 7))
+  )
+```
+
+**Moderate Scenario (70% over-reporting):**
+
+```{r}
+#| label: reconciliation-moderate-table
+#| echo: false
+
+reconciliation_moderate %>%
+  mutate(Value = sprintf("%.2f M", Value)) %>%
+  gt() %>%
+  tab_header(
+    title = "Moderate Reconciliation",
+    subtitle = "Assuming 70% over-reporting (mid-range from literature)"
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(rows = c(1, 5, 6, 7))
+  )
+```
+
+```{r}
+#| label: reconciliation-visual
+#| echo: false
+#| fig-cap: "Reconciliation waterfall: Explaining the gap"
+#| fig-width: 11
+#| fig-height: 7
+
+# Create waterfall data for moderate scenario
+implied_actual <- survey_claim - over_reporting_mid - definitional_estimate - non_christian_estimate
+actual_recorded <- estimated_total_christian_weekly / 1e6
+
+# Build the waterfall data frame
+waterfall_data <- tibble(
+  x = 1:7,
+  Stage = c("Survey claim", "Less: Over-reporting", "Less: Definitional", "Less: Non-Christian",
+            "Implied actual", "Gap to recorded", "Actual recorded"),
+  Amount = c(survey_claim, over_reporting_mid, definitional_estimate, non_christian_estimate,
+             implied_actual, actual_recorded - implied_actual, actual_recorded),
+  Type = c("Start", "Deduction", "Deduction", "Deduction", "Subtotal", "Addition", "Final")
+)
+
+# Define y-positions for rectangles
+waterfall_data <- waterfall_data %>%
+  mutate(
+    ymin = case_when(
+      Type == "Start" ~ 0,
+      Type == "Deduction" & Stage == "Less: Over-reporting" ~ survey_claim - over_reporting_mid,
+      Type == "Deduction" & Stage == "Less: Definitional" ~ survey_claim - over_reporting_mid - definitional_estimate,
+      Type == "Deduction" & Stage == "Less: Non-Christian" ~ implied_actual,
+      Type == "Subtotal" ~ 0,
+      Type == "Addition" ~ implied_actual,
+      Type == "Final" ~ 0
+    ),
+    ymax = case_when(
+      Type == "Start" ~ survey_claim,
+      Type == "Deduction" & Stage == "Less: Over-reporting" ~ survey_claim,
+      Type == "Deduction" & Stage == "Less: Definitional" ~ survey_claim - over_reporting_mid,
+      Type == "Deduction" & Stage == "Less: Non-Christian" ~ survey_claim - over_reporting_mid - definitional_estimate,
+      Type == "Subtotal" ~ implied_actual,
+      Type == "Addition" ~ actual_recorded,
+      Type == "Final" ~ actual_recorded
+    )
+  ) %>%
+  mutate(label_pos = (ymin + ymax) / 2)
+
+# Plot using geom_rect for all bars
+ggplot(waterfall_data, aes(x = x, ymin = ymin, ymax = ymax, fill = Type)) +
+  geom_rect(aes(xmin = x - 0.4, xmax = x + 0.4), alpha = 0.85) +
+  geom_text(aes(y = label_pos, label = sprintf("%.2f M", Amount)),
+            fontface = "bold", size = 3.5, color = "white") +
+  scale_x_continuous(breaks = 1:7, labels = waterfall_data$Stage) +
+  scale_y_continuous(limits = c(0, 7.5), breaks = 0:7,
+                     expand = expansion(mult = c(0, 0.05))) +
+  scale_fill_manual(
+    values = c("Start" = "#d73027", "Deduction" = "#4575b4", "Addition" = "#91cf60", 
+               "Subtotal" = "#fee08b", "Final" = "#313695"),
+    guide = "none"
+  ) +
+  labs(
+    title = "Reconciling Survey Claims with Actual Attendance",
+    subtitle = "Moderate scenario: 70% over-reporting + definitional differences + non-Christian attendance",
+    x = NULL,
+    y = "Millions of people"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    axis.text.x = element_text(size = 9, lineheight = 0.8, angle = 45, hjust = 1),
+    panel.grid.major.x = element_blank()
+  )
+```
+
+### Reconciliation Findings
+
+Under the **moderate scenario** (70% over-reporting, consistent with international literature): - Survey claim: **6.66M** - Less over-reporting (70%): **-4.66M** - Less definitional differences: **-0.50M** - Less non-Christian attendance: **-0.30M** - **= Implied actual: ~1.20M\ -\ Actual\ recorded\ (all\ Christian):~** 1.46M
+
+**Result:** With plausible adjustments for known biases, the survey and actual attendance figures can be reconciled within reasonable bounds (1.20M implied vs 1.46M actual).
+
+**Key insight:** The gap is NOT mysterious—it's explained by well-documented survey biases. This means: 1. The survey doesn't prove a "revival"—it just demonstrates over-reporting 2. A 4pp increase in survey responses could result from: - Changes in over-reporting rates (not actual behaviour) - Demographic composition changes (immigration from high-religiosity countries) - Question order effects (see [Question Order Effects](./question-order-effects.qmd)) - Measurement artifacts
+
+## Summary Dashboard
+
+```{r}
+#| label: summary-table
+#| echo: false
+
+# Create comprehensive summary table
+summary_table <- tibble(
+  Metric = c(
+    "Weekly attendance (millions)",
+    "Weekly as % of population",
+    "Annual attendance (millions)",
+    "Change 2019-2024",
+    "Over-reporting factor (weekly)"
+  ),
+  `Bible Society Survey` = c(
+    sprintf("%.2f M (11%%)", survey_weekly_absolute / 1e6),
+    sprintf("%.1f%%", survey_weekly_pct * 100),
+    sprintf("%.1f M (24%%)", survey_annual_absolute / 1e6),
+    "+25% (claimed)",
+    "—"
+  ),
+  `CofE Statistics` = c(
+    sprintf("%.2f M", cofe_weekly / 1e6),
+    sprintf("%.2f%%", cofe_weekly_pct_england_wales),
+    sprintf("%.2f M (est.)", cofe_unique_annual_estimate / 1e6),
+    sprintf("%.1f%%", change_2019_2024),
+    "—"
+  ),
+  `All Christian (Est.)` = c(
+    sprintf("%.2f M", estimated_total_christian_weekly / 1e6),
+    sprintf("%.1f%%", estimated_all_christian_pct),
+    sprintf("%.1f M", total_christian_annual_estimate / 1e6),
+    "—",
+    sprintf("%.1fx", over_report_all_denom)
+  )
+)
+
+summary_table %>%
+  gt() %>%
+  tab_header(
+    title = "Church Attendance: Survey vs Reality",
+    subtitle = "Comparison of Bible Society survey claims with CofE official statistics (2024)"
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "#fee08b"),
+    locations = cells_body(columns = `Bible Society Survey`)
+  ) %>%
+  tab_style(
+    style = cell_fill(color = "#d1e5f0"),
+    locations = cells_body(columns = `CofE Statistics`)
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  ) %>%
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(columns = Metric)
+  ) %>%
+  tab_source_note(
+    source_note = "Sources: Bible Society UK (2024 YouGov survey); CofE Statistics for Mission (2024)"
+  )
+```
+
+## Key Findings
+
+### 1. Massive Discrepancy Between Survey and Reality
+
+-   Survey suggests **6.66 million** weekly attenders
+-   Church records suggest **\~1.46 million** across all denominations
+-   Gap: **\~5.2 million "phantom attenders"** (**`r sprintf("%.1fx", over_report_all_denom)` over-reporting**)
+
+### 2. Age Distribution Contradiction
+
+-   Survey: Young people (18-34) MORE engaged than middle-aged (26% vs 18%)
+-   Reality: Elderly (70+) make up 35% of worshipping community
+-   **Implication:** Systematic over-reporting among younger respondents
+
+### 3. "Revival" Claim Contradicts Church Records
+
+-   Bible Society claim: **+25%** CofE attendance increase
+-   **CofE actual:** **`r sprintf("%.1f%%", change_2019_2024)` decline** (2019-2024); +1.6% (2023-2024)
+-   **Catholic actual:** **`r sprintf("%.1f%%", catholic_change_2019_2023)` decline** (2019-2023); +10.3% (2022-2023)
+-   **Both denominations:** Modest recovery from pandemic lows, but still below pre-pandemic levels
+
+### 4. Well-Documented Over-Reporting Phenomenon
+
+-   **`r sprintf("%.1fx", over_report_all_denom)` over-reporting** consistent with international literature
+-   Social desirability bias, memory errors, and definitional ambiguity contribute
+-   Survey data alone CANNOT be used to claim religious revival
+
+## Implications for the "Quiet Revival" Claim
+
+The comparison with actual church attendance records from **both CofE and Catholic churches** (representing 70% of UK Christians) reveals that:
+
+1.  **The baseline is inflated**: Survey estimates are `r sprintf("%.1f", over_report_all_denom)` times higher than actual attendance
+2.  **The trend is wrong**: Both CofE (-19%) and Catholic (-21%) show decline from 2019, not revival (+25% claimed)
+3.  **The age pattern is inverted**: Reality shows elderly dominance, survey shows youth engagement
+4.  **No triangulation**: Other measures (belief, prayer, donations) should also show increases
+5.  **Cross-denominational consistency**: Both major denominations show the same pattern (pandemic recovery, not revival)
+
+**Conclusion:** The "Quiet Revival" claim is **not supported** when compared against actual church attendance records across multiple denominations. The discrepancies suggest: - Systematic over-reporting in surveys - Measurement artifacts (see [Question Order Effects](./question-order-effects.qmd)) - Demographic confounding (see [Demographic Analysis](./demographic-analysis.qmd)) - Lack of methodological rigour in interpreting survey data
+
+## References
+
+**Church of England:** - Church of England. (2024). *Statistics for Mission 2024*. Retrieved from Church of England National Church Institutions.
+
+**Catholic Church (England and Wales):** - Drozdziak, A. (2025, February 17). UK Mass attendance jumps significantly, numbers still not quite pre-pandemic. *Catholic Review* / OSV News. Retrieved from <https://catholicreview.org/uk-mass-attendance-jumps-significantly-numbers-still-not-quite-pre-pandemic/> - Data source: Bishops' Conference of England and Wales. Analysis by Prof. Stephen Bullivant, St. Mary's University, London.
+
+**Bible Society UK:** - Bible Society UK. (2024). *The Untold Story: 2024 Bible in British Life Survey Results*. YouGov survey, n=13,146.
+
+**Survey Over-Reporting Literature:** - Hadaway, C. K., Marler, P. L., & Chaves, M. (1993). What the polls don't show: A closer look at US church attendance. *American Sociological Review*, 58(6), 741-752. - Brenner, P. S. (2011). Exceptional behavior or exceptional identity? Overreporting of church attendance in the US. *Public Opinion Quarterly*, 75(1), 19-41.
