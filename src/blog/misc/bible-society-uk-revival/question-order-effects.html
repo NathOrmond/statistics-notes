@@ -178,11 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The Problem</a></li>
-  <li><a href="#question-format-comparison" id="toc-question-format-comparison" class="nav-link" data-scroll-target="#question-format-comparison">Question Format Comparison</a>
-  <ul class="collapse">
-  <li><a href="#survey-format" id="toc-survey-format" class="nav-link" data-scroll-target="#survey-format">2018 Survey Format</a></li>
-  <li><a href="#survey-format-1" id="toc-survey-format-1" class="nav-link" data-scroll-target="#survey-format-1">2024 Survey Format</a></li>
-  </ul></li>
+  <li><a href="#visualizing-the-structural-difference" id="toc-visualizing-the-structural-difference" class="nav-link" data-scroll-target="#visualizing-the-structural-difference">Visualizing the Structural Difference</a></li>
   <li><a href="#internal-consistency-check" id="toc-internal-consistency-check" class="nav-link" data-scroll-target="#internal-consistency-check">Internal Consistency Check</a>
   <ul class="collapse">
   <li><a href="#internal-consistency-check-2024" id="toc-internal-consistency-check-2024" class="nav-link" data-scroll-target="#internal-consistency-check-2024">Internal Consistency Check (2024)</a></li>
@@ -232,24 +228,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>This violates best practice in survey methodology, as question order can significantly bias responses.</p>
 </section>
-<section id="question-format-comparison" class="level2">
-<h2 class="anchored" data-anchor-id="question-format-comparison">Question Format Comparison</h2>
-<section id="survey-format" class="level3">
-<h3 class="anchored" data-anchor-id="survey-format">2018 Survey Format</h3>
-<p><strong>Question</strong>: ‘Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?’</p>
-<p><strong>Response options</strong>: - Daily/almost daily - A few times a week - About once a week - [other frequency options…] - Never</p>
-</section>
-<section id="survey-format-1" class="level3">
-<h3 class="anchored" data-anchor-id="survey-format-1">2024 Survey Format</h3>
-<p><strong>Question 1 (BINARY)</strong>: ‘Have you attended a church service in the past year?’ - Yes - in the past year - Yes - more than a year ago - Never</p>
-<p><strong>Question 2 (FREQUENCY)</strong>: ‘How often did you attend?’ [Same frequency scale as 2018]</p>
+<section id="visualizing-the-structural-difference" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-the-structural-difference">Visualizing the Structural Difference</h2>
+<p>The most significant methodological flaw is the change in question structure between the two surveys. The 2018 survey asked a single question about frequency, while the 2024 survey first asked a binary yes/no question before asking about frequency. This change introduces a “priming” effect that makes the results from the two years not directly comparable. The chart below illustrates this structural difference.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="question-order-effects_files/figure-html/question-flow-chart-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Visual comparison of the 2018 and 2024 survey question structures.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>🚩 <strong>CRITICAL</strong>: The binary question primes respondents before they consider frequency, which can lead to:</p>
 <ul>
 <li>Acquiescence bias (tendency to say ‘yes’)</li>
 <li>Anchoring effects (binary framing affects frequency judgements)</li>
 <li>Non-comparable measures between years</li>
 </ul>
-</section>
 </section>
 <section id="internal-consistency-check" class="level2">
 <h2 class="anchored" data-anchor-id="internal-consistency-check">Internal Consistency Check</h2>
@@ -289,6 +286,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Discrepancy</strong>: 2.0 percentage points</li>
 </ul>
 <p>✓ Responses are internally consistent</p>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="question-order-effects_files/figure-html/inconsistency-chart-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Internal inconsistency in the 2024 survey. The sum of frequency responses does not match the binary ‘Yes’ response.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="evidence-from-survey-methodology-literature" class="level2">
@@ -358,10 +365,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="ever-attended-comparison">‘Ever Attended’ Comparison</h3>
 <p>Interestingly, the binary question itself shows a decrease:</p>
 <ul>
-<li><strong>2018 (frequency-based)</strong>: ~52%</li>
+<li><strong>2018 (frequency-based)</strong>: 52%</li>
 <li><strong>2024 (binary question)</strong>: 24.0%</li>
 <li><strong>Change</strong>: -28.0 percentage points</li>
 </ul>
+<div class="cell">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="question-order-effects_files/figure-html/contradictory-trend-chart-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Contradictory trends between weekly and annual attendance measures.</figcaption>
+</figure>
+</div>
+</div>
+</div>
 <p>🚩 <strong>CONTRADICTION</strong>:</p>
 <p>The binary question shows a DECREASE (27% → 24%), while the frequency question shows an INCREASE (7% → 11%). This contradiction is critical evidence:</p>
 <p>These cannot both be true. This is strong evidence that question order effects are creating measurement error.</p>
