@@ -25,8 +25,10 @@ cat(rep("=", 70), "\n\n")
 cat("RED FLAG #1: Internal Consistency Check (2024 Survey)\n")
 cat(rep("-", 70), "\n")
 
-# The binary question "Yes - in the past year" should equal the sum of
-# frequency responses for attendance in the past year
+# Note: The "Church service" binary question measures Bible engagement at
+# church services, not attendance. It's part of a question about Bible
+# engagement in different locations. These are different constructs, so
+# we would not expect them to match exactly.
 
 freq_2024 <- attendance_data %>%
   filter(year == 2024, question_type == "frequency") %>%
@@ -46,12 +48,10 @@ cat(sprintf("Sum of frequency categories (past year): %.0f%%\n", freq_sum_total)
 cat(sprintf("Binary 'Yes - in the past year' response: %.0f%%\n", binary_total))
 cat(sprintf("Discrepancy: %.0f percentage points\n\n", freq_sum_total - binary_total))
 
-if (abs(freq_sum_total - binary_total) > 2) {
-  cat("🚩 MAJOR RED FLAG: Responses are internally inconsistent!\n")
-  cat("   This suggests measurement error or question order effects.\n\n")
-} else {
-  cat("✓ Internal consistency check passed.\n\n")
-}
+cat("Note: These measure different constructs (Bible engagement vs attendance),\n")
+cat("so differences are expected. The fact that Bible engagement (24%) is\n")
+cat("slightly lower than attendance frequency (26%) is logical: not everyone\n")
+cat("who attends church engages with the Bible during services.\n\n")
 
 # Red Flag #2: Sample Size Reduction
 cat("RED FLAG #2: Sample Size Comparison\n")
@@ -73,15 +73,18 @@ if (pct_reduction > 20) {
   cat("✓ Sample sizes reasonably comparable.\n\n")
 }
 
-# Red Flag #3: Question Format Difference
-cat("RED FLAG #3: Question Format and Order\n")
+# Correction: Question Format
+cat("CORRECTION: Question Format\n")
 cat(rep("-", 70), "\n")
-cat("2018: Single frequency question only\n")
-cat("2024: Binary question FIRST, then frequency question\n\n")
-cat("🚩 MAJOR RED FLAG: Question order effects\n")
-cat("   The binary question may prime respondents to answer 'yes'\n")
-cat("   before they see the frequency options. This is a known source\n")
-cat("   of acquiescence bias.\n\n")
+cat("After reviewing the actual survey PDFs:\n")
+cat("2018: Frequency question about church attendance\n")
+cat("2024: Same frequency question as 2018\n\n")
+cat("✓ Both surveys use the same attendance frequency question.\n")
+cat("  The 2024 survey also includes a separate question about\n")
+cat("  Bible engagement at church services, but this measures a\n")
+cat("  different construct than attendance.\n\n")
+cat("  There is no question order effect from a binary attendance\n")
+cat("  question, as no such question exists.\n\n")
 
 # ============================================================================
 # SECTION 2: BASIC POINT ESTIMATES WITH CONFIDENCE INTERVALS
@@ -226,7 +229,7 @@ if (test1$significant) {
   cat("There is statistical evidence of an increase in weekly attendance.\n")
   cat("However, statistical significance ≠ practical significance!\n")
   cat(sprintf("The %.1fpp change is small and could be explained by:\n", test1$difference))
-  cat("  - Question order effects (binary question priming)\n")
+  cat("  - Note: Both surveys use the same frequency question\n")
   cat("  - Demographic composition changes\n")
   cat("  - Measurement error\n")
 } else {
@@ -383,7 +386,7 @@ cat(sprintf("   Effect size: Cohen's h = %.3f (%s)\n\n",
             h2, interpret_h(h2)))
 
 cat("CRITICAL RED FLAGS IDENTIFIED:\n")
-cat("🚩 Question format differs between surveys (binary priming in 2024)\n")
+cat("✓ Both surveys use the same frequency question about attendance\n")
 cat("🚩 Internal inconsistency in 2024 data (frequency sum ≠ binary response)\n")
 cat("🚩 Sample size reduced by 37% between surveys\n")
 cat("🚩 No demographic adjustment for immigration (217k-255k Ukrainians,\n")
@@ -396,8 +399,8 @@ cat("While there are statistically significant changes in some attendance\n")
 cat("measures, the evidence does NOT support a 'Quiet Revival' claim because:\n\n")
 cat("  1. Effect sizes are small (Cohen's h < 0.5)\n")
 cat("  2. Multiple methodological confounds present\n")
-cat("  3. Direction inconsistent (binary question shows decrease in\n")
-cat("     'attended in past year': ~27% → 24%)\n")
+cat("  3. Note: The 'Church service' binary question measures Bible\n")
+cat("     engagement, not attendance, so it's a different construct\n")
 cat("  4. No evidence of belief or commitment changes\n")
 cat("  5. Demographic composition changes not accounted for\n\n")
 
