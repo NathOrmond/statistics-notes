@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -144,8 +144,6 @@ window.Quarto = {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../../index.html">
     <span class="navbar-title">Nathans Stats Stuff</span>
     </a>
@@ -217,7 +215,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#critical-methodological-issues-identified" id="toc-critical-methodological-issues-identified" class="nav-link" data-scroll-target="#critical-methodological-issues-identified">Critical Methodological Issues Identified</a>
   <ul class="collapse">
-  <li><a href="#survey-design-differences" id="toc-survey-design-differences" class="nav-link" data-scroll-target="#survey-design-differences">1. Survey Design Differences</a></li>
+  <li><a href="#survey-design-corrected" id="toc-survey-design-corrected" class="nav-link" data-scroll-target="#survey-design-corrected">1. Survey Design (CORRECTED)</a></li>
   <li><a href="#population-demographic-changes" id="toc-population-demographic-changes" class="nav-link" data-scroll-target="#population-demographic-changes">2. Population Demographic Changes</a></li>
   <li><a href="#attendance-vs-belief-confound" id="toc-attendance-vs-belief-confound" class="nav-link" data-scroll-target="#attendance-vs-belief-confound">3. Attendance vs Belief Confound</a></li>
   </ul></li>
@@ -355,9 +353,9 @@ window.Quarto = {
 </section>
 <section id="critical-methodological-issues-identified" class="level2">
 <h2 class="anchored" data-anchor-id="critical-methodological-issues-identified">Critical Methodological Issues Identified</h2>
-<section id="survey-design-differences" class="level3">
-<h3 class="anchored" data-anchor-id="survey-design-differences">1. Survey Design Differences</h3>
-<p><strong>Problem</strong>: The surveys use different question formats and ordering - 2018: Direct frequency question - 2024: Binary “ever attended” question followed by frequency question - <strong>Impact</strong>: Question order effects can bias responses (acquiescence bias)</p>
+<section id="survey-design-corrected" class="level3">
+<h3 class="anchored" data-anchor-id="survey-design-corrected">1. Survey Design (CORRECTED)</h3>
+<p><strong>Correction</strong>: After reviewing the actual survey PDFs, both surveys use the same frequency question about church attendance. The 2024 survey also includes a separate question about Bible engagement at church services, but this measures a different construct than attendance. There is no question order effect from a binary attendance question, as no such question exists.</p>
 </section>
 <section id="population-demographic-changes" class="level3">
 <h3 class="anchored" data-anchor-id="population-demographic-changes">2. Population Demographic Changes</h3>
@@ -497,7 +495,7 @@ window.Quarto = {
 <section id="response-pattern-analysis" class="level4">
 <h4 class="anchored" data-anchor-id="response-pattern-analysis">2.3 Response Pattern Analysis</h4>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Acquiescence bias (more "yes" in 2024 due to binary question first?)</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># - Note: Both surveys use the same frequency question, so no question order effect</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># - Social desirability bias  </span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># - Satisficing (selecting first acceptable response)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
@@ -800,7 +798,7 @@ CI = \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n_{eff}}}
 <ol type="1">
 <li><strong>Sampling variation</strong>: Natural fluctuation within margin of error</li>
 <li><strong>Demographic composition</strong>: Immigration from more religious populations</li>
-<li><strong>Question order effects</strong>: Binary question before frequency question biases responses upward</li>
+<li><strong>Measurement differences</strong>: Different sample sizes, weighting, or other methodological factors</li>
 <li><strong>Social attendance increase</strong>: Non-religious attendance (cultural events, tourism) increased</li>
 <li><strong>Measurement error</strong>: Different methodologies yield different (contradictory) results</li>
 <li><strong>Regression to the mean</strong>: 2018 might have been unusually low</li>
@@ -902,7 +900,7 @@ CI = \hat{p} \pm z_{\alpha/2} \sqrt{\frac{\hat{p}(1-\hat{p})}{n_{eff}}}
 <h3 class="anchored" data-anchor-id="appropriate-conclusions">Appropriate Conclusions:</h3>
 <ul>
 <li>“There is evidence that reported church attendance frequency increased slightly between 2018 and 2024”</li>
-<li>“However, this could be explained by [demographic changes / measurement differences / question order effects]”</li>
+<li>“However, this could be explained by [demographic changes / measurement differences / sampling variation]”</li>
 <li>“No evidence is provided for changes in religious belief or commitment”</li>
 <li>“The term ‘revival’ is not supported by the data presented”</li>
 </ul>

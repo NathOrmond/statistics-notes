@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -115,8 +115,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">Nathans Stats Stuff</span>
     </a>
@@ -177,22 +175,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#the-problem" id="toc-the-problem" class="nav-link active" data-scroll-target="#the-problem">The Problem</a></li>
-  <li><a href="#visualizing-the-structural-difference" id="toc-visualizing-the-structural-difference" class="nav-link" data-scroll-target="#visualizing-the-structural-difference">Visualizing the Structural Difference</a></li>
+  <li><a href="#correction-question-order-effect-analysis" id="toc-correction-question-order-effect-analysis" class="nav-link active" data-scroll-target="#correction-question-order-effect-analysis">Correction: Question Order Effect Analysis</a></li>
+  <li><a href="#what-the-church-service-binary-question-actually-measures" id="toc-what-the-church-service-binary-question-actually-measures" class="nav-link" data-scroll-target="#what-the-church-service-binary-question-actually-measures">What the “Church service” Binary Question Actually Measures</a></li>
   <li><a href="#internal-consistency-check" id="toc-internal-consistency-check" class="nav-link" data-scroll-target="#internal-consistency-check">Internal Consistency Check</a>
   <ul class="collapse">
-  <li><a href="#internal-consistency-check-2024" id="toc-internal-consistency-check-2024" class="nav-link" data-scroll-target="#internal-consistency-check-2024">Internal Consistency Check (2024)</a></li>
+  <li><a href="#comparison-of-bible-engagement-vs.-attendance-2024" id="toc-comparison-of-bible-engagement-vs.-attendance-2024" class="nav-link" data-scroll-target="#comparison-of-bible-engagement-vs.-attendance-2024">Comparison of Bible Engagement vs.&nbsp;Attendance (2024)</a></li>
   </ul></li>
-  <li><a href="#evidence-from-survey-methodology-literature" id="toc-evidence-from-survey-methodology-literature" class="nav-link" data-scroll-target="#evidence-from-survey-methodology-literature">Evidence from Survey Methodology Literature</a></li>
-  <li><a href="#impact-on-weekly-attendance-claim" id="toc-impact-on-weekly-attendance-claim" class="nav-link" data-scroll-target="#impact-on-weekly-attendance-claim">Impact on Weekly Attendance Claim</a>
+  <li><a href="#conclusion-on-question-order-effects" id="toc-conclusion-on-question-order-effects" class="nav-link" data-scroll-target="#conclusion-on-question-order-effects">Conclusion on Question Order Effects</a></li>
+  <li><a href="#weekly-attendance-comparison" id="toc-weekly-attendance-comparison" class="nav-link" data-scroll-target="#weekly-attendance-comparison">Weekly Attendance Comparison</a>
   <ul class="collapse">
-  <li><a href="#weekly-attendance-comparison" id="toc-weekly-attendance-comparison" class="nav-link" data-scroll-target="#weekly-attendance-comparison">Weekly Attendance Comparison</a></li>
+  <li><a href="#weekly-attendance-comparison-1" id="toc-weekly-attendance-comparison-1" class="nav-link" data-scroll-target="#weekly-attendance-comparison-1">Weekly Attendance Comparison</a></li>
   </ul></li>
-  <li><a href="#the-contradictory-evidence" id="toc-the-contradictory-evidence" class="nav-link" data-scroll-target="#the-contradictory-evidence">The Contradictory Evidence</a>
+  <li><a href="#comparing-different-constructs" id="toc-comparing-different-constructs" class="nav-link" data-scroll-target="#comparing-different-constructs">Comparing Different Constructs</a>
   <ul class="collapse">
-  <li><a href="#ever-attended-comparison" id="toc-ever-attended-comparison" class="nav-link" data-scroll-target="#ever-attended-comparison">‘Ever Attended’ Comparison</a></li>
+  <li><a href="#attendance-vs.-bible-engagement-comparison" id="toc-attendance-vs.-bible-engagement-comparison" class="nav-link" data-scroll-target="#attendance-vs.-bible-engagement-comparison">Attendance vs.&nbsp;Bible Engagement Comparison</a></li>
   </ul></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#final-conclusion" id="toc-final-conclusion" class="nav-link" data-scroll-target="#final-conclusion">Final Conclusion</a></li>
   </ul>
 </nav>
     </div>
@@ -219,38 +217,33 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="the-problem" class="level2">
-<h2 class="anchored" data-anchor-id="the-problem">The Problem</h2>
-<p>The 2018 and 2024 surveys used fundamentally different question formats:</p>
-<ul>
-<li><strong>2018</strong>: Single frequency question only</li>
-<li><strong>2024</strong>: Binary question FIRST (“Yes - in the past year”), THEN frequency question</li>
-</ul>
-<p>This violates best practice in survey methodology, as question order can significantly bias responses.</p>
+<section id="correction-question-order-effect-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="correction-question-order-effect-analysis">Correction: Question Order Effect Analysis</h2>
+<p><strong>UPDATE</strong>: After reviewing the actual survey PDFs, the question order effect claim appears to be <strong>incorrect</strong>.</p>
+<p>The “Church service” binary question (showing “Yes - in the past year” at 24%) is <strong>not</strong> a standalone question about church attendance. Instead, it is part of a different question: <strong>“Have you read, listened to, or engaged with the Bible in any of the following locations/situations?”</strong> where “Church service” is one location option alongside “Home”, “Sightseeing in a cathedral or church”, “School, college or university”, and “Art exhibition/TV/film/music”.</p>
+<p>Both the 2018 and 2024 surveys ask the same frequency question: <strong>“Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?”</strong></p>
+<p>Therefore, there is <strong>no question order effect</strong> from a binary attendance question being asked before the frequency question, as no such binary attendance question exists in the 2024 survey.</p>
 </section>
-<section id="visualizing-the-structural-difference" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-the-structural-difference">Visualizing the Structural Difference</h2>
-<p>The most significant methodological flaw is the change in question structure between the two surveys. The 2018 survey asked a single question about frequency, while the 2024 survey first asked a binary yes/no question before asking about frequency. This change introduces a “priming” effect that makes the results from the two years not directly comparable. The chart below illustrates this structural difference.</p>
+<section id="what-the-church-service-binary-question-actually-measures" class="level2">
+<h2 class="anchored" data-anchor-id="what-the-church-service-binary-question-actually-measures">What the “Church service” Binary Question Actually Measures</h2>
+<p>The binary question showing “Yes - in the past year” (24%) for “Church service” is asking about <strong>Bible engagement in church services</strong>, not church attendance itself. This is fundamentally different from asking “Have you attended a church service in the past year?”</p>
+<p>The question structure is: - <strong>Question</strong>: “Have you read, listened to, or engaged with the Bible in any of the following locations/situations?” - <strong>Location options</strong>: Home, Church service, Sightseeing in a cathedral or church, School/college/university, Art exhibition/TV/film/music - <strong>Response options for each location</strong>: “Yes - in the past year”, “Yes - more than a year ago”, “Never”</p>
+<p>This means the 24% figure represents people who have engaged with the Bible <strong>at</strong> church services in the past year, which is not the same as people who <strong>attended</strong> church services. One can attend church without engaging with the Bible, and one can engage with the Bible at church without necessarily attending regularly.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="question-order-effects_files/figure-html/question-flow-chart-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Visual comparison of the 2018 and 2024 survey question structures.</figcaption>
+<figcaption>Both surveys use the same frequency question about church attendance, making them directly comparable.</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>🚩 <strong>CRITICAL</strong>: The binary question primes respondents before they consider frequency, which can lead to:</p>
-<ul>
-<li>Acquiescence bias (tendency to say ‘yes’)</li>
-<li>Anchoring effects (binary framing affects frequency judgements)</li>
-<li>Non-comparable measures between years</li>
-</ul>
+<p>⚠️ <strong>IMPORTANT</strong>: The binary question about “Church service” measures Bible engagement at church services, not church attendance. Comparing this to the frequency attendance question is comparing different constructs, which explains any apparent inconsistencies.</p>
 </section>
 <section id="internal-consistency-check" class="level2">
 <h2 class="anchored" data-anchor-id="internal-consistency-check">Internal Consistency Check</h2>
-<p>If the questions are measuring the same thing, the binary response should match the sum of frequency responses:</p>
+<p><strong>Note</strong>: The binary “Church service” question measures Bible engagement at church services, while the frequency question measures church attendance. These are different constructs, so we would not expect them to match exactly. However, we can still examine the relationship:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -277,74 +270,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>is_inconsistent <span class="ot">&lt;-</span> discrepancy <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<section id="internal-consistency-check-2024" class="level3">
-<h3 class="anchored" data-anchor-id="internal-consistency-check-2024">Internal Consistency Check (2024)</h3>
-<p>If the questions are measuring the same thing, the binary response should match the sum of frequency responses:</p>
+<section id="comparison-of-bible-engagement-vs.-attendance-2024" class="level3">
+<h3 class="anchored" data-anchor-id="comparison-of-bible-engagement-vs.-attendance-2024">Comparison of Bible Engagement vs.&nbsp;Attendance (2024)</h3>
+<p>Comparing the two measures (recognising they measure different things):</p>
 <ul>
-<li><strong>Binary ‘Yes - in the past year’</strong>: 24.0%</li>
-<li><strong>Sum of frequency categories</strong>: 26.0%</li>
-<li><strong>Discrepancy</strong>: 2.0 percentage points</li>
+<li><strong>Bible engagement at church services (‘Yes - in the past year’)</strong>: 24.0%</li>
+<li><strong>Sum of frequency attendance categories (past year)</strong>: 26.0%</li>
+<li><strong>Difference</strong>: 2.0 percentage points</li>
 </ul>
-<p>✓ Responses are internally consistent</p>
+<p>The fact that Bible engagement (24%) is lower than attendance frequency (26%) is actually logical: not everyone who attends church engages with the Bible during services. The small difference suggests most church attendees do engage with the Bible, but some may attend for other reasons (social, cultural, etc.).</p>
 <div class="cell">
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="question-order-effects_files/figure-html/inconsistency-chart-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Internal inconsistency in the 2024 survey. The sum of frequency responses does not match the binary ‘Yes’ response.</figcaption>
+<p><img src="question-order-effects_files/figure-html/comparison-chart-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Comparison of Bible engagement at church services vs.&nbsp;church attendance frequency in 2024. These measure different constructs.</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
 </section>
-<section id="evidence-from-survey-methodology-literature" class="level2">
-<h2 class="anchored" data-anchor-id="evidence-from-survey-methodology-literature">Evidence from Survey Methodology Literature</h2>
-<p>Question order effects are well-documented:</p>
-<ul>
-<li><strong>Schuman &amp; Presser (1996)</strong>: Found order effects of 5-15 percentage points</li>
-<li><strong>Acquiescence bias</strong>: Tendency to agree with yes/no questions</li>
-<li><strong>Anchoring effects</strong>: First question frames subsequent responses</li>
-</ul>
-<p>The 2024 survey design violates the principle that questions should be asked in a way that minimises priming effects when making comparisons over time.</p>
+<section id="conclusion-on-question-order-effects" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion-on-question-order-effects">Conclusion on Question Order Effects</h2>
+<p>After reviewing the actual survey PDFs, <strong>there is no question order effect</strong> from a binary attendance question being asked before the frequency question, because:</p>
+<ol type="1">
+<li>The “Church service” binary question is part of a Bible engagement question, not a standalone attendance question</li>
+<li>Both 2018 and 2024 surveys use the same frequency question: “Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?”</li>
+<li>The questions are directly comparable in structure</li>
+</ol>
+<p>The earlier analysis incorrectly assumed the “Church service” binary question was about attendance when it actually measures Bible engagement at church services—a different construct.</p>
 </section>
-<section id="impact-on-weekly-attendance-claim" class="level2">
-<h2 class="anchored" data-anchor-id="impact-on-weekly-attendance-claim">Impact on Weekly Attendance Claim</h2>
+<section id="weekly-attendance-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="weekly-attendance-comparison">Weekly Attendance Comparison</h2>
+<p>Since both surveys use the same frequency question, the comparison is methodologically sound:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Weekly attendance in 2024 might be inflated by:</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Acquiescence bias from binary question</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Anchoring effects affecting frequency judgements</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>weekly_2018 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2018</span>, response_category <span class="sc">==</span> <span class="st">"At least once a week"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct) <span class="sc">/</span> <span class="dv">100</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>weekly_2018 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2018</span>, response_category <span class="sc">==</span> <span class="st">"At least once a week"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct) <span class="sc">/</span> <span class="dv">100</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>weekly_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="dv">2024</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    question_type <span class="sc">==</span> <span class="st">"frequency"</span>,</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Daily/almost daily"</span>, <span class="st">"A few times a week"</span>, <span class="st">"About once a week"</span>)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_pct =</span> <span class="fu">sum</span>(total_pct)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct) <span class="sc">/</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>weekly_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    year <span class="sc">==</span> <span class="dv">2024</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    question_type <span class="sc">==</span> <span class="st">"frequency"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    response_category <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Daily/almost daily"</span>, <span class="st">"A few times a week"</span>, <span class="st">"About once a week"</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total_pct =</span> <span class="fu">sum</span>(total_pct)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct) <span class="sc">/</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<section id="weekly-attendance-comparison" class="level3">
-<h3 class="anchored" data-anchor-id="weekly-attendance-comparison">Weekly Attendance Comparison</h3>
-<p>The weekly attendance in 2024 might be inflated by acquiescence bias from the binary question and anchoring effects affecting frequency judgements:</p>
+<section id="weekly-attendance-comparison-1" class="level3">
+<h3 class="anchored" data-anchor-id="weekly-attendance-comparison-1">Weekly Attendance Comparison</h3>
 <ul>
-<li><strong>2018 (frequency question only)</strong>: 7.0%</li>
-<li><strong>2024 (after binary question)</strong>: 11.0%</li>
+<li><strong>2018</strong>: 7.0%</li>
+<li><strong>2024</strong>: 11.0%</li>
 <li><strong>Difference</strong>: +4.0 percentage points</li>
 </ul>
-<p>⚠️ <strong>CAUTION</strong>: The apparent increase may be an artefact of question order effects rather than true behavioural change. Without the binary priming question, the 2024 figure might be lower, showing no real change or even a decrease.</p>
+<p>Since both surveys use the same question wording and structure, this comparison is methodologically valid. However, other factors (demographic changes, sampling differences, etc.) may still affect comparability.</p>
 </section>
 </section>
-<section id="the-contradictory-evidence" class="level2">
-<h2 class="anchored" data-anchor-id="the-contradictory-evidence">The Contradictory Evidence</h2>
-<p>Interestingly, the binary question itself shows a <strong>decrease</strong>:</p>
+<section id="comparing-different-constructs" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-different-constructs">Comparing Different Constructs</h2>
+<p>The “Church service” binary question measures Bible engagement, not attendance. Comparing it to attendance frequency:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -355,44 +344,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(total_pct, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total)</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>binary_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"binary"</span>, </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>         response_category <span class="sc">==</span> <span class="st">"Yes - in the past year"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># 2024 attendance (sum of frequency categories except "Never")</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>ever_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"frequency"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(response_category <span class="sc">!=</span> <span class="st">"Never"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">total =</span> <span class="fu">sum</span>(total_pct, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>binary_2024 <span class="ot">&lt;-</span> attendance_data <span class="sc">%&gt;%</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2024</span>, question_type <span class="sc">==</span> <span class="st">"binary"</span>, </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>         response_category <span class="sc">==</span> <span class="st">"Yes - in the past year"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(total_pct)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<section id="ever-attended-comparison" class="level3">
-<h3 class="anchored" data-anchor-id="ever-attended-comparison">‘Ever Attended’ Comparison</h3>
-<p>Interestingly, the binary question itself shows a decrease:</p>
+<section id="attendance-vs.-bible-engagement-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="attendance-vs.-bible-engagement-comparison">Attendance vs.&nbsp;Bible Engagement Comparison</h3>
 <ul>
-<li><strong>2018 (frequency-based)</strong>: 52%</li>
-<li><strong>2024 (binary question)</strong>: 24.0%</li>
-<li><strong>Change</strong>: -28.0 percentage points</li>
+<li><strong>2018 attendance (frequency-based)</strong>: 52%</li>
+<li><strong>2024 attendance (frequency-based)</strong>: 38.0%</li>
+<li><strong>2024 Bible engagement at church services</strong>: 24.0%</li>
 </ul>
-<div class="cell">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="question-order-effects_files/figure-html/contradictory-trend-chart-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption>Contradictory trends between weekly and annual attendance measures.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<p>🚩 <strong>CONTRADICTION</strong>:</p>
-<p>The binary question shows a DECREASE (27% → 24%), while the frequency question shows an INCREASE (7% → 11%). This contradiction is critical evidence:</p>
-<p>These cannot both be true. This is strong evidence that question order effects are creating measurement error.</p>
+<p>The Bible engagement figure (24%) is lower than both attendance figures, which makes sense: not everyone who attends church engages with the Bible during services. This is not a contradiction but reflects different constructs being measured.</p>
 </section>
 </section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>The different question formats make direct comparison between 2018 and 2024 problematic. The question order effects likely:</p>
+<section id="final-conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="final-conclusion">Final Conclusion</h2>
+<p><strong>Correction</strong>: After reviewing the actual survey PDFs, the question order effect analysis was based on a misunderstanding. The “Church service” binary question is not about attendance but about Bible engagement at church services.</p>
+<p><strong>Key findings</strong>:</p>
 <ol type="1">
-<li>Inflate the weekly attendance figure in 2024 due to acquiescence bias</li>
-<li>Create internal inconsistencies within the 2024 survey</li>
-<li>Produce contradictory results that cannot both be true</li>
+<li>Both 2018 and 2024 surveys use the same frequency question about church attendance</li>
+<li>The questions are directly comparable in structure</li>
+<li>There is no question order effect from a binary attendance question</li>
+<li>The “Church service” binary question measures a different construct (Bible engagement) than attendance</li>
 </ol>
-<p><strong>Recommendation</strong>: The 7% → 11% increase claim should be treated with extreme caution. The methodological differences make the comparison invalid without controlling for question order effects.</p>
+<p><strong>Recommendation</strong>: The 7% → 11% weekly attendance increase can be compared directly since both surveys use the same question. However, other methodological factors (demographic changes, sampling differences, etc.) should still be considered when interpreting the results.</p>
 
 
 </section>

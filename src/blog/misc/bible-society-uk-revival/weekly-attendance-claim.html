@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -72,7 +72,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../../../site_libs/bootstrap/bootstrap-0b37c64f34216b628666a8dac638b53b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -115,8 +115,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../../../index.html">
     <span class="navbar-title">Nathans Stats Stuff</span>
     </a>
@@ -567,7 +565,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Frequency breakdown</strong>: Sum of all specific frequency categories (daily, weekly, monthly, etc.) → <strong>68.5% attended at least once</strong></li>
 </ol>
 <p><strong>Discrepancy</strong>: 77% - 68.5% = <strong>8.5 percentage points</strong></p>
-<p>This is a <strong>critical red flag</strong> suggesting measurement error, question order effects, or acquiescence bias in the survey instrument.</p>
+<p><strong>Correction</strong>: The “Church service” binary question measures Bible engagement at church services, not attendance. These are different constructs, so differences are expected.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show the code</summary>
@@ -580,27 +578,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>unexplained_from_immigration <span class="ot">&lt;-</span> unexplained_pp <span class="sc">/</span> <span class="dv">100</span>  <span class="co"># Convert to proportion</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze potential measurement artifact contribution</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Assumption: If the binary question was asked FIRST in 2024 but NOT in 2018,</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># this could inflate 2024 estimates via priming/acquiescence bias</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Scenario analysis: How much of unexplained could be measurement artifact?</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_low <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.25</span>  <span class="co"># 25% of discrepancy</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_mid <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.50</span>  <span class="co"># 50% of discrepancy  </span></span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_high <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.75</span> <span class="co"># 75% of discrepancy</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate what remains after accounting for measurement artifacts</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>remainder_after_low <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_low</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>remainder_after_mid <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_mid</span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>remainder_after_high <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_high</span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Combined explanation: Immigration + Measurement artifacts</span></span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>combined_explanation_low <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_low <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>combined_explanation_mid <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_mid <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>combined_explanation_high <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_high <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>combined_proportion_low <span class="ot">&lt;-</span> combined_explanation_low <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>combined_proportion_mid <span class="ot">&lt;-</span> combined_explanation_mid <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span>
-<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>combined_proportion_high <span class="ot">&lt;-</span> combined_explanation_high <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: Both surveys use the same frequency question, so there is no question order effect</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Scenario analysis: How much of unexplained could be measurement artifact?</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_low <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.25</span>  <span class="co"># 25% of discrepancy</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_mid <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.50</span>  <span class="co"># 50% of discrepancy  </span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>potential_measurement_contribution_high <span class="ot">&lt;-</span> consistency_discrepancy <span class="sc">*</span> <span class="fl">0.75</span> <span class="co"># 75% of discrepancy</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate what remains after accounting for measurement artifacts</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>remainder_after_low <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_low</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>remainder_after_mid <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_mid</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>remainder_after_high <span class="ot">&lt;-</span> unexplained_from_immigration <span class="sc">-</span> potential_measurement_contribution_high</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Combined explanation: Immigration + Measurement artifacts</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>combined_explanation_low <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_low <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>combined_explanation_mid <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_mid <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>combined_explanation_high <span class="ot">&lt;-</span> (immigration_contribution_pp <span class="sc">+</span> potential_measurement_contribution_high <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>combined_proportion_low <span class="ot">&lt;-</span> combined_explanation_low <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>combined_proportion_mid <span class="ot">&lt;-</span> combined_explanation_mid <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>combined_proportion_high <span class="ot">&lt;-</span> combined_explanation_high <span class="sc">/</span> observed_increase_pp <span class="sc">*</span> <span class="dv">100</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -612,7 +609,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="scenario-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="scenario-analysis">Scenario Analysis</h3>
-<p>If measurement artifacts (question order effects, acquiescence bias, priming) contribute even a <strong>fraction</strong> of the 8.5pp discrepancy to the observed 4pp increase:</p>
+<p><strong>Correction</strong>: Both surveys use the same frequency question, so there is no question order effect. The “Church service” binary question measures Bible engagement, not attendance. If other measurement artifacts contribute to the observed 4pp increase:</p>
 <p><strong>Conservative scenario (25% of discrepancy affects increase)</strong>: - Measurement contribution: 2.12 pp - Immigration contribution: 0.03 pp - <strong>Combined</strong>: 2.16 pp = <strong>54%</strong> of observed 4pp increase - <strong>Remaining unexplained</strong>: 1.84 pp</p>
 <p><strong>Moderate scenario (50% of discrepancy affects increase)</strong>: - Measurement contribution: 4.25 pp - Immigration contribution: 0.03 pp - <strong>Combined</strong>: 4.28 pp = <strong>107%</strong> of observed 4pp increase - <strong>Remaining unexplained</strong>: -0.28 pp</p>
 <p><strong>Liberal scenario (75% of discrepancy affects increase)</strong>: - Measurement contribution: 6.37 pp - Immigration contribution: 0.03 pp - <strong>Combined</strong>: 6.41 pp = <strong>160%</strong> of observed 4pp increase - <strong>Remaining unexplained</strong>: -2.41 pp</p>
@@ -793,12 +790,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Data source</strong>: Human Mortality Database; World Mortality Dataset (2024); Karlinsky and Kobak (2021) – processed by Our World in Data. Retrieved from https://ourworldindata.org/grapher/excess-mortality-p-scores-average-baseline</p>
 <hr>
 </section>
-<section id="question-order-and-measurement-effects" class="level4">
-<h4 class="anchored" data-anchor-id="question-order-and-measurement-effects">3. <strong>Question Order and Measurement Effects</strong></h4>
-<p><strong>Mechanism</strong>: The 2024 survey asked questions in a different order/format than 2018, potentially introducing acquiescence bias or priming effects.</p>
-<p><strong>Evidence for</strong>: - 2024 included a binary “past year” question (77% yes) that doesn’t match frequency breakdown (68.5% non-never) - <strong>Internal inconsistency</strong>: 8.5pp discrepancy suggests measurement error - Question order can affect responses by 3-7pp in survey research - Different question formats between years</p>
-<p><strong>Evidence against</strong>: - Both surveys by same organisation (YouGov) using similar methodology - Effect should be random if truly measurement error</p>
-<p><strong>Testability</strong>: See <a href="../../../../src/blog/misc/bible-society-uk-revival/question-order-effects.html">Question Order Effects</a> analysis</p>
+<section id="measurement-effects-corrected" class="level4">
+<h4 class="anchored" data-anchor-id="measurement-effects-corrected">3. <strong>Measurement Effects (CORRECTED)</strong></h4>
+<p><strong>Correction</strong>: After reviewing the actual survey PDFs, both surveys use the same frequency question about church attendance. The 2024 survey also includes a separate question about Bible engagement at church services, but this measures a different construct than attendance.</p>
+<p><strong>Key points</strong>: - Both surveys use the same attendance frequency question, making them directly comparable - There is no question order effect from a binary attendance question, as no such question exists - The “Church service” binary question measures Bible engagement, not attendance - Other measurement factors (sampling differences, weighting, etc.) may still affect comparability</p>
+<p><strong>Testability</strong>: See <a href="../../../../src/blog/misc/bible-society-uk-revival/question-order-effects.html">Question Order Effects</a> for correction and clarification</p>
 <hr>
 </section>
 <section id="demographic-composition-changes-ageeducation" class="level4">
