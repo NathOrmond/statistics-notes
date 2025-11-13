@@ -24,22 +24,30 @@ library(scales)
 library(ggplot2)
 ```
 
-## The Problem
+## Correction: Question Order Effect Analysis
 
-The 2018 and 2024 surveys used fundamentally different question formats:
+**UPDATE**: After reviewing the actual survey PDFs, the question order effect claim appears to be **incorrect**. 
 
-- **2018**: Single frequency question only
-- **2024**: Binary question FIRST ("Yes - in the past year"), THEN frequency question
+The "Church service" binary question (showing "Yes - in the past year" at 24%) is **not** a standalone question about church attendance. Instead, it is part of a different question: **"Have you read, listened to, or engaged with the Bible in any of the following locations/situations?"** where "Church service" is one location option alongside "Home", "Sightseeing in a cathedral or church", "School, college or university", and "Art exhibition/TV/film/music".
 
-This violates best practice in survey methodology, as question order can significantly bias responses.
+Both the 2018 and 2024 surveys ask the same frequency question: **"Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?"**
 
-## Visualizing the Structural Difference
+Therefore, there is **no question order effect** from a binary attendance question being asked before the frequency question, as no such binary attendance question exists in the 2024 survey.
 
-The most significant methodological flaw is the change in question structure between the two surveys. The 2018 survey asked a single question about frequency, while the 2024 survey first asked a binary yes/no question before asking about frequency. This change introduces a "priming" effect that makes the results from the two years not directly comparable. The chart below illustrates this structural difference.
+## What the "Church service" Binary Question Actually Measures
+
+The binary question showing "Yes - in the past year" (24%) for "Church service" is asking about **Bible engagement in church services**, not church attendance itself. This is fundamentally different from asking "Have you attended a church service in the past year?"
+
+The question structure is:
+- **Question**: "Have you read, listened to, or engaged with the Bible in any of the following locations/situations?"
+- **Location options**: Home, Church service, Sightseeing in a cathedral or church, School/college/university, Art exhibition/TV/film/music
+- **Response options for each location**: "Yes - in the past year", "Yes - more than a year ago", "Never"
+
+This means the 24% figure represents people who have engaged with the Bible **at** church services in the past year, which is not the same as people who **attended** church services. One can attend church without engaging with the Bible, and one can engage with the Bible at church without necessarily attending regularly.
 
 ```{r}
 #| label: question-flow-chart
-#| fig-cap: "Visual comparison of the 2018 and 2024 survey question structures."
+#| fig-cap: "Both surveys use the same frequency question about church attendance, making them directly comparable."
 #| echo: false
 
 library(ggplot2)
@@ -48,29 +56,22 @@ library(dplyr)
 
 nodes <- tribble(
   ~survey, ~step, ~label,
-  "2018 Survey", 1, "1. How often do you\nattend church?",
-  "2024 Survey", 1, "1. Have you attended church\nin the past year?",
-  "2024 Survey", 2, "2. How often did you attend?"
+  "2018 Survey", 1, "Frequency question:\nHow often did you go to\na church service in\nthe last year?",
+  "2024 Survey", 1, "Frequency question:\nHow often did you go to\na church service in\nthe last year?",
+  "2024 Survey", 2, "Separate question:\nBible engagement at\nchurch services\n(not about attendance)"
 ) %>% 
   mutate(x = 1, y = -step)
 
-edges <- tribble(
-  ~survey, ~x, ~y, ~xend, ~yend,
-  "2024 Survey", 1, -1.2, 1, -1.8
-)
-
 ggplot() +
   geom_label(data = nodes, aes(x = x, y = y, label = label, fill = survey),
-             color = "white", fontface = "bold", size = 4, lineheight = 0.9, 
+             color = "white", fontface = "bold", size = 3.5, lineheight = 0.9, 
              label.padding = unit(0.5, "lines"), label.size = 0) +
-  geom_segment(data = edges, aes(x=x,y=y,xend=xend,yend=yend),
-               arrow = arrow(length = unit(0.3, "cm")), linewidth = 1.5, color = "grey30") +
   facet_wrap(~survey, ncol = 2) +
-  scale_fill_manual(values = c("2018 Survey" = "#4575b4", "2024 Survey" = "#d73027")) +
+  scale_fill_manual(values = c("2018 Survey" = "#4575b4", "2024 Survey" = "#4575b4")) +
   theme_void() +
   labs(
-    title = "Comparability Assessment: Survey Question Structure",
-    subtitle = "The 2024 survey introduced a binary question, priming respondents before the frequency question."
+    title = "Survey Question Structure: Both Surveys Use Same Attendance Question",
+    subtitle = "The 2024 survey has an additional Bible engagement question, but it measures a different construct."
   ) +
   theme(
     plot.title = element_text(size = 16, face = "bold", hjust = 0.5),
@@ -81,15 +82,11 @@ ggplot() +
   )
 ```
 
-🚩 **CRITICAL**: The binary question primes respondents before they consider frequency, which can lead to:
-
-- Acquiescence bias (tendency to say 'yes')
-- Anchoring effects (binary framing affects frequency judgements)
-- Non-comparable measures between years
+⚠️ **IMPORTANT**: The binary question about "Church service" measures Bible engagement at church services, not church attendance. Comparing this to the frequency attendance question is comparing different constructs, which explains any apparent inconsistencies.
 
 ## Internal Consistency Check
 
-If the questions are measuring the same thing, the binary response should match the sum of frequency responses:
+**Note**: The binary "Church service" question measures Bible engagement at church services, while the frequency question measures church attendance. These are different constructs, so we would not expect them to match exactly. However, we can still examine the relationship:
 
 ```{r}
 #| label: consistency-check
@@ -117,39 +114,35 @@ discrepancy <- abs(freq_sum_2024 - binary_2024)
 is_inconsistent <- discrepancy > 2
 ```
 
-### Internal Consistency Check (2024)
+### Comparison of Bible Engagement vs. Attendance (2024)
 
-If the questions are measuring the same thing, the binary response should match the sum of frequency responses:
+Comparing the two measures (recognising they measure different things):
 
-- **Binary 'Yes - in the past year'**: `r sprintf("%.1f", binary_2024)`%
-- **Sum of frequency categories**: `r sprintf("%.1f", freq_sum_2024)`%
-- **Discrepancy**: `r sprintf("%.1f", discrepancy)` percentage points
+- **Bible engagement at church services ('Yes - in the past year')**: `r sprintf("%.1f", binary_2024)`%
+- **Sum of frequency attendance categories (past year)**: `r sprintf("%.1f", freq_sum_2024)`%
+- **Difference**: `r sprintf("%.1f", discrepancy)` percentage points
 
-`r if (is_inconsistent) {
-  "🚩 **INCONSISTENCY DETECTED**\n\nThis discrepancy suggests:\n1. Question order effects are influencing responses\n2. Respondents interpret the questions differently\n3. Measurement error in the data extraction process"
-} else {
-  "✓ Responses are internally consistent"
-}`
+The fact that Bible engagement (24%) is lower than attendance frequency (26%) is actually logical: not everyone who attends church engages with the Bible during services. The small difference suggests most church attendees do engage with the Bible, but some may attend for other reasons (social, cultural, etc.).
 
 ```{r}
-#| label: inconsistency-chart
-#| fig-cap: "Internal inconsistency in the 2024 survey. The sum of frequency responses does not match the binary 'Yes' response."
+#| label: comparison-chart
+#| fig-cap: "Comparison of Bible engagement at church services vs. church attendance frequency in 2024. These measure different constructs."
 #| echo: false
 
-inconsistency_data <- tibble(
-  Source = c("Binary Question\\n('Yes - in past year')", "Sum of Frequency Questions\\n(annual categories)"),
+comparison_data <- tibble(
+  Source = c("Bible Engagement at\\nChurch Services", "Church Attendance\\nFrequency (past year)"),
   Percentage = c(binary_2024, freq_sum_2024)
 )
 
-ggplot(inconsistency_data, aes(x = Source, y = Percentage, fill = Source)) +
+ggplot(comparison_data, aes(x = Source, y = Percentage, fill = Source)) +
   geom_col(width = 0.6, alpha = 0.8) +
   geom_text(aes(label = sprintf("%.1f%%", Percentage)), vjust = -0.5, size = 5, fontface = "bold") +
   scale_fill_manual(values = c("#d7191c", "#fdae61")) +
   theme_minimal(base_size = 14) +
   labs(
-    title = "Internal Inconsistency in 2024 Survey Data",
-    subtitle = sprintf("Discrepancy of %.1f percentage points between two measures of annual attendance", discrepancy),
-    x = "Data Source within 2024 Survey",
+    title = "Bible Engagement vs. Church Attendance (2024)",
+    subtitle = sprintf("Difference of %.1f percentage points. These measure different constructs.", discrepancy),
+    x = "Measure Type",
     y = "Percentage (%)"
   ) +
   theme(
@@ -161,24 +154,22 @@ ggplot(inconsistency_data, aes(x = Source, y = Percentage, fill = Source)) +
   ylim(0, 30)
 ```
 
-## Evidence from Survey Methodology Literature
+## Conclusion on Question Order Effects
 
-Question order effects are well-documented:
+After reviewing the actual survey PDFs, **there is no question order effect** from a binary attendance question being asked before the frequency question, because:
 
-- **Schuman & Presser (1996)**: Found order effects of 5-15 percentage points
-- **Acquiescence bias**: Tendency to agree with yes/no questions
-- **Anchoring effects**: First question frames subsequent responses
+1. The "Church service" binary question is part of a Bible engagement question, not a standalone attendance question
+2. Both 2018 and 2024 surveys use the same frequency question: "Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?"
+3. The questions are directly comparable in structure
 
-The 2024 survey design violates the principle that questions should be asked in a way that minimises priming effects when making comparisons over time.
+The earlier analysis incorrectly assumed the "Church service" binary question was about attendance when it actually measures Bible engagement at church services—a different construct.
 
-## Impact on Weekly Attendance Claim
+## Weekly Attendance Comparison
+
+Since both surveys use the same frequency question, the comparison is methodologically sound:
 
 ```{r}
 #| label: impact-analysis
-
-# Weekly attendance in 2024 might be inflated by:
-# 1. Acquiescence bias from binary question
-# 2. Anchoring effects affecting frequency judgements
 
 weekly_2018 <- attendance_data %>%
   filter(year == 2018, response_category == "At least once a week") %>%
@@ -196,17 +187,15 @@ weekly_2024 <- attendance_data %>%
 
 ### Weekly Attendance Comparison
 
-The weekly attendance in 2024 might be inflated by acquiescence bias from the binary question and anchoring effects affecting frequency judgements:
-
-- **2018 (frequency question only)**: `r sprintf("%.1f", weekly_2018 * 100)`%
-- **2024 (after binary question)**: `r sprintf("%.1f", weekly_2024 * 100)`%
+- **2018**: `r sprintf("%.1f", weekly_2018 * 100)`%
+- **2024**: `r sprintf("%.1f", weekly_2024 * 100)`%
 - **Difference**: `r sprintf("%+.1f", (weekly_2024 - weekly_2018) * 100)` percentage points
 
-⚠️ **CAUTION**: The apparent increase may be an artefact of question order effects rather than true behavioural change. Without the binary priming question, the 2024 figure might be lower, showing no real change or even a decrease.
+Since both surveys use the same question wording and structure, this comparison is methodologically valid. However, other factors (demographic changes, sampling differences, etc.) may still affect comparability.
 
-## The Contradictory Evidence
+## Comparing Different Constructs
 
-Interestingly, the binary question itself shows a **decrease**:
+The "Church service" binary question measures Bible engagement, not attendance. Comparing it to attendance frequency:
 
 ```{r}
 #| label: contradictory-evidence
@@ -218,67 +207,37 @@ ever_2018 <- attendance_data %>%
   summarise(total = sum(total_pct, na.rm = TRUE)) %>%
   pull(total)
 
+# 2024 attendance (sum of frequency categories except "Never")
+ever_2024 <- attendance_data %>%
+  filter(year == 2024, question_type == "frequency") %>%
+  filter(response_category != "Never") %>%
+  summarise(total = sum(total_pct, na.rm = TRUE)) %>%
+  pull(total)
+
 binary_2024 <- attendance_data %>%
   filter(year == 2024, question_type == "binary", 
          response_category == "Yes - in the past year") %>%
   pull(total_pct)
 ```
 
-### 'Ever Attended' Comparison
+### Attendance vs. Bible Engagement Comparison
 
-Interestingly, the binary question itself shows a decrease:
+- **2018 attendance (frequency-based)**: `r sprintf("%.0f", ever_2018)`%
+- **2024 attendance (frequency-based)**: `r sprintf("%.1f", ever_2024)`%
+- **2024 Bible engagement at church services**: `r sprintf("%.1f", binary_2024)`%
 
-- **2018 (frequency-based)**: `r sprintf("%.0f", ever_2018)`%
-- **2024 (binary question)**: `r sprintf("%.1f", binary_2024)`%
-- **Change**: `r sprintf("%.1f", binary_2024 - ever_2018)` percentage points
+The Bible engagement figure (24%) is lower than both attendance figures, which makes sense: not everyone who attends church engages with the Bible during services. This is not a contradiction but reflects different constructs being measured.
 
-```{r}
-#| label: contradictory-trend-chart
-#| fig-cap: "Contradictory trends between weekly and annual attendance measures."
-#| echo: false
+## Final Conclusion
 
-trend_data <- tibble(
-  Metric = c("Weekly Attendance", "Weekly Attendance", "Annual Attendance", "Annual Attendance"),
-  Year = c("2018", "2024", "2018", "2024"),
-  Value = c(weekly_2018 * 100, weekly_2024 * 100, ever_2018, binary_2024)
-)
+**Correction**: After reviewing the actual survey PDFs, the question order effect analysis was based on a misunderstanding. The "Church service" binary question is not about attendance but about Bible engagement at church services.
 
-ggplot(trend_data, aes(x = Year, y = Value, group = Metric, color = Metric, shape = Metric)) +
-  geom_line(linewidth = 2, alpha = 0.8) +
-  geom_point(size = 5) +
-  geom_text(aes(label = sprintf("%.1f%%", Value)),
-            vjust = -1.5, fontface = "bold", size = 5) +
-  scale_color_manual(values = c("Weekly Attendance" = "#2166ac", "Annual Attendance" = "#d73027")) +
-  scale_shape_manual(values = c("Weekly Attendance" = 16, "Annual Attendance" = 15)) +
-  guides(color = guide_legend(override.aes = list(linetype = 0))) +
-  theme_minimal(base_size = 14) +
-  labs(
-    title = "Contradictory Trends: Weekly vs. Annual Attendance",
-    subtitle = "Weekly attendance appears to increase while annual attendance decreases—a logical impossibility.",
-    x = "Survey Year",
-    y = "Percentage (%)"
-  ) +
-  theme(
-    legend.position = "top",
-    plot.title = element_text(face = "bold"),
-    plot.subtitle = element_text(color = "grey40")
-  ) +
-  ylim(0, 30)
-```
+**Key findings**:
 
-🚩 **CONTRADICTION**:
+1. Both 2018 and 2024 surveys use the same frequency question about church attendance
+2. The questions are directly comparable in structure
+3. There is no question order effect from a binary attendance question
+4. The "Church service" binary question measures a different construct (Bible engagement) than attendance
 
-The binary question shows a DECREASE (27% → 24%), while the frequency question shows an INCREASE (7% → 11%). This contradiction is critical evidence:
-
-These cannot both be true. This is strong evidence that question order effects are creating measurement error.
-
-## Conclusion
-
-The different question formats make direct comparison between 2018 and 2024 problematic. The question order effects likely:
-
-1. Inflate the weekly attendance figure in 2024 due to acquiescence bias
-2. Create internal inconsistencies within the 2024 survey
-3. Produce contradictory results that cannot both be true
-
-**Recommendation**: The 7% → 11% increase claim should be treated with extreme caution. The methodological differences make the comparison invalid without controlling for question order effects.
+**Recommendation**: The 7% → 11% weekly attendance increase can be compared directly since both surveys use the same question. However, other methodological factors (demographic changes, sampling differences, etc.) should still be considered when interpreting the results.
 

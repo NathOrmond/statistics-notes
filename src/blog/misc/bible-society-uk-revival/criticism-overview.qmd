@@ -312,28 +312,27 @@ discrepancy <- abs(freq_sum_2024 - binary_pct_2024)
 is_inconsistent <- discrepancy > 2
 ```
 
-### Internal Consistency Check (2024 Survey)
+### Comparison of Bible Engagement vs. Attendance (2024 Survey)
 
-The 2024 survey asked both a binary question and a frequency question. If these are measuring the same thing, they should yield consistent results:
+The 2024 survey includes a question about Bible engagement at church services (part of a question about Bible engagement in different locations) and a separate frequency question about attendance. These measure different constructs, so we would not expect them to match exactly:
 
-- **Binary 'Yes - in the past year'**: `r sprintf("%.1f", binary_pct_2024)`%
-- **Sum of frequency categories**: `r sprintf("%.1f", freq_sum_2024)`%
-- **Discrepancy**: `r sprintf("%.1f", discrepancy)` percentage points
+- **Bible engagement at church services ('Yes - in the past year')**: `r sprintf("%.1f", binary_pct_2024)`%
+- **Sum of frequency attendance categories (past year)**: `r sprintf("%.1f", freq_sum_2024)`%
+- **Difference**: `r sprintf("%.1f", discrepancy)` percentage points
 
-`r if (is_inconsistent) {"🚩 **RED FLAG**: Internal inconsistency detected! This suggests measurement error or question order effects."} else {"✓ Internal consistency check passed."}`
+The fact that Bible engagement (24%) is slightly lower than attendance frequency (26%) is logical: not everyone who attends church engages with the Bible during services. This is not an inconsistency but reflects different constructs being measured.
 
-## Red Flag #2: Question Format Differences
+## Correction: Question Format
 
-The surveys used different question formats, which makes direct comparison problematic:
+**UPDATE**: After reviewing the actual survey PDFs, both surveys use the same frequency question about church attendance. The 2024 survey also includes a separate question about Bible engagement at church services, but this measures a different construct than attendance.
 
 ### Question Format Comparison
 
-- **2018**: Single frequency question only
-  - 'Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?'
-- **2024**: Binary question FIRST, then frequency question
-  - This order may prime respondents differently.
+- **2018**: Frequency question: 'Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?'
+- **2024**: Same frequency question as 2018
+- **2024 additional question**: Bible engagement at church services (part of "Have you read, listened to, or engaged with the Bible in any of the following locations/situations?")
 
-🚩 **RED FLAG**: Question order effects are a known source of bias. The binary question may influence responses to the frequency question.
+✓ **Both surveys use the same attendance frequency question**, making them directly comparable. There is no question order effect from a binary attendance question, as no such question exists.
 
 ## Basic Attendance Statistics
 
@@ -516,7 +515,7 @@ ggplot(plot_data, aes(x = response_category, y = total_pct, fill = Year)) +
 
 ## The Contradiction: Why This Is a Critical Red Flag
 
-Notice the contradiction: the weekly attendance measure shows an **increase** (7% → 11%), while the binary "past year" measure shows a **decrease** (~27% → 24%). These cannot both be true, which suggests measurement error or question order effects.
+**Correction**: The "Church service" binary question measures Bible engagement at church services, not attendance. The weekly attendance measure shows an **increase** (7% → 11%), while the Bible engagement measure shows 24%. These measure different constructs, so they are not contradictory.
 
 ### Why This Discrepancy Is Logically Impossible
 
@@ -553,22 +552,13 @@ This pattern is **extremely suspicious** because genuine behavioural change typi
 
 **Three possible explanations (all problematic):**
 
-1. **Question order effect (most likely):**
-   - The binary question was asked FIRST in 2024
-   - This primes respondents to think about church attendance
-   - When they then answer the frequency question, they may:
-     - Over-report higher frequencies (acquiescence bias)
-     - Selectively recall more frequent attendance
-     - Feel social pressure to report higher attendance after saying "yes" to binary question
-   - Result: Artificially inflated frequency responses
+1. **Different constructs being measured:**
+   - The "Church service" binary question measures Bible engagement at church services, not attendance
+   - The frequency question measures attendance frequency
+   - These are different constructs, so differences are expected
+   - Result: Not a measurement error, but different things being measured
 
-2. **Measurement error:**
-   - Different questions measuring different constructs
-   - Binary question may include more events (cultural visits, weddings, etc.)
-   - Frequency question may be interpreted more narrowly (regular worship)
-   - Result: Non-comparable measures
-
-3. **Data processing error:**
+2. **Data processing or sampling differences:**
    - Weighting applied inconsistently
    - Different sample bases used for different questions
    - Calculation or transcription errors
@@ -576,13 +566,15 @@ This pattern is **extremely suspicious** because genuine behavioural change typi
 
 ### Why This Matters for the "Revival" Claim
 
-**The 7% → 11% increase that Bible Society UK highlights comes from the frequency question—the one that shows the suspicious pattern.**
+**The 7% → 11% increase that Bible Society UK highlights comes from the frequency question.**
 
-If question order effects inflated the frequency responses, then:
-- The entire basis for the "revival" claim is an artifact
-- The "increase" is measurement error, not real behavioural change
-- The binary question (which shows a DECREASE) may be more reliable
-- **There is no revival—there's just a methodological problem**
+Since both surveys use the same frequency question, the comparison is methodologically valid. However, other factors should be considered:
+- Demographic composition changes (immigration, etc.)
+- Sampling differences
+- COVID-19 recovery effects
+- Other methodological factors
+
+The Bible engagement question (24%) measures a different construct than attendance and should not be used to evaluate the attendance claim.
 
 ### What Would Vindicate the Data
 
@@ -599,7 +591,7 @@ To resolve this discrepancy, Bible Society UK would need to show:
 
 When two measures of the same behaviour move in opposite directions, **at least one of them must be wrong**. This is not a minor technical issue—it's a fundamental data quality problem that calls into question the entire analysis.
 
-The most parsimonious explanation: **Question order effects artificially inflated the frequency responses**, making the claimed "revival" a measurement artifact rather than a real phenomenon.
+**Correction**: Both surveys use the same frequency question, so there is no question order effect. The comparison is methodologically valid, though other factors (demographic changes, sampling differences, etc.) should still be considered.
 
 ## Detailed Critique: Why This Doesn't Support a "Revival" Claim
 
@@ -656,20 +648,15 @@ Using **ONS Long-term International Migration data**, we can precisely quantify 
 
 The surveys used fundamentally different approaches:
 
-**2018**: Single frequency question
+**Correction**: After reviewing the actual survey PDFs:
+
+**2018**: Frequency question
 - "Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?"
 
-**2024**: Binary question FIRST, then frequency question
-- Binary: "Have you attended a church service?" (Yes/No)
-- Then frequency question
+**2024**: Same frequency question as 2018
+- The 2024 survey also includes a separate question about Bible engagement at church services (part of "Have you read, listened to, or engaged with the Bible in any of the following locations/situations?"), but this measures a different construct than attendance.
 
-**Why this matters**: Question order effects are well-documented in survey methodology:
-- Binary questions create **acquiescence bias** (tendency to say "yes")
-- The binary question **primes respondents** before they answer the frequency question
-- Can produce differences of **5-15 percentage points** (Schuman & Presser, 1996)
-- The 4pp change we observe could be entirely explained by this methodological difference
-
-🚩 **RED FLAG**: The 2018 and 2024 surveys are **not directly comparable** due to different question formats.
+✓ **Both surveys use the same attendance frequency question**, making them directly comparable. There is no question order effect from a binary attendance question, as no such question exists.
 
 ### 4. Attendance Does Not Equal Belief
 

@@ -22,11 +22,8 @@ This document outlines a comprehensive statistical analysis framework to evaluat
 
 ## Critical Methodological Issues Identified
 
-### 1. Survey Design Differences
-**Problem**: The surveys use different question formats and ordering
-- 2018: Direct frequency question
-- 2024: Binary "ever attended" question followed by frequency question
-- **Impact**: Question order effects can bias responses (acquiescence bias)
+### 1. Survey Design (CORRECTED)
+**Correction**: After reviewing the actual survey PDFs, both surveys use the same frequency question about church attendance. The 2024 survey also includes a separate question about Bible engagement at church services, but this measures a different construct than attendance. There is no question order effect from a binary attendance question, as no such question exists.
 
 ### 2. Population Demographic Changes
 **Problem**: Significant demographic shifts between 2018-2024 without proper controls
@@ -124,7 +121,7 @@ This document outlines a comprehensive statistical analysis framework to evaluat
 #### 2.3 Response Pattern Analysis
 ```r
 # Check for:
-# - Acquiescence bias (more "yes" in 2024 due to binary question first?)
+# - Note: Both surveys use the same frequency question, so no question order effect
 # - Social desirability bias  
 # - Satisficing (selecting first acceptable response)
 ```
@@ -451,7 +448,7 @@ This is observational data. We cannot establish:
 
 1. **Sampling variation**: Natural fluctuation within margin of error
 2. **Demographic composition**: Immigration from more religious populations
-3. **Question order effects**: Binary question before frequency question biases responses upward
+3. **Measurement differences**: Different sample sizes, weighting, or other methodological factors
 4. **Social attendance increase**: Non-religious attendance (cultural events, tourism) increased
 5. **Measurement error**: Different methodologies yield different (contradictory) results
 6. **Regression to the mean**: 2018 might have been unusually low
@@ -538,7 +535,7 @@ library(rmarkdown)
 
 ### Appropriate Conclusions:
 - "There is evidence that reported church attendance frequency increased slightly between 2018 and 2024"
-- "However, this could be explained by [demographic changes / measurement differences / question order effects]"
+- "However, this could be explained by [demographic changes / measurement differences / sampling variation]"
 - "No evidence is provided for changes in religious belief or commitment"
 - "The term 'revival' is not supported by the data presented"
 

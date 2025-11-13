@@ -28,21 +28,18 @@ The 2024 survey data contains **contradictory results within the same survey**:
 
 **Implication**: The binary "attended in past year" (24%) shows a **decrease** from 2018 (~27%), whilst the frequency measure shows an increase (7% → 11% weekly). These cannot both be true.
 
-**Likely cause**: Question order effect. The 2024 survey asks the binary question first, then the frequency question. This priming may artificially inflate some frequency categories whilst deflating others.
+**Correction**: After reviewing the actual survey PDFs, the "Church service" binary question is not about attendance but about Bible engagement at church services (part of "Have you read, listened to, or engaged with the Bible in any of the following locations/situations?"). It measures a different construct than attendance, so differences are expected.
 
-### 🚩 Red Flag #2: Question Format Differs (SEVERE)
+### ✓ Correction: Question Format
 
 | Survey | Question Format |
 |--------|----------------|
-| 2018 | Single frequency question only |
-| 2024 | Binary question FIRST ("Yes/No attended in past year"), THEN frequency question |
+| 2018 | Frequency question: "Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?" |
+| 2024 | Same frequency question as 2018 |
 
-**Problem**: This is a fundamental violation of survey methodology best practices. The binary question primes respondents before they consider frequency, leading to:
-- **Acquiescence bias**: Tendency to say "yes" to binary questions
-- **Anchoring effects**: Binary framing affects subsequent frequency judgements
-- **Non-comparable measures**: 2018 and 2024 are measuring different psychological constructs
+**Correction**: Both surveys use the same frequency question about church attendance, making them directly comparable. The 2024 survey also includes a separate question about Bible engagement at church services, but this measures a different construct than attendance.
 
-**Evidence from literature**: Question order effects can produce differences of 5-15 percentage points (Schuman & Presser, 1996).
+**No question order effect**: There is no binary attendance question asked before the frequency question in 2024, so there is no question order effect affecting comparability.
 
 ### 🚩 Red Flag #3: No Demographic Adjustment (SEVERE)
 
@@ -143,8 +140,7 @@ The problem is **validity**, not precision.
 
 **The observed 4pp increase in weekly attendance could be explained by**:
 
-1. **Question order effect** (3-8pp impact): Binary priming increases reported frequency
-2. **Demographic composition** (1-3pp impact): Immigration from more religious populations
+1. **Demographic composition** (1-3pp impact): Immigration from more religious populations
 3. **COVID recovery effect** (1-2pp impact): 2018 may have been unusually low
 4. **Cultural attendance** (1-2pp impact): Non-religious cathedral tourism, concerts
 5. **Regression to mean** (1-2pp impact): Random variation around long-term mean
@@ -185,7 +181,7 @@ To support a "Quiet Revival" claim, we would need:
 
 ### ✅ What the Data Supports:
 
-> "YouGov survey data shows a small increase in self-reported weekly church attendance between 2018 and 2024 (7% to 11%, difference of 4 percentage points with 95% CI [+2.9pp, +5.1pp]). However, this change could be explained by multiple methodological factors including question format differences, demographic composition changes, and measurement error. No evidence is provided for changes in religious belief or commitment."
+> "YouGov survey data shows a small increase in self-reported weekly church attendance between 2018 and 2024 (7% to 11%, difference of 4 percentage points with 95% CI [+2.9pp, +5.1pp]). However, this change could be explained by multiple methodological factors including demographic composition changes and measurement error. Both surveys use the same frequency question, making them directly comparable. No evidence is provided for changes in religious belief or commitment."
 
 ### ❌ What the Data Does NOT Support:
 

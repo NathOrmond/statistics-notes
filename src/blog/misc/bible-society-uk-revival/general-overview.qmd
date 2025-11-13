@@ -214,15 +214,11 @@ common_questions <- attendance_data %>%
 1. **Frequency Question**: "Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?"
    - Response scale: 9 categories from "Daily/almost daily" to "Never"
 
-**2024 Survey (2 questions):**
+**2024 Survey:**
 
-1. **Binary Question** (NEW): "Have you attended a church service?" 
-   - Response options: "Yes - in the past year", "Yes - more than a year ago", "Never"
-   - Asked FIRST before the frequency question
-
-2. **Frequency Question** (SAME as 2018): Church attendance frequency
+1. **Frequency Question** (SAME as 2018): "Apart from weddings, baptisms/christenings, and funerals how often, if at all, did you go to a church service in the last year?"
    - Response scale: Same 9 categories as 2018
-   - Asked SECOND, after the binary question
+   - **Note**: There is also a separate question about Bible engagement at church services (part of "Have you read, listened to, or engaged with the Bible in any of the following locations/situations?"), but this measures a different construct than attendance.
 
 ### Comparability Assessment
 
@@ -269,20 +265,13 @@ ggplot(question_structure, aes(x = x_pos, y = y_pos)) +
 
 ### Key Observations
 
-1. **Direct Comparability**: Only **1 out of 2** questions from the 2024 survey is directly comparable to 2018 (the frequency question)
+1. **Direct Comparability**: Both surveys use the same frequency question about church attendance, making them directly comparable.
 
-2. **Question Order Changed**: Even the comparable frequency question appears in a different context:
-   - **2018**: Asked as the only question
-   - **2024**: Asked as the second question, after a binary screener
+2. **Additional Question in 2024**: The 2024 survey includes a separate question about Bible engagement at church services (part of a question about Bible engagement in different locations). This measures a different construct (Bible engagement) than attendance, so it should not be compared directly to attendance figures.
 
-3. **New Binary Question**: The 2024 binary question provides additional data not available in 2018, but also introduces potential **question order effects**
+3. **No Question Order Effect**: Since there is no binary attendance question asked before the frequency question in 2024, there is no question order effect affecting the comparability of the attendance frequency question.
 
-4. **Methodological Implication**: The change from 1 question (2018) to 2 questions (2024) means:
-   - 2024 respondents are primed by the binary question before answering the frequency question
-   - This priming may affect how they respond to the frequency question
-   - The 2018 and 2024 frequency questions are not truly equivalent due to different question contexts
-
-**Conclusion**: While both surveys include a frequency question with identical response categories, the 2024 survey's addition of a binary question asked first creates a different response context. This means **only partial comparability** exists between the two surveys.
+**Conclusion**: Both surveys use the same frequency question about church attendance with identical wording and response categories. The questions are directly comparable. The 2024 survey's additional Bible engagement question measures a different construct and should not be confused with attendance.
 
 ## Complete Survey Question Inventory
 
@@ -311,7 +300,7 @@ question_inventory <- tibble(
   Question_Topic = c(
     # Church Attendance
     "Frequency of church service attendance (past year)",
-    "Ever attended church service (binary)",
+    "Bible engagement at church services (2024 only, different construct)",
     "When last attended (if not in past year)",
     # Religious Identification
     "Religious affiliation/denomination",
@@ -338,7 +327,7 @@ question_inventory <- tibble(
     "Yes", "Yes", "Yes"
   ),
   Directly_Comparable = c(
-    "Partial*", "No", "No",
+    "Yes", "No (different construct)", "No",
     "Yes", "Yes",
     "Unknown**", "Unknown**", "Unknown**",
     "Yes", "Partial***", "Partial***"
@@ -358,7 +347,7 @@ kable(question_inventory,
 
 **Notes:**
 
-- \* **Partial comparability**: Question wording identical, but asked in different contexts (2024 has binary question first)
+- \* **Full comparability**: Question wording identical, same context
 - \*\* **Unknown comparability**: Questions asked in both surveys, but exact wording not documented in our data extracts
 - \*\*\* **Partial demographic data**: 2018 had limited ethnicity/gender breakdowns compared to 2024
 
@@ -441,7 +430,7 @@ ggplot(coverage_data, aes(x = Survey, fill = Status)) +
 
 1. **Both surveys covered similar topic areas**: Church attendance, religious identification, beliefs about the Bible, and demographics
 
-2. **2024 expanded church attendance questions**: Added binary attendance question and follow-up about when people last attended
+2. **2024 includes additional question**: Added question about Bible engagement at church services (part of a question about Bible engagement in different locations), which measures a different construct than attendance
 
 3. **Demographic data improved in 2024**: More comprehensive ethnicity and gender breakdowns
 
@@ -503,7 +492,7 @@ This limitation means our analysis necessarily focuses on what data is available
 
 **Question 2 (Frequency)**: Same frequency scale as 2018
 
-⚠️ **Important methodological note**: The binary question was asked BEFORE the frequency question in 2024, which was not the case in 2018. This ordering may influence responses.
+⚠️ **Important methodological note**: Both surveys use the same frequency question. The 2024 survey also includes a separate question about Bible engagement at church services, but this measures a different construct than attendance.
 
 ## Complete Attendance Distribution Comparison
 
@@ -879,9 +868,9 @@ ggplot(gender_table, aes(x = Gender, y = `Attended in Past Year (%)`)) +
   scale_y_continuous(limits = c(0, 30), breaks = seq(0, 30, 5))
 ```
 
-## 2024 Binary Question Results
+## 2024 Bible Engagement Question Results
 
-The 2024 survey included an additional binary question asked before the frequency question.
+The 2024 survey included a question about Bible engagement at church services (part of a question about Bible engagement in different locations). This measures a different construct than attendance.
 
 ```{r}
 #| label: binary-question-table
@@ -1097,10 +1086,7 @@ p4 <- ggplot(consistency_plot, aes(x = Measure, y = Value)) +
 
 ## Methodological Notes
 
-**Question format differences**:
-- 2018: Single frequency question only
-- 2024: Binary question FIRST, then frequency question
-- This difference in question order may affect comparability
+**Question format**: Both surveys use the same frequency question about church attendance, making them directly comparable. The 2024 survey also includes a separate question about Bible engagement at church services, which measures a different construct.
 
 **Sample size changes**:
 - 2018: 19,875 (weighted)

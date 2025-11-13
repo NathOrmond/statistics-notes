@@ -53,11 +53,7 @@ Statistical testing of the 7% → 11% increase claim:
 
 ### 5. [Question Order Effects](./question-order-effects.qmd)
 
-Impact of different survey question formats:
-- Comparison of 2018 vs 2024 question formats
-- Internal consistency checks within 2024 survey
-- Evidence of acquiescence bias and anchoring effects
-- Contradictory results analysis
+**Correction**: After reviewing the actual survey PDFs, both surveys use the same frequency question about church attendance. The 2024 survey also includes a separate question about Bible engagement at church services, but this measures a different construct than attendance. There is no question order effect from a binary attendance question, as no such question exists.
 
 ### 6. [Demographic Analysis](./demographic-analysis.qmd)
 
@@ -104,13 +100,11 @@ Our analysis reveals multiple critical red flags that comprehensively undermine 
 - Composition change (new immigrants arriving) vs behaviour change (revival among existing residents) not separated
 - See [Demographic Analysis](./demographic-analysis.qmd) for detailed calculations and age analysis
 
-### 5. **Internal Inconsistencies**
-- The 2024 survey shows contradictory results
-- Binary question (77% attended) vs frequency sum (68.5% attended) = 8.5pp discrepancy
-
-### 6. **Question Order Effects**
-- Different question formats between 2018 and 2024 make comparison invalid
-- See [Question Order Effects](./question-order-effects.qmd)
+### 5. **Different Constructs Being Measured**
+- The "Church service" binary question measures Bible engagement at church services, not attendance
+- The frequency question measures attendance frequency
+- These are different constructs, so differences are expected
+- See [Question Order Effects](./question-order-effects.qmd) for correction
 
 ### 7. **Small Effect Sizes**
 - Cohen's h = 0.179 (below "small" threshold)

@@ -590,7 +590,7 @@ The 2024 survey asked respondents about church attendance in two different ways:
 
 **Discrepancy**: 77% - 68.5% = **8.5 percentage points**
 
-This is a **critical red flag** suggesting measurement error, question order effects, or acquiescence bias in the survey instrument.
+**Correction**: The "Church service" binary question measures Bible engagement at church services, not attendance. These are different constructs, so differences are expected.
 
 ```{r}
 #| label: measurement-artifact-analysis
@@ -605,8 +605,7 @@ consistency_discrepancy <- binary_yes_2024 - frequency_sum_2024  # 8.5pp
 unexplained_from_immigration <- unexplained_pp / 100  # Convert to proportion
 
 # Analyze potential measurement artifact contribution
-# Assumption: If the binary question was asked FIRST in 2024 but NOT in 2018,
-# this could inflate 2024 estimates via priming/acquiescence bias
+# Note: Both surveys use the same frequency question, so there is no question order effect
 
 # Scenario analysis: How much of unexplained could be measurement artifact?
 potential_measurement_contribution_low <- consistency_discrepancy * 0.25  # 25% of discrepancy
@@ -638,7 +637,7 @@ combined_proportion_high <- combined_explanation_high / observed_increase_pp * 1
 
 ### Scenario Analysis
 
-If measurement artifacts (question order effects, acquiescence bias, priming) contribute even a **fraction** of the 8.5pp discrepancy to the observed 4pp increase:
+**Correction**: Both surveys use the same frequency question, so there is no question order effect. The "Church service" binary question measures Bible engagement, not attendance. If other measurement artifacts contribute to the observed 4pp increase:
 
 **Conservative scenario (25% of discrepancy affects increase)**:
 - Measurement contribution: `r sprintf("%.2f", potential_measurement_contribution_low * 100)` pp
@@ -1046,21 +1045,17 @@ Given the survey methodology, demographic context, and question structure, here 
 
 ---
 
-#### 3. **Question Order and Measurement Effects**
+#### 3. **Measurement Effects (CORRECTED)**
 
-**Mechanism**: The 2024 survey asked questions in a different order/format than 2018, potentially introducing acquiescence bias or priming effects.
+**Correction**: After reviewing the actual survey PDFs, both surveys use the same frequency question about church attendance. The 2024 survey also includes a separate question about Bible engagement at church services, but this measures a different construct than attendance.
 
-**Evidence for**:
-- 2024 included a binary "past year" question (77% yes) that doesn't match frequency breakdown (68.5% non-never)
-- **Internal inconsistency**: 8.5pp discrepancy suggests measurement error
-- Question order can affect responses by 3-7pp in survey research
-- Different question formats between years
+**Key points**:
+- Both surveys use the same attendance frequency question, making them directly comparable
+- There is no question order effect from a binary attendance question, as no such question exists
+- The "Church service" binary question measures Bible engagement, not attendance
+- Other measurement factors (sampling differences, weighting, etc.) may still affect comparability
 
-**Evidence against**:
-- Both surveys by same organisation (YouGov) using similar methodology
-- Effect should be random if truly measurement error
-
-**Testability**: See [Question Order Effects](./question-order-effects.qmd) analysis
+**Testability**: See [Question Order Effects](./question-order-effects.qmd) for correction and clarification
 
 ---
 
